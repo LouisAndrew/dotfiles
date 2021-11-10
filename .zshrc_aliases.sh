@@ -29,9 +29,15 @@ alias re-term="source ~/.zshrc"
 
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 
+export VSCODE_SETTINGS_PATH="/Users/louis.andrew/Library/'Application Support'/Code/User/settings.json"
+
+alias vsc-config="code $VSCODE_SETTINGS_PATH"
+
 alias g-local="git config user.email louisandrew3@gmail.com"
 alias g-delete-origin="git push origin --delete"
 alias g-fetch="git fetch"
 alias dj-start='python ./boilerplate/manage.py runserver'
 
-alias aliases="cat $ALIAS_FILE_PATH"
+alias alias:custom="cat $ALIAS_FILE_PATH"
+alias vsc-to-dotfiles="cat $VSCODE_SETTINGS_PATH >> $DOTFILES_PATH/.vscode/settings.json"
+alias backup:vsc="vsc-to-dotfiles && $DOTFILES_PATH && git add .vscode && g-cm 'chore: backup vscode config' && g-pu"
