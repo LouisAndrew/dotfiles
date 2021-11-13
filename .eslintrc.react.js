@@ -8,9 +8,12 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "5.3.1",
+    "@typescript-eslint/parser": "5.3.1"
 
     `npm i -D eslint eslint-config-airbnb eslint-import-resolver-typescript eslint-plugin-import \
-     eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort`
+     eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort\
+     @typescript-eslint/parser @typescript-eslint/eslint-plugin`
  */
 
 /**
