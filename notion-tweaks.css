@@ -1,0 +1,13 @@
+:root {
+ --prim: #282b2c;
+
+ --theme_dark--main: var(--prim);
+ --theme_dark--option_active-color: var(--prim);
+ --theme_dark--option_hover-background: var(--prim);
+ --theme_dark--select-text: red;
+ --theme_dark--bg_blue: red;
+}
+
+.notion-collection_view-block > div:first-child {
+ background: none !important;
+}

@@ -1,19 +1,10 @@
 /**
- * NPM dependencies for plugins:
- *  "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "5.3.1",
-    "@typescript-eslint/parser": "5.3.1"
-
-    `npm i -D eslint eslint-config-airbnb eslint-import-resolver-typescript eslint-plugin-import \
-     eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort\
-     @typescript-eslint/parser @typescript-eslint/eslint-plugin`
+  run `npm i -D eslint && npx eslint --init`
+  Additional plugins:
+    - eslint-import-resolver-typescript
+    - eslint-plugin-simple-import-sort
+    - @typescript-eslint/parser 
+    - @typescript-eslint/eslint-plugin
  */
 
 /**
