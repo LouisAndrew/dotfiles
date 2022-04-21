@@ -33,11 +33,11 @@ alias icloud="icl"
 
 export VSCODE_SETTINGS_PATH="/Users/louis.andrew/Library/'Application Support'/Code/User/settings.json"
 
-alias vsc-config="code $VSCODE_SETTINGS_PATH"
-alias zsh-config="code ~/.zshrc"
-alias alias-config="code $ALIAS_FILE_PATH"
+alias vsc:config="code $VSCODE_SETTINGS_PATH"
+alias zsh:config="code ~/.zshrc"
+alias alias:config="code $ALIAS_FILE_PATH"
 alias dotfies="code $DOTFILES_PATH"
-alias hyper-config="code ~/.hyper.js"
+alias hyper:config="code ~/.hyper.js"
 alias config="echo vsc-config alias-config dotfiles hyper-config"
 
 alias g-local="git config user.email louisandrew3@gmail.com"
@@ -52,4 +52,12 @@ alias backup:vsc="vsc-to-dotfiles && $DOTFILES_PATH && git add .vscode && g-cm '
 # Watch vue tests
 alias tvw="npx vue-cli-service test:unit --watch"
 
+# NPM `ni` alias
+alias ns="nr start"
+alias nt="nr test"
+alias nun="npm uninstall"
+
 export SPEC="spec.ts"
+function ntv() {
+ nt -- $1.$SPEC
+}
