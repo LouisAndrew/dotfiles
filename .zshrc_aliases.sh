@@ -1,4 +1,5 @@
 # export variable $ALIAS_FILE_PATH and $DOTFILES_PATH on your `.zshrc` file that's pointing to the absolute path of this file
+source "$DOTFILES_PATH/variables.sh"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
@@ -26,12 +27,11 @@ alias pb-latest="npm i @plattenbau/component-library@latest"
 alias fs="fs-cli && cd \$(clipboard)"
 alias nrun="select-run"
 alias re-term="source ~/.zshrc"
+alias rtm="re-term"
 
 # `cd` to iCloud directory
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias icloud="icl"
-
-export VSCODE_SETTINGS_PATH="/Users/louis.andrew/Library/'Application Support'/Code/User/settings.json"
 
 alias vsc:config="code $VSCODE_SETTINGS_PATH"
 alias zsh:config="code ~/.zshrc"
@@ -57,7 +57,4 @@ alias ns="nr start"
 alias nt="nr test"
 alias nun="npm uninstall"
 
-export SPEC="spec.ts"
-function ntv() {
- nt -- $1.$SPEC
-}
+source "$DOTFILES_PATH/functions.sh" 
