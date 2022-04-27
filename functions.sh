@@ -14,7 +14,7 @@ function mcm() {
 
 function ticket() {
  branch_name=`g-b`
- branch_without_prefix=${branch_name//(ft\/|bg\/)/""}
+ branch_without_prefix=${branch_name//(*\/)/""}
  branch_details=$(awk -F-- '{print $2}' <<< $branch_without_prefix)
  if [[ -z "$branch_details" ]];
  then
