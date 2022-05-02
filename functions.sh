@@ -2,8 +2,14 @@ function ntv() {
  nt -- $1.$SPEC
 }
 
+function ntvw() {
+ nt -- --watch $1.$SPEC
+}
+
 function cm() {
- g-cm "$1($2): $3"
+ ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
+ echo "🎊 Committing for $ticket_number"
+ g-cm "$1($2): $3 ($ticket_number)"
 }
 
 function mcm() {
