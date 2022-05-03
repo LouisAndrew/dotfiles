@@ -48,7 +48,8 @@ alias g-delete-origin="git push origin --delete"
 alias g-fetch="git fetch"
 alias dj-start='python ./boilerplate/manage.py runserver'
 
-alias al:custom="cat $ALIAS_FILE_PATH"
+alias al:cat="cat $ALIAS_FILE_PATH"
+alias fn:cat="cat $FUNCTIONS_PATH"
 alias vsc-to-dotfiles="cat $VSCODE_SETTINGS_PATH >> $DOTFILES_PATH/.vscode/settings.json"
 alias backup:vsc="vsc-to-dotfiles && $DOTFILES_PATH && git add .vscode && g-cm 'chore: backup vscode config' && g-pu"
 
@@ -59,5 +60,7 @@ alias tvw="npx vue-cli-service test:unit --watch"
 alias ns="nr start"
 alias nt="nr test"
 alias nun="npm uninstall"
+
+alias vsc="code ."
 
 source $FUNCTIONS_PATH 

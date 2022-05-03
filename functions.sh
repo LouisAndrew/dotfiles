@@ -29,3 +29,25 @@ function ticket() {
   echo $(awk -F-- '{print $1}' <<< $branch_without_prefix)
  fi
 }
+
+function isWork() {
+ work_email="louis.andrew@share-now.com"
+ current=`git config user.email`
+ if [[ $current == $work_email ]];
+ then
+   echo 1
+ else
+  echo 0
+ fi
+}
+
+# function getFormattedBranch() {
+#  branch_name=`g-b`
+#  branch_formatted=${branch_name//(\/)/%2F}
+#  echo $branch_formatted
+# }
+
+# function mrUrl() {
+#  current_dir=`pwd`
+#  echo "https://gitlab.share-now.com/mops/container-ui/-/merge_requests/new?merge_request%5Bsource_branch%5D=ft%2FMOPS-0--focus-munster-stations"
+# }
