@@ -45,3 +45,7 @@ function isWork() {
   echo 0
  fi
 }
+
+function g-rename() {
+  git branch -m `g-b` $1
+}
