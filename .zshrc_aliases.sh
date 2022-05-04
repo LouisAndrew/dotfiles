@@ -21,6 +21,7 @@ alias g-cb="g-c -b"
 alias g-pu="g-p -u origin \$(g-b)"
 alias g-a="git add *"
 alias g-n="echo `g-b` | sed  's/^.*\([0-9]\{4\}\).*$/\1/g'"
+alias discard="git reset --hard"
 
 alias clc="clear"
 
