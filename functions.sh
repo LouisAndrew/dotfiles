@@ -6,10 +6,15 @@ function ntvw() {
  nt -- --watch $1.$SPEC
 }
 
+function cmo() {
+  echo "Committing without end-parantheses"
+  g-cm "$1($2): $3"
+}
+
 function cm() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- g-cm "$1($2): $3 ($ticket_number)"
+ g-cm "$1($2): $3"
 }
 
 function mcm() {
@@ -40,14 +45,3 @@ function isWork() {
   echo 0
  fi
 }
-
-# function getFormattedBranch() {
-#  branch_name=`g-b`
-#  branch_formatted=${branch_name//(\/)/%2F}
-#  echo $branch_formatted
-# }
-
-# function mrUrl() {
-#  current_dir=`pwd`
-#  echo "https://gitlab.share-now.com/mops/container-ui/-/merge_requests/new?merge_request%5Bsource_branch%5D=ft%2FMOPS-0--focus-munster-stations"
-# }
