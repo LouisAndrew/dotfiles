@@ -30,6 +30,7 @@ alias fs="fs-cli && cd \$(clipboard)"
 alias nrun="select-run"
 alias re-term="source ~/.zshrc"
 alias rtm="re-term"
+alias main="g-cc"
 
 # `cd` to iCloud directory
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
@@ -40,6 +41,7 @@ alias zsh:config="code ~/.zshrc"
 alias fn:config="code $FUNCTIONS_PATH"
 alias al:config="code $ALIAS_FILE_PATH"
 alias hyper:config="code ~/.hyper.js"
+alias gh-dash:config="code /Users/louis.andrew/Library/'Application Support'/gh-dash"
 
 alias dotfies="code $DOTFILES_PATH"
 alias config="echo vsc-config alias-config dotfiles hyper-config"

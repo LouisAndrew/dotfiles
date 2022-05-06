@@ -6,6 +6,10 @@ function ntvw() {
  nt -- --watch $1.$SPEC
 }
 
+function devlog() {
+  g-cm "log: add journal entry [JOURNAL]"
+}
+
 function cmo() {
   echo "Committing without end-parantheses"
   g-cm "$1($2): $3"
