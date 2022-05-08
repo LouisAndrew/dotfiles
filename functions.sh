@@ -56,5 +56,6 @@ function g-rename() {
 
 function ghpr() {
   num=`ticket`
-  gh pr create -b 'Closes #$num' -w
+  body="Closes #${num}"
+  gh pr create -b $body -w
 }
