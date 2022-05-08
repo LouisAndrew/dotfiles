@@ -53,3 +53,8 @@ function isWork() {
 function g-rename() {
   git branch -m `g-b` $1
 }
+
+function ghpr() {
+  num=`ticket`
+  gh pr create -b 'Closes #$num' -w
+}
