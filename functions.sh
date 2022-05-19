@@ -3,7 +3,7 @@ function ntv() {
 }
 
 function ntvw() {
- nt -- --watch $1.$SPEC
+ nt -- --watch $1.$SPEC $2
 }
 
 function devlog() {
@@ -13,6 +13,10 @@ function devlog() {
 function cmo() {
   echo "Committing without end-parantheses"
   g-cm "$1($2): $3"
+}
+
+function cmto() {
+  npm t && cmo $1 $2 $3
 }
 
 function cm() {
