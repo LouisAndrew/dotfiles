@@ -1,3 +1,4 @@
+
 function ntv() {
  nt -- $1.$SPEC
 }
@@ -62,4 +63,11 @@ function ghpr() {
   num=`ticket`
   body="Closes #${num}"
   gh pr create -b $body -w
+}
+
+function glmr() {
+  project=`basename "$PWD"`
+  branch_name=`g-b`
+  encoded_branch=${branch_name//(\/)/"%2F"}
+  open "https://gitlab.share-now.com/mops/$project/-/merge_requests/new?merge_request%5Bsource_branch%5D=$encoded_branch"
 }

@@ -63,6 +63,7 @@ alias tvw="npx vue-cli-service test:unit --watch"
 alias ns="nr start"
 alias nt="nr test"
 alias nun="npm uninstall"
+alias nb="nr build"
 
 alias vsc="code ."
 
