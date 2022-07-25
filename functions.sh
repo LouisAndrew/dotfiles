@@ -32,6 +32,12 @@ function mcm() {
  pre "$1($2): $3 ($ticket_number)"
 }
 
+function mcmo() {
+ ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
+ echo "🎊 Committing for $ticket_number"
+ g-cm "$1($2): $3 ($ticket_number)"
+}
+
 function ticket() {
  branch_name=`g-b`
  branch_without_prefix=${branch_name//(*\/)/""}

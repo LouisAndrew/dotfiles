@@ -2,6 +2,10 @@
 source "$DOTFILES_PATH/variables.sh"
 FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
+vscode="code"
+vscodium="codium"
+editor=$vscode
+
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
 alias gh-vpr="gh pr view -w"
@@ -36,14 +40,14 @@ alias main="g-cc"
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias icloud="icl"
 
-alias vsc:config="code $VSCODE_SETTINGS_PATH"
-alias zsh:config="code ~/.zshrc"
-alias fn:config="code $FUNCTIONS_PATH"
-alias al:config="code $ALIAS_FILE_PATH"
-alias hyper:config="code ~/.hyper.js"
-alias gh-dash:config="code /Users/louis.andrew/Library/'Application Support'/gh-dash"
+alias vsc:config="$editor $VSCODE_SETTINGS_PATH"
+alias zsh:config="$editor ~/.zshrc"
+alias fn:config="$editor $FUNCTIONS_PATH"
+alias al:config="$editor $ALIAS_FILE_PATH"
+alias hyper:config="$editor ~/.hyper.js"
+alias gh-dash:config="$editor /Users/louis.andrew/Library/'Application Support'/gh-dash"
 
-alias dotfies="code $DOTFILES_PATH"
+alias dotfies="$editor $DOTFILES_PATH"
 alias config="echo vsc-config alias-config dotfiles hyper-config"
 
 alias g-local="git config user.email louisandrew3@gmail.com"
@@ -65,6 +69,8 @@ alias nt="nr test"
 alias nun="npm uninstall"
 alias nb="nr build"
 
-alias vsc="code ."
+alias vsc="$vscode ."
+alias vc="$vscodium ."
+alias c="$editor ."
 
 source $FUNCTIONS_PATH 
