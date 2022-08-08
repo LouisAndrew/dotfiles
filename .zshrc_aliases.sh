@@ -72,5 +72,8 @@ alias nb="nr build"
 alias vsc="$vscode ."
 alias vc="$vscodium ."
 alias c="$editor ."
+alias yw="yarn workspace"
+
+alias clone="git clone"
 
 source $FUNCTIONS_PATH 
