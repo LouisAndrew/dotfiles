@@ -25,7 +25,19 @@ alias g-cb="g-c -b"
 alias g-pu="g-p -u origin \$(g-b)"
 alias g-a="git add *"
 alias g-n="echo `g-b` | sed  's/^.*\([0-9]\{4\}\).*$/\1/g'"
+alias g-d="git diff"
+alias g-dn="g-d --name-only"
+
+alias changed="g-dn"
+alias staged="g-dn --cached"
+alias changed:full="g-d"
+alias staged="g-d --cached"
+
+alias ch="changed"
+alias stg="staged"
+
 alias discard="git reset --hard"
+alias g-dc="discard"
 
 alias clc="clear"
 
@@ -68,6 +80,7 @@ alias ns="nr start"
 alias nt="nr test"
 alias nun="npm uninstall"
 alias nb="nr build"
+alias nd="nr dev"
 
 alias vsc="$vscode ."
 alias vc="$vscodium ."
@@ -75,5 +88,19 @@ alias c="$editor ."
 alias yw="yarn workspace"
 
 alias clone="git clone"
+
+# TEMPORARY
+alias first="ni -D @mops/component-library@latest @plattenbau/component-library @vue/eslint-config-typescript@11 @vue/eslint-config-prettier@7 eslint@7.28 eslint-plugin-vue@9.3 --legacy-peer-deps"
+alias second="vue upgrade eslint -t v5.0.0-alpha.7"
+export REGEX="\"/^(?!(.*)(vue|eslint|sass-loader|typescript|graphql|apollo)).*$/\""
+alias commit="mcm feat node 'upgrade to v16'"
+alias zero="echo 'engine-strict=true' >> .npmrc"
+alias minus="ncu \"/^(?!(.*)(vue|eslint|sass-loader|typescript|graphql|apollo)).*$/\""
+
+# BW
+alias bwu="bw unlock --passwordenv BW_PASSWORD"
+
+# vars
+export PBN="@plattenbau-next"
 
 source $FUNCTIONS_PATH 
