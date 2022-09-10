@@ -38,6 +38,16 @@ function mcmo() {
  g-cm "$1($2): $3 ($ticket_number)"
 }
 
+function mcm:nt() {
+  pre "$1($2): $3"
+}
+
+function mcmo:nt() {
+ g-cm "$1($2): $3"
+}
+
+
+
 function ticket() {
  branch_name=`g-b`
  branch_without_prefix=${branch_name//(*\/)/""}
