@@ -98,6 +98,7 @@ alias minus="ncu \"/^(?!(.*)(vue|eslint|sass-loader|typescript|graphql|apollo)).
 
 # BW
 alias bwu="bw unlock --passwordenv BW_PASSWORD"
+alias ghpr="gh-cpr"
 
 # vars
 export PBN="@plattenbau-next"

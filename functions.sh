@@ -75,11 +75,11 @@ function g-rename() {
   git branch -m `g-b` $1
 }
 
-function ghpr() {
-  num=`ticket`
-  body="Closes #${num}"
-  gh pr create -b $body -w
-}
+# function ghpr() {
+#   num=`ticket`
+#   body="Closes #${num}"
+#   gh pr create -b $body -w
+# }
 
 function glmr() {
   project=`basename "$PWD"`
