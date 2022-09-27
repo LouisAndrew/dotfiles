@@ -87,3 +87,7 @@ function glmr() {
   encoded_branch=${branch_name//(\/)/"%2F"}
   open "https://gitlab.share-now.com/mops/$project/-/merge_requests/new?merge_request%5Bsource_branch%5D=$encoded_branch"
 }
+
+function ywp() {
+  yw $PBN/$1 ${@:2:99}
+}
