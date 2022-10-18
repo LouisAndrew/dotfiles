@@ -91,3 +91,7 @@ function glmr() {
 function ywp() {
   yw $PBN/$1 ${@:2:99}
 }
+
+function ywp() {
+  yw $MC/$1 ${@:2:99}
+}

@@ -102,5 +102,6 @@ alias ghpr="gh-cpr"
 
 # vars
 export PBN="@plattenbau-next"
+export MC="@mops"
 
 source $FUNCTIONS_PATH 
