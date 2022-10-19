@@ -92,6 +92,6 @@ function ywp() {
   yw $PBN/$1 ${@:2:99}
 }
 
-function ywp() {
+function ywm() {
   yw $MC/$1 ${@:2:99}
 }
