@@ -1,0 +1,67 @@
+format = """
+$time\
+$directory\
+$git_branch\
+$git_commit\
+$git_status\
+$git_state\
+$deno\
+$nodejs\
+$golang\
+$rust\
+$python\
+$shlvl\
+$cmd_duration\
+$character"""
+
+add_newline = false
+
+[time]
+disabled = false
+format = "\\[ [$time](yellow) \\] "
+time_format = "%T"
+
+
+[directory]
+format = "[$read_only]($read_only_style)[$path]($style)"
+read_only = "🔒 "
+style = "bold white"
+truncation_length = 0
+
+[git_branch]
+style = "white"
+symbol = ""
+format = ': [$symbol$branch(:$remote_branch)]($style)'
+
+[python]
+format = "[${symbol}${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
+
+[golang]
+format = "$symbol[$version]($style) "
+version_format = "$raw"
+
+[deno]
+format = " -> $symbol[$version](green) "
+style = "green"
+version_format = "${raw}"
+
+[nodejs]
+detect_extensions = ["mjs", "cjs"]
+format = " -> $symbol [$version]($style) "
+style = "green"
+symbol = "node"
+version_format = "$raw"
+
+[shlvl]
+disabled = false
+style = "bright-blue"
+format = "\\[ [$shlvl]($style) \\] "
+
+[cmd_duration]
+format = "⏱️ [$duration](bold yellow) "
+min_time = 5_000
+show_notifications = true
+
+[character]
+error_symbol = "[λ](red)"
+success_symbol = "[λ](white)"

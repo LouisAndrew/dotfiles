@@ -67,10 +67,12 @@ function g-rename() {
 # }
 
 function glmr() {
-  project=`basename "$PWD"`
-  branch_name=`g-b`
-  encoded_branch=${branch_name//(\/)/"%2F"}
-  open "https://gitlab.share-now.com/mops/$project/-/merge_requests/new?merge_request%5Bsource_branch%5D=$encoded_branch"
+  # project=`basename "$PWD"`
+  # branch_name=`g-b`
+  # encoded_branch=${branch_name//(\/)/"%2F"}
+  # open "https://gitlab.share-now.com/mops/$project/-/merge_requests/new?merge_request%5Bsource_branch%5D=$encoded_branch"
+
+  glab mr create --fill --web
 }
 
 function ywp() {

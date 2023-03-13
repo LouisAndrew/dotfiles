@@ -4,7 +4,7 @@ FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
 vscode="code"
 vscodium="codium"
-editor=$vscode
+editor=$vscodium
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
@@ -78,6 +78,7 @@ alias tvw="npx vue-cli-service test:unit --watch"
 # NPM `ni` alias
 alias ns="nr start"
 alias nt="nr test"
+alias ntw="nr test:watch"
 alias nb="nr build"
 alias nd="nr dev"
 
@@ -99,6 +100,8 @@ alias minus="ncu \"/^(?!(.*)(vue|eslint|sass-loader|typescript|graphql|apollo)).
 # BW
 alias bwu="bw unlock --passwordenv BW_PASSWORD"
 alias ghpr="gh-cpr"
+
+alias rbrew="/usr/local/bin/brew"
 
 # vars
 export PBN="@plattenbau-next"
