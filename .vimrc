@@ -1,18 +1,18 @@
 " Have j and k navigate visual lines rather than logical ones
-nmap j gj
-nmap k gk
+map j gj
+map k gk
 
 " I like using H and L for beginning/end of line
-nmap H ^
-nmap L $
+map H ^
+map L $
 
-nmap K {
-nmap J }
+map K {
+map J }
 
-nmap ' *
-nmap ; #
-nmap <C-d> <C-d>zz
-nmap <C-u> <C-u>zz
+map ' *
+map ; #
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
 
 " Quickly remove search highlights
 nmap <F9> :nohl
