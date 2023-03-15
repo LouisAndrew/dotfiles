@@ -58,6 +58,7 @@ alias fn:config="$editor $FUNCTIONS_PATH"
 alias al:config="$editor $ALIAS_FILE_PATH"
 alias hyper:config="$editor ~/.hyper.js"
 alias gh-dash:config="$editor /Users/louis.andrew/Library/'Application Support'/gh-dash"
+alias dotfiles="$editor $DOTFILES_PATH"
 
 alias dotfies="$editor $DOTFILES_PATH"
 alias config="echo vsc-config alias-config dotfiles hyper-config"
@@ -102,6 +103,10 @@ alias bwu="bw unlock --passwordenv BW_PASSWORD"
 alias ghpr="gh-cpr"
 
 alias rbrew="/usr/local/bin/brew"
+
+# NVM
+alias n16="nvm use 16"
+alias nd="nvm use default"
 
 # vars
 export PBN="@plattenbau-next"
