@@ -82,6 +82,7 @@ alias nt="nr test"
 alias ntw="nr test:watch"
 alias nb="nr build"
 alias nd="nr dev"
+alias nx="npx"
 
 alias vsc="$vscode ."
 alias vc="$vscodium ."
@@ -106,7 +107,7 @@ alias rbrew="/usr/local/bin/brew"
 
 # NVM
 alias n16="nvm use 16"
-alias nd="nvm use default"
+alias ndef="nvm use default"
 
 # vars
 export PBN="@plattenbau-next"

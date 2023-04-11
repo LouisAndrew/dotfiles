@@ -9,8 +9,8 @@ map L $
 map K {
 map J }
 
-map ' *
-map ; #
+map n *
+map N #
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
 
