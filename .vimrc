@@ -11,8 +11,6 @@ map J }
 
 map n *
 map N #
-map <C-d> <C-d>zz
-map <C-u> <C-u>zz
 
 " Quickly remove search highlights
 nmap <F9> :nohl

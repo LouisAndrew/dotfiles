@@ -1,6 +1,6 @@
 function cmo() {
   echo "Committing without end-parantheses"
-  g-cm "$1($2): $3"
+  gcm "$1($2): $3"
 }
 
 function cmto() {
@@ -10,7 +10,7 @@ function cmto() {
 function cm() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- g-cm "$1($2): $3"
+ gcm "$1($2): $3"
 }
 
 function mcm() {
@@ -22,7 +22,7 @@ function mcm() {
 function mcmo() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- g-cm "$1($2): $3 ($ticket_number)"
+ gcm "$1($2): $3 ($ticket_number)"
 }
 
 function mcm:nt() {
@@ -30,11 +30,11 @@ function mcm:nt() {
 }
 
 function mcmo:nt() {
- g-cm "$1($2): $3"
+ gcm "$1($2): $3"
 }
 
 function ticket() {
- branch_name=`g-b`
+ branch_name=`gb`
  branch_without_prefix=${branch_name//(*\/)/""}
  branch_details=$(awk -F-- '{print $2}' <<< $branch_without_prefix)
  if [[ -z "$branch_details" ]];
@@ -57,7 +57,7 @@ function isWork() {
 }
 
 function g-rename() {
-  git branch -m `g-b` $1
+  git branch -m `gb` $1
 }
 
 # function ghpr() {

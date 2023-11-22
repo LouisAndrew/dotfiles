@@ -4,34 +4,45 @@ FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
 vscode="code"
 vscodium="codium"
-editor=$vscodium
+n="nvim"
+editor=$n
+alias vsc=$vscodium
+alias n:config="$editor .config/nvim"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
 alias gh-vpr="gh pr view -w"
 alias gh-lpr="gh pr list"
+alias n="$n"
+alias nushell="/opt/homebrew/Cellar/nushell/0.87.1/bin/nu"
 
-alias pre="npm run lint:fix; npm t && g-cm"
+alias pre="npm t && gcm"
 
 # Git commands
-alias g-cm="git commit -m"
-alias g-cc="git checkout master || git checkout main && g-l"
-alias g-p="git push"
-alias g-l="git pull"
-alias g-b="git symbolic-ref --short -q HEAD"
-alias g-ba="git branch -a"
-alias g-c="git checkout"
-alias g-cb="g-c -b"
-alias g-pu="g-p -u origin \$(g-b)"
-alias g-a="git add *"
-alias g-n="echo `g-b` | sed  's/^.*\([0-9]\{4\}\).*$/\1/g'"
-alias g-d="git diff"
-alias g-dn="g-d --name-only"
+alias gcm="git commit -m"
+alias gcc="git checkout master || git checkout main && gl"
+alias gp="git push"
+alias gl="git pull"
+alias gb="git symbolic-ref --short -q HEAD"
+alias gba="git branch -a"
+alias gc="git checkout"
+alias gcb="gc -b"
+alias gpu="gp -u origin \$(gb)"
+alias ga="git add *"
+alias gn="echo `gb` | sed  's/^.*\([0-9]\{4\}\).*$/\1/g'"
+alias gd="git diff"
+alias gdn="gd --name-only"
+alias gcma="git commit --amend --no-edit"
+alias gbd="git branch -d"
+alias gm="git branch -M main"
+alias lg="lazygit"
+alias gundo="git reset --soft HEAD~"
+alias greset="git reset --hard"
 
-alias changed="g-dn"
-alias staged="g-dn --cached"
-alias changed:full="g-d"
-alias staged="g-d --cached"
+alias changed="gdn"
+alias staged="gdn --cached"
+alias changed:full="gd"
+alias staged="gd --cached"
 
 alias ch="changed"
 alias stg="staged"
@@ -39,14 +50,14 @@ alias stg="staged"
 alias discard="git reset --hard"
 alias g-dc="discard"
 
-alias clc="clear"
+alias cl="clear"
 
 alias pb-latest="npm i @plattenbau/component-library@latest"
 alias fs="fs-cli && cd \$(clipboard)"
 alias nrun="select-run"
 alias re-term="source ~/.zshrc"
 alias rtm="re-term"
-alias main="g-cc"
+alias main="gcc"
 
 # `cd` to iCloud directory
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
@@ -58,14 +69,15 @@ alias fn:config="$editor $FUNCTIONS_PATH"
 alias al:config="$editor $ALIAS_FILE_PATH"
 alias hyper:config="$editor ~/.hyper.js"
 alias gh-dash:config="$editor /Users/louis.andrew/Library/'Application Support'/gh-dash"
-alias dotfiles="$editor $DOTFILES_PATH"
+alias dotfiles="$DOTFILES_PATH"
+alias dotfiles:config="$editor $DOTFILES_PATH"
+alias obsd="~/dev/documents/"
 
-alias dotfies="$editor $DOTFILES_PATH"
 alias config="echo vsc-config alias-config dotfiles hyper-config"
 
-alias g-local="git config user.email louisandrew3@gmail.com"
+alias glocal="git config user.email louisandrew3@gmail.com"
 alias g-delete-origin="git push origin --delete"
-alias g-fetch="git fetch"
+alias gfetch="git fetch"
 alias dj-start='python ./boilerplate/manage.py runserver'
 
 alias al:cat="cat $ALIAS_FILE_PATH"
@@ -83,6 +95,9 @@ alias ntw="nr test:watch"
 alias nb="nr build"
 alias nd="nr dev"
 alias nx="npx"
+alias ntu="nr test:unit"
+alias nsw="nr serve"
+alias nc="npm-check -u"
 
 alias vsc="$vscode ."
 alias vc="$vscodium ."
@@ -107,10 +122,19 @@ alias rbrew="/usr/local/bin/brew"
 
 # NVM
 alias n16="nvm use 16"
+alias n18="nvm use 18"
 alias ndef="nvm use default"
+alias clc="cl & c"
+alias ca="c -a"
+alias k9="k9s -n default"
 
 # vars
 export PBN="@plattenbau-next"
 export MC="@mops"
+
+alias py=python3
+
+# nvim
+alias ncp="nvim -c PackerSync"
 
 source $FUNCTIONS_PATH 

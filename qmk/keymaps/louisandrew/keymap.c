@@ -5,6 +5,7 @@
 
 enum custom_keycodes {
     QMKBEST = SAFE_RANGE,
+		U_UMLAUT 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -13,6 +14,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             // when keycode QMKBEST is pressed
             SEND_STRING("QMK is the best thing ever!");
+        } else {
+            // when keycode QMKBEST is released
+        }
+        break;
+		case U_UMLAUT:
+				if (record->event.pressed) {
+            // when keycode QMKBEST is pressed
+            SEND_STRING("ü");
         } else {
             // when keycode QMKBEST is released
         }
@@ -35,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT(
         QMKBEST, KC_MYCM, KC_WHOM, KC_CALC, KC_MSEL, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,          _______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT,            _______,
+        _______, _______, RGB_VAI, _______, _______, _______, _______, U_UMLAUT,_______, _______, _______, _______, _______, QK_BOOT,            _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
         _______,          _______, RGB_HUI, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
