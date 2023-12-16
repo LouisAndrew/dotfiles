@@ -4,8 +4,8 @@ FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
 vscode="code"
 vscodium="codium"
-n="nvim"
-editor=$n
+nv="nvim"
+editor=$nv
 alias vsc=$vscodium
 alias n:config="$editor .config/nvim"
 
@@ -13,7 +13,8 @@ alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
 alias gh-vpr="gh pr view -w"
 alias gh-lpr="gh pr list"
-alias n="$n"
+alias nv="$nv"
+alias n="$nv"
 alias nushell="/opt/homebrew/Cellar/nushell/0.87.1/bin/nu"
 
 alias pre="npm t && gcm"
@@ -127,10 +128,16 @@ alias ndef="nvm use default"
 alias clc="cl & c"
 alias ca="c -a"
 alias k9="k9s -n default"
+alias z="eza"
+alias zt="eza -T --git-ignore"
+alias notes="cd $NOTES"
+alias l="z"
+alias c-="cd -"
 
 # vars
 export PBN="@plattenbau-next"
 export MC="@mops"
+alias cb="clipboard"
 
 alias py=python3
 

@@ -7,10 +7,12 @@ $git_status\
 $git_state\
 $deno\
 $nodejs\
+$lua\
 $golang\
 $rust\
 $python\
 $shlvl\
+$jobs\
 $character"""
 
 add_newline = false
@@ -37,38 +39,39 @@ modified = " ${count} "
 staged = " ${count} "
 renamed = " ${count} "
 deleted = " ${count} "
-style = "bright-white"
+style = "white"
 format = " $all_status$ahead_behind"
 
 [python]
-format = "[${symbol}${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
+format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
 
 [golang]
-format = "$symbol[$version]($style) "
+format = "-> [go@$version]($style) "
 version_format = "$raw"
 
 [deno]
-format = " -> $symbol[$version](green) "
+format = "-> $symbol[$version](green) "
 style = "green"
 version_format = "${raw}"
 
 [nodejs]
 detect_extensions = ["mjs", "cjs"]
-format = " -> $symbol [$version]($style) "
+format = "-> [node@$version]($style) "
 style = "green"
 symbol = "node"
 version_format = "$raw"
+
+[lua]
+format = '-> [lua@$version](blue) '
+
+[rust]
+format = "-> [rust@$version]($style) "
 
 [shlvl]
 disabled = false
 style = "bright-blue"
 format = "\\[ [$shlvl]($style) \\] "
 
-[cmd_duration]
-format = "⏱️ [$duration](bold yellow) "
-min_time = 5_000
-show_notifications = true
-
 [character]
-error_symbol = " [λ](red)"
-success_symbol = " [λ](white)"
+error_symbol = " [# ](white)"
+success_symbol = " [# ](white)"

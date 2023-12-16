@@ -29,21 +29,36 @@ config.colors = {
 config.window_background_opacity = 1
 
 config.font = wezterm.font_with_fallback({
-	{ family = "Office Code Pro", weight = "Regular" },
+	{ family = "Iosevka Custom", weight = "Medium" },
 	{ family = "nonicons" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
-config.font_size = 12
+-- config.font_size = 11.8
+config.font_size = 11
 config.window_decorations = "RESIZE"
+config.line_height = 1.6
+
 -- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
+local PADDING = 32
 config.window_padding = {
-	left = 36,
-	right = 24,
-	top = 24,
-	bottom = 0,
+	left = PADDING,
+	right = PADDING,
+	top = PADDING,
+	bottom = 4,
 }
+
+wezterm.on("up-and-hide", function(window, pane)
+	window:perform_action(act.ActivatePaneDirection("Up"), pane)
+	window:perform_action(act.TogglePaneZoomState, pane)
+end)
+
+-- @TODO create new pane if not exists, otherwise move down: https://wezfurlong.org/wezterm/config/lua/MuxTab/get_pane_direction.html?h=get+direction+pane
+wezterm.on("miniterm", function(window, pane)
+	local tab = window:active_tab()
+	local bottom_pane = tab:get_pane_direction("Down")
+end)
 
 config.leader = { key = "i", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -68,6 +83,11 @@ config.keys = {
 	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 	{ key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
+	{
+		key = "p",
+		mods = "LEADER",
+		action = act.EmitEvent("up-and-hide"),
+	},
 
 	-- But Wezterm offers custom "mode" in the name of "KeyTable"
 	{
