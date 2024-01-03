@@ -45,7 +45,7 @@ local PADDING = 32
 config.window_padding = {
 	left = PADDING,
 	right = PADDING,
-	top = PADDING,
+	top = PADDING * 0.75,
 	bottom = 4,
 }
 
@@ -58,6 +58,11 @@ end)
 wezterm.on("miniterm", function(window, pane)
 	local tab = window:active_tab()
 	local bottom_pane = tab:get_pane_direction("Down")
+	if bottom_pane == nil then
+		window:perform_action(act.SplitPane({ direction = "Down", size = { Percent = 20 } }), pane)
+	end
+
+	window:perform_action(act.ActivatePaneDirection("Down"), pane)
 end)
 
 config.leader = { key = "i", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -82,7 +87,7 @@ config.keys = {
 	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
-	{ key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
+	{ key = "o", mods = "LEADER", action = act.EmitEvent("miniterm") },
 	{
 		key = "p",
 		mods = "LEADER",
@@ -211,7 +216,7 @@ end)
 
 config.window_frame = {
 	font = wezterm.font("Office Code Pro", { weight = "Bold" }),
-	active_titlebar_bg = "#333333",
+	active_titlebar_bg = "#ff0000",
 }
 
 return config
