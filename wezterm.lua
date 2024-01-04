@@ -1,3 +1,5 @@
+local minimal_fedu = dofile("/Users/louis.andrew/.config/nvim/lua/colors.lua")
+
 local wezterm = require("wezterm")
 local act = wezterm.action
 
@@ -12,13 +14,21 @@ local colors = {
 	background = "#131313",
 }
 
+config.show_new_tab_button_in_tab_bar = false
+
 config.colors = {
 	background = colors.background,
 	foreground = colors.foreground,
 	tab_bar = {
+		background = minimal_fedu.background,
 		active_tab = {
-			bg_color = "#191B28",
+			bg_color = minimal_fedu.background,
 			fg_color = "#ffffff",
+			intensity = "Half",
+		},
+		inactive_tab = {
+			bg_color = minimal_fedu.background,
+			fg_color = minimal_fedu.white_accent,
 			intensity = "Half",
 		},
 	},
@@ -27,17 +37,23 @@ config.colors = {
 -- Lost focus inside nvim
 -- config.window_background_opacity = 0.92
 config.window_background_opacity = 1
+config.dpi = 144
 
 config.font = wezterm.font_with_fallback({
-	{ family = "Iosevka Custom", weight = "Medium" },
+	-- { family = "Fira Code", weight = "Medium" },
+	-- { family = "Iosevka", weight = "Light" },
+	-- { family = "Iosevka Custom", weight = "Medium" },
+	{ family = "Iosevka Custom", weight = "Light" },
 	{ family = "nonicons" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
--- config.font_size = 11.8
-config.font_size = 11
+
+config.font_size = 6
 config.window_decorations = "RESIZE"
-config.line_height = 1.6
+config.line_height = 1.55
+-- config.line_height = 1.6
+-- config.cell_width = 1.1
 
 -- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
@@ -46,7 +62,7 @@ config.window_padding = {
 	left = PADDING,
 	right = PADDING,
 	top = PADDING * 0.75,
-	bottom = 4,
+	bottom = 2,
 }
 
 wezterm.on("up-and-hide", function(window, pane)
@@ -216,7 +232,16 @@ end)
 
 config.window_frame = {
 	font = wezterm.font("Office Code Pro", { weight = "Bold" }),
+	inactive_titlebar_bg = "#353535",
 	active_titlebar_bg = "#ff0000",
+	inactive_titlebar_fg = "#cccccc",
+	active_titlebar_fg = "#ffffff",
+	inactive_titlebar_border_bottom = "#2b2042",
+	active_titlebar_border_bottom = "#2b2042",
+	button_fg = "#cccccc",
+	button_bg = "#2b2042",
+	button_hover_fg = "#ffffff",
+	button_hover_bg = "#3b3052",
 }
 
 return config

@@ -132,6 +132,8 @@ alias z="eza"
 alias zt="eza -T --git-ignore"
 alias notes="cd $NOTES"
 alias l="z"
+alias ls="z"
+alias lt="zt"
 alias c-="cd -"
 
 # vars

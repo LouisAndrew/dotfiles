@@ -1,11 +1,12 @@
-# private-build-plans.toml 
+
+# private-build-plans.toml
 # Paste this to root `Iosevka` directory,
 # For more info see https://typeof.net/Iosevka/customizer
 
 [buildPlans.IosevkaCustom]
 family = "Iosevka Custom"
-spacing = "FontConfig Mono"
-serifs = "Sans"
+spacing = "normal"
+serifs = "sans"
 noCvSs = true
 exportGlyphNames = false
 
@@ -17,6 +18,11 @@ exportGlyphNames = false
 		zero = "slashed"
     paren = "normal"
     brace = "straight"
+
+[buildPlans.IosevkaCustom.weights.Light]
+shape = 300
+menu = 300
+css = 300
 
 [buildPlans.IosevkaCustom.weights.Regular]
 shape = 400
@@ -34,7 +40,7 @@ menu = 600
 css = 600
 
 [buildPlans.IosevkaCustom.widths.Normal]
-shape = 720
+shape = 658
 menu = 8
 css = "normal"
 
@@ -48,4 +54,6 @@ angle = 0
 shape = "upright"
 menu = "upright"
 css = "normal"
+
+
 
