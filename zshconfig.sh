@@ -48,3 +48,7 @@ PATH="$GOPATH/bin:$PATH"
 export PATH
 # Add it to your shell init files
 [[ -d /Applications/WezTerm.app/Contents/MacOS ]] && export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
+
+# Run once to enable wezterm undercurl for nvim
+# $ curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
+export TERM="wezterm"
