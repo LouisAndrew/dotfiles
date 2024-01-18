@@ -24,45 +24,34 @@ config.colors = {
 		active_tab = {
 			bg_color = minimal_fedu.background,
 			fg_color = "#ffffff",
-			intensity = "Half",
 		},
 		inactive_tab = {
 			bg_color = minimal_fedu.background,
 			fg_color = minimal_fedu.white_accent,
-			intensity = "Half",
 		},
 	},
 }
 
--- Lost focus inside nvim
--- config.window_background_opacity = 0.92
 config.window_background_opacity = 1
-config.dpi = 144
 
 config.font = wezterm.font_with_fallback({
-	-- { family = "Fira Code", weight = "Medium" },
-	-- { family = "Iosevka", weight = "Light" },
-	-- { family = "Iosevka Custom", weight = "Medium" },
-	{ family = "Iosevka Custom", weight = "Light" },
+	{ family = "Varys", weight = "Light" },
 	{ family = "nonicons" },
+	{ family = "codicon" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font_size = 6
+config.font_size = 12
 config.window_decorations = "RESIZE"
-config.line_height = 1.55
--- config.line_height = 1.6
--- config.cell_width = 1.1
-
+config.line_height = 1.45
 -- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
-local PADDING = 32
+local PADDING = 24
 config.window_padding = {
 	left = PADDING,
 	right = PADDING,
-	top = PADDING * 0.75,
-	bottom = 2,
+	bottom = PADDING,
 }
 
 wezterm.on("up-and-hide", function(window, pane)
@@ -92,7 +81,7 @@ config.keys = {
 	{
 		key = "J",
 		mods = "LEADER",
-		action = act.SplitPane({ direction = "Down", size = { Percent = 20 } }),
+		action = act.SplitPane({ direction = "Down", size = { Percent = 40 } }),
 	},
 	{ key = "L", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
@@ -179,54 +168,27 @@ config.key_tables = {
 -- I don't like the look of "fancy" tab bar
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 
-wezterm.on("update-status", function(window, pane)
-	-- Workspace name
+wezterm.on("update-status", function(window)
 	local stat = window:active_workspace()
 	local stat_color = "#f7768e"
-	-- It's a little silly to have workspace name all the time
-	-- Utilize this to display LDR or current key table name
+
 	if window:active_key_table() then
 		stat = window:active_key_table()
 		stat_color = "#7dcfff"
 	end
+
 	if window:leader_is_active() then
 		stat = "LDR"
 		stat_color = "#bb9af7"
 	end
 
-	-- Current working directory
-	local basename = function(s)
-		-- Nothing a little regex can't fix
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	end
-	-- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l). Not a big deal, but check in case
-	local cwd = pane:get_current_working_dir()
-	cwd = cwd and basename(cwd) or ""
-	-- Current command
-	local cmd = pane:get_foreground_process_name()
-	cmd = cmd and basename(cmd) or ""
-
-	-- Time
-	-- Left status (left of the tab line)
 	window:set_left_status(wezterm.format({
 		{ Foreground = { Color = stat_color } },
 		{ Text = "  " },
 		{ Text = "  " .. stat },
 		{ Text = " |" },
-	}))
-
-	-- Right status
-	window:set_right_status(wezterm.format({
-		-- Wezterm has a built-in nerd fonts
-		-- https://wezfurlong.org/wezterm/config/lua/wezterm/nerdfonts.html
-		{ Text = "  " .. cwd },
-		{ Text = " | " },
-		{ Foreground = { Color = "#fed7aa" } },
-		{ Text = "  " .. cmd },
-		"ResetAttributes",
-		{ Text = "  " },
 	}))
 end)
 
@@ -243,5 +205,7 @@ config.window_frame = {
 	button_hover_fg = "#ffffff",
 	button_hover_bg = "#3b3052",
 }
+
+config.enable_kitty_graphics = true
 
 return config

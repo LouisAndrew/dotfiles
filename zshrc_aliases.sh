@@ -5,23 +5,27 @@ FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 vscode="code"
 vscodium="codium"
 nv="nvim"
-editor=$nv
+nvd="neovide"
+gnm="goneovim"
+editor=$gnm
 alias vsc=$vscodium
 alias n:config="$editor .config/nvim"
+alias nvd="$nvd"
+alias gnm="$gnm"
+alias n="$editor"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
 alias gh-vpr="gh pr view -w"
 alias gh-lpr="gh pr list"
 alias nv="$nv"
-alias n="$nv"
 alias nushell="/opt/homebrew/Cellar/nushell/0.87.1/bin/nu"
 
 alias pre="npm t && gcm"
 
 # Git commands
 alias gcm="git commit -m"
-alias gcc="git checkout master || git checkout main && gl"
+alias gcc="git checkout main || git checkout master && gl"
 alias gp="git push"
 alias gl="git pull"
 alias gb="git symbolic-ref --short -q HEAD"
@@ -102,7 +106,8 @@ alias nc="npm-check -u"
 
 alias vsc="$vscode ."
 alias vc="$vscodium ."
-alias c="$editor ."
+alias c="$editor"
+alias cdot="$editor ."
 alias yw="yarn workspace"
 
 alias clone="git clone"
@@ -145,5 +150,7 @@ alias py=python3
 
 # nvim
 alias ncp="nvim -c PackerSync"
+alias ng="pnpm add -g"
+alias cte="EDITOR=nvim crontab -e"
 
 source $FUNCTIONS_PATH 

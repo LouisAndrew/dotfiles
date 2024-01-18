@@ -46,26 +46,25 @@ format = " $all_status$ahead_behind"
 format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
 
 [golang]
-format = "-> [go@$version]($style) "
+format = "- [go@$version]($style) "
 version_format = "$raw"
 
 [deno]
-format = "-> $symbol[$version](green) "
+format = "- $symbol[$version](green) "
 style = "green"
 version_format = "${raw}"
 
 [nodejs]
 detect_extensions = ["mjs", "cjs"]
-format = "-> [node@$version]($style) "
+detect_files = ['package.json', '.node-version']
+format = "- [node@$version]($style) "
 style = "green"
-symbol = "node"
-version_format = "$raw"
 
 [lua]
-format = '-> [lua@$version](blue) '
+format = '- [lua@$version](blue) '
 
 [rust]
-format = "-> [rust@$version]($style) "
+format = "- [rust@$version]($style) "
 
 [shlvl]
 disabled = false

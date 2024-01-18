@@ -52,3 +52,10 @@ export PATH
 # Run once to enable wezterm undercurl for nvim
 # $ curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
 export TERM="wezterm"
+
+LS_COLORS=$LS_COLORS:'di=1;35'; 
+export LS_COLORS
+export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
+export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
+export EDITOR="nvim"
+export NEOVIDE_FRAME="none"
