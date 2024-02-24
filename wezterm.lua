@@ -36,19 +36,20 @@ config.window_background_opacity = 1
 
 config.font = wezterm.font_with_fallback({
 	{ family = "Varys", weight = "Light" },
+	-- { family = "Varys", weight = "Regular" },
 	{ family = "nonicons" },
-	{ family = "codicon" },
+	-- { family = "codicon" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font_size = 12
+config.font_size = 13
 config.window_decorations = "RESIZE"
-config.line_height = 1.45
--- config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+config.line_height = 2
 
 local PADDING = 24
 config.window_padding = {
+	top = 0,
 	left = PADDING,
 	right = PADDING,
 	bottom = PADDING,
@@ -59,7 +60,6 @@ wezterm.on("up-and-hide", function(window, pane)
 	window:perform_action(act.TogglePaneZoomState, pane)
 end)
 
--- @TODO create new pane if not exists, otherwise move down: https://wezfurlong.org/wezterm/config/lua/MuxTab/get_pane_direction.html?h=get+direction+pane
 wezterm.on("miniterm", function(window, pane)
 	local tab = window:active_tab()
 	local bottom_pane = tab:get_pane_direction("Down")

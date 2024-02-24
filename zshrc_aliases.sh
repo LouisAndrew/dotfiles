@@ -4,10 +4,11 @@ FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
 vscode="code"
 vscodium="codium"
-nv="nvim"
+nvim="nvim"
 nvd="neovide"
 gnm="goneovim"
-editor=$gnm
+
+editor=$nvim
 alias vsc=$vscodium
 alias n:config="$editor .config/nvim"
 alias nvd="$nvd"
