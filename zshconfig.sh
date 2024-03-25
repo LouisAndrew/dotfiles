@@ -59,3 +59,17 @@ export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
 export NEOVIDE_FRAME="none"
+
+export FZF_DEFAULT_OPTS="--bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#9a9a9a,fg+:#ffffff,bg:-1,bg+:#121212
+  --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#ffcfa7
+  --color=prompt:#f2eaea,spinner:#af5fff,pointer:#ffcfa7,header:#87afaf
+  --color=border:#262626,preview-fg:-1,label:#aeaeae,query:#d9d9d9
+  --preview-window="border-rounded" --padding="1" --prompt="  " --marker="◆"
+  --pointer=">" --separator="─" --scrollbar="│"'
+
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"

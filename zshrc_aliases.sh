@@ -28,6 +28,7 @@ alias pre="npm t && gcm"
 alias gcm="git commit -m"
 alias gcc="git checkout main || git checkout master && gl"
 alias gp="git push"
+alias gpf="git push -f"
 alias gl="git pull"
 alias gb="git symbolic-ref --short -q HEAD"
 alias gba="git branch -a"
@@ -44,6 +45,7 @@ alias gm="git branch -M main"
 alias lg="lazygit"
 alias gundo="git reset --soft HEAD~"
 alias greset="git reset --hard"
+alias grh="git reset --hard HEAD"
 
 alias changed="gdn"
 alias staged="gdn --cached"
@@ -153,5 +155,6 @@ alias py=python3
 alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
+alias f="fd --type f --hidden --exclude .git | fzf --preview='bat -n --color=always {}' | xargs nvim"
 
 source $FUNCTIONS_PATH 

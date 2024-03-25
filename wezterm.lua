@@ -36,23 +36,23 @@ config.window_background_opacity = 1
 
 config.font = wezterm.font_with_fallback({
 	{ family = "Varys", weight = "Light" },
-	-- { family = "Varys", weight = "Regular" },
 	{ family = "nonicons" },
-	-- { family = "codicon" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font_size = 13
+config.font_size = 12
+-- config.font_size = 14
 config.window_decorations = "RESIZE"
-config.line_height = 2
+config.line_height = 1.8
+-- config.cell_width = 1.1
 
-local PADDING = 24
+local PADDING = 16
 config.window_padding = {
 	top = 0,
 	left = PADDING,
 	right = PADDING,
-	bottom = PADDING,
+	bottom = 8,
 }
 
 wezterm.on("up-and-hide", function(window, pane)
@@ -74,6 +74,8 @@ config.leader = { key = "i", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	-- Send C-a when pressing C-a twice
 	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
+	{ key = "c", mods = "CTRL", action = act.SendKey({ key = "c", mods = "CTRL" }) },
+	{ key = "v", mods = "CTRL", action = act.SendKey({ key = "v", mods = "CTRL" }) },
 	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode },
 	{ key = "phys:Space", mods = "LEADER", action = act.ActivateCommandPalette },
 
@@ -192,6 +194,38 @@ wezterm.on("update-status", function(window)
 	}))
 end)
 
+local function tab_title(tab_info)
+	local title = tab_info.tab_title
+	-- if the tab title is explicitly set, take that
+	if title and #title > 0 then
+		return title
+	end
+	-- Otherwise, use the title from the active pane
+	-- in that tab
+	return tab_info.active_pane.title
+end
+
+local basename = function(s)
+	-- Nothing a little regex can't fix
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local title = tab.tab_index + 1 .. ". " .. basename(tab_title(tab))
+	local pane_info = ""
+	local pane = tab.active_pane
+
+	if #panes > 1 then
+		pane_info = " (" .. #panes .. ")"
+	end
+
+	if tab.is_active then
+		return " " .. title .. pane_info .. " "
+	end
+
+	return " " .. title .. " "
+end)
+
 config.window_frame = {
 	font = wezterm.font("Office Code Pro", { weight = "Bold" }),
 	inactive_titlebar_bg = "#353535",
@@ -207,5 +241,6 @@ config.window_frame = {
 }
 
 config.enable_kitty_graphics = true
+config.cursor_thickness = "1px"
 
 return config
