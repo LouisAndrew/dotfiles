@@ -41,11 +41,9 @@ config.font = wezterm.font_with_fallback({
 
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font_size = 12
--- config.font_size = 14
+config.font_size = 13.5
 config.window_decorations = "RESIZE"
-config.line_height = 1.8
--- config.cell_width = 1.1
+config.line_height = 1.7
 
 local PADDING = 16
 config.window_padding = {
@@ -206,20 +204,37 @@ local function tab_title(tab_info)
 end
 
 local basename = function(s)
-	-- Nothing a little regex can't fix
+	if s == nil then
+		return ""
+	end
+
+	local home = os.getenv("HOME")
+	if s.path == home then
+		return "~"
+	end
+
+	if s.path ~= nil then
+		local home_resolved = string.gsub(s.path, home or "", "~")
+		local cwd = string.gsub(home_resolved, "^.*/(.*[/\\])(.*)$", "%1%2")
+		return cwd
+	end
+
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local title = tab.tab_index + 1 .. ". " .. basename(tab_title(tab))
 	local pane_info = ""
 	local pane = tab.active_pane
-
-	if #panes > 1 then
-		pane_info = " (" .. #panes .. ")"
-	end
+	local cwd = basename(pane.current_working_dir)
+	local title = tab.tab_index + 1 .. ". " .. cwd or basename(tab_title(tab))
 
 	if tab.is_active then
+		local mux_tab = wezterm.mux.get_tab(tab.tab_id)
+		local pane_count = #mux_tab:panes()
+
+		if pane_count > 1 then
+			pane_info = " (" .. pane_count .. ")"
+		end
 		return " " .. title .. pane_info .. " "
 	end
 
@@ -242,5 +257,5 @@ config.window_frame = {
 
 config.enable_kitty_graphics = true
 config.cursor_thickness = "1px"
-
+config.tab_max_width = 48
 return config
