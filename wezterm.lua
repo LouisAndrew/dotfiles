@@ -42,8 +42,10 @@ config.font = wezterm.font_with_fallback({
 config.use_cap_height_to_scale_fallback_fonts = true
 
 config.font_size = 13.5
+
+-- config.font_size = 12
 config.window_decorations = "RESIZE"
-config.line_height = 1.7
+config.line_height = 1.8
 
 local PADDING = 16
 config.window_padding = {
@@ -226,8 +228,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local pane_info = ""
 	local pane = tab.active_pane
 	local cwd = basename(pane.current_working_dir)
-	local title = tab.tab_index + 1 .. ". " .. cwd or basename(tab_title(tab))
 
+	local title = tab.tab_index + 1 .. ". " .. cwd or basename(tab_title(tab))
 	if tab.is_active then
 		local mux_tab = wezterm.mux.get_tab(tab.tab_id)
 		local pane_count = #mux_tab:panes()

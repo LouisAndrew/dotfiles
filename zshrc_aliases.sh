@@ -14,6 +14,8 @@ alias n:config="$editor .config/nvim"
 alias nvd="$nvd"
 alias gnm="$gnm"
 alias n="$editor"
+alias ngo="nvim -c DiffviewOpen"
+alias ngd="nvim -c DiffviewFileHistory"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
@@ -156,5 +158,8 @@ alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 alias f="fd --type f --hidden --exclude .git | fzf --preview='bat -n --color=always {}' | xargs nvim"
+# alias gco="git branch -r | fzf | xargs git checkout"
+alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
+alias gcd="git branch -r | fzf | xargs git checkout"
 
 source $FUNCTIONS_PATH 
