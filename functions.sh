@@ -60,18 +60,7 @@ function g-rename() {
   git branch -m `gb` $1
 }
 
-# function ghpr() {
-#   num=`ticket`
-#   body="Closes #${num}"
-#   gh pr create -b $body -w
-# }
-
 function glmr() {
-  # project=`basename "$PWD"`
-  # branch_name=`g-b`
-  # encoded_branch=${branch_name//(\/)/"%2F"}
-  # open "https://gitlab.share-now.com/mops/$project/-/merge_requests/new?merge_request%5Bsource_branch%5D=$encoded_branch"
-
   glab mr create --fill --web
 }
 
@@ -81,4 +70,24 @@ function ywp() {
 
 function ywm() {
   yw $MC/$1 ${@:2:99}
+}
+
+# Find content of files and open in nvim
+function gr() {
+  rg -e $1 --line-number --no-heading --color=always \
+    --smart-case | fzf -d ':' -n 2.. --ansi --no-sort \
+    --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
+    | cut -d ':' -f 1 | xargs nvim
+}
+
+# Fuzzy find files and open in nvim
+function f() {
+  local query=""
+  # checks if the first argument is empty
+  if [ ! -z "$1" ]; then
+    query="-q $1"
+  fi
+
+  fd --type f --hidden --exclude .git | fzf $query \
+    --preview='bat -n --color=always {}' | xargs nvim
 }

@@ -1,4 +1,4 @@
-# export variable $ALIAS_FILE_PATH and $DOTFILES_PATH on your `.zshrc` file that's pointing to the absolute path of this file
+# export variable $ALIAS_FILE_PATH and $DOTFILES_PATH on your `.zshrc` file that's pointing to the absolute path of this filealias
 source "$DOTFILES_PATH/variables.sh"
 FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
@@ -157,7 +157,6 @@ alias py=python3
 alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
-alias f="fd --type f --hidden --exclude .git | fzf --preview='bat -n --color=always {}' | xargs nvim"
 # alias gco="git branch -r | fzf | xargs git checkout"
 alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
 alias gcd="git branch -r | fzf | xargs git checkout"
