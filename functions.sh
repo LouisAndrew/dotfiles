@@ -74,13 +74,20 @@ function ywm() {
 
 # Find content of files and open in nvim
 function gr() {
+  ifsOld=$IFS
+  IFS=":"
+
+  # can be done using cut, but it will try to print the 
+  # file and number in the sameline, separated by delimiter.
   rg -e $1 --line-number --no-heading --color=always \
     --smart-case | fzf -d ':' -n 2.. --ansi --no-sort \
     --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
-    | cut -d ':' -f 1 | xargs nvim
+    | read filename linenumber content 
+
+  IFS=$ifsOld
+  $editor $filename +$linenumber
 }
 
-# Fuzzy find files and open in nvim
 function f() {
   local query=""
   # checks if the first argument is empty
@@ -88,6 +95,10 @@ function f() {
     query="-q $1"
   fi
 
+  # can use xargs, but seems that newly touched files
+  # are not properly opened.
   fd --type f --hidden --exclude .git | fzf $query \
-    --preview='bat -n --color=always {}' | xargs nvim
+    --preview='bat -n --color=always {}' | read filename
+
+  $editor $filename
 }
