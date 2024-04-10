@@ -81,7 +81,7 @@ function gr() {
   # file and number in the sameline, separated by delimiter.
   rg -e $1 --line-number --no-heading --color=always \
     --smart-case | fzf -d ':' -n 2.. --ansi --no-sort \
-    --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
+    --preview "$DOTFILES_PATH/batpager.sh {1} {2}" \
     | read filename linenumber content 
 
   IFS=$ifsOld
