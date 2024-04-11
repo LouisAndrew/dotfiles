@@ -2,20 +2,14 @@
 source "$DOTFILES_PATH/variables.sh"
 FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
-vscode="code"
-vscodium="codium"
-nvim="nvim"
-nvd="neovide"
-gnm="goneovim"
-
-editor=$nvim
 alias vsc=$vscodium
 alias n:config="$editor .config/nvim"
 alias nvd="$nvd"
 alias gnm="$gnm"
 alias n="$editor"
 alias ngo="nvim -c DiffviewOpen"
-alias ngd="nvim -c DiffviewFileHistory"
+alias ngd="nvim -c 'DiffviewOpen main'"
+alias ngl="nvim -c DiffviewFileHistory"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
@@ -63,11 +57,12 @@ alias g-dc="discard"
 alias cl="clear"
 
 alias pb-latest="npm i @plattenbau/component-library@latest"
-alias fs="fs-cli && cd \$(clipboard)"
+alias fsc="fs-cli && cd \$(clipboard)"
 alias nrun="select-run"
 alias re-term="source ~/.zshrc"
 alias rtm="re-term"
 alias main="gcc"
+alias m="gcc"
 
 # `cd` to iCloud directory
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
@@ -158,7 +153,6 @@ alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 # alias gco="git branch -r | fzf | xargs git checkout"
-alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
-alias gcd="git branch -r | fzf | xargs git checkout"
+
 
 source $FUNCTIONS_PATH 

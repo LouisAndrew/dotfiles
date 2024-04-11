@@ -102,3 +102,25 @@ function f() {
 
   $editor $filename
 }
+
+function e() {
+  local filename=$1
+  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
+}
+
+function fs() {
+  ls $DEV_HOME | fzf | read scope;
+  if [ -z "$scope" ]; then
+    return 0
+  fi
+
+  ls $DEV_HOME/$scope | fzf | read project;
+
+  if [ -z "$project" ]; then
+    return 0
+  fi
+  cd $DEV_HOME/$scope/$project
+}
+
+alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
+alias gcd="git branch -r | fzf | xargs git checkout"

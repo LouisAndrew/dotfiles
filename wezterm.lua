@@ -41,13 +41,15 @@ config.font = wezterm.font_with_fallback({
 
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font_size = 13.4
+config.font_size = 14
+-- config.font_size = 12
 config.window_decorations = "RESIZE"
-config.line_height = 1.45
+config.line_height = 1.25
+-- config.line_height = 1.5
 
 local PADDING = 16
 config.window_padding = {
-	top = 0,
+	top = 8,
 	left = PADDING,
 	right = PADDING,
 	bottom = 8,
