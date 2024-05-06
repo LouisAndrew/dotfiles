@@ -72,22 +72,6 @@ function ywm() {
   yw $MC/$1 ${@:2:99}
 }
 
-# Find content of files and open in nvim
-function gr() {
-  ifsOld=$IFS
-  IFS=":"
-
-  # can be done using cut, but it will try to print the 
-  # file and number in the sameline, separated by delimiter.
-  rg -e $1 --line-number --no-heading --color=always \
-    --smart-case | fzf -d ':' -n 2.. --ansi --no-sort \
-    --preview "$DOTFILES_PATH/batpager.sh {1} {2}" \
-    | read filename linenumber content 
-
-  IFS=$ifsOld
-  $editor $filename +$linenumber
-}
-
 function f() {
   local query=""
   # checks if the first argument is empty
@@ -124,3 +108,19 @@ function fs() {
 
 alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
 alias gcd="git branch -r | fzf | xargs git checkout"
+
+function rgf() {
+  local query=""
+  if [ ! -z "$1" ]; then
+    query="-q $1"
+  fi
+
+  c="rg --column -nS --no-heading --color=always"
+  a="$(fzf --bind "change:reload:$c {q} || true" \
+    --ansi --preview "$DOTFILES_PATH/bat-ripgrep.sh {}" \
+    --header 'Search in files')"
+  if [[ -n $a ]]; then
+      IFS=':' read -r file line char _ <<< "$a"
+      "$EDITOR" "$file" +"$line" -c "norm ${char}lh"
+  fi
+}
