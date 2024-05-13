@@ -42,6 +42,8 @@ alias lg="lazygit"
 alias gundo="git reset --soft HEAD~"
 alias greset="git reset --hard"
 alias grh="git reset --hard HEAD"
+alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete all merged branches
+alias gsync="git fetch --all -Pp && gclean"
 
 alias changed="gdn"
 alias staged="gdn --cached"

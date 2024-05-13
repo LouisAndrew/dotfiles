@@ -87,6 +87,13 @@ function f() {
   $editor $filename
 }
 
+function gchb() {
+  type=$1
+  ticket=$2
+  description=$3
+  git checkout -b $type/$ticket--$description
+}
+
 function e() {
   local filename=$1
   mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
@@ -106,7 +113,7 @@ function fs() {
   cd $DEV_HOME/$scope/$project
 }
 
-alias gco="git branch -r | fzf | sed 's/origin\///' | xargs git checkout"
+alias gco="git branch -a | fzf | sed 's/\*//' | sed 's/remotes\/origin\///' | xargs git checkout"
 alias gcd="git branch -r | fzf | xargs git checkout"
 
 function rgf() {
