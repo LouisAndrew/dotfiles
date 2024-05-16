@@ -3,14 +3,16 @@ source "$DOTFILES_PATH/variables.sh"
 FUNCTIONS_PATH="$DOTFILES_PATH/functions.sh"
 
 alias vsc=$vscodium
-alias n:config="$editor .config/nvim"
+alias n:config="$editor $HOME/.config/nvim"
 alias nvd="$nvd"
 alias gnm="$gnm"
 alias n="$editor"
 alias ngo="nvim -c DiffviewOpen"
 alias ngd="nvim -c 'DiffviewOpen main'"
 alias ngl="nvim -c DiffviewFileHistory"
+alias nconfig="$EDITOR $HOME/.config/nvim"
 
+alias ls="fd"
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
 alias gh-vpr="gh pr view -w"
@@ -44,6 +46,7 @@ alias greset="git reset --hard"
 alias grh="git reset --hard HEAD"
 alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete all merged branches
 alias gsync="git fetch --all -Pp && gclean"
+alias glcv="glab ci view"
 
 alias changed="gdn"
 alias staged="gdn --cached"

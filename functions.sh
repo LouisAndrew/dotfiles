@@ -99,17 +99,24 @@ function e() {
   mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
 }
 
+function lsd() {
+  fd . $1 -t d -d 1
+}
+
 function fs() {
-  ls $DEV_HOME | fzf | read scope;
+  lsd $DEV_HOME | sed "s,$DEV_HOME/,," | fzf \
+    --preview "fd . $DEV_HOME/{} -t d -d 1 | sed \
+    s,$DEV_HOME/{},," | read scope
+
   if [ -z "$scope" ]; then
     return 0
   fi
 
-  ls $DEV_HOME/$scope | fzf | read project;
-
+  lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,," | fzf | read project
   if [ -z "$project" ]; then
     return 0
   fi
+
   cd $DEV_HOME/$scope/$project
 }
 
@@ -117,12 +124,7 @@ alias gco="git branch -a | fzf | sed 's/\*//' | sed 's/remotes\/origin\///' | xa
 alias gcd="git branch -r | fzf | xargs git checkout"
 
 function rgf() {
-  local query=""
-  if [ ! -z "$1" ]; then
-    query="-q $1"
-  fi
-
-  c="rg --column -nS --no-heading --color=always"
+  c="rg --column -nS --no-heading --color=always -e "
   a="$(fzf --bind "change:reload:$c {q} || true" \
     --ansi --preview "$DOTFILES_PATH/bat-ripgrep.sh {}" \
     --header 'Search in files')"

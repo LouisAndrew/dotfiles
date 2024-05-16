@@ -58,6 +58,7 @@ export LS_COLORS
 export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
+export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
 
 export FZF_DEFAULT_OPTS="--bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
