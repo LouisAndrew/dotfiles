@@ -103,8 +103,11 @@ function lsd() {
   fd . $1 -t d -d 1
 }
 
+GO_BACK=".."
+CLONE="Clone from clipboard"
 function fs() {
-  lsd $DEV_HOME | sed "s,$DEV_HOME/,," | fzf \
+  scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,") 
+  echo $scope_list | fzf \
     --preview "fd . $DEV_HOME/{} -t d -d 1 | sed \
     s,$DEV_HOME/{},," | read scope
 
@@ -112,7 +115,23 @@ function fs() {
     return 0
   fi
 
-  lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,," | fzf | read project
+  project_list=$(lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,,")
+  project_list+=("\n$GO_BACK"); project_list+=("\n$CLONE")
+
+  echo $project_list | fzf | read project
+
+  if [ "$project" = "$CLONE" ]; then
+    cd $DEV_HOME/$scope
+    pbpaste | xargs git clone
+    cd $project
+
+    return 0
+  fi
+
+  if [ "$project" = "$GO_BACK" ]; then
+    fs
+  fi
+
   if [ -z "$project" ]; then
     return 0
   fi
