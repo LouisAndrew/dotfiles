@@ -144,7 +144,13 @@ alias gcd="git branch -r | fzf | xargs git checkout"
 
 function rgf() {
   c="rg --column -nS --no-heading --color=always -e "
-  a="$(fzf --bind "change:reload:$c {q} || true" \
+
+  query=""
+  if [ ! -z "$1" ]; then
+    query=$(rg --column -nS --no-heading --color=always -e $1)
+  fi 
+
+  a="$(echo $query | fzf --bind "change:reload:$c {q} || true" \
     --ansi --preview "$DOTFILES_PATH/bat-ripgrep.sh {}" \
     --header 'Search in files')"
   if [[ -n $a ]]; then
