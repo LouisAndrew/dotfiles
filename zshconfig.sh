@@ -20,7 +20,6 @@ export FS_CLI_CONFIG="~/.fs-cli.json"
 source $DOTFILES_PATH/vim.sh
 source $ALIAS_FILE_PATH
 
-alias docker="/Applications/Docker.app/Contents/Resources/bin/docker"
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
