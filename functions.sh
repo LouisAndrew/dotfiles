@@ -123,7 +123,6 @@ function fs() {
   if [ "$project" = "$CLONE" ]; then
     cd $DEV_HOME/$scope
     pbpaste | xargs git clone
-    cd $project
 
     return 0
   fi
@@ -146,11 +145,13 @@ function rgf() {
   c="rg --column -nS --no-heading --color=always -e "
 
   query=""
+  fzf_query=""
   if [ ! -z "$1" ]; then
     query=$(rg --column -nS --no-heading --color=always -e $1)
+    fzf_query="-q $1"
   fi 
 
-  a="$(echo $query | fzf --bind "change:reload:$c {q} || true" \
+  a="$(echo $query | fzf $fzf_query --bind "change:reload:$c {q} || true" \
     --ansi --preview "$DOTFILES_PATH/bat-ripgrep.sh {}" \
     --header 'Search in files')"
   if [[ -n $a ]]; then

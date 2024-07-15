@@ -260,4 +260,14 @@ config.window_frame = {
 config.enable_kitty_graphics = true
 config.cursor_thickness = "1px"
 config.tab_max_width = 48
+
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+smart_splits.apply_to_config(config, {
+	direction_keys = { "h", "j", "k", "l" },
+	modifiers = {
+		move = "CTRL",
+		resize = "ALT",
+	},
+})
+
 return config
