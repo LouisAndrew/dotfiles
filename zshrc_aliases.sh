@@ -157,8 +157,5 @@ alias py=python3
 alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
-# alias gco="git branch -r | fzf | xargs git checkout"
-
-alias jli="jira issue list -a$(jira me) -s'In Progress' --plain --no-headers --columns 'KEY,SUMMARY'"
 
 source $FUNCTIONS_PATH 

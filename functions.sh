@@ -159,3 +159,29 @@ function rgf() {
       "$EDITOR" "$file" +"$line" -c "norm ${char}lh"
   fi
 }
+
+function jli() {
+  local ticket_status='In Progress'
+
+  if [ ! -z "$1" ]; then
+    ticket_status=$1
+
+    if [[ $ticket_status == "td" ]]; then
+      ticket_status='ToDo'
+    fi
+
+    if [[ $ticket_status == "cr" ]]; then
+      ticket_status='Code Review'
+    fi
+
+    if [[ $ticket_status == "rv" ]]; then
+      ticket_status='Review'
+    fi
+
+    if [[ $ticket_status == "rr" ]]; then
+      ticket_status='Ready to Release'
+    fi
+  fi
+
+  jira issue list -a$(jira me) -s$ticket_status --plain --no-headers --columns 'KEY,SUMMARY'
+}
