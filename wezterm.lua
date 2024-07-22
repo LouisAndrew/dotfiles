@@ -23,7 +23,7 @@ config.colors = {
 		background = minimal_fedu.background,
 		active_tab = {
 			bg_color = minimal_fedu.background,
-			fg_color = "#ffffff",
+			fg_color = minimal_fedu.misc.add_fg,
 		},
 		inactive_tab = {
 			bg_color = minimal_fedu.background,
@@ -32,27 +32,23 @@ config.colors = {
 	},
 }
 
-config.window_background_opacity = 1
-
 config.font = wezterm.font_with_fallback({
-	{ family = "Varys", weight = "Light" },
-	{ family = "nonicons" },
+	-- { family = "Varys" },
+	{ family = "CommitMono", weight = "Regular" },
+	{ family = "nonicons", weight = "Thin" },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
-
 config.font_size = 14
--- config.font_size = 12
 config.window_decorations = "RESIZE"
-config.line_height = 1.25
--- config.line_height = 1.5
+config.line_height = 1.40
 
 local PADDING = 16
 config.window_padding = {
-	top = 8,
+	top = PADDING / 2,
 	left = PADDING,
 	right = PADDING,
-	bottom = 8,
+	bottom = 2,
 }
 
 wezterm.on("up-and-hide", function(window, pane)
@@ -81,17 +77,23 @@ config.keys = {
 
 	-- create pane keybindings
 	{
-		key = "J",
+		key = "j",
 		mods = "LEADER",
 		action = act.SplitPane({ direction = "Down", size = { Percent = 40 } }),
 	},
-	{ key = "L", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "l", mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
+	{
+		key = "k",
+		mods = "LEADER",
+		action = act.SplitPane({ direction = "Up" }),
+	},
+	{ key = "h", mods = "LEADER", action = act.SplitPane({ direction = "Left" }) },
 
 	-- jump to panes
-	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+	-- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+	-- { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+	-- { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+	-- { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 	{ key = "o", mods = "LEADER", action = act.EmitEvent("miniterm") },
@@ -173,25 +175,25 @@ config.status_update_interval = 1000
 config.tab_bar_at_bottom = false
 
 wezterm.on("update-status", function(window)
-	local stat = window:active_workspace()
-	local stat_color = "#f7768e"
-
-	if window:active_key_table() then
-		stat = window:active_key_table()
-		stat_color = "#7dcfff"
-	end
-
-	if window:leader_is_active() then
-		stat = "LDR"
-		stat_color = "#bb9af7"
-	end
-
-	window:set_left_status(wezterm.format({
-		{ Foreground = { Color = stat_color } },
-		{ Text = "  " },
-		{ Text = "  " .. stat },
-		{ Text = " |" },
-	}))
+	-- local stat = window:active_workspace()
+	-- local stat_color = "#f7768e"
+	--
+	-- if window:active_key_table() then
+	-- 	stat = window:active_key_table()
+	-- 	stat_color = "#7dcfff"
+	-- end
+	--
+	-- if window:leader_is_active() then
+	-- 	stat = "LDR"
+	-- 	stat_color = "#bb9af7"
+	-- end
+	--
+	-- window:set_left_status(wezterm.format({
+	-- 	{ Foreground = { Color = stat_color } },
+	-- 	-- { Text = "  " },
+	-- 	-- { Text = "  " .. stat },
+	-- 	-- { Text = " |" },
+	-- }))
 end)
 
 local function tab_title(tab_info)
@@ -217,19 +219,20 @@ local basename = function(s)
 
 	if s.path ~= nil then
 		local home_resolved = string.gsub(s.path, home or "", "~")
-		local cwd = string.gsub(home_resolved, "^.*/(.*[/\\])(.*)$", "%1%2")
+		-- %1 is parent dir (scope), %2 is project name.
+		local cwd = string.gsub(home_resolved, "^.*/(.*[/\\])(.*)$", "%2")
 		return cwd
 	end
 
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+wezterm.on("format-tab-title", function(tab)
 	local pane_info = ""
 	local pane = tab.active_pane
 	local cwd = basename(pane.current_working_dir)
 
-	local title = tab.tab_index + 1 .. ". " .. cwd or basename(tab_title(tab))
+	local title = "[" .. tab.tab_index + 1 .. "] " .. cwd or basename(tab_title(tab))
 	if tab.is_active then
 		local mux_tab = wezterm.mux.get_tab(tab.tab_id)
 		local pane_count = #mux_tab:panes()
@@ -258,7 +261,6 @@ config.window_frame = {
 }
 
 config.enable_kitty_graphics = true
-config.cursor_thickness = "1px"
 config.tab_max_width = 48
 
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")

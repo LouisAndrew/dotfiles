@@ -46,6 +46,7 @@ alias grh="git reset --hard HEAD"
 alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete all merged branches
 alias gsync="git fetch --all -Pp && gclean"
 alias glcv="glab ci view"
+alias gs="git stash"
 
 alias changed="gdn"
 alias staged="gdn --cached"
@@ -158,5 +159,6 @@ alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 # alias gco="git branch -r | fzf | xargs git checkout"
 
+alias jli="jira issue list -a$(jira me) -s'In Progress' --plain --no-headers --columns 'KEY,SUMMARY'"
 
 source $FUNCTIONS_PATH 

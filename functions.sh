@@ -61,7 +61,7 @@ function g-rename() {
 }
 
 function glmr() {
-  glab mr create --fill --web
+  glab mr create --fill --yes -a louis.andrew
 }
 
 function ywp() {
