@@ -32,10 +32,14 @@ function jli() {
 function jmi() {
   ticket_status=$(jira_status $1)
   ticket_key=$2
+
+  if [[ -z "$2" ]]; then
+    ticket_key=$(echo `ticket`)
+  fi
   
   if [[ $ticket_key != *"-"* ]]; then
     ticket_key="MOPS-$ticket_key"
   fi
 
-  jira issue move $2 $ticket_status
+  jira issue move $ticket_key $ticket_status
 }

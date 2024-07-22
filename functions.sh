@@ -159,5 +159,3 @@ function rgf() {
       "$EDITOR" "$file" +"$line" -c "norm ${char}lh"
   fi
 }
-
-source "./jira.sh"

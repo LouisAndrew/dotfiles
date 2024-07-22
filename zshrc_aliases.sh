@@ -159,3 +159,4 @@ alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 
 source $FUNCTIONS_PATH 
+source "$DOTFILES_PATH/jira.sh"
