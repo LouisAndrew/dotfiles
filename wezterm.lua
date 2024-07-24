@@ -32,16 +32,20 @@ config.colors = {
 	},
 }
 
+config.inactive_pane_hsb = {
+	saturation = 1.0,
+	brightness = 0.5,
+}
+
 config.font = wezterm.font_with_fallback({
-	-- { family = "Varys" },
-	{ family = "CommitMono", weight = "Regular" },
-	{ family = "nonicons", weight = "Thin" },
+	{ family = "CommitMono", weight = "Regular", scale = 1 },
+	{ family = "nonicons", weight = "Thin", scale = 1 },
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
-config.font_size = 14
+config.font_size = 14.8
 config.window_decorations = "RESIZE"
-config.line_height = 1.40
+config.line_height = 1.4
 
 local PADDING = 16
 config.window_padding = {

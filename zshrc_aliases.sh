@@ -45,7 +45,6 @@ alias greset="git reset --hard"
 alias grh="git reset --hard HEAD"
 alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete all merged branches
 alias gsync="git fetch --all -Pp && gclean"
-alias glcv="glab ci view"
 alias gs="git stash"
 
 alias changed="gdn"
@@ -157,6 +156,11 @@ alias py=python3
 alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
+
+# glab
+alias glcv="glab ci view"
+alias glmg="glab mr merge -y"
+alias glmv="glab mr view"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/jira.sh"
