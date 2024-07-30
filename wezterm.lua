@@ -143,6 +143,16 @@ config.keys = {
 
 	-- Lastly, workspace
 	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+	{
+		key = "k",
+		mods = "ALT|SHIFT",
+		action = act.ScrollByLine(-1),
+	},
+	{
+		key = "j",
+		mods = "ALT|SHIFT",
+		action = act.ScrollByLine(1),
+	},
 }
 -- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
 for i = 1, 9 do
@@ -237,17 +247,14 @@ wezterm.on("format-tab-title", function(tab)
 	local cwd = basename(pane.current_working_dir)
 
 	local title = "[" .. tab.tab_index + 1 .. "] " .. cwd or basename(tab_title(tab))
-	if tab.is_active then
-		local mux_tab = wezterm.mux.get_tab(tab.tab_id)
-		local pane_count = #mux_tab:panes()
+	local mux_tab = wezterm.mux.get_tab(tab.tab_id)
+	local pane_count = #mux_tab:panes()
 
-		if pane_count > 1 then
-			pane_info = " (" .. pane_count .. ")"
-		end
-		return " " .. title .. pane_info .. " "
+	if pane_count > 1 then
+		pane_info = " (" .. pane_count .. ")"
 	end
 
-	return " " .. title .. " "
+	return " " .. title .. pane_info .. " "
 end)
 
 config.window_frame = {

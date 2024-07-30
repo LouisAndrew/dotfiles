@@ -4,6 +4,10 @@ function jira_status() {
   if [ ! -z "$1" ]; then
     ticket_status=$1
 
+    if [[ $ticket_status == "ip" ]]; then
+      ticket_status='In Progress'
+    fi
+
     if [[ $ticket_status == "td" ]]; then
       ticket_status='ToDo'
     fi
@@ -26,7 +30,15 @@ function jira_status() {
 
 function jli() {
   ticket_status=$(jira_status $1)
-  jira issue list -a$(jira me) -s$ticket_status --plain --no-headers --columns 'KEY,SUMMARY'
+  assigner="-a$(jira me)"
+  columns='KEY,SUMMARY'
+
+  if [[ "$2" == *"a"* ]]; then
+    assigner=""
+    columns="KEY,SUMMARY,ASSIGNEE"
+  fi
+
+  jira issue list $assigner -s$ticket_status --plain --no-headers --columns $columns
 }
 
 function jmi() {

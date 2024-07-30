@@ -7,6 +7,7 @@ $git_status\
 $git_state\
 $deno\
 $nodejs\
+$custom\
 $lua\
 $golang\
 $rust\
@@ -57,8 +58,16 @@ version_format = "${raw}"
 [nodejs]
 detect_extensions = ["mjs", "cjs"]
 detect_files = ['package.json', '.node-version']
-format = "- [node@$version]($style) "
-style = "green"
+format = "- [node@](green)"
+version_format = "raw"
+
+
+# node version not working
+[custom.node_custom]
+detect_extensions = ["mjs", "cjs"]
+command = 'node --version | cut -c 1-' # cuts the first character
+detect_files = ['package.json', '.node-version'] 
+format = '[$output](green) '
 
 [lua]
 format = '- [lua@$version](blue) '
