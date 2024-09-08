@@ -188,28 +188,6 @@ config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 config.tab_bar_at_bottom = false
 
-wezterm.on("update-status", function(window)
-	-- local stat = window:active_workspace()
-	-- local stat_color = "#f7768e"
-	--
-	-- if window:active_key_table() then
-	-- 	stat = window:active_key_table()
-	-- 	stat_color = "#7dcfff"
-	-- end
-	--
-	-- if window:leader_is_active() then
-	-- 	stat = "LDR"
-	-- 	stat_color = "#bb9af7"
-	-- end
-	--
-	-- window:set_left_status(wezterm.format({
-	-- 	{ Foreground = { Color = stat_color } },
-	-- 	-- { Text = "  " },
-	-- 	-- { Text = "  " .. stat },
-	-- 	-- { Text = " |" },
-	-- }))
-end)
-
 local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	-- if the tab title is explicitly set, take that
@@ -220,6 +198,12 @@ local function tab_title(tab_info)
 	-- in that tab
 	return tab_info.active_pane.title
 end
+
+local custom_docnames = {
+	["nvim"] = "config/nvim",
+	["com~apple~CloudDocs"] = "iCloud",
+	["iCloud~md~obsidian"] = "Obsidian",
+}
 
 local basename = function(s)
 	if s == nil then
@@ -244,9 +228,13 @@ end
 wezterm.on("format-tab-title", function(tab)
 	local pane_info = ""
 	local pane = tab.active_pane
-	local cwd = basename(pane.current_working_dir)
+	local cwd = basename(pane.current_working_dir) or basename(tab_title(tab))
+	if custom_docnames[cwd] then
+		cwd = custom_docnames[cwd]
+	end
 
-	local title = "[" .. tab.tab_index + 1 .. "] " .. cwd or basename(tab_title(tab))
+	local title = "[" .. tab.tab_index + 1 .. "] " .. cwd
+
 	local mux_tab = wezterm.mux.get_tab(tab.tab_id)
 	local pane_count = #mux_tab:panes()
 
