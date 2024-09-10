@@ -71,6 +71,8 @@ alias m="gcc"
 # `cd` to iCloud directory
 alias icl="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias icloud="icl"
+alias obsidian="~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/vault"
+alias obs="obsidian"
 
 alias vsc:config="$editor $VSCODE_SETTINGS_PATH"
 alias zsh:config="$editor ~/.zshrc"
@@ -161,6 +163,7 @@ alias cte="EDITOR=nvim crontab -e"
 alias glcv="glab ci view"
 alias glmg="glab mr merge -y"
 alias glmv="glab mr view"
+alias glmaa="glab mr update --reviewer +atilla.okumus1"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/jira.sh"
