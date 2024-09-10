@@ -162,6 +162,7 @@ alias cte="EDITOR=nvim crontab -e"
 # glab
 alias glcv="glab ci view"
 alias glmg="glab mr merge -y"
+alias glmgj="glmg && jmi cr"
 alias glmv="glab mr view"
 alias glmaa="glab mr update --reviewer +atilla.okumus1"
 

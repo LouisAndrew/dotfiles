@@ -38,6 +38,10 @@ function jli() {
     columns="KEY,SUMMARY,ASSIGNEE"
   fi
 
+  if [[ "$2" == *"k"* ]]; then
+    columns="KEY"
+  fi
+
   jira issue list $assigner -s$ticket_status --plain --no-headers --columns $columns
 }
 
