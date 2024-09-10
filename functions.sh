@@ -60,10 +60,6 @@ function g-rename() {
   git branch -m `gb` $1
 }
 
-function glmr() {
-  glab mr create --fill --yes -a louis.andrew
-}
-
 function ywp() {
   yw $PBN/$1 ${@:2:99}
 }

@@ -21,7 +21,7 @@ function jira_status() {
     fi
 
     if [[ $ticket_status == "rr" ]]; then
-      ticket_status='Ready to Release'
+      ticket_status='Ready for Release'
     fi
   fi
 
@@ -29,7 +29,7 @@ function jira_status() {
 }
 
 function jli() {
-  ticket_status=$(jira_status $1)
+  ticket_status="-s$(jira_status $1)"
   assigner="-a$(jira me)"
   columns='KEY,SUMMARY'
 
@@ -42,7 +42,12 @@ function jli() {
     columns="KEY"
   fi
 
-  jira issue list $assigner -s$ticket_status --plain --no-headers --columns $columns
+  if [[ "$1" == *"a"* ]]; then
+    columns="KEY,SUMMARY,STATUS"
+    ticket_status=""
+  fi
+
+  jira issue list $assigner $ticket_status --plain --no-headers --columns $columns
 }
 
 function jmi() {

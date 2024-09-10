@@ -46,6 +46,7 @@ alias grh="git reset --hard HEAD"
 alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete all merged branches
 alias gsync="git fetch --all -Pp && gclean"
 alias gs="git stash"
+alias gcub="git rev-parse --abbrev-ref HEAD" # current branch
 
 alias changed="gdn"
 alias staged="gdn --cached"
@@ -159,12 +160,6 @@ alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 
-# glab
-alias glcv="glab ci view"
-alias glmg="glab mr merge -y"
-alias glmgj="glmg && jmi cr"
-alias glmv="glab mr view"
-alias glmaa="glab mr update --reviewer +atilla.okumus1"
-
 source $FUNCTIONS_PATH 
+source "$DOTFILES_PATH/glab.sh"
 source "$DOTFILES_PATH/jira.sh"
