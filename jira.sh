@@ -28,6 +28,21 @@ function jira_status() {
   echo $ticket_status
 }
 
+function jai() {
+  me=$(jira me)
+  ticket_key=$1
+
+  if [[ -z "$1" ]]; then
+    ticket_key=$(echo `ticket`)
+  fi
+  
+  if [[ $ticket_key != *"-"* ]]; then
+    ticket_key="MOPS-$ticket_key"
+  fi
+
+  jira issue assign $ticket_key $me
+}
+
 function jli() {
   ticket_status="-s$(jira_status $1)"
   assigner="-a$(jira me)"
