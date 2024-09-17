@@ -79,3 +79,17 @@ function jmi() {
 
   jira issue move $ticket_key $ticket_status
 }
+
+function jvi() {
+  ticket_key=$1
+
+  if [[ -z "$2" ]]; then
+    ticket_key=$(echo `ticket`)
+  fi
+  
+  if [[ $ticket_key != *"-"* ]]; then
+    ticket_key="MOPS-$ticket_key"
+  fi
+
+  jira issue view $ticket_key
+}
