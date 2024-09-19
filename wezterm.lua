@@ -22,8 +22,10 @@ config.colors = {
 	tab_bar = {
 		background = minimal_fedu.background,
 		active_tab = {
-			bg_color = minimal_fedu.background,
-			fg_color = minimal_fedu.misc.add_fg,
+			-- bg_color = minimal_fedu.background,
+			-- fg_color = minimal_fedu.misc.add_fg,
+			bg_color = minimal_fedu.palette.indigo_fg,
+			fg_color = minimal_fedu.background,
 		},
 		inactive_tab = {
 			bg_color = minimal_fedu.background,
@@ -47,12 +49,12 @@ config.font_size = 14.8
 config.window_decorations = "RESIZE"
 config.line_height = 1.4
 
-local PADDING = 16
+local PADDING = 8
 config.window_padding = {
-	top = PADDING / 2,
+	top = PADDING + 4,
 	left = PADDING,
 	right = PADDING,
-	bottom = 2,
+	bottom = 0,
 }
 
 wezterm.on("up-and-hide", function(window, pane)
@@ -186,7 +188,7 @@ config.key_tables = {
 -- I don't like the look of "fancy" tab bar
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
-config.tab_bar_at_bottom = false
+config.tab_bar_at_bottom = true
 
 local function tab_title(tab_info)
 	local title = tab_info.tab_title
