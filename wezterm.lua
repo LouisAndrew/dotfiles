@@ -22,8 +22,6 @@ config.colors = {
 	tab_bar = {
 		background = minimal_fedu.background,
 		active_tab = {
-			-- bg_color = minimal_fedu.background,
-			-- fg_color = minimal_fedu.misc.add_fg,
 			bg_color = minimal_fedu.palette.indigo_fg,
 			fg_color = minimal_fedu.background,
 		},
@@ -45,9 +43,19 @@ config.font = wezterm.font_with_fallback({
 })
 
 config.use_cap_height_to_scale_fallback_fonts = true
-config.font_size = 14.8
+
+-- CommitMono specific
+local font_size_increment = 0.75
+local font_size_small = 14.8
+local font_sizes = {
+	small = font_size_small,
+	regular = font_size_small + font_size_increment,
+	large = font_size_small + (font_size_increment * 2),
+}
+
+config.font_size = font_sizes.regular
 config.window_decorations = "RESIZE"
-config.line_height = 1.4
+config.line_height = 1.5
 
 local PADDING = 8
 config.window_padding = {
@@ -74,14 +82,10 @@ end)
 
 config.leader = { key = "i", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-	-- Send C-a when pressing C-a twice
-	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
 	{ key = "c", mods = "CTRL", action = act.SendKey({ key = "c", mods = "CTRL" }) },
 	{ key = "v", mods = "CTRL", action = act.SendKey({ key = "v", mods = "CTRL" }) },
 	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode },
 	{ key = "phys:Space", mods = "LEADER", action = act.ActivateCommandPalette },
-
-	-- create pane keybindings
 	{
 		key = "j",
 		mods = "LEADER",
@@ -94,12 +98,6 @@ config.keys = {
 		action = act.SplitPane({ direction = "Up" }),
 	},
 	{ key = "h", mods = "LEADER", action = act.SplitPane({ direction = "Left" }) },
-
-	-- jump to panes
-	-- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-	-- { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-	-- { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-	-- { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 	{ key = "o", mods = "LEADER", action = act.EmitEvent("miniterm") },
@@ -108,19 +106,14 @@ config.keys = {
 		mods = "LEADER",
 		action = act.EmitEvent("up-and-hide"),
 	},
-
-	-- But Wezterm offers custom "mode" in the name of "KeyTable"
 	{
 		key = "r",
 		mods = "LEADER",
 		action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
 	},
-
-	-- Tab keybindings
 	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{ key = "n", mods = "LEADER", action = act.ShowTabNavigator },
 	{
 		key = "e",
 		mods = "LEADER",
@@ -137,13 +130,7 @@ config.keys = {
 			end),
 		}),
 	},
-	-- Key table for moving tabs around
 	{ key = "m", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_tab", one_shot = false }) },
-	-- Or shortcuts to move tab w/o move_tab table. SHIFT is for when caps lock is on
-	{ key = "{", mods = "LEADER|SHIFT", action = act.MoveTabRelative(-1) },
-	{ key = "}", mods = "LEADER|SHIFT", action = act.MoveTabRelative(1) },
-
-	-- Lastly, workspace
 	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 	{
 		key = "k",
@@ -156,7 +143,7 @@ config.keys = {
 		action = act.ScrollByLine(1),
 	},
 }
--- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
+
 for i = 1, 9 do
 	table.insert(config.keys, {
 		key = tostring(i),
@@ -227,12 +214,33 @@ local basename = function(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
+local function stringifyTable(t)
+	local function serialize(tbl)
+		local result = "{"
+		for k, v in pairs(tbl) do
+			local key = type(k) == "string" and string.format("%q", k) or k
+			local value
+			if type(v) == "table" then
+				value = serialize(v)
+			else
+				value = type(v) == "string" and string.format("%q", v) or tostring(v)
+			end
+			result = result .. "[" .. key .. "]=" .. value .. ","
+		end
+		return result .. "}"
+	end
+
+	return serialize(t)
+end
+
 wezterm.on("format-tab-title", function(tab)
 	local pane_info = ""
 	local pane = tab.active_pane
 	local cwd = basename(pane.current_working_dir) or basename(tab_title(tab))
 	if custom_docnames[cwd] then
 		cwd = custom_docnames[cwd]
+	elseif tab.tab_title ~= "" then
+		cwd = tab.tab_title
 	end
 
 	local title = "[" .. tab.tab_index + 1 .. "] " .. cwd
