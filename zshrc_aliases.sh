@@ -160,6 +160,8 @@ alias ncp="nvim -c PackerSync"
 alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 
+alias got="go test"
+
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"
 source "$DOTFILES_PATH/jira.sh"

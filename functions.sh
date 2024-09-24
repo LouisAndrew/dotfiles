@@ -118,7 +118,10 @@ function fs() {
 
   if [ "$project" = "$CLONE" ]; then
     cd $DEV_HOME/$scope
-    pbpaste | xargs git clone
+    clone_url=$(pbpaste)
+    echo $clone_url | xargs git clone
+    echo $clone_url | sed -E 's/.*\/(.*)\.git/\1/' | read project
+    cd $project
 
     return 0
   fi
