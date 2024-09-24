@@ -75,5 +75,4 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export BAT_THEME="minimalfedu"
 
-. $(brew --prefix asdf)/libexec/asdf.sh
-export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
+source $DOTFILES_PATH/asdf.sh
