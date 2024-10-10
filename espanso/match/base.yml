@@ -1,0 +1,34 @@
+matches:
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo 'Hello from your shell'"
+
+  - trigger: ":efm"
+    replace: "louis.andrew@free2move.com"
+
+  - trigger: ":em"
+    replace: "louisandrew3@gmail.com"
+
+  - trigger: ":mopsi"
+    replace: "admin.int.free2move.com"
+
+  - trigger: ":mopsp"
+    replace: "admin.free2move.com"
+
+  - trigger: ":lk"
+    replace: "[$|$]()"
