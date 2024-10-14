@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	config = function()
-		local minimal_fedu = require("colors")
+		local minimal_fedu = require("minimal_fedu")
 		local lualine = require("lualine")
 		local icons = require("theme.icons")
 		local search_count = require("search").search_count

@@ -6,7 +6,7 @@
 -- 	event = "VeryLazy",
 -- 	config = function()
 -- 		local icons = require("theme.icons")
--- 		local colors = require("colors")
+-- 		local colors = require("minimal_fedu")
 --
 -- 		local function get_diagnostic_fg(props)
 -- 			local diag_severity = {

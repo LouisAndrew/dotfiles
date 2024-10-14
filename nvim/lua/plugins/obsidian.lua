@@ -39,7 +39,7 @@ return {
 			},
 		},
 		config = function()
-			local colors = require("colors")
+			local colors = require("minimal_fedu")
 
 			require("obsidian").setup({
 				picker = {

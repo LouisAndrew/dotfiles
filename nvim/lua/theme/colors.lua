@@ -1,5 +1,5 @@
 local Color = require("colorbuddy").Color
-local minimal_fedu = require("colors")
+local minimal_fedu = require("minimal_fedu")
 
 Color.new("nb_background", minimal_fedu.background)
 Color.new("primary", minimal_fedu.foreground)

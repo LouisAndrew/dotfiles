@@ -1,4 +1,4 @@
-local minimal_fedu = require("colors")
+local minimal_fedu = require("minimal_fedu")
 local Group = require("colorbuddy").Group
 local colors = require("colorbuddy").colors
 local styles = require("colorbuddy").styles

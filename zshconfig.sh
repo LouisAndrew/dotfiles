@@ -66,7 +66,8 @@ JQ_PROP="0;$COLOR_YELLOW"
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
-export LS_COLORS=$LS_COLORS:'di=1;35'; 
+export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
+export EZA_COLORS="sc=0;$COLOR_CYAN:di=2;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
 export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"

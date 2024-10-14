@@ -83,7 +83,7 @@ function jmi() {
 function jvi() {
   ticket_key=$1
 
-  if [[ -z "$2" ]]; then
+  if [[ -z "$1" ]]; then
     ticket_key=$(echo `ticket`)
   fi
   

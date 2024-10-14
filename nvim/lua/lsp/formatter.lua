@@ -23,7 +23,6 @@ local lsp_fallback_format_ft = {
 	"docker",
 }
 
-vim.g.ENABLE_AUTOFORMAT = "true"
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)

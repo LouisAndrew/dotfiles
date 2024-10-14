@@ -33,6 +33,10 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
+		{
+			name = "lazydev",
+			group_index = 0,
+		},
 	},
 	formatting = {
 		format = function(entry, vim_item)
