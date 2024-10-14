@@ -52,8 +52,21 @@ export PATH
 # $ curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
 export TERM="wezterm"
 
-LS_COLORS=$LS_COLORS:'di=1;35'; 
-export LS_COLORS
+COLOR_BLACK="30"
+COLOR_RED="31"
+COLOR_GREEN="32"
+COLOR_YELLOW="33"
+COLOR_BLUE="34"
+COLOR_MAGENTA="35"
+COLOR_CYAN="36"
+COLOR_WHITE="37"
+
+JQ_OBJECT="0;$COLOR_WHITE"
+JQ_PROP="0;$COLOR_YELLOW"
+
+export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
+
+export LS_COLORS=$LS_COLORS:'di=1;35'; 
 export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
