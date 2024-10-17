@@ -39,11 +39,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-				borderchars = {
-					preview = { " ", " ", "", " ", "", "", "", "" },
-					results = { " ", "│", " ", " ", "", "", "│", " " },
-					prompt = { " ", "│", "", " ", " ", "│", "", "" },
-				},
+				border = true,
 				path_display = {
 					shorten = {
 						len = 1,

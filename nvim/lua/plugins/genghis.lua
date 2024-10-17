@@ -6,13 +6,8 @@ return {
 			local special_chars = require("theme.special_chars")
 			require("dressing").setup({
 				input = {
-					border = special_chars.create_special_border({
-						side_padding = true,
-						start_in_insert = false,
-						vertical_half = true,
-					}),
 					win_options = {
-						winhighlight = "NormalFloat:NoiceInputNormal",
+						winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 					},
 				},
 				select = {
@@ -26,10 +21,6 @@ return {
 								prompt_position = "top",
 							},
 						},
-						borderchars = {
-							results = { " ", " ", " ", " ", "", "", "", "" },
-							prompt = { " ", " ", "-", " ", "", "", "", "" },
-						},
 					},
 				},
 			})
@@ -38,6 +29,11 @@ return {
 	config = function()
 		local keymap = vim.keymap.set
 		local genghis = require("genghis")
+		genghis.setup({
+			backdrop = {
+				enabled = false,
+			},
+		})
 
 		keymap("n", "<leader>yp", genghis.copyFilepath)
 		keymap("n", "<leader>yn", genghis.copyFilename)
