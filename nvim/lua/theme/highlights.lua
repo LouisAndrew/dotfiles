@@ -71,7 +71,7 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.mfed_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.mfed_0)
-Group.new("NormalFloat", colors.mfed_4, colors.bg_shade)
+Group.new("NormalFloat", colors.mfed_4, colors.nb_background)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -187,7 +187,7 @@ Group.new("Pmenu", colors.mfed_2, colors.bg_shade)
 
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.mfed_navy)
+Group.new("FloatBorder", colors.mfed_8)
 Group.new("DiagnosticShowBorder", colors.bg_shade)
 
 -- code action
@@ -209,7 +209,7 @@ Group.new("FinderVirtText", colors.mfed_7)
 -- hover
 Group.new("HoverNormal", colors.primary)
 -- rename
-Group.new("RenameNormal", colors.secondary, colors.bg_shade)
+Group.new("RenameNormal", colors.secondary, colors.nb_background)
 -- diagnostic
 Group.new("DiagnosticSource", colors.primary)
 Group.new("DiagnosticPos", colors.mfed_7)
@@ -431,7 +431,7 @@ local noice_config = {
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
-	{ "NoiceInputNormal", colors.white, colors.bg_shade },
+	{ "NoiceInputNormal", colors.white, colors.nb_background },
 	{ "NoiceHoverNormal", nil, nil },
 }
 

@@ -62,6 +62,16 @@ return function(wezterm, config)
 			mods = "ALT|SHIFT",
 			action = act.ScrollByLine(1),
 		},
+		{
+			key = "u",
+			mods = "ALT|SHIFT",
+			action = act.ScrollByLine(-20),
+		},
+		{
+			key = "d",
+			mods = "ALT|SHIFT",
+			action = act.ScrollByLine(20),
+		},
 	}
 
 	for i = 1, 9 do

@@ -2,12 +2,15 @@ return {
 	{
 		"stevearc/oil.nvim",
 		keys = {
-			{ "-", "<cmd>:Oil<cr>" },
+			{ "-", "<cmd>:Oil --float<cr>" },
 		},
 		config = function()
 			local oil = require("oil")
 			oil.setup({
 				view_options = {},
+				float = {
+					padding = 0,
+				},
 				keymaps = {
 					["g?"] = "actions.show_help",
 					["<CR>"] = "actions.select",

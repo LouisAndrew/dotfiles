@@ -114,7 +114,11 @@ return {
 					},
 				},
 				mini = {},
-				hover = {},
+				hover = {
+					win_options = {
+						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:cmpborder",
+					},
+				},
 			},
 			notify = {
 				enabled = false,
