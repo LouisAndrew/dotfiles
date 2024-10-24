@@ -71,7 +71,7 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.mfed_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.mfed_0)
-Group.new("NormalFloat", colors.mfed_4, colors.bg_shade)
+Group.new("NormalFloat", colors.mfed_4, colors.nb_background)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -187,7 +187,7 @@ Group.new("Pmenu", colors.mfed_2, colors.bg_shade)
 
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.bg_shade)
+Group.new("FloatBorder", colors.mfed_8)
 Group.new("DiagnosticShowBorder", colors.bg_shade)
 
 -- code action
@@ -207,9 +207,9 @@ Group.new("FinderSpinnerTitle", colors.primary)
 Group.new("FinderSpinner", colors.primary)
 Group.new("FinderVirtText", colors.mfed_7)
 -- hover
-Group.new("HoverNormal", colors.primary, colors.nb_background)
+Group.new("HoverNormal", colors.primary)
 -- rename
-Group.new("RenameNormal", colors.secondary, colors.bg_shade)
+Group.new("RenameNormal", colors.secondary, colors.nb_background)
 -- diagnostic
 Group.new("DiagnosticSource", colors.primary)
 Group.new("DiagnosticPos", colors.mfed_7)
@@ -254,11 +254,11 @@ Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 -- Telescope
 -- Group.new("TelescopeTitle", colors.white, colors.bg_shade, styles.bold)
 Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
-Group.new("TelescopeNormal", nil, colors.bg_shade)
-Group.new("TelescopeBorder", colors.mfed_bg_accent_light, colors.bg_shade)
+Group.new("TelescopeNormal", nil)
+Group.new("TelescopeBorder", colors.mfed_8, nil)
 Group.new("TelescopeMatching", colors.mfed_0)
 Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
-Group.new("TelescopeResultsNormal", colors.mfed_dim, colors.bg_shade)
+Group.new("TelescopeResultsNormal", colors.mfed_dim)
 Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
 
 -- Saga
@@ -326,9 +326,9 @@ Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.bg_shade)
-Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("cmpmenu", nil, nil)
 
-Group.new("cmpborder", colors.bg_shade, nil)
+Group.new("cmpborder", colors.mfed_8, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.bg_shade)
@@ -431,8 +431,8 @@ local noice_config = {
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
-	{ "NoiceInputNormal", colors.white, colors.bg_shade },
-	{ "NoiceHoverNormal", nil, colors.bg_shade },
+	{ "NoiceInputNormal", colors.white, colors.nb_background },
+	{ "NoiceHoverNormal", nil, nil },
 }
 
 local navic_config = {

@@ -1,4 +1,3 @@
-local null_ls = require("null-ls")
 local conform = require("conform")
 
 local utils = require("utils")
@@ -34,13 +33,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			end
 		end
 	end,
-})
-
-null_ls.setup({
-	sources = {
-		null_ls.builtins.diagnostics.markdownlint,
-		null_ls.builtins.formatting.textlint,
-		null_ls.builtins.diagnostics.spectral,
-		null_ls.builtins.diagnostics.staticcheck,
-	},
 })

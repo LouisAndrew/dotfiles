@@ -32,3 +32,24 @@ matches:
 
   - trigger: ":lk"
     replace: "[$|$]()"
+
+  - trigger: ":ae"
+    replace: ä
+
+  - trigger: ":oe"
+    replace: ö
+
+  - trigger: ":ue"
+    replace: ü
+
+  - trigger: ":Ae"
+    replace: Ä
+
+  - trigger: ":Oe"
+    replace: Ö
+
+  - trigger: ":Ue"
+    replace: Ü
+
+  - trigger: ":ss"
+    replace: ß

@@ -20,6 +20,46 @@ return {
 		local actions = require("telescope.actions")
 		local fb_actions = telescope.extensions.file_browser.actions
 
+		local function normalize_path(path)
+			return path:gsub("\\", "/")
+		end
+
+		local function split_filepath(path)
+			local normalized_path = normalize_path(path)
+
+			local paths = {}
+			for match in string.gmatch(normalized_path, "[^/]+") do
+				table.insert(paths, match)
+			end
+
+			local filename = paths[#paths]
+			local stripped_path = ""
+
+			if #paths == 1 then
+				return "", filename
+			end
+
+			local path_limit = 2
+			for i = 1, #paths - 1 do
+				local path_component = paths[i]
+				if #paths - 1 >= path_limit and i < #paths - path_limit - 1 then
+					path_component = path_component:sub(1, 1)
+				end
+
+				stripped_path = stripped_path .. path_component .. "/"
+			end
+
+			return stripped_path, filename
+		end
+
+		local function path_display(_, path)
+			local stripped_path, filename = split_filepath(path)
+			if filename == stripped_path or stripped_path == "" then
+				return filename
+			end
+			return string.format("%s ~ %s", filename, stripped_path)
+		end
+
 		require("neoclip").setup()
 
 		local default_maps = {
@@ -27,6 +67,10 @@ return {
 				["<C-l>"] = actions.file_vsplit,
 				["<C-j>"] = actions.file_split,
 				["<C-u>"] = actions.preview_scrolling_up,
+				["<C-q>"] = function(prompt_bufnr)
+					actions.smart_send_to_qflist(prompt_bufnr)
+					actions.open_qflist(prompt_bufnr)
+				end,
 			},
 		}
 
@@ -39,85 +83,29 @@ return {
 
 		telescope.setup({
 			defaults = {
-				borderchars = {
-					preview = { " ", " ", "", " ", "", "", "", "" },
-					results = { " ", "│", " ", " ", "", "", "│", " " },
-					prompt = { " ", "│", "", " ", " ", "│", "", "" },
-				},
-				path_display = {
-					shorten = {
-						len = 1,
-						exclude = { -1, -2 },
+				border = true,
+				mappings = default_maps,
+				path_display = path_display,
+				layout_strategy = "horizontal",
+				layout_config = {
+					horizontal = {
+						width = {
+							padding = 0,
+						},
+						height = {
+							padding = 0,
+						},
+						preview_width = 0.7,
 					},
 				},
 				dynamic_preview_title = true,
 				prompt_prefix = "   ",
 				selection_caret = " ",
 				entry_prefix = " ",
-				layout_config = {
-					horizontal = {
-						width_padding = 1,
-						height_padding = 1,
-						preview_width = 0.6,
-						width = 0.9,
-					},
-				},
-				vimgrep_arguments = vimgrep_arguments,
-				mappings = default_maps,
-				color_devicons = false,
 			},
 			pickers = {
 				find_files = {
-					mappings = default_maps,
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-				},
-				buffers = {
-					mappings = default_maps,
-				},
-				live_grep = {
-					mappings = default_maps,
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-				},
-			},
-			extensions = {
-				fzf = {
-					fuzzy = true,
-					override_generic_sorter = true,
-					override_file_sorter = true,
-					case_mode = "smart_case",
-				},
-				file_browser = {
-					hijack_netrw = true,
-					respect_gitignore = true,
-					mappings = {
-						["i"] = {
-							["<C-u>"] = actions.preview_scrolling_up,
-							["<C-d>"] = actions.preview_scrolling_down,
-							["<C-l>"] = actions.file_vsplit,
-							["<C-j>"] = actions.file_split,
-							["<C-h>"] = fb_actions.goto_cwd,
-							["<C-c>"] = fb_actions.create,
-							["<C-r>"] = fb_actions.rename,
-							["<C-q>"] = fb_actions.remove,
-							["<C-t>"] = actions.file_tab,
-							["<C-x>"] = function(prompt_bufnr)
-								fb_actions.toggle_hidden(prompt_bufnr)
-								fb_actions.toggle_respect_gitignore(prompt_bufnr)
-							end,
-						},
-					},
-				},
-				undo = {
-					side_by_side = false,
-					use_delta = false,
-					layout_config = {
-						horizontal = {
-							width_padding = 0.1,
-							height_padding = 0.1,
-							preview_width = 0.7,
-							width = 0.9,
-						},
-					},
+					find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
 				},
 			},
 		})

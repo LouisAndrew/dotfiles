@@ -149,7 +149,7 @@ return {
 			end,
 			padding = { right = 1, left = 1 },
 			color = {
-				fg = minimal_fedu.white_accent,
+				fg = minimal_fedu.dimmed_white,
 			},
 		})
 
