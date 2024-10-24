@@ -67,6 +67,10 @@ return {
 				["<C-l>"] = actions.file_vsplit,
 				["<C-j>"] = actions.file_split,
 				["<C-u>"] = actions.preview_scrolling_up,
+				["<C-q>"] = function(prompt_bufnr)
+					actions.smart_send_to_qflist(prompt_bufnr)
+					actions.open_qflist(prompt_bufnr)
+				end,
 			},
 		}
 
@@ -101,7 +105,7 @@ return {
 			},
 			pickers = {
 				find_files = {
-					hidden = true,
+					find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
 				},
 			},
 		})

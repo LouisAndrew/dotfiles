@@ -161,6 +161,10 @@ return {
 					web = { pattern = "^http[s]?://", icon = " ", highlight = "RenderMarkdownLink" },
 				},
 			},
+			quote = {
+				icon = "|",
+			},
+			callout = {},
 			file_types = { "markdown", "codecompanion" },
 		},
 		dependencies = {

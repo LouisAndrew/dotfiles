@@ -35,7 +35,6 @@ return function(_, config)
 
 		tab_bar = {
 			background = "#131313",
-			inactive_tab_edge = "#414559",
 
 			active_tab = {
 				bg_color = "#818cf8",
@@ -48,7 +47,7 @@ return function(_, config)
 
 			inactive_tab = {
 				bg_color = "#131313",
-				fg_color = "#a0a0a0",
+				fg_color = "#9a9a9a",
 				intensity = "Normal",
 				italic = false,
 				strikethrough = false,
