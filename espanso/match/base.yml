@@ -34,22 +34,22 @@ matches:
     replace: "[$|$]()"
 
   - trigger: ":ae"
-    replace: ä
+    replace: "ä"
 
   - trigger: ":oe"
-    replace: ö
+    replace: "ö"
 
   - trigger: ":ue"
-    replace: ü
+    replace: "ü"
 
   - trigger: ":Ae"
-    replace: Ä
+    replace: "Ä"
 
   - trigger: ":Oe"
-    replace: Ö
+    replace: "Ö"
 
   - trigger: ":Ue"
-    replace: Ü
+    replace: "Ü"
 
   - trigger: ":ss"
-    replace: ß
+    replace: "ß"
