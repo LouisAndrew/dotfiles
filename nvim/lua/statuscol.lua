@@ -27,40 +27,6 @@ function sc.num()
 	return v_hl .. out
 end
 
-sc.folds = function()
-	local lnum = vim.v.lnum
-	local foldlevel = vim.fn.foldlevel(lnum)
-
-	local foldlevel_before = vim.fn.foldlevel((lnum - 1) > 1 and lnum - 1 or 1)
-	local foldlevel_after = vim.fn.foldlevel((lnum + 1) <= vim.fn.line("$") and (lnum + 1) or vim.fn.line("$"))
-
-	local foldclosed = vim.fn.foldclosed(lnum)
-
-	-- Line has nothing to do with folds so we will skip it
-	if foldlevel == 0 then
-		return " "
-	end
-
-	local hl = sc.hl("FoldColumn")
-	-- Line is a closed fold(I know second condition feels unnecessary but I will still add it)
-	if foldclosed ~= -1 and foldclosed == lnum then
-		return hl .. "+"
-	end
-
-	-- I didn't use ~= because it couldn't make a nested fold have a lower level than it's parent fold and it's not something I would use
-	if foldlevel > foldlevel_before or lnum == 1 then
-		return hl .. "┌"
-	end
-
-	-- The line is the last line in the fold
-	if foldlevel > foldlevel_after then
-		return hl .. "└"
-	end
-
-	-- Line is in the middle of an open fold
-	return hl .. "│"
-end
-
 function sc.sign()
 	-- render sign (gitsigns) and align it to the right
 	return "%s%="
@@ -70,16 +36,44 @@ function sc.space()
 	return " "
 end
 
+local function ternary(condition, if_true, if_false)
+	return condition .. " ? " .. if_true .. " : " .. if_false
+end
+
+local fold_chars = {
+	closed = '"+"',
+	opened = '"┌"',
+	end_ = '"└"',
+	middle = '"│"',
+}
+
+-- vimscript because it's a bit better than lua
+-- Issue with lua: unfocusing window will make the foldcolumn disappear
+function sc.nf()
+	local hl = sc.hl("FoldColumn")
+	local fold_before = "foldlevel(v:lnum - 1)"
+	local fold_after = "foldlevel(v:lnum + 1)"
+	local fold = "foldlevel(v:lnum)"
+	local foldclosed = "foldclosed(v:lnum)"
+
+	local is_end_t = ternary(fold .. " > " .. fold_after, fold_chars.end_, fold_chars.middle)
+	local is_opened_start_t = ternary(fold .. " > " .. fold_before, fold_chars.opened, is_end_t)
+	local is_closed_start_t =
+		ternary(foldclosed .. " != -1 && " .. foldclosed .. " == v:lnum", fold_chars.closed, is_opened_start_t)
+	local is_not_fold_t = ternary(fold .. " == 0", '" "', is_closed_start_t)
+
+	return hl .. "%{" .. is_not_fold_t .. "}"
+end
+
 -- %s%=%{v:relnum?v:relnum:v:lnum} %#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*
 -- tuts: https://www.reddit.com/r/neovim/comments/1djjc6q/statuscolumn_a_beginers_guide/, https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/modules/status/components.lua
-sc.myStatuscolumn = function()
+function sc.myStatuscolumn()
 	return table.concat({
 		sc.sign(),
 		sc.num(),
 		sc.space(),
-		sc.folds(),
+		sc.nf(),
 		sc.space(),
-		-- vim.w.display_fold,
 	})
 end
 
