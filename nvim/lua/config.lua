@@ -1,9 +1,7 @@
 local block = "n-c:block-Cursor,i-ci:ver10-iCursor,v:hor100-vCursor,o:hor50-pCursor,r:hor100-rCursor"
-local statuscolumn =
-	'%s%=%{v:relnum?v:relnum:v:lnum} %#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
 
 return {
-	statuscolumn = statuscolumn,
+	statuscolumn = '%!v:lua.require("statuscol").myStatuscolumn()',
 	nu = true,
 	rnu = true,
 	numberwidth = 1,

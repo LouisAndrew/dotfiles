@@ -28,6 +28,8 @@ Group.new("Conceal", colors.mfed_7)
 Group.new("CursorColumn", nil, colors.mfed_9)
 Group.new("CursorLine", nil, colors.mfed_9)
 Group.new("CursorLineNr", colors.mfed_6, colors.noir_9)
+Group.new("vCursorLine", colors.indigo_fg)
+Group.new("RCursorLine", colors.yellow_fg)
 
 Group.new("Cursor", nil, colors.yellow_fg)
 Group.new("iCursor", nil, colors.add_fg)
@@ -48,7 +50,7 @@ Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
 Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light():light())
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
-Group.new("FoldColumn", colors.mfed_bg_accent_light:light():light():light(), nil)
+Group.new("FoldColumn", colors.mfed_bg_accent_light:light(), nil)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)

@@ -42,6 +42,14 @@ return {
 			local colors = require("minimal_fedu")
 
 			require("obsidian").setup({
+				mappings = {
+					["gf"] = {
+						action = function()
+							return require("obsidian").util.gf_passthrough()
+						end,
+						opts = { noremap = false, expr = true, buffer = true },
+					},
+				},
 				picker = {
 					name = "telescope.nvim",
 					note_mappings = {
@@ -157,6 +165,7 @@ return {
 				email = " ",
 				hyperlink = " ",
 				highlight = "RenderMarkdownLink",
+				wiki = { icon = " ", highlight = "RenderMarkdownWikiLink" },
 				custom = {
 					web = { pattern = "^http[s]?://", icon = " ", highlight = "RenderMarkdownLink" },
 				},

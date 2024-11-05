@@ -129,6 +129,7 @@ alias minus="ncu \"/^(?!(.*)(vue|eslint|sass-loader|typescript|graphql|apollo)).
 
 # BW
 alias bwu="bw unlock --passwordenv BW_PASSWORD"
+alias bwli="bw list items"
 alias ghpr="gh-cpr"
 
 alias rbrew="/usr/local/bin/brew"
