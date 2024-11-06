@@ -44,6 +44,7 @@ local has_value = require("utils").has_value
 local no_statuscol_filetypes = {
 	"DiffviewFiles",
 	"DiffviewFileHistory",
+	"Outline",
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {

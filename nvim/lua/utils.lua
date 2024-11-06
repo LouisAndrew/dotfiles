@@ -1,7 +1,9 @@
+local U = {}
+
 ---@param tab table
 ---@param val  string
 ---@return boolean
-local function has_value(tab, val)
+function U.has_value(tab, val)
 	for _, value in ipairs(tab) do
 		if value == val then
 			return true
@@ -11,14 +13,14 @@ local function has_value(tab, val)
 	return false
 end
 
-local function dump(o)
+function U.dump(o)
 	if type(o) == "table" then
 		local s = "{ "
 		for k, v in pairs(o) do
 			if type(k) ~= "number" then
 				k = '"' .. k .. '"'
 			end
-			s = s .. "[" .. k .. "] = " .. dump(v) .. ","
+			s = s .. "[" .. k .. "] = " .. U.dump(v) .. ","
 		end
 		return s .. "} "
 	else
@@ -26,17 +28,17 @@ local function dump(o)
 	end
 end
 
-local nvim_config_path = function()
+function U.nvim_config_path()
 	return vim.fn.stdpath("config")
 end
 
-local pascal_case = function(str)
+function U.pascal_case(str)
 	local pascalStr = str:gsub("[-_]%l", string.upper):gsub("[-_]", "")
 	return pascalStr:gsub("^%l", string.upper)
 end
 
 --- @param text string
-local insert = function(text, append)
+function U.insert(text, append)
 	local content = text
 	if append then
 		local current_line = vim.api.nvim_get_current_line()
@@ -50,7 +52,7 @@ local insert = function(text, append)
 	vim.api.nvim_set_current_line(content)
 end
 
-local function extract_component_name(
+function U.extract_component_name(
 	args, -- text from i(2) in this example i.e. { { "456" } }
 	_, -- parent snippet or parent node
 	_ -- custom arguments
@@ -63,23 +65,23 @@ local function extract_component_name(
 	end
 
 	local str = component_name:match("(.+)%..+$") or component_name
-	return pascal_case(str)
+	return U.pascal_case(str)
 end
 
-local merge = function(first_table, second_table)
+function U.merge(first_table, second_table)
 	for k, v in pairs(second_table) do
 		first_table[k] = v
 	end
 end
 
 -- https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/utils.lua#L83
-local function char_on_pos(pos)
+function U.char_on_pos(pos)
 	pos = pos or vim.fn.getpos(".")
 	return tostring(vim.fn.getline(pos[1])):sub(pos[2], pos[2])
 end
 
 --  https://neovim.discourse.group/t/how-do-you-work-with-strings-with-multibyte-characters-in-lua/2437/4
-local function char_byte_count(s, i)
+function U.char_byte_count(s, i)
 	if not s or s == "" then
 		return 1
 	end
@@ -99,12 +101,12 @@ local function char_byte_count(s, i)
 end
 
 -- https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/utils.lua#L83
-local function get_visual_range()
+function U.get_visual_range()
 	local sr, sc = unpack(vim.fn.getpos("v"), 2, 3)
 	local er, ec = unpack(vim.fn.getpos("."), 2, 3)
 
 	-- To correct work with non-single byte chars
-	local byte_c = char_byte_count(char_on_pos({ er, ec }))
+	local byte_c = U.char_byte_count(U.char_on_pos({ er, ec }))
 	ec = ec + (byte_c - 1)
 
 	local range = {}
@@ -121,24 +123,15 @@ local function get_visual_range()
 	return range
 end
 
-local function pad_start(n, width)
+function U.pad_start(n, width)
 	local len = width - #tostring(n)
 	return len < 1 and n or (" "):rep(len) .. n
 end
 
-return {
-	has_value = has_value,
-	dump = dump,
-	nvim_config_path = nvim_config_path(),
-	insert = insert,
-	CONST = {
-		truthy = 1,
-		falsy = 0,
-		emptyString = "",
-	},
-	pascal_case = pascal_case,
-	extract_component_name = extract_component_name,
-	merge = merge,
-	get_visual_range = get_visual_range,
-	pad_start = pad_start,
+U.CONST = {
+	truthy = 1,
+	falsy = 0,
+	emptyString = "",
 }
+
+return U

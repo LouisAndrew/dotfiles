@@ -11,11 +11,10 @@ return {
 		local opts = { buffer = bufnr, remap = false }
 
 		vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "go", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
 		vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
 
-		vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
 		vim.keymap.set("n", "<leader>if", function()
 			local winid = require("ufo").peekFoldedLinesUnderCursor()
 			if not winid then
@@ -24,36 +23,40 @@ return {
 		end, opts)
 
 		vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
-		vim.keymap.set("n", "<leader>it", "<cmd>Lspsaga outline<CR>", opts)
 		vim.keymap.set(
 			"i",
 			"<c-b>",
 			vim.lsp.buf.signature_help,
 			{ silent = true, noremap = true, desc = "toggle signature" }
 		)
+
 		vim.keymap.set("n", "<space>id", function()
 			vim.diagnostic.open_float(diag_float_config)
 		end, { noremap = true, silent = true })
 
 		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.goto_prev({
+			vim.diagnostic.jump({
+				count = -1,
 				float = diag_float_config,
 			})
 		end, opts) -- jump to previous diagnostic in buffer
 		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.goto_next({
+			vim.diagnostic.jump({
+				count = 1,
 				float = diag_float_config,
 			})
 		end, opts)
 
 		vim.keymap.set("n", "[e", function()
-			vim.diagnostic.goto_prev({
+			vim.diagnostic.jump({
+				count = -1,
 				float = diag_float_config,
 				severity = vim.diagnostic.severity.ERROR,
 			})
 		end)
 		vim.keymap.set("n", "]e", function()
-			vim.diagnostic.goto_next({
+			vim.diagnostic.jump({
+				count = 1,
 				float = diag_float_config,
 				severity = vim.diagnostic.severity.ERROR,
 			})
@@ -71,5 +74,6 @@ return {
 
 		-- make sure it works
 		vim.keymap.set("i", "<C-h>", "<Left>", opts)
+		vim.keymap.set("n", "<leader>it", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 	end,
 }

@@ -2,7 +2,6 @@ local special_chars = require("theme.special_chars")
 local keymaps = require("lsp.keymaps")
 
 local lsp_zero = require("lsp-zero")
-local saga = require("lspsaga")
 local navic = require("nvim-navic")
 local utils = require("utils")
 
@@ -193,57 +192,6 @@ require("lspconfig").cssls.setup({
 				unknownAtRules = "ignore",
 			},
 		},
-	},
-})
-
-local saga_keys = {
-	edit = "<cr>",
-	vsplit = "<C-l>",
-	split = "<C-j>",
-	quit = "<leader>w",
-	tabe = "<C-t>",
-}
-
-saga.setup({
-	scroll_preview = { scroll_down = "<C-d>", scroll_up = "<C-u>" },
-	definition = {
-		keys = saga_keys,
-	},
-	finder = {
-		keys = saga_keys,
-	},
-	code_action = {
-		keys = {
-			quit = "<leader>w",
-		},
-	},
-	lightbulb = {
-		enabled = false,
-		sign_priority = 1,
-	},
-	ui = {
-		title = false,
-		border = special_chars.create_special_border({
-			side_padding = true,
-			hide_vertical_padding = true,
-		}),
-		code_action = " ",
-	},
-	symbol_in_winbar = {
-		enable = false,
-		show_file = false,
-	},
-	outline = {
-		keys = {
-			toggle_or_jump = "<CR>",
-		},
-	},
-	diagnostic = {
-		border_follow = false,
-		text_hl_follow = false,
-	},
-	rename = {
-		in_select = false,
 	},
 })
 

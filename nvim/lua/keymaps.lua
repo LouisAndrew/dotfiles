@@ -3,6 +3,14 @@ local function termcodes(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+local function build_keymaps(keymaps)
+	for mode, t in pairs(keymaps) do
+		for key, remap in pairs(t) do
+			vim.keymap.set(mode, key, remap[1], remap.opts)
+		end
+	end
+end
+
 vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
 vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
 vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
@@ -138,8 +146,9 @@ local M = {
 	},
 }
 
-for mode, t in pairs(M) do
-	for key, remap in pairs(t) do
-		vim.keymap.set(mode, key, remap[1], remap.opts)
-	end
-end
+build_keymaps(M)
+
+return {
+	M = M,
+	build_keymaps = build_keymaps,
+}

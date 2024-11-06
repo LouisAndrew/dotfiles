@@ -27,12 +27,19 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 zstyle :compinstall filename '/home/louis.andrew/.zshrc'
 autoload -Uz compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' rehash true
-zmodload zsh/complist
-compinit
+
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+#
+# zstyle ':completion:*' menu select
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*' rehash true
+# zmodload zsh/complist
+# compinit
+
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
 # bun completions
 [ -s "/Users/louis.andrew/.bun/_bun" ] && source "/Users/louis.andrew/.bun/_bun"

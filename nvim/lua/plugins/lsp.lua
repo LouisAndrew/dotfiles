@@ -9,19 +9,20 @@ return {
 		-- LSP Support
 		"neovim/nvim-lspconfig",
 		-- Autocompletion
-		"nvimdev/lspsaga.nvim",
-		"nvimtools/none-ls.nvim",
 		{
+			-- Auto-close LSP
 			"zeioth/garbage-day.nvim",
 			event = "VeryLazy",
 			opts = {},
 		},
 		{
+			-- Formatting
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },
 			lazy = true,
 		},
 		{
+			-- Completion
 			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
 			dependencies = {
@@ -43,8 +44,8 @@ return {
 				require("trouble").setup({ auto_preview = false })
 			end,
 		},
-		-- Disabling for now, seeing a performance issue
 		{
+			-- Breadcrumbs
 			"SmiteshP/nvim-navic",
 			config = function()
 				require("nvim-navic").setup({
@@ -62,6 +63,7 @@ return {
 			end,
 		},
 		{
+			-- Folds
 			"kevinhwang91/nvim-ufo",
 			dependencies = {
 				"kevinhwang91/promise-async",
@@ -78,9 +80,12 @@ return {
 				},
 			},
 		},
+		-- json schema
 		"b0o/SchemaStore.nvim",
+		-- TS LSP
 		"yioneko/nvim-vtsls",
 		{
+			-- Lua LSP
 			"folke/lazydev.nvim",
 			ft = "lua",
 			opts = {
@@ -90,6 +95,15 @@ return {
 			},
 		},
 		{ "Bilal2453/luvit-meta", lazy = true },
+		-- Symbols outline
+		{
+			"hedyhli/outline.nvim",
+			lazy = true,
+			keys = {
+				{ "n", "<leader>it", "<cmd>:Outline<cr>" },
+			},
+			opts = {},
+		},
 	},
 	config = function()
 		require("lsp")

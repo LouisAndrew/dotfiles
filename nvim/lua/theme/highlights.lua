@@ -47,7 +47,7 @@ Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
 Group.new("Folded", colors.dimmed_white, nil)
 
-Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light():light())
+Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light())
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
 Group.new("FoldColumn", colors.mfed_bg_accent_light:light(), nil)
