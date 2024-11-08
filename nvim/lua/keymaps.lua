@@ -3,18 +3,13 @@ local function termcodes(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local function build_keymaps(keymaps)
+local function build_keymaps(keymaps, opts)
 	for mode, t in pairs(keymaps) do
-		for key, remap in pairs(t) do
-			vim.keymap.set(mode, key, remap[1], remap.opts)
+		for _, remap in pairs(t) do
+			vim.keymap.set(mode, remap[1], remap[2], opts and opts or remap.opts)
 		end
 	end
 end
-
-vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
 
 local function create_spec()
 	local ft_specfile = {
@@ -35,114 +30,117 @@ end
 local M = {
 	i = {
 		-- go to  beginning and end
-		["<C-b>"] = { "<ESC>^i", "beginning of line" },
-		["<C-e>"] = { "<End>", "end of line" },
+		{ "<C-b>", "<ESC>^i", "beginning of line" },
+		{ "<C-e>", "<End>", "end of line" },
 		-- navigate within insert mode
-		["<C-h>"] = { "<Left>", "move left" },
-		["<C-l>"] = { "<Right>", "move right" },
-		["<C-j>"] = { "<Down>", "move down" },
-		["<C-k>"] = { "<Up>", "move up" },
-		["<C-4>"] = { "<End>" },
-		["<C-6>"] = { "<cmd>:norm ^<CR>" },
-		["<S-Tab>"] = { "<cmd>:norm <<^<CR>" },
+		{ "<C-h>", "<Left>", "move left" },
+		{ "<C-l>", "<Right>", "move right" },
+		{ "<C-j>", "<Down>", "move down" },
+		{ "<C-k>", "<Up>", "move up" },
+		{ "<C-4>", "<End>" },
+		{ "<C-6>", "<cmd>:norm ^<CR>" },
+		{ "<S-Tab>", "<cmd>:norm <<^<CR>" },
 	},
 
 	n = {
-		["<ESC>"] = { "<cmd> noh <CR>", "no highlight" },
-		["<leader>pv"] = { vim.cmd.Ex },
-		["<leader>tn"] = { ":e %:h" }, -- adjacent
-		["<leader>tt"] = { create_spec },
-		["<leader>s"] = { "<cmd>:w<cr>" },
+		{ "<ESC>", "<cmd> noh <CR>", "no highlight" },
+		{ "<leader>pv", vim.cmd.Ex },
+		{ "<leader>tn", ":e %:h" }, -- adjacent
+		{ "<leader>tt", create_spec },
+		{ "<leader>s", "<cmd>:w<cr>" },
 
-		["<leader>tw"] = { "<cmd>:tabclose<cr>" },
-		["<leader>q"] = { "<cmd>:wqa<cr>" },
-		["<leader>]"] = { "<cmd>:bnext<cr>" },
-		["<leader>["] = { "<cmd>:bprev<cr>" },
-		["<C-]>"] = { "<cmd>:bnext<cr>" },
-		["<C-[>"] = { "<cmd>:bprev<cr>" },
-		["<leader>bw"] = { "<cmd>:%bd|e#|bd#<cr>" },
+		{ "<leader>tw", "<cmd>:tabclose<cr>" },
+		{ "<leader>q", "<cmd>:wqa<cr>" },
+		{ "<leader>]", "<cmd>:bnext<cr>" },
+		{ "<leader>[", "<cmd>:bprev<cr>" },
+		{ "<C-]>", "<cmd>:bnext<cr>" },
+		{ "<C-[>", "<cmd>:bprev<cr>" },
+		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
 		-- Customs
-		["<S-j>"] = { "}", "skip bracket" },
-		["<S-k>"] = { "{", "skip bracket up" },
-		["<S-h>"] = { "^", "start of line" },
-		["<S-l>"] = { "$", "end of line" },
-		["'"] = { "*", "next occurence" },
-		[";"] = { "#", "last occurence" },
-		["<C-u>"] = { "<C-u>zz", "scroll page down" },
-		["<C-d>"] = { "<C-d>zz", "scroll page up" },
+		{ "<S-j>", "}", "skip bracket" },
+		{ "<S-k>", "{", "skip bracket up" },
+		{ "<S-h>", "^", "start of line" },
+		{ "<S-l>", "$", "end of line" },
+		{ "'", "*", "next occurence" },
+		{ ";", "#", "last occurence" },
+		{ "<C-u>", "<C-u>zz", "scroll page down" },
+		{ "<C-d>", "<C-d>zz", "scroll page up" },
 
-		["<A-k>"] = { "O", "move line up" },
+		{ "<A-k>", "O", "move line up" },
 
-		["<leader>mk"] = { "<cmd> :m-2 <CR>", "line up" },
-		["<leader>mj"] = { "<cmd> :m+ <CR>", "line down" },
-		-- ["gh"] = { "<Plug>VSCodeCommentaryLine" },
+		{ "<leader>mk", "<cmd> :m-2 <CR>", "line up" },
+		{ "<leader>mj", "<cmd> :m+ <CR>", "line down" },
+		-- { "gh", "<Plug>VSCodeCommentaryLine"  },
 
 		-- Copy all
-		["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
+		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
 
 		-- line numbers
 
-		["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-		["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-		["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+		-- { "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }  },
+		-- { "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }  },
+		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
 		-- ALT+H
-		["˙"] = { require("smart-splits").resize_left },
+		{ "˙", require("smart-splits").resize_left },
 		-- ALT+J
-		["¬"] = { require("smart-splits").resize_down },
+		{ "¬", require("smart-splits").resize_down },
 		-- ALT+K
-		["˚"] = { require("smart-splits").resize_up },
+		{ "˚", require("smart-splits").resize_up },
 		-- ALT+L
-		["∆"] = { require("smart-splits").resize_right },
+		{ "∆", require("smart-splits").resize_right },
 
-		["<C-h>"] = { require("smart-splits").move_cursor_left },
-		["<C-j>"] = { require("smart-splits").move_cursor_down },
-		["<C-k>"] = { require("smart-splits").move_cursor_up },
-		["<C-l>"] = { require("smart-splits").move_cursor_right },
+		{ "<C-h>", require("smart-splits").move_cursor_left },
+		{ "<C-j>", require("smart-splits").move_cursor_down },
+		{ "<C-k>", require("smart-splits").move_cursor_up },
+		{ "<C-l>", require("smart-splits").move_cursor_right },
 
-		["<C-8>"] = { "zh" },
-		["<C-9>"] = { "zl" },
+		{ "<C-8>", "zh" },
+		{ "<C-9>", "zl" },
 
-		["<leader>'"] = { "gt" },
-		["<leader>;"] = { "gT" },
+		{ "<leader>'", "gt" },
+		{ "<leader>;", "gT" },
 
 		-- Window management
-		["<leader>w"] = { "<cmd>:bd<cr>" },
-		["<leader>W"] = { "<cmd>:q<cr>" },
-		["<leader>tj"] = { "<cmd>:sp<cr>" },
-		["<leader>tl"] = { "<cmd>:vsp<cr>" },
+		{ "<leader>w", "<cmd>:bd<cr>" },
+		{ "<leader>W", "<cmd>:q<cr>" },
+		{ "<leader>tj", "<cmd>:sp<cr>" },
+		{ "<leader>tl", "<cmd>:vsp<cr>" },
 
-		["Q"] = { "@qj", "Fast macro, always save on Q" },
-		["go"] = { "gx" },
+		{ "Q", "@qj", "Fast macro, always save on Q" },
 
-		["<leader>t["] = { "<cmd>:tabprev<cr>" }, -- adjacent
-		["<leader>t]"] = { "<cmd>:tabnext<cr>" }, -- spec file
+		{ "<leader>t[", "<cmd>:tabprev<cr>" }, -- adjacent
+		{ "<leader>t]", "<cmd>:tabnext<cr>" }, -- spec file
+		{ "<C-h>", require("smart-splits").move_cursor_left },
+		{ "<C-j>", require("smart-splits").move_cursor_down },
+		{ "<C-k>", require("smart-splits").move_cursor_up },
+		{ "<C-l>", require("smart-splits").move_cursor_right },
 	},
 
-	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },
+	t = { { "<C-x>", termcodes("<C-\\><C-N>"), "escape terminal " } },
 
 	v = {
-		["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-		["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		["<S-j>"] = { "}", "skip bracket" },
-		["<S-k>"] = { "{", "skip bracket up" },
-		["<S-h>"] = { "^", "start of line" },
-		["<S-l>"] = { "$", "end of line" },
-		["n"] = { "*", "next occurence" },
-		["N"] = { "#", "last occurence" },
-		["<C-l>"] = { "%" },
-		["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
-		["s"] = { "<Plug>(nvim-surround-visual)" },
+		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+		{ "<S-j>", "}", "skip bracket" },
+		{ "<S-k>", "{", "skip bracket up" },
+		{ "<S-h>", "^", "start of line" },
+		{ "<S-l>", "$", "end of line" },
+		{ "n", "*", "next occurence" },
+		{ "N", "#", "last occurence" },
+		{ "<C-l>", "%" },
+		{ "<C-k>", ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
+		{ "s", "<Plug>(nvim-surround-visual)" },
 	},
 
 	x = {
-		["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+		{ "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+		{ "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		-- Don't copy the replaced text after pasting in visual mode
 		-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
-		["Q"] = { ":norm @q<CR>", "Fast macro, always save on Q" },
+		{ "p", 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+		{ "Q", ":norm @q<CR>", "Fast macro, always save on Q" },
 	},
 }
 

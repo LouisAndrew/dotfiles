@@ -332,12 +332,14 @@ return {
 					table.insert(client_names, client.name .. count)
 				end
 
-				if #client_names == 1 then
+				if #client_names == 0 then
+					return msg
+				end
+
+				if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
 					return "|    " .. table.concat(client_names, ", ")
 				elseif #client_names > 0 then
 					return "|    " .. #client_names .. " LSPs"
-				else
-					return msg
 				end
 			end,
 			color = {

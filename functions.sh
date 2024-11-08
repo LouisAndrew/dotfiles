@@ -158,3 +158,17 @@ function rgf() {
       "$EDITOR" "$file" +"$line" -c "norm ${char}lh"
   fi
 }
+
+function loadenv() {
+  local file = ".env"
+  if [[ ! -z "$1" ]]; then
+    file = $1
+  fi
+  
+  grep -v '^#' $file | xargs -0 | while read -r line; do
+    export $line
+  done
+
+  clear
+  echo "clearing for security"
+}

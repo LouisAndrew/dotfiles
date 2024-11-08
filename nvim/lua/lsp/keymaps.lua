@@ -1,3 +1,4 @@
+local keymaps = require("keymaps")
 local diag_float_config = {
 	severity_sort = true,
 	source = true,
@@ -10,70 +11,93 @@ return {
 	generate_keymaps = function(bufnr)
 		local opts = { buffer = bufnr, remap = false }
 
-		vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "go", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
+		local M = {
+			n = {
+				{ "go", vim.lsp.buf.definition },
+				{
+					"K",
+					function()
+						local winid = require("ufo").peekFoldedLinesUnderCursor()
+						if not winid then
+							vim.lsp.buf.hover()
+						end
+					end,
+				},
+				{ "<leader>is", vim.lsp.buf.workspace_symbol },
+				{
+					"<space>id",
+					function()
+						vim.diagnostic.open_float(diag_float_config)
+					end,
+				},
+				{ "<leader>ia", vim.lsp.buf.code_action },
+				{ "<leader>it", "<cmd>Outline<CR>" },
+				{ "<leader>in", vim.lsp.buf.rename },
+				{ "<leader>rr", "<cmd>LspRestart<CR>" },
+				{
+					"[d",
+					function()
+						vim.diagnostic.jump({
+							count = -1,
+							float = diag_float_config,
+						})
+					end,
+				}, -- jump to previous diagnostic in buffer
+				{
+					"]d",
+					function()
+						vim.diagnostic.jump({
+							count = 1,
+							float = diag_float_config,
+						})
+					end,
+				},
 
-		vim.keymap.set("n", "<leader>if", function()
-			local winid = require("ufo").peekFoldedLinesUnderCursor()
-			if not winid then
-				vim.lsp.buf.hover()
-			end
-		end, opts)
+				{
+					"[e",
+					function()
+						vim.diagnostic.jump({
+							count = -1,
+							float = diag_float_config,
+							severity = vim.diagnostic.severity.ERROR,
+						})
+					end,
+				},
+				{
+					"]e",
+					function()
+						vim.diagnostic.jump({
+							count = 1,
+							float = diag_float_config,
+							severity = vim.diagnostic.severity.ERROR,
+						})
+					end,
+				},
+				{ "<leader>ir", vim.lsp.buf.references },
+				{
+					"<leader>rl",
+					function()
+						if vim.g.EXPAND_LSP == "true" then
+							vim.g.EXPAND_LSP = "false"
+						else
+							vim.g.EXPAND_LSP = "true"
+						end
+					end,
+					"toggle lualine lsp expand",
+				},
+			},
+			i = {
+				{
+					"<c-b>",
+					vim.lsp.buf.signature_help,
+				},
+				{ "<C-h>", "<Left>", opts },
+			},
+			v = {
+				{ "<leader>ir", vim.lsp.buf.references, opts },
+			},
+		}
 
-		vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
-		vim.keymap.set(
-			"i",
-			"<c-b>",
-			vim.lsp.buf.signature_help,
-			{ silent = true, noremap = true, desc = "toggle signature" }
-		)
-
-		vim.keymap.set("n", "<space>id", function()
-			vim.diagnostic.open_float(diag_float_config)
-		end, { noremap = true, silent = true })
-
-		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.jump({
-				count = -1,
-				float = diag_float_config,
-			})
-		end, opts) -- jump to previous diagnostic in buffer
-		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.jump({
-				count = 1,
-				float = diag_float_config,
-			})
-		end, opts)
-
-		vim.keymap.set("n", "[e", function()
-			vim.diagnostic.jump({
-				count = -1,
-				float = diag_float_config,
-				severity = vim.diagnostic.severity.ERROR,
-			})
-		end)
-		vim.keymap.set("n", "]e", function()
-			vim.diagnostic.jump({
-				count = 1,
-				float = diag_float_config,
-				severity = vim.diagnostic.severity.ERROR,
-			})
-		end)
-		vim.keymap.set("n", "<leader>ia", vim.lsp.buf.code_action, opts)
-
-		vim.keymap.set({ "n", "v" }, "<leader>ip", vim.lsp.buf.references, opts)
-		vim.keymap.set({ "n", "v" }, "<leader>ir", "<cmd>Telescope lsp_references<cr>", opts)
-		vim.keymap.set("n", "<leader>in", vim.lsp.buf.rename, opts) -- smart rename
-
-		vim.keymap.set("n", "<leader>rr", "<cmd>LspRestart<CR>", opts)
-		vim.keymap.set({ "n", "v" }, "<leader>iw", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
-
-		-- make sure it works
-		vim.keymap.set("i", "<C-h>", "<Left>", opts)
-		vim.keymap.set("n", "<leader>it", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+		keymaps.build_keymaps(M, opts)
 	end,
 }

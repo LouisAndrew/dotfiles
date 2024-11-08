@@ -47,10 +47,10 @@ Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
 Group.new("Folded", colors.dimmed_white, nil)
 
-Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light())
+Group.new("UfoFoldVirtualText", colors.mfed_6)
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
-Group.new("FoldColumn", colors.mfed_bg_accent_light:light(), nil)
+Group.new("FoldColumn", colors.mfed_7)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)

@@ -49,7 +49,7 @@ local fold_chars = {
 
 -- vimscript because it's a bit better than lua
 -- Issue with lua: unfocusing window will make the foldcolumn disappear
-function sc.nf()
+function sc.fold()
 	local hl = sc.hl("FoldColumn")
 	local fold_before = "foldlevel(v:lnum - 1)"
 	local fold_after = "foldlevel(v:lnum + 1)"
@@ -72,7 +72,7 @@ function sc.myStatuscolumn()
 		sc.sign(),
 		sc.num(),
 		sc.space(),
-		sc.nf(),
+		sc.fold(),
 		sc.space(),
 	})
 end
