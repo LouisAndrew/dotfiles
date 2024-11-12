@@ -162,6 +162,7 @@ alias ng="pnpm add -g"
 alias cte="EDITOR=nvim crontab -e"
 
 alias got="go test"
+alias pgpaste="$DOTFILES_PATH/pngpaste.sh"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"

@@ -1,5 +1,52 @@
 return {
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = {
+			heading = {
+				enabled = false,
+			},
+			code = {
+				sign = false,
+				style = "language",
+			},
+			bullet = {
+				icons = { "-", "+", "◇" },
+				right_pad = 1,
+			},
+			checkbox = {
+				enabled = true,
+				unchecked = {
+					icon = " ",
+					highlight = "ObsidianTodo",
+				},
+				checked = {
+					icon = " ",
+					highlight = "ObsidianDone",
+				},
+			},
+			link = {
+				enabled = true,
+				image = " ",
+				email = " ",
+				hyperlink = " ",
+				highlight = "RenderMarkdownLink",
+				wiki = { icon = " ", highlight = "RenderMarkdownWikiLink" },
+				custom = {
+					web = { pattern = "^http[s]?://", icon = " ", highlight = "RenderMarkdownLink" },
+				},
+			},
+			quote = {
+				icon = "|",
+			},
+			callout = {},
+			file_types = { "markdown", "codecompanion" },
+		},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		ft = { "markdown", "codecompanion" },
+	},
+	{
 		"epwalsh/obsidian.nvim",
 		lazy = true,
 		ft = "markdown",
@@ -133,52 +180,5 @@ return {
 				end,
 			})
 		end,
-	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		opts = {
-			heading = {
-				enabled = false,
-			},
-			code = {
-				sign = false,
-				style = "language",
-			},
-			bullet = {
-				icons = { "-", "+", "◇" },
-				right_pad = 1,
-			},
-			checkbox = {
-				enabled = true,
-				unchecked = {
-					icon = " ",
-					highlight = "ObsidianTodo",
-				},
-				checked = {
-					icon = " ",
-					highlight = "ObsidianDone",
-				},
-			},
-			link = {
-				enabled = true,
-				image = " ",
-				email = " ",
-				hyperlink = " ",
-				highlight = "RenderMarkdownLink",
-				wiki = { icon = " ", highlight = "RenderMarkdownWikiLink" },
-				custom = {
-					web = { pattern = "^http[s]?://", icon = " ", highlight = "RenderMarkdownLink" },
-				},
-			},
-			quote = {
-				icon = "|",
-			},
-			callout = {},
-			file_types = { "markdown", "codecompanion" },
-		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		ft = { "markdown", "codecompanion" },
 	},
 }

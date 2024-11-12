@@ -5,6 +5,7 @@ return function(wezterm, config)
 	})
 
 	config.use_cap_height_to_scale_fallback_fonts = true
+	config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 	-- CommitMono specific
 	local font_size_increment = 0.75

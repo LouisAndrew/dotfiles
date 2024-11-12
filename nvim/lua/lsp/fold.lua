@@ -47,8 +47,8 @@ require("ufo").setup({
 	},
 	preview = {
 		win_config = {
-			border = { "", "", "", "", "", "", "", "" },
-			winhighlight = "Normal:UfoFoldPeekNormal",
+			-- border = { "", "", "", "", "", "", "", "" },
+			-- winhighlight = "Normal:UfoFoldPeekNormal",
 			winblend = 0,
 		},
 		mappings = {

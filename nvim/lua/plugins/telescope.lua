@@ -71,6 +71,7 @@ return {
 					actions.smart_send_to_qflist(prompt_bufnr)
 					actions.open_qflist(prompt_bufnr)
 				end,
+				["<C-a>"] = actions.select_all,
 			},
 		}
 
@@ -80,6 +81,7 @@ return {
 		table.insert(vimgrep_arguments, "--hidden")
 		table.insert(vimgrep_arguments, "--glob")
 		table.insert(vimgrep_arguments, "!**/.git/*")
+		local egrep_actions = require("telescope._extensions.egrepify.actions")
 
 		telescope.setup({
 			defaults = {
@@ -106,6 +108,18 @@ return {
 			pickers = {
 				find_files = {
 					find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
+				},
+			},
+			extensions = {
+				egrepify = {
+					mappings = {
+						i = {
+							["<C-z>"] = egrep_actions.toggle_prefixes,
+							["<C-x>"] = egrep_actions.toggle_and,
+							["<C-r>"] = egrep_actions.toggle_permutations,
+							["<C-a>"] = actions.select_all,
+						},
+					},
 				},
 			},
 		})

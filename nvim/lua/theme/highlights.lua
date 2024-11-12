@@ -229,7 +229,8 @@ Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
 Group.new("diffChanged", colors.change)
 -- gitsigns
-Group.new("GitSignsChange", colors.blue:light():light():light())
+-- Group.new("GitSignsChange", colors.blue:light():light():light())
+Group.new("GitSignsChange", colors.indigo_fg:dark())
 Group.new("GitSignsAdd", colors.add:light():light():light())
 Group.new("GitSignsDelete", colors.remove:light():light():light())
 

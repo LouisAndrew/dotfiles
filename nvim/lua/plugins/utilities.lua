@@ -17,7 +17,7 @@ return {
 		ft = "qf",
 		opts = {
 			preview = {
-				border = "none",
+				border = "single",
 			},
 		},
 	},

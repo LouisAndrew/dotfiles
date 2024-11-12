@@ -160,15 +160,14 @@ function rgf() {
 }
 
 function loadenv() {
-  local file = ".env"
+  local file=".env"
   if [[ ! -z "$1" ]]; then
-    file = $1
+    file=$1
   fi
   
   grep -v '^#' $file | xargs -0 | while read -r line; do
-    export $line
+    if [[ ! -z "${line// }" ]]; then
+      export "${line//\"/}"
+    fi
   done
-
-  clear
-  echo "clearing for security"
 }

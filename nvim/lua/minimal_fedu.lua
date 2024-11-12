@@ -8,7 +8,8 @@ local dimmed_white = "#9a9a9a"
 local white = "#ffffff"
 local navy = "#678CB1"
 
-local background = "#131313"
+-- local background = "#131313"
+local background = "#0a0a0a"
 local f = "#202020"
 -- local bg_shade = "#0f0f0f"
 

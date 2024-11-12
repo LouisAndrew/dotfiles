@@ -71,30 +71,37 @@ local split_by_space = function(s)
 end
 
 local utils = require("utils")
-local pngpastePath = "~/dev/utils/dotfiles/pngpaste.sh"
-vim.api.nvim_create_user_command("PasteImgClipboard", function(args)
-	local words = split_by_space(args["args"] or "")
-	local dir = words[2] or "~/dev/documents/assets/imgs"
 
-	local now = os.date("%d.%m.%Y")
-	local filename = words[1] or now
-
-	local dest = dir .. "/" .. filename
-	vim.cmd("!" .. pngpastePath .. " " .. dest)
-	utils.insert("![" .. dest .. "](" .. dest .. ".png)", true)
-end, { nargs = "?" })
+local pngpastePath = os.getenv("DOTFILES_PATH") .. "/pngpaste.sh"
+local pngpasteDest = os.getenv("VAULT_PATH") .. "/assets/imgs"
 
 vim.api.nvim_create_user_command("PasteImgClipboardObsidian", function(args)
 	local words = split_by_space(args["args"] or "")
-	local dir = words[2] or "~/dev/documents/assets/imgs"
+	local dir = words[2] or pngpasteDest
 
-	local now = os.date("%d.%m.%Y")
+	local now = os.date("%Y.%m.%d:%H.%M.%S")
 	local filename = words[1] or now
 
 	local dest = dir .. "/" .. filename
 	vim.cmd("!" .. pngpastePath .. " " .. dest)
 	utils.insert(" ![[" .. filename .. ".png]]", true)
 end, { nargs = "?" })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = vim.api.nvim_create_augroup("qflist", { clear = true }),
+	desc = "allow updating quickfix window",
+	pattern = "quickfix",
+	callback = function()
+		vim.bo.modifiable = true
+		vim.bo.errorformat = "%f|%l col %c| %m,%f|%l col %c-%k| %m"
+		vim.keymap.set(
+			"n",
+			"<leader>s",
+			'<Cmd>cgetbuffer|set nomodified|echo "quickfix/location list updated"<CR>',
+			{ buffer = true, desc = "Update quickfix/location list with changes made in quickfix window" }
+		)
+	end,
+})
 
 -- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
 vim.filetype.add({

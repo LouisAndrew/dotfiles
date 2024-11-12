@@ -20,7 +20,7 @@ return function(_, config)
 			"#97CCF1",
 			"#d5d5d5",
 		},
-		background = "#131313",
+		background = "#0a0a0a",
 
 		compose_cursor = "#eebebe",
 		cursor_bg = "#ffcfa7",
@@ -34,7 +34,7 @@ return function(_, config)
 		visual_bell = "#414559",
 
 		tab_bar = {
-			background = "#131313",
+			background = "#0a0a0a",
 
 			active_tab = {
 				bg_color = "#818cf8",
@@ -46,7 +46,7 @@ return function(_, config)
 			},
 
 			inactive_tab = {
-				bg_color = "#131313",
+				bg_color = "#0a0a0a",
 				fg_color = "#9a9a9a",
 				intensity = "Normal",
 				italic = false,
