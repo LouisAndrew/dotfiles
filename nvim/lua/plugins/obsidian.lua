@@ -39,12 +39,12 @@ return {
 				icon = "|",
 			},
 			callout = {},
-			file_types = { "markdown", "codecompanion" },
+			file_types = { "markdown", "codecompanion", "Avante" },
 		},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
-		ft = { "markdown", "codecompanion" },
+		ft = { "markdown", "codecompanion", "Avante" },
 	},
 	{
 		"epwalsh/obsidian.nvim",

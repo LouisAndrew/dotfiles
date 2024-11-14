@@ -227,7 +227,7 @@ Group.new("TerminalNormal", colors.secondary, colors.nb_background)
 -- Signs
 Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
-Group.new("diffChanged", colors.change)
+Group.new("diffChanged", colors.blue_fg)
 -- gitsigns
 -- Group.new("GitSignsChange", colors.blue:light():light():light())
 Group.new("GitSignsChange", colors.indigo_fg:dark())
