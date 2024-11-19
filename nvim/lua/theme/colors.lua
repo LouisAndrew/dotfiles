@@ -5,6 +5,7 @@ Color.new("nb_background", minimal_fedu.background)
 Color.new("primary", minimal_fedu.foreground)
 -- Variables and stuff
 Color.new("secondary", minimal_fedu.white)
+Color.new("black", "#161616")
 
 Color.new("diagnostic_error", minimal_fedu.diagnostic_error)
 Color.new("diagnostic_warning", minimal_fedu.diagnostic_warning)

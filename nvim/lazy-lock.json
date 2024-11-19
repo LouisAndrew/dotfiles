@@ -63,6 +63,7 @@
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
+  "qmk.nvim": { "branch": "main", "commit": "ad51cb15e607da0983fcf9882d38a2aafac32149" },
   "render-markdown.nvim": { "branch": "main", "commit": "901838c63d644e27ed4b591fa5c5d587cad9e102" },
   "smart-splits.nvim": { "branch": "master", "commit": "11600d75e1b57e9fe1f3ca880a917485fc399e8c" },
   "tabular": { "branch": "master", "commit": "12437cd1b53488e24936ec4b091c9324cafee311" },

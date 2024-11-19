@@ -48,9 +48,9 @@ Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 Group.new("Folded", colors.dimmed_white, nil)
 
 Group.new("UfoFoldVirtualText", colors.mfed_6)
-Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
+Group.new("UfoFoldPeekNormal", nil, colors.black)
 --
-Group.new("FoldColumn", colors.mfed_7)
+Group.new("FoldColumn", colors.mfed_9)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)
@@ -189,7 +189,7 @@ Group.new("Pmenu", colors.mfed_2, colors.bg_shade)
 
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.mfed_8)
+Group.new("FloatBorder", colors.bg_shade)
 Group.new("DiagnosticShowBorder", colors.bg_shade)
 
 -- code action
@@ -329,9 +329,10 @@ Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.bg_shade)
-Group.new("cmpmenu", nil, nil)
+Group.new("cmpmenu", nil, colors.black)
+Group.new("BlackBorder", colors.black)
 
-Group.new("cmpborder", colors.mfed_8, nil)
+Group.new("cmpborder", colors.bg_shade, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.bg_shade)
@@ -434,8 +435,8 @@ local noice_config = {
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
-	{ "NoiceInputNormal", colors.white, colors.nb_background },
-	{ "NoiceHoverNormal", nil, nil },
+	{ "NoiceInputNormal", colors.white, colors.black },
+	{ "NoiceHoverNormal", nil, colors.black },
 }
 
 local navic_config = {

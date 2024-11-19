@@ -6,8 +6,13 @@ return {
 			local special_chars = require("theme.special_chars")
 			require("dressing").setup({
 				input = {
+					border = special_chars.create_special_border({
+						side_padding = true,
+						start_in_insert = false,
+						vertical_half = true,
+					}),
 					win_options = {
-						winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
+						winhighlight = "NormalFloat:Identifier",
 					},
 				},
 				select = {
@@ -21,6 +26,10 @@ return {
 								prompt_position = "top",
 							},
 						},
+						borderchars = {
+							results = { " ", " ", " ", " ", "", "", "", "" },
+							prompt = { " ", " ", "-", " ", "", "", "", "" },
+						},
 					},
 				},
 			})
@@ -31,7 +40,7 @@ return {
 		local genghis = require("genghis")
 		genghis.setup({
 			backdrop = {
-				enabled = false,
+				enabled = true,
 			},
 		})
 

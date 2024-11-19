@@ -43,6 +43,8 @@ local M = {
 	},
 
 	n = {
+		{ "j", "gj" },
+		{ "k", "gk" },
 		{ "<ESC>", "<cmd> noh <CR>", "no highlight" },
 		{ "<leader>pv", vim.cmd.Ex },
 		{ "<leader>tn", ":e %:h" }, -- adjacent
@@ -74,7 +76,8 @@ local M = {
 
 		-- Copy all
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
-
+		{ "π", "<cmd>vertical resize 50<CR>" },
+		{ "æ", "<C-w>=" },
 		-- line numbers
 
 		-- { "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }  },

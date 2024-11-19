@@ -15,12 +15,17 @@ cmp.setup({
 		completion = {
 			col_offset = 1,
 			side_padding = 1,
-			border = "rounded",
+			-- border = "rounded",
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 		documentation = {
-			side_padding = 1,
-			border = "rounded",
+			-- side_padding = 1,
+			border = special_chars.create_special_border({
+				side_padding = true,
+				padding_char = special_chars.full_block,
+				hide_vertical_padding = true,
+			}),
+			-- border = "rounded",
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 	},
