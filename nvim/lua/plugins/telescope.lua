@@ -140,7 +140,7 @@ return {
 		vim.keymap.set("n", "<C-b>", builtin.buffers, {})
 
 		vim.keymap.set("n", "<leader>ps", telescope.extensions.egrepify.egrepify, {})
-		vim.keymap.set("n", "<C-s>", telescope.extensions.egrepify.egrepify, {})
+		vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})

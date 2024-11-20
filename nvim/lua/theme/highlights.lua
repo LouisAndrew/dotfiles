@@ -529,5 +529,5 @@ end
 
 Group.new("VertSplit", colors.debug, colors.debug)
 Group.new("WinSeparator", colors.mfed_bg_accent)
-Group.new("BqfPreviewFloat", nil, colors.bg_shade)
+Group.new("BqfPreviewFloat", nil, colors.black)
 Group.new("QuickFixLine", colors.white, nil, styles.bold)
