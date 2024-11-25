@@ -4,6 +4,29 @@ return {
 		lazy = false,
 	},
 	{
+		{
+			"CopilotC-Nvim/CopilotChat.nvim",
+			branch = "canary",
+			dependencies = {
+				{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+				{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+			},
+			build = "make tiktoken", -- Only on MacOS or Linux
+			opts = {
+				highlight_headers = false,
+				separator = "",
+				question_header = "# User ",
+				answer_header = "# Copilot ",
+				error_header = "# Error ",
+				window = {
+					width = 0.3,
+				},
+				model = "claude-3.5-sonnet",
+			},
+			lazy = false,
+		},
+	},
+	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		lazy = false,

@@ -19,6 +19,7 @@ return {
 			preview = {
 				border = "single",
 			},
+			winblend = 0,
 		},
 	},
 	{

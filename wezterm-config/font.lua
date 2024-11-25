@@ -16,8 +16,8 @@ return function(wezterm, config)
 		large = font_size_small + (font_size_increment * 2),
 	}
 
-	-- config.font_size = 17
 	config.font_size = font_sizes.regular
 
-	config.line_height = 1.5
+	-- config.line_height = 1.5
+	config.line_height = 1.35
 end

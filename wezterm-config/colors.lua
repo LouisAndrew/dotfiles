@@ -1,3 +1,17 @@
+local preset_config = {
+	light = {
+		bg = "#131313",
+		shade = "#0c0c0c",
+	},
+	dark = {
+		bg = "#0a0a0a",
+		shade = "#131313",
+	},
+}
+
+local theme = "light"
+local preset = preset_config[theme]
+
 return function(_, config)
 	config.colors = {
 		ansi = {
@@ -20,7 +34,7 @@ return function(_, config)
 			"#97CCF1",
 			"#d5d5d5",
 		},
-		background = "#0a0a0a",
+		background = preset.bg,
 
 		compose_cursor = "#eebebe",
 		cursor_bg = "#ffcfa7",
@@ -30,11 +44,11 @@ return function(_, config)
 		scrollbar_thumb = "#626880",
 		selection_bg = "#626880",
 		selection_fg = "#d5d5d5",
-		split = "#737994",
+		split = preset.shade,
 		visual_bell = "#414559",
 
 		tab_bar = {
-			background = "#0a0a0a",
+			background = preset.bg,
 
 			active_tab = {
 				bg_color = "#818cf8",
@@ -46,7 +60,7 @@ return function(_, config)
 			},
 
 			inactive_tab = {
-				bg_color = "#0a0a0a",
+				bg_color = preset.bg,
 				fg_color = "#9a9a9a",
 				intensity = "Normal",
 				italic = false,

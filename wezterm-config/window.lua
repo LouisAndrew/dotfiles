@@ -7,9 +7,9 @@ return function(wezterm, config)
 	}
 
 	config.window_decorations = "RESIZE"
-	local PADDING = 8
+	local PADDING = 12
 	config.window_padding = {
-		top = PADDING + 4,
+		top = PADDING,
 		left = PADDING,
 		right = PADDING,
 		bottom = 0,

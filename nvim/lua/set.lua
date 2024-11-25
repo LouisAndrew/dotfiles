@@ -103,6 +103,24 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "copilot-*",
+	callback = function()
+		vim.opt_local.relativenumber = false
+		vim.opt_local.statuscolumn = " "
+		-- vim.opt_local.nonumber = true
+
+		vim.keymap.set("n", "<C-l>", function()
+			print(require("CopilotChat").response())
+		end, { buffer = true, remap = true })
+
+		vim.keymap.set("n", "<leader>w", "<cmd>:CopilotChatToggle<CR>", {
+			remap = true,
+			buffer = true,
+		})
+	end,
+})
+
 -- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
 vim.filetype.add({
 	extension = {

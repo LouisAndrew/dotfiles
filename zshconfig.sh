@@ -70,6 +70,8 @@ COLOR_WHITE="37"
 
 JQ_OBJECT="0;$COLOR_WHITE"
 JQ_PROP="0;$COLOR_YELLOW"
+BG_COLOR="#131313"
+BG_COLOR_DARK="#0a0a0a"
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
@@ -82,13 +84,13 @@ export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
 
 export FZF_DEFAULT_OPTS="--bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#9a9a9a,fg+:#ffffff,bg:#0a0a0a,bg+:#0a0a0a
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
+  --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG_COLOR,bg+:$BG_COLOR
   --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#ffcfa7
   --color=prompt:#f2eaea,spinner:#af5fff,pointer:#ffcfa7,header:#87afaf
-  --color=border:#0a0a0a,preview-fg:-1,label:#aeaeae,query:#d9d9d9
-  --preview-window="border-rounded" --padding="1" --prompt="  " --marker="◆"
-  --pointer="" --separator="" --scrollbar="│"'
+  --color=border:$BG_COLOR,preview-fg:-1,label:#aeaeae,query:#d9d9d9
+  --preview-window=\"border-rounded\" --padding=\"1\" --prompt=\"  \" --marker=\"◆\"
+  --pointer=\"\" --separator=\"\" --scrollbar=\"│\""
 
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target

@@ -1,50 +1,47 @@
 return {
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
+		"OXY2DEV/markview.nvim",
+		ft = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 		opts = {
-			heading = {
-				enabled = false,
+			filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+			headings = {
+				enable = false,
 			},
-			code = {
+			list_items = {
+				enable = false,
+			},
+			checkboxes = {
+				enable = false,
+			},
+			code_blocks = {
+				icons = "devicons",
+				style = "simple",
+				language_direction = "left",
 				sign = false,
-				style = "language",
 			},
-			bullet = {
-				icons = { "-", "+", "◇" },
-				right_pad = 1,
+			inline_codes = {
+				hl = "MarkviewCodeInline",
+				corner_right = "",
+				corner_left = "",
 			},
-			checkbox = {
-				enabled = true,
-				unchecked = {
-					icon = " ",
-					highlight = "ObsidianTodo",
+			links = {
+				hyperlinks = {
+					icon = " ",
+					custom = {
+						{ match_string = "^http[s]?://", icon = " ", highlight = "MarkviewExternalLink" },
+					},
 				},
-				checked = {
-					icon = " ",
-					highlight = "ObsidianDone",
+				images = {
+					icon = " ",
 				},
-			},
-			link = {
-				enabled = true,
-				image = " ",
-				email = " ",
-				hyperlink = " ",
-				highlight = "RenderMarkdownLink",
-				wiki = { icon = " ", highlight = "RenderMarkdownWikiLink" },
-				custom = {
-					web = { pattern = "^http[s]?://", icon = " ", highlight = "RenderMarkdownLink" },
+				emails = {
+					icon = " ",
+				},
+				internal_links = {
+					icon = " ",
 				},
 			},
-			quote = {
-				icon = "|",
-			},
-			callout = {},
-			file_types = { "markdown", "codecompanion", "Avante" },
 		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		ft = { "markdown", "codecompanion", "Avante" },
 	},
 	{
 		"epwalsh/obsidian.nvim",

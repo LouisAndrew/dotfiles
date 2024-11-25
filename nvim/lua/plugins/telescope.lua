@@ -148,5 +148,9 @@ return {
 		vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})
 		vim.keymap.set("n", "<leader>pu", telescope.extensions.undo.undo, {})
 		vim.keymap.set("n", "<leader>pe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
+		vim.keymap.set("n", "<leader>pa", function()
+			local ac = require("CopilotChat.actions")
+			require("CopilotChat.integrations.telescope").pick(ac.prompt_actions())
+		end, { desc = "CopilotChat - Prompt actions" })
 	end,
 }

@@ -1,3 +1,17 @@
+local preset_config = {
+	light = {
+		bg = "#131313",
+		shade = "#0c0c0c",
+	},
+	dark = {
+		bg = "#0a0a0a",
+		shade = "#131313",
+	},
+}
+
+local theme = "light"
+local preset = preset_config[theme]
+
 local red = "#431d1f"
 local red_fg = "#ff8185"
 
@@ -8,12 +22,11 @@ local dimmed_white = "#9a9a9a"
 local white = "#ffffff"
 local navy = "#678CB1"
 
--- local background = "#131313"
-local background = "#0a0a0a"
 local f = "#202020"
--- local bg_shade = "#0f0f0f"
 
-local bg_shade = "#0c0c0c"
+local bg_shade = preset.shade
+local background = preset.bg
+
 local bg_accent_light = "#202020"
 -- local foreground = "#ffbb80"
 local foreground = "#ffcfa7"

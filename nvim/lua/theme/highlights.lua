@@ -48,14 +48,14 @@ Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 Group.new("Folded", colors.dimmed_white, nil)
 
 Group.new("UfoFoldVirtualText", colors.mfed_6)
-Group.new("UfoFoldPeekNormal", nil, colors.black)
+Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
 Group.new("FoldColumn", colors.mfed_9)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)
 Group.new("NonText", colors.mfed_8, nil)
-Group.new("PmenuThumb", nil, colors.bg_shade:light())
+Group.new("PmenuThumb", nil, colors.nb_background:light())
 Group.new("PmenuSbar", nil, colors.nb_background)
 Group.new("Question", colors.mfed_1, colors.noir_8)
 Group.new("SpecialKey", colors.mfed_6, nil)
@@ -185,12 +185,12 @@ Group.new("TabLine", colors.dimmed_white, nil)
 Group.new("TabLineFill", nil, nil)
 Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
-Group.new("Pmenu", colors.mfed_2, colors.bg_shade)
+Group.new("Pmenu", colors.mfed_2, colors.nb_background)
 
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.bg_shade)
-Group.new("DiagnosticShowBorder", colors.bg_shade)
+Group.new("FloatBorder", colors.nb_background)
+Group.new("DiagnosticShowBorder", colors.nb_background)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)
@@ -255,7 +255,7 @@ Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 
 -- Telescope
--- Group.new("TelescopeTitle", colors.white, colors.bg_shade, styles.bold)
+-- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
 Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
 Group.new("TelescopeNormal", nil)
 Group.new("TelescopeBorder", colors.mfed_8, nil)
@@ -268,7 +268,7 @@ Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
 Group.new("TitleString", colors.secondary)
 Group.new("TitleSymbol", colors.primary)
 Group.new("TitleIcon", colors.primary)
-Group.new("SagaNormal", nil, colors.bg_shade)
+Group.new("SagaNormal", nil, colors.nb_background)
 Group.new("SagaExpand", colors.remove_fg)
 Group.new("SagaCollapse", colors.remove_fg)
 Group.new("SagaBeacon", colors.primary)
@@ -328,14 +328,14 @@ Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
-Group.new("sagaborder", colors.bg_shade)
-Group.new("cmpmenu", nil, colors.black)
-Group.new("BlackBorder", colors.black)
+Group.new("sagaborder", colors.nb_background)
+Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("bg_shadeBorder", colors.black)
 
-Group.new("cmpborder", colors.bg_shade, nil)
+Group.new("cmpborder", colors.nb_background, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
-Group.new("paletteborder", colors.bg_shade)
+Group.new("paletteborder", colors.nb_background)
 Group.new("wildermatch", colors.yellow_fg)
 Group.new("IlluminatedWordText", nil, colors.mfed_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.mfed_9, nil)
@@ -384,8 +384,14 @@ end
 
 local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
-	{ "RenderMarkdownCode", nil, colors.bg_shade },
+	{ "RenderMarkdownCode", nil, colors.nb_background },
+	{ "MarkviewCode", nil, colors.nb_background },
+	{ "MarkviewCodeInfo", nil, colors.nb_background },
+	{ "MarkviewCodeInline", nil, colors.nb_background },
+	{ "InlineCode", nil, colors.nb_background },
 	{ "RenderMarkdownLink", colors.mfed_navy, nil },
+	{ "MarkviewHyperlink", colors.mfed_navy },
+	{ "MarkviewImageLink", colors.mfed_navy },
 }
 
 local dap_config = {
@@ -421,22 +427,22 @@ local notify_config = {
 local noice_config = {
 	{ "NoiceCmdlinePrompt", colors.nb_background },
 	{ "NoiceCmdlinePopup", nil, colors.indigo_fg },
-	{ "NoiceCmdlinePopupBorder", colors.bg_shade, colors.nb_background },
+	{ "NoiceCmdlinePopupBorder", colors.nb_background, colors.nb_background },
 	{ "NoiceCmdlineIcon", colors.mfed_3, nil, styles.bold },
 	{ "NoiceCmdlineIconSearch", colors.mfed_2, nil, styles.bold },
 	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
-	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
+	{ "NoiceCmdlinePopupBorderSearch", colors.nb_background:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.mfed_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
-	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
-	{ "NoicePopup", nil, colors.bg_shade },
-	{ "NoiceCmdlineSearch", colors.mfed_2, colors.bg_shade },
+	{ "NoicePopupBorder", colors.nb_background, colors.nb_background },
+	{ "NoicePopup", nil, colors.nb_background },
+	{ "NoiceCmdlineSearch", colors.mfed_2, colors.nb_background },
 	{ "NoiceCmdlineSearchBorder", colors.nb_background, colors.yellow_fg },
-	{ "NoiceCmdline", colors.white, colors.bg_shade },
+	{ "NoiceCmdline", colors.white, colors.nb_background },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
-	{ "NoiceInputNormal", colors.white, colors.black },
-	{ "NoiceHoverNormal", nil, colors.black },
+	{ "NoiceInputNormal", colors.white, colors.bg_shade },
+	{ "NoiceHoverNormal", nil, colors.bg_shade },
 }
 
 local navic_config = {
@@ -474,7 +480,12 @@ local gpt_config = {
 	{
 		"ChatGPTNormal",
 		colors.dimmed_white,
-		colors.bg_shade,
+		colors.nb_background,
+	},
+	{
+		"CopilotChatSpinner",
+		colors.white,
+		nil,
 	},
 }
 
@@ -484,6 +495,7 @@ local diagflow_config = {
 	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.yellow },
 	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
+	high,
 }
 
 local luasnip_config = {
@@ -529,5 +541,5 @@ end
 
 Group.new("VertSplit", colors.debug, colors.debug)
 Group.new("WinSeparator", colors.mfed_bg_accent)
-Group.new("BqfPreviewFloat", nil, colors.black)
+Group.new("BqfPreviewFloat", nil, colors.nb_background)
 Group.new("QuickFixLine", colors.white, nil, styles.bold)
