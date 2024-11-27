@@ -42,6 +42,12 @@ cmp.setup({
 		},
 	},
 	formatting = {
+		fields = {
+			"abbr",
+			"kind",
+			"menu",
+		},
+		expandable_indicator = true,
 		format = function(entry, vim_item)
 			vim_item.kind = string.format("      %s %s", cmp_kinds[vim_item.kind], vim_item.kind:lower())
 			vim_item.menu = ({
@@ -51,6 +57,7 @@ cmp.setup({
 				buffer = "[Buf]",
 				path = "[Path]",
 			})[entry.source.name]
+
 			return vim_item
 		end,
 	},

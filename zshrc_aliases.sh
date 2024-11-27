@@ -82,6 +82,7 @@ alias al:config="$editor $ALIAS_FILE_PATH"
 alias hyper:config="$editor ~/.hyper.js"
 alias gh-dash:config="$editor /Users/louis.andrew/Library/'Application Support'/gh-dash"
 alias dotfiles="$DOTFILES_PATH"
+alias df="dotfiles"
 alias dotfiles:config="$editor $DOTFILES_PATH"
 alias obsd="~/dev/documents/"
 
@@ -90,6 +91,7 @@ alias config="echo vsc-config alias-config dotfiles hyper-config"
 alias glocal="git config user.email louisandrew3@gmail.com"
 alias g-delete-origin="git push origin --delete"
 alias gfetch="git fetch"
+alias gf="git fetch"
 alias dj-start='python ./boilerplate/manage.py runserver'
 
 alias al:cat="cat $ALIAS_FILE_PATH"

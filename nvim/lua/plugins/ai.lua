@@ -7,6 +7,18 @@ return {
 		{
 			"CopilotC-Nvim/CopilotChat.nvim",
 			branch = "canary",
+			keys = {
+				{ "<leader>ac", "<cmd>:CopilotChat<CR>", mode = { "n", "v" } },
+				{
+					"<leader>pa",
+					function()
+						local ac = require("CopilotChat.actions")
+						require("CopilotChat.integrations.telescope").pick(ac.prompt_actions())
+					end,
+					mode = { "n", "v" },
+					desc = "CopilotChat - Prompt actions",
+				},
+			},
 			dependencies = {
 				{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
 				{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -21,6 +33,15 @@ return {
 				window = {
 					width = 0.3,
 				},
+				mappings = {
+					complete = {
+						insert = "<C-i>",
+					},
+					reset = {
+						normal = "<C-r>",
+						insert = "<C-r>",
+					},
+				},
 				model = "claude-3.5-sonnet",
 			},
 			lazy = false,
@@ -29,9 +50,10 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		lazy = false,
 		keys = {
-			"<leader>aa",
+			"<leader>av",
 			":Avante<CR>",
 		},
 		build = "make",
@@ -148,7 +170,7 @@ return {
 			"CodeCompanionAdd",
 		},
 		keys = {
-			{ "<leader>ac", "<cmd>:CodeCompanionChat<CR>" },
+			{ "<leader>ap", "<cmd>:CodeCompanionChat<CR>" },
 			{ "<leader>aa", "<cmd>:CodeCompanionToggle<CR>" },
 			{ "<leader>al", "<cmd>:CodeCompanion " },
 			{ "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },

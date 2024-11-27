@@ -40,7 +40,7 @@ return function(_, config)
 		cursor_bg = "#ffcfa7",
 		cursor_border = "#ffcfa7",
 		cursor_fg = "#232634",
-		foreground = "#d5d5d5",
+		foreground = "#b4b4b4",
 		scrollbar_thumb = "#626880",
 		selection_bg = "#626880",
 		selection_fg = "#d5d5d5",

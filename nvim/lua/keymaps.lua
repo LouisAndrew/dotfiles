@@ -50,6 +50,7 @@ local M = {
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
 		{ "<leader>s", "<cmd>:w<cr>" },
+		{ "<leader>nr", ":so $MYVIMRC", "reload vimrc" },
 
 		{ "<leader>tw", "<cmd>:tabclose<cr>" },
 		{ "<leader>q", "<cmd>:wqa<cr>" },
@@ -76,7 +77,8 @@ local M = {
 
 		-- Copy all
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
-		{ "π", "<cmd>vertical resize 50<CR>" },
+		{ "π", "<cmd>vertical resize 40<CR>" },
+		{ "ø", "<cmd>vertical resize 160<CR>" },
 		{ "æ", "<C-w>=" },
 		-- line numbers
 

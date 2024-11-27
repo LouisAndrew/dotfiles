@@ -112,12 +112,21 @@ return {
 			},
 			extensions = {
 				egrepify = {
+					title = true,
+					layout_config = {
+						preview_width = 0.3,
+					},
+					col_hl = "ECOL",
 					mappings = {
 						i = {
 							["<C-z>"] = egrep_actions.toggle_prefixes,
 							["<C-x>"] = egrep_actions.toggle_and,
 							["<C-r>"] = egrep_actions.toggle_permutations,
 							["<C-a>"] = actions.select_all,
+							["<C-q>"] = function(bufnr)
+								actions.send_to_qflist(bufnr)
+								actions.open_qflist(bufnr)
+							end,
 						},
 					},
 				},
@@ -131,7 +140,7 @@ return {
 		telescope.load_extension("noice")
 
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-		vim.keymap.set("n", "<C-f>", builtin.find_files, {})
+		vim.keymap.set("n", "<C-o>", builtin.find_files, {})
 		-- find siblings
 		vim.keymap.set("n", "<leader>pj", function()
 			builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
@@ -140,7 +149,7 @@ return {
 		vim.keymap.set("n", "<C-b>", builtin.buffers, {})
 
 		vim.keymap.set("n", "<leader>ps", telescope.extensions.egrepify.egrepify, {})
-		vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
+		vim.keymap.set("n", "<C-f>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
@@ -148,9 +157,9 @@ return {
 		vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})
 		vim.keymap.set("n", "<leader>pu", telescope.extensions.undo.undo, {})
 		vim.keymap.set("n", "<leader>pe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
-		vim.keymap.set("n", "<leader>pa", function()
-			local ac = require("CopilotChat.actions")
-			require("CopilotChat.integrations.telescope").pick(ac.prompt_actions())
-		end, { desc = "CopilotChat - Prompt actions" })
+
+		vim.keymap.set("n", "<leader>pn", function()
+			require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+		end, { desc = "Search for nvim-config" })
 	end,
 }
