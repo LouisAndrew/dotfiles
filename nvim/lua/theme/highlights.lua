@@ -244,7 +244,7 @@ Group.new("DiffDelete", nil, colors.remove)
 Group.new("DiffChange", nil, colors.change)
 Group.new("DiffText", nil, colors.change)
 
-Group.new("BufferInactive", nil, colors.mfed_bg_accent)
+-- Group.new("BufferInactive", nil, colors.mfed_bg_accent)
 
 Group.new("DiagnosticError", colors.diagnostic_error, nil)
 Group.new("DiagnosticWarn", colors.yellow_fg, nil)
@@ -263,6 +263,7 @@ Group.new("TelescopeMatching", colors.mfed_0)
 Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
 Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
+Group.new("EgrepifyFile", colors.mfed_2, nil)
 
 -- Saga
 Group.new("TitleString", colors.secondary)

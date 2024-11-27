@@ -4,6 +4,7 @@ return {
 	keys = {
 		{ "<leader>gd", "<cmd>:DiffviewOpen<cr>" },
 		{ "<leader>go", "<cmd>:DiffviewOpen<cr>" },
+		{ "<C-g>", "<cmd>:DiffviewOpen<cr>" },
 		{ "<leader>gh", "<cmd>:DiffviewFileHistory %<cr>" },
 		{ "<leader>ga", "<cmd>:DiffviewFileHistory<cr>" },
 	},

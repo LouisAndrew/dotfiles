@@ -1,3 +1,5 @@
+local VAULT_PATH = os.getenv("VAULT_PATH")
+
 return {
 	{
 		"OXY2DEV/markview.nvim",
@@ -59,6 +61,11 @@ return {
 			{ "<leader>lw", "<cmd>:ObsidianWorkspace<cr>" },
 			{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
 			{ "<leader>lt", "<cmd>:ObsidianTags<CR>" },
+			{
+				"<leader>lq",
+				":e " .. VAULT_PATH .. "/todos.md<CR>",
+				{ expr = true },
+			},
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",

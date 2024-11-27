@@ -12,7 +12,6 @@ eval "$(starship init zsh)"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/aws-okta aws-okta
-export DOTFILES_PATH="/Users/louis.andrew/dev/utils/dotfiles"
 export STARSHIP_CONFIG="$DOTFILES_PATH/starship.toml"
 export ALIAS_FILE_PATH="$DOTFILES_PATH/zshrc_aliases.sh"
 export FS_CLI_CONFIG="~/.fs-cli.json"
