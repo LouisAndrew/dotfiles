@@ -58,6 +58,7 @@ return {
 					end,
 					lsp = {
 						preference = { "volar" },
+						auto_attach = true,
 					},
 				})
 			end,

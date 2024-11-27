@@ -140,6 +140,7 @@ return {
 				unnamed = "",
 				newfile = "[New]",
 			},
+			padding = { left = -1 },
 		}, { fg = minimal_fedu.noir_6 })
 
 		ins_left({

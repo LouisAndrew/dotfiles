@@ -1,7 +1,7 @@
 return function(wezterm, config)
 	config.font = wezterm.font_with_fallback({
 		{ family = "CommitMono", weight = "Regular", scale = 1 },
-		{ family = "nonicons", weight = "Thin", scale = 1 },
+		{ family = "nonicons", weight = "Thin", scale = 0.8 },
 	})
 
 	config.use_cap_height_to_scale_fallback_fonts = true
@@ -19,5 +19,5 @@ return function(wezterm, config)
 	config.font_size = font_sizes.regular
 
 	-- config.line_height = 1.5
-	config.line_height = 1.35
+	config.line_height = 1.25
 end
