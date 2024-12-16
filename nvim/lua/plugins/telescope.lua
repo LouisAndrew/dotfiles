@@ -116,6 +116,14 @@ return {
 					layout_config = {
 						preview_width = 0.3,
 					},
+					prefixes = {
+						["-g="] = {
+							flag = "glob",
+						},
+						["-v"] = {
+							flag = "invert-match",
+						},
+					},
 					col_hl = "ECOL",
 					mappings = {
 						i = {
