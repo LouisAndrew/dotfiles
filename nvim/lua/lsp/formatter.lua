@@ -2,35 +2,56 @@ local conform = require("conform")
 
 local utils = require("utils")
 
+local lsp_fallback_format_ft = {
+	"css",
+	"scss",
+	"docker",
+}
+
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		rust = { "rust_analyzer" },
 		astro = { "eslint_d" },
 		go = { "gofmt" },
-		markdown = { "prettier" },
+		markdown = { "prettierd" },
+		json = { "prettierd" },
 	},
-	format_on_save = {
-		timeout_ms = 500,
-	},
+	format_on_save = function(bufnr)
+		-- Disable with a global or buffer-local variable
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			return
+		end
+
+		local file = vim.api.nvim_buf_get_name(bufnr)
+		local extension = vim.fn.fnamemodify(file, ":e")
+
+		if utils.has_value(lsp_fallback_format_ft, extension) then
+			vim.lsp.buf.format()
+			return
+		end
+
+		return {
+			timeout_ms = 500,
+		}
+	end,
 })
 
-local lsp_fallback_format_ft = {
-	"json",
-	"css",
-	"scss",
-	"docker",
-}
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		-- FormatDisable! will disable formatting just for this buffer
+		vim.b.disable_autoformat = true
+	else
+		vim.g.disable_autoformat = true
+	end
+end, {
+	desc = "Disable autoformat-on-save",
+	bang = true,
+})
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		if vim.g.ENABLE_AUTOFORMAT == "true" then
-			local file = args.file
-			local extension = vim.fn.fnamemodify(file, ":e")
-			if utils.has_value(lsp_fallback_format_ft, extension) and vim.g.ENABLE_AUTOFORMAT == "true" then
-				vim.lsp.buf.format()
-			end
-		end
-	end,
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+end, {
+	desc = "Re-enable autoformat-on-save",
 })

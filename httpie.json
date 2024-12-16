@@ -1,6 +1,3 @@
 {
-  "default_options": [
-    "--style=vim",
-    "-p=b"
-  ]
+  "default_options": ["--style=vim", "-p=b"]
 }
