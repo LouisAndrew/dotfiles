@@ -1,4 +1,5 @@
 local icons = require("theme.icons")
+
 return {
 	"VonHeikemen/lsp-zero.nvim",
 	-- event = "BufEnter",
@@ -24,6 +25,7 @@ return {
 		{
 			-- Completion
 			"hrsh7th/nvim-cmp",
+			enabled = false, -- trying out blink.cmp
 			event = "InsertEnter",
 			dependencies = {
 				"hrsh7th/cmp-path",
@@ -34,6 +36,34 @@ return {
 				"L3MON4D3/LuaSnip",
 				"saadparwaiz1/cmp_luasnip",
 			},
+		},
+		{
+			"saghen/blink.cmp",
+			lazy = false,
+			build = "cargo build --release",
+			branch = "main",
+			---@module 'blink.cmp'
+			---@type blink.cmp.Config
+			opts = {
+				completion = {
+					list = {
+						selection = "manual",
+					},
+				},
+				appearance = {
+					kind_icons = icons,
+					nerd_font_variant = "normal",
+					use_nvim_cmp_as_default = false,
+				},
+				keymap = {
+					["<C-e>"] = { "show", "hide" },
+					["<CR>"] = { "accept", "fallback" },
+					["<C-y>"] = { "show_documentation", "hide_documentation" },
+					["<C-u>"] = { "scroll_documentation_up", "fallback" },
+					["<C-d>"] = { "scroll_documentation_down", "fallback" },
+				},
+			},
+			opts_extend = { "sources.default" },
 		},
 		-- Debugging
 		{

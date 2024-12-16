@@ -253,6 +253,7 @@ Group.new("DiagnosticWarn", colors.yellow_fg, nil)
 Group.new("LuaLineDiffChange", colors.blue_fg, nil)
 Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
+Group.new("WinBar", nil, nil, nil)
 
 -- Telescope
 -- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
@@ -331,6 +332,10 @@ Group.new("Debug", colors.debug, colors.debug)
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.nb_background)
 Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("BlinkCmpMenu", nil, colors.bg_shade)
+Group.new("BlinkCmpDoc", nil, colors.bg_shade)
+Group.new("BlinkCmpDocBorder", nil, colors.bg_shade)
+
 Group.new("bg_shadeBorder", colors.black)
 
 Group.new("cmpborder", colors.nb_background, nil)
@@ -498,7 +503,6 @@ local diagflow_config = {
 	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.yellow },
 	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
-	high,
 }
 
 local luasnip_config = {

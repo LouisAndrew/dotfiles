@@ -6,6 +6,7 @@ return {
 	{
 		{
 			"CopilotC-Nvim/CopilotChat.nvim",
+			branch = "main",
 			keys = {
 				{ "<leader>ac", "<cmd>:CopilotChat<CR>", mode = { "n", "v" } },
 				{
