@@ -47,7 +47,6 @@ return {
 				default = { "lsp", "path", "snippets", "luasnip" },
 				cmdline = function()
 					local type = vim.fn.getcmdtype()
-					print(type)
 					if type == "/" or type == "?" then
 						return { "buffer" }
 					end

@@ -39,4 +39,38 @@ return {
 			"TextCaseStartReplacingCommand",
 		},
 	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@module 'snacks'
+		---@type snacks.Config
+		opts = {
+			animate = { enabled = false },
+			bigfile = { enabled = true },
+			dashboard = {
+				enabled = true,
+				sections = {
+					{ section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
+					{ section = "keys", gap = 1, padding = 1 },
+					{ section = "startup" },
+				},
+			},
+			dim = { enabled = false },
+			git = { enabled = true },
+			gitbrowse = { enabled = true },
+			indent = {
+				enabled = false,
+				animate = {
+					enabled = false,
+				},
+			},
+			input = { enabled = true },
+			notifier = { enabled = false },
+			quickfile = { enabled = true },
+			scroll = { enabled = false },
+			statuscolumn = { enabled = false },
+			words = { enabled = true },
+		},
+	},
 }

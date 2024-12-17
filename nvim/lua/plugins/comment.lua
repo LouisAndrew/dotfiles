@@ -10,8 +10,8 @@ return {
 		},
 	},
 	event = "BufEnter",
-	opts = {
-		{
+	config = function()
+		require("mini.comment").setup({
 			mappings = {
 				comment = "gy",
 				comment_line = "gyy",
@@ -24,6 +24,6 @@ return {
 						or vim.bo.commentstring
 				end,
 			},
-		},
-	},
+		})
+	end,
 }
