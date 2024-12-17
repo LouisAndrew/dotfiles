@@ -254,6 +254,7 @@ Group.new("LuaLineDiffChange", colors.blue_fg, nil)
 Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 Group.new("WinBar", nil, nil, nil)
+Group.new("WinBarNC", nil, nil, nil)
 
 -- Telescope
 -- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
