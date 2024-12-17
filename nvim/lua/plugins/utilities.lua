@@ -65,7 +65,19 @@ return {
 					enabled = false,
 				},
 			},
-			input = { enabled = true },
+			input = {
+				prompt_pos = "left",
+				icon_pos = "left",
+				expand = false,
+				icon = "",
+			},
+			styles = {
+				input = {
+					border = "none",
+					row = -1,
+					width = 0,
+				},
+			},
 			notifier = { enabled = false },
 			quickfile = { enabled = true },
 			scroll = { enabled = false },

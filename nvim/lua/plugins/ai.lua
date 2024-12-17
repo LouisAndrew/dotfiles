@@ -1,7 +1,30 @@
 return {
 	{
 		"github/copilot.vim",
+		enabled = false,
 		lazy = false,
+	},
+
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					keymap = {
+						accept = "<Tab>",
+						next = "<M-l>",
+						prev = "<M-h>",
+						dismiss = "<M-j>",
+					},
+				},
+				filetypes = {
+					markdown = true,
+					snacks_input = false,
+				},
+			})
+		end,
 	},
 	{
 		{

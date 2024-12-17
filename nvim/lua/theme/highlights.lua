@@ -63,7 +63,8 @@ Group.new("SpellBad", colors.primary)
 Group.new("SpellCap", colors.mfed_0)
 Group.new("SpellLocal", colors.mfed_5)
 Group.new("SpellRare", colors.primary)
-Group.new("StatusLine", colors.mfed_5, colors.noir_8)
+
+Group.new("StatusLine", nil, colors.mfed_9)
 Group.new("TabLine", colors.mfed_3, colors.noir_8)
 Group.new("TabLineFill", nil, colors.mfed_8)
 Group.new("TabLineSel", colors.mfed_2, nil)
@@ -433,6 +434,11 @@ local notify_config = {
 	{ "NotifyTRACEBorder", colors.mfed_bg_accent },
 }
 
+local snacks_config = {
+	{ "SnacksInputBorder", colors.dimmed_white, colors.mfed_bg_accent },
+	{ "SnacksInputNormal", colors.white, colors.mfed_bg_accent },
+}
+
 local noice_config = {
 	{ "NoiceCmdlinePrompt", colors.nb_background },
 	{ "NoiceCmdlinePopup", nil, colors.indigo_fg },
@@ -506,17 +512,6 @@ local diagflow_config = {
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
 }
 
-local luasnip_config = {
-	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
-	-- { "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
-}
-
-for _, pair in pairs(luasnip_config) do
-	local hi_group = pair[1]
-	local hi_color = pair[2]
-	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
-end
-
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -534,6 +529,7 @@ local hl_group_configs = {
 	gpt_config,
 	diagflow_config,
 	md_config,
+	snacks_config,
 }
 
 for _, config in ipairs(hl_group_configs) do
