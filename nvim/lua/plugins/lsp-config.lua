@@ -40,17 +40,6 @@ return {
 			"kevinhwang91/nvim-ufo",
 			dependencies = {
 				"kevinhwang91/promise-async",
-				{
-					"chrisgrieser/nvim-origami",
-					event = "BufReadPost", -- later or on keypress would prevent saving folds
-					config = function()
-						require("origami").setup({
-							keepFoldsAcrossSessions = true,
-							pauseFoldsOnSearch = true,
-							setupFoldKeymaps = false,
-						})
-					end,
-				},
 			},
 		},
 		-- json schema
