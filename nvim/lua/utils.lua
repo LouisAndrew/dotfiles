@@ -134,4 +134,8 @@ U.CONST = {
 	emptyString = "",
 }
 
+function U.paste()
+	return io.popen("pbpaste", "r"):read()
+end
+
 return U
