@@ -1,9 +1,11 @@
+local icons = require("theme.icons")
 local VAULT_PATH = os.getenv("VAULT_PATH")
 
 return {
 	{
 		"OXY2DEV/markview.nvim",
 		ft = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+		---@module 'markview'
 		opts = {
 			filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 			headings = {
@@ -43,6 +45,43 @@ return {
 					icon = " ",
 				},
 			},
+			block_quotes = {
+				default = {
+					border = icons.TallVertLine,
+				},
+				callouts = {
+					{
+						match_string = "NOTE",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.InfoCircle .. " Note",
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "TODO",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.CircleCheck .. " Todo",
+						title = true,
+						icon = icons.CircleCheck,
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "INFO",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.InfoCircle .. " Info",
+						custom_title = true,
+						icon = icons.CircleCheck,
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "TLDR",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.Clippy .. " Tldr",
+						title = true,
+						icon = icons.Clippy,
+						border = icons.TallVertLine,
+					},
+				},
+			},
 		},
 	},
 	{
@@ -70,24 +109,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"godlygeek/tabular",
-			{
-				"ellisonleao/glow.nvim",
-				cmd = "Glow",
-				config = function()
-					require("glow").setup({
-						path = "/opt/homebrew/bin/glow",
-						border = "rounded", -- floating window border config
-						style = "dark", -- filled automatically with your current editor background, you can override using glow json style
-						pager = false,
-						width = 150,
-						height = 300,
-						width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
-						height_ratio = 0.7,
-					})
-
-					vim.keymap.set("n", "<leader>lg", "<cmd>:Glow<cr>", { noremap = true, silent = true })
-				end,
-			},
 		},
 		config = function()
 			local colors = require("minimal_fedu")
@@ -122,8 +143,8 @@ return {
 						hl_group = "ObsidianExtLinkIcon",
 					},
 					checkboxes = {
-						[" "] = { char = "", hl_group = "ObsidianTodo" },
-						["x"] = { char = "", hl_group = "ObsidianDone" },
+						[" "] = { char = icons.Circle, hl_group = "ObsidianTodo" },
+						["x"] = { char = icons.CircleCheck, hl_group = "ObsidianDone" },
 						[">"] = { char = "", hl_group = "ObsidianRightArrow" },
 						["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
 					},

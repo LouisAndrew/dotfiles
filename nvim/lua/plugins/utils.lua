@@ -52,7 +52,6 @@ return {
 				enabled = true,
 				sections = {
 					{ section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
-					{ section = "keys", gap = 1, padding = 1 },
 					{ section = "startup" },
 				},
 			},
@@ -79,9 +78,16 @@ return {
 				},
 			},
 			notifier = { enabled = false },
-			quickfile = { enabled = true },
+			quickfile = { enabled = false },
 			scroll = { enabled = false },
-			statuscolumn = { enabled = false },
+			statuscolumn = {
+				enabled = true,
+				folds = {
+					open = true, -- show open fold icons
+					git_hl = true, -- use Git Signs hl for fold icons
+				},
+				refresh = 50, -- refresh at most every 50ms
+			},
 			words = { enabled = true },
 		},
 	},

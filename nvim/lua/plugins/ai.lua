@@ -13,10 +13,10 @@ return {
 			require("copilot").setup({
 				suggestion = {
 					keymap = {
-						accept = "<Tab>",
-						next = "<M-l>",
-						prev = "<M-h>",
-						dismiss = "<M-j>",
+						accept = "<M-l>",
+						next = "<M-j>",
+						prev = "<M-k>",
+						dismiss = "<M-h>",
 					},
 				},
 				filetypes = {

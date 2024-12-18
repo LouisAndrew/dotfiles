@@ -1,5 +1,6 @@
 local config = require("config")
 local opt = vim.opt
+vim.cmd("set fillchars+=foldopen:,foldsep:│,foldclose:")
 
 for key, value in pairs(config) do
 	opt[key] = value

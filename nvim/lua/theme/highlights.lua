@@ -20,7 +20,7 @@ Group.new("Identifier", colors.mfed_0)
 Group.new("Statement", colors.mfed_1)
 Group.new("PreProc", colors.primary)
 Group.new("Type", colors.secondary)
-Group.new("Special", colors.mfed_5)
+Group.new("Special", colors.dimmed_white)
 Group.new("Error", colors.primary)
 Group.new("Function", colors.mfed_0)
 Group.new("ColorColumn", nil, colors.mfed_8)
@@ -134,14 +134,11 @@ Group.new("@identifier", colors.mfed_0)
 Group.new("@type.builtin", colors.mfed_6)
 Group.new("@type.definition", colors.mfed_2)
 Group.new("@variable", colors.secondary)
+Group.new("@attribute", colors.secondary)
 Group.new("@variable.builtin", colors.mfed_2)
 Group.new("@lsp.type.function", colors.mfed_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
-Group.new("@markup.heading", colors.mfed_2, nil, styles.bold)
-Group.new("@markup.italic", nil, nil, styles.italic)
-Group.new("@markup.list", colors.mfed_2, nil)
-Group.new("@markup.raw", colors.mfed_num, nil)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
 Group.new("@punctuation.special", colors.mfed_3)
 Group.new("@comment", colors.mfed_7)
@@ -229,8 +226,6 @@ Group.new("TerminalNormal", colors.secondary, colors.nb_background)
 Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
 Group.new("diffChanged", colors.blue_fg)
--- gitsigns
--- Group.new("GitSignsChange", colors.blue:light():light():light())
 Group.new("GitSignsChange", colors.indigo_fg:dark())
 Group.new("GitSignsAdd", colors.add:light():light():light())
 Group.new("GitSignsDelete", colors.remove:light():light():light())
@@ -299,6 +294,10 @@ Group.new("CmpItemKindClass", colors.remove_fg)
 Group.new("CmpItemKindKeyword", colors.mfed_cyan)
 Group.new("CmpItemKindProperty", colors.mfed_cyan)
 Group.new("CmpItemKindUnit", colors.mfed_cyan)
+
+Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
+Group.new("CmpItemAbbrMatch", colors.mfed_cyan)
+Group.new("CmpItemAbbrMatchFuzzy", colors.mfed_cyan)
 
 -- Mason
 Group.new("MasonHeader", colors.secondary, colors.mfed_9)
@@ -375,21 +374,6 @@ for _, l in ipairs(level_hl_raw) do
 	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
 end
 
---- @class HlConfig
---- @field fg string
---- @field bg (string|nil)
---- @field guicg? string
-
---- @param group string
---- @param M HlConfig
---- @return nil
-local set_hl = function(group, M)
-	local bg = M.bg or nil
-	local guicg = M.guicg or nil
-
-	Group.new(group, M.fg, bg, guicg)
-end
-
 local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
 	{ "RenderMarkdownCode", nil, colors.nb_background },
@@ -402,6 +386,11 @@ local md_config = {
 	{ "MarkviewImageLink", colors.mfed_navy },
 	{ "MarkviewBlockQuoteDefault", colors.mfed_cyan },
 	{ "@markup", colors.mfed_0 },
+	{ "@markup.link", colors.mfed_0 },
+	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
+	{ "@markup.italic", nil, nil, styles.italic },
+	{ "@markup.list", colors.mfed_2, nil },
+	{ "@markup.raw", colors.mfed_num, nil },
 }
 
 local dap_config = {
@@ -458,6 +447,36 @@ local noice_config = {
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
 	{ "NoiceInputNormal", colors.white, colors.bg_shade },
 	{ "NoiceHoverNormal", nil, colors.bg_shade },
+}
+
+local cmp_config = {
+	{ "BlinkCmpKindFile", colors.mfed_2 },
+	{ "BlinkCmpKindModule", colors.mfed_2 },
+	{ "BlinkCmpKindNamespace", colors.mfed_2 },
+	{ "BlinkCmpKindPackage", colors.mfed_2 },
+	{ "BlinkCmpKindClass", colors.remove_fg },
+	{ "BlinkCmpKindMethod", colors.mfed_bool },
+	{ "BlinkCmpKindProperty", colors.mfed_cyan },
+	{ "BlinkCmpKindField", colors.mfed_cyan },
+	{ "BlinkCmpKindConstructor", colors.mfed_2 },
+	{ "BlinkCmpKindEnum", colors.add_fg },
+	{ "BlinkCmpKindInterface", colors.mfed_navy },
+	{ "BlinkCmpKindFunction", colors.mfed_bool },
+	{ "BlinkCmpKindVariable", colors.mfed_navy },
+	{ "BlinkCmpKindConstant", colors.mfed_2 },
+	{ "BlinkCmpKindString", colors.add_fg },
+	{ "BlinkCmpKindNumber", colors.mfed_2 },
+	{ "BlinkCmpKindBoolean", colors.mfed_2 },
+	{ "BlinkCmpKindArray", colors.mfed_2 },
+	{ "BlinkCmpKindObject", colors.mfed_2 },
+	{ "BlinkCmpKindKey", colors.add_fg },
+	{ "BlinkCmpKindNull", colors.mfed_2 },
+	{ "BlinkCmpKindEnumMember", colors.mfed_2 },
+	{ "BlinkCmpKindStruct", colors.mfed_2 },
+	{ "BlinkCmpKindEvent", colors.mfed_2 },
+	{ "BlinkCmpKindOperator", colors.mfed_2 },
+	{ "BlinkCmpKindTypeParameter", colors.mfed_2 },
+	{ "BlinkCmpKindUnit", colors.mfed_cyan },
 }
 
 local navic_config = {
@@ -530,7 +549,23 @@ local hl_group_configs = {
 	diagflow_config,
 	md_config,
 	snacks_config,
+	cmp_config,
 }
+
+--- @class HlConfig
+--- @field fg string
+--- @field bg (string|nil)
+--- @field guicg? string
+
+--- @param group string
+--- @param M HlConfig
+--- @return nil
+local set_hl = function(group, M)
+	local bg = M.bg or nil
+	local guicg = M.guicg or nil
+
+	Group.new(group, M.fg, bg, guicg)
+end
 
 for _, config in ipairs(hl_group_configs) do
 	for _, l in ipairs(config) do

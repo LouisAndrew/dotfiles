@@ -162,6 +162,7 @@ return {
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 		vim.keymap.set("n", "<leader>ph", builtin.help_tags, {})
+		vim.keymap.set("n", "<leader>pt", builtin.highlights, {})
 		vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})
 		vim.keymap.set("n", "<leader>pu", telescope.extensions.undo.undo, {})
 		vim.keymap.set("n", "<leader>pe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
