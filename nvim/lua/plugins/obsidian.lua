@@ -6,7 +6,7 @@ return {
 		"OXY2DEV/markview.nvim",
 		ft = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 		keys = {
-			{ "<leader>il", "<cmd>:Markview toggle" },
+			{ "<leader>il", "<cmd>:Markview toggle<CR>" },
 		},
 		opts = {
 			filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },

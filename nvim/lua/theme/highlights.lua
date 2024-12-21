@@ -45,7 +45,7 @@ Group.new("DiffDelete", colors.secondary, colors.mfed_8)
 Group.new("DiffText", colors.mfed_0, colors.noir_7)
 Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
-Group.new("Folded", colors.dimmed_white, nil)
+Group.new("Folded", colors.noir_9, nil)
 
 Group.new("UfoFoldVirtualText", colors.mfed_6)
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
