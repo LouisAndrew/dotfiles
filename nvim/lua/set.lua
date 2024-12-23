@@ -1,7 +1,6 @@
 local config = require("config")
-local minimal_fedu = require("minimal_fedu")
 local opt = vim.opt
-vim.cmd("set fillchars+=foldopen:,foldsep:│,foldclose:")
+-- vim.cmd("set fillchars+=foldopen:,foldsep:│,foldclose:")
 
 for key, value in pairs(config) do
 	opt[key] = value
@@ -30,6 +29,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
+		vim.cmd("syntax match MDDate /@\\d\\{4}-\\d\\{2}-\\d\\{2}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/ ")
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 

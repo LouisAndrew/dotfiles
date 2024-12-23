@@ -19,11 +19,13 @@ return {
 			checkboxes = {
 				enable = false,
 			},
+			---@type markview.conf.code_blocks
 			code_blocks = {
 				icons = "devicons",
-				style = "simple",
+				style = "block",
 				language_direction = "left",
 				sign = false,
+				pad_amount = 2,
 			},
 			inline_codes = {
 				hl = "MarkviewCodeInline",

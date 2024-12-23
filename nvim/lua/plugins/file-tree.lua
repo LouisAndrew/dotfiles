@@ -2,16 +2,13 @@ return {
 	{
 		"stevearc/oil.nvim",
 		keys = {
-			{ "-", "<cmd>:Oil --float<cr>" },
+			{ "-", "<cmd>:Oil<cr>" },
 		},
 		--- @module 'oil'
 		--- @type oil.Config
 		opts = {
 			default_file_explorer = true,
 			view_options = {},
-			float = {
-				padding = 0,
-			},
 			win_options = {
 				wrap = false,
 				signcolumn = "no",

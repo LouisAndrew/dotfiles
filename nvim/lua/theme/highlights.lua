@@ -276,7 +276,7 @@ Group.new("SagaBeacon", colors.primary)
 Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
-Group.new("ObsTag", colors.magenta_fg:light(), nil, styles.bold)
+Group.new("ObsTag", colors.magenta_fg:light())
 
 -- CMP
 Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
@@ -323,7 +323,7 @@ Group.new("NvimTreeSpecialFile", colors.mfed_2, nil)
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 -- Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
-Group.new("MDDate", colors.indigo_fg, nil, styles.bold)
+Group.new("MDDate", nil, colors.indigo, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Bold", nil, nil, styles.bold)
 Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
@@ -377,8 +377,9 @@ end
 local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
 	{ "RenderMarkdownCode", nil, colors.nb_background },
-	{ "MarkviewCode", nil, colors.nb_background },
-	{ "MarkviewCodeInfo", nil, colors.nb_background },
+	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
+	{ "MarkviewCodeInfo", nil, colors.bg_shade },
+	{ "MarkviewInlineCode", nil, colors.debug },
 	{ "MarkviewCodeInline", nil, colors.nb_background },
 	{ "InlineCode", nil, colors.nb_background },
 	{ "RenderMarkdownLink", colors.mfed_navy, nil },
@@ -392,7 +393,7 @@ local md_config = {
 	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
-	{ "@markup.raw", colors.dimmed_white:dark() },
+	{ "@markup.raw", colors.mfed_bool:light() },
 }
 
 local dap_config = {
