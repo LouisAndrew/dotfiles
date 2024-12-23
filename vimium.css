@@ -22,13 +22,13 @@
   --fg-url: #84bffa;
   --fg-match: #2165d9;
 
-  --bg: rgba(80, 80, 80, 0.2);
+  --bg: rgba(80, 80, 80, 0.7);
   --bg-selected: rgba(150, 150, 150, 0.3);
 
   --border: #464646;
 
   /* -------- HINTS -------- */
-  --fg-hints: #a7a7a7;
+  --fg-hints: #d5d5d5;
   /* Text color of link hints, (don't forget to change `#vimiumHintMarkerContainer div > .matchingCharacter ~ span`) */
 }
 

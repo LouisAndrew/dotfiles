@@ -1,4 +1,5 @@
 local config = require("config")
+local minimal_fedu = require("minimal_fedu")
 local opt = vim.opt
 vim.cmd("set fillchars+=foldopen:,foldsep:│,foldclose:")
 
@@ -9,7 +10,7 @@ opt.iskeyword:append("-")
 vim.cmd("set noswapfile")
 
 vim.keymap.set("n", "<leader>pd", function()
-	local bufinfos = vim.fn.getbufinfo({ buflisted = true })
+	local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 	vim.tbl_map(function(bufinfo)
 		if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
 			-- vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
@@ -46,6 +47,7 @@ local no_statuscol_filetypes = {
 	"DiffviewFiles",
 	"DiffviewFileHistory",
 	"Outline",
+	"oil",
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -109,7 +111,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.opt_local.relativenumber = false
 		vim.opt_local.statuscolumn = " "
-		-- vim.opt_local.nonumber = true
 
 		vim.keymap.set("n", "<C-l>", function()
 			print(require("CopilotChat").response())
@@ -122,7 +123,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
--- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "oil",
+	callback = function()
+		vim.opt_local.relativenumber = false
+		vim.opt_local.statuscolumn = " "
+	end,
+})
+
 vim.filetype.add({
 	extension = {
 		pcss = "scss",

@@ -12,6 +12,13 @@ return {
 			float = {
 				padding = 0,
 			},
+			win_options = {
+				wrap = false,
+				signcolumn = "no",
+				cursorcolumn = false,
+				statuscolumn = "",
+				foldcolumn = "0",
+			},
 			keymaps = {
 				["g?"] = "actions.show_help",
 				["<CR>"] = "actions.select",
@@ -25,6 +32,7 @@ return {
 					opts = { horizontal = true },
 					desc = "Open the entry in a horizontal split",
 				},
+				["<C-w>"] = { "actions.close" },
 				["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = "actions.close",

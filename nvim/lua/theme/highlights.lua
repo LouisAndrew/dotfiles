@@ -141,7 +141,7 @@ Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
 Group.new("@punctuation.special", colors.mfed_3)
-Group.new("@comment", colors.mfed_7)
+-- Group.new("@comment", colors.mfed_7)
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
@@ -256,7 +256,7 @@ Group.new("WinBarNC", nil, nil, nil)
 -- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
 Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
 Group.new("TelescopeNormal", nil)
-Group.new("TelescopeBorder", colors.mfed_8, nil)
+Group.new("TelescopeBorder", colors.bg_shade, nil)
 Group.new("TelescopeMatching", colors.mfed_0)
 Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
@@ -385,12 +385,14 @@ local md_config = {
 	{ "MarkviewHyperlink", colors.mfed_navy },
 	{ "MarkviewImageLink", colors.mfed_navy },
 	{ "MarkviewBlockQuoteDefault", colors.mfed_cyan },
+	{ "@spell", colors.mfed_7 },
+	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.mfed_0 },
 	{ "@markup.link", colors.mfed_0 },
 	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
-	{ "@markup.raw", colors.mfed_num, nil },
+	{ "@markup.raw", colors.dimmed_white:dark() },
 }
 
 local dap_config = {
