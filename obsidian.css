@@ -1,6 +1,7 @@
 /* Copy to `vault/'Github Theme'/theme.css`. Modified Github theme for obsidian. */
 /* This is just a copy, since symlinks are not synced with icloud */
 /* @settings
+
 name: GitHub theme settings
 id: id
 settings:
@@ -791,6 +792,10 @@ body {
   --background-modifier-cover: rgba(0, 0, 0, 0.5);
   --background-modifier-hover: rgba(var(--mono-rgb-100), 0.15);
   --settings-home-background: var(--background-primary);
+}
+
+.is-mobile .metadata-container {
+  display: none !important;
 }
 
 .theme-light {
