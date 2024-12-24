@@ -95,7 +95,7 @@ return {
 				},
 				layout_config = {
 					horizontal = {
-						preview_width = 0.7,
+						preview_width = 0.6,
 					},
 				},
 				dynamic_preview_title = true,

@@ -386,7 +386,6 @@ local md_config = {
 	{ "MarkviewHyperlink", colors.mfed_navy },
 	{ "MarkviewImageLink", colors.mfed_navy },
 	{ "MarkviewBlockQuoteDefault", colors.mfed_cyan },
-	{ "@spell", colors.mfed_7 },
 	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.mfed_0 },
 	{ "@markup.link", colors.mfed_0 },
