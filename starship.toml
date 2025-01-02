@@ -12,7 +12,6 @@ $lua\
 $golang\
 $rust\
 $python\
-$shlvl\
 $jobs\
 $character"""
 
@@ -40,7 +39,7 @@ modified = " ${count} "
 staged = " ${count} "
 renamed = " ${count} "
 deleted = " ${count} "
-style = "white"
+style = "bold white"
 format = " $all_status$ahead_behind"
 
 [python]
@@ -74,11 +73,6 @@ format = '- [lua@$version](blue) '
 
 [rust]
 format = "- [rust@$version]($style) "
-
-[shlvl]
-disabled = false
-style = "bright-blue"
-format = "\\[ [$shlvl]($style) \\] "
 
 [character]
 error_symbol = " [# ](white)"

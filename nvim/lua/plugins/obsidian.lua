@@ -100,6 +100,7 @@ return {
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
 			{ "<leader>ln", ":ObsidianNew notes/" },
+			{ "<leader>ln", ":ObsidianExtractNote notes/", mode = "v" },
 			{ "<leader>lg", ":ObsidianLinkNew ", mode = "v" },
 			{ "<leader>lw", "<cmd>:ObsidianWorkspace<cr>" },
 			{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
@@ -184,7 +185,7 @@ return {
 					sort_by = "modified",
 					sort_reversed = true,
 					note_frontmatter_func = function(note)
-						local now = os.date("%d.%m.%Y")
+						local now = os.date("%Y-%m-%d")
 						local out =
 							{ id = note.id, aliases = note.aliases, tags = note.tags, created = now, modified = now }
 
@@ -197,6 +198,7 @@ return {
 								end
 							end
 						end
+
 						return out
 					end,
 					note_id_func = function(title)

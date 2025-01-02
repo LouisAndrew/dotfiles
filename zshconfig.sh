@@ -1,5 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_TMUX_AUTOSTART="true"
 
+plugins=(tmux)
 source $ZSH/oh-my-zsh.sh
 
 # # Env related
@@ -18,7 +20,6 @@ export FS_CLI_CONFIG="~/.fs-cli.json"
 
 source $DOTFILES_PATH/vim.sh
 source $ALIAS_FILE_PATH
-
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -74,8 +75,8 @@ BG_COLOR_DARK="#0a0a0a"
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
-export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
-export EZA_COLORS="sc=0;$COLOR_CYAN:di=2;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
+export LS_COLORS=$LS_COLORS:"di=1;$COLOR_MAGENTA"; 
+export EZA_COLORS="sc=0;$COLOR_CYAN:di=3;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
 export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
