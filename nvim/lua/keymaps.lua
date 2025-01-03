@@ -56,8 +56,8 @@ local M = {
 		{ "<leader>q", "<cmd>:wqa<cr>" },
 		{ "<leader>]", "<cmd>:bnext<cr>" },
 		{ "<leader>[", "<cmd>:bprev<cr>" },
-		{ "<C-]>", "<cmd>:bnext<cr>" },
-		{ "<C-[>", "<cmd>:bprev<cr>" },
+		{ "<C-p>", "<cmd>:bprev<cr>" },
+		{ "<C-n>", "<cmd>:bnext<cr>" },
 		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
 		-- Customs
 		{ "<S-j>", "}", "skip bracket" },
@@ -77,9 +77,9 @@ local M = {
 
 		-- Copy all
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
-		{ "π", "<cmd>vertical resize 40<CR>" },
-		{ "ø", "<cmd>vertical resize 160<CR>" },
-		{ "æ", "<C-w>=" },
+		{ "<C-w>P", "<cmd>vertical resize 40<CR>" },
+		{ "<C-w>O", "<cmd>vertical resize 160<CR>" },
+		-- { "æ", "<C-w>=" },
 		-- line numbers
 
 		-- { "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }  },
@@ -101,8 +101,8 @@ local M = {
 		{ "<C-k>", require("smart-splits").move_cursor_up },
 		{ "<C-l>", require("smart-splits").move_cursor_right },
 
-		{ "<C-8>", "zh" },
-		{ "<C-9>", "zl" },
+		{ "å", "zh" },
+		{ "∂", "zl" },
 		{ "]z", "zj" },
 		{ "[z", "zk" },
 

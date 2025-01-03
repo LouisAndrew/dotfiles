@@ -48,6 +48,7 @@ Color.new("red", minimal_fedu.palette.red)
 Color.new("red_softened", minimal_fedu.palette.red_softened)
 
 Color.new("indigo_fg", minimal_fedu.palette.indigo_fg)
+Color.new("indigo_fg_light", minimal_fedu.palette.indigo_fg_light)
 Color.new("indigo", minimal_fedu.palette.indigo)
 
 Color.new("blue_fg", minimal_fedu.palette.blue_fg)

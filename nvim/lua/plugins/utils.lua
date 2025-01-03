@@ -81,7 +81,7 @@ return {
 			quickfile = { enabled = false },
 			scroll = { enabled = false },
 			statuscolumn = {
-				enabled = true,
+				enabled = false,
 				folds = {
 					open = true, -- show open fold icons
 					git_hl = true, -- use Git Signs hl for fold icons
