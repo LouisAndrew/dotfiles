@@ -20,7 +20,7 @@ Group.new("Identifier", colors.mfed_0)
 Group.new("Statement", colors.mfed_1)
 Group.new("PreProc", colors.primary)
 Group.new("Type", colors.secondary)
-Group.new("Special", colors.mfed_5)
+Group.new("Special", colors.dimmed_white)
 Group.new("Error", colors.primary)
 Group.new("Function", colors.mfed_0)
 Group.new("ColorColumn", nil, colors.mfed_8)
@@ -45,12 +45,12 @@ Group.new("DiffDelete", colors.secondary, colors.mfed_8)
 Group.new("DiffText", colors.mfed_0, colors.noir_7)
 Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
-Group.new("Folded", colors.dimmed_white, nil)
+Group.new("Folded", colors.noir_9, nil)
 
 Group.new("UfoFoldVirtualText", colors.mfed_6)
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
-Group.new("FoldColumn", colors.mfed_9)
+Group.new("FoldColumn", colors.mfed_7)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)
@@ -63,7 +63,8 @@ Group.new("SpellBad", colors.primary)
 Group.new("SpellCap", colors.mfed_0)
 Group.new("SpellLocal", colors.mfed_5)
 Group.new("SpellRare", colors.primary)
-Group.new("StatusLine", colors.mfed_5, colors.noir_8)
+
+Group.new("StatusLine", nil, colors.mfed_9)
 Group.new("TabLine", colors.mfed_3, colors.noir_8)
 Group.new("TabLineFill", nil, colors.mfed_8)
 Group.new("TabLineSel", colors.mfed_2, nil)
@@ -133,17 +134,14 @@ Group.new("@identifier", colors.mfed_0)
 Group.new("@type.builtin", colors.mfed_6)
 Group.new("@type.definition", colors.mfed_2)
 Group.new("@variable", colors.secondary)
+Group.new("@attribute", colors.secondary)
 Group.new("@variable.builtin", colors.mfed_2)
 Group.new("@lsp.type.function", colors.mfed_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
-Group.new("@markup.heading", colors.mfed_2, nil, styles.bold)
-Group.new("@markup.italic", nil, nil, styles.italic)
-Group.new("@markup.list", colors.mfed_2, nil)
-Group.new("@markup.raw", colors.mfed_num, nil)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
 Group.new("@punctuation.special", colors.mfed_3)
-Group.new("@comment", colors.mfed_7)
+-- Group.new("@comment", colors.mfed_7)
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
@@ -228,8 +226,6 @@ Group.new("TerminalNormal", colors.secondary, colors.nb_background)
 Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
 Group.new("diffChanged", colors.blue_fg)
--- gitsigns
--- Group.new("GitSignsChange", colors.blue:light():light():light())
 Group.new("GitSignsChange", colors.indigo_fg:dark())
 Group.new("GitSignsAdd", colors.add:light():light():light())
 Group.new("GitSignsDelete", colors.remove:light():light():light())
@@ -253,12 +249,14 @@ Group.new("DiagnosticWarn", colors.yellow_fg, nil)
 Group.new("LuaLineDiffChange", colors.blue_fg, nil)
 Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
+Group.new("WinBar", nil, nil, nil)
+Group.new("WinBarNC", nil, nil, nil)
 
 -- Telescope
 -- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
 Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
 Group.new("TelescopeNormal", nil)
-Group.new("TelescopeBorder", colors.mfed_8, nil)
+Group.new("TelescopeBorder", colors.bg_shade, nil)
 Group.new("TelescopeMatching", colors.mfed_0)
 Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
@@ -278,7 +276,7 @@ Group.new("SagaBeacon", colors.primary)
 Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
-Group.new("ObsTag", colors.magenta_fg:light(), nil, styles.bold)
+Group.new("ObsTag", colors.magenta_fg:light())
 
 -- CMP
 Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
@@ -296,6 +294,10 @@ Group.new("CmpItemKindClass", colors.remove_fg)
 Group.new("CmpItemKindKeyword", colors.mfed_cyan)
 Group.new("CmpItemKindProperty", colors.mfed_cyan)
 Group.new("CmpItemKindUnit", colors.mfed_cyan)
+
+Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
+Group.new("CmpItemAbbrMatch", colors.mfed_cyan)
+Group.new("CmpItemAbbrMatchFuzzy", colors.mfed_cyan)
 
 -- Mason
 Group.new("MasonHeader", colors.secondary, colors.mfed_9)
@@ -321,7 +323,7 @@ Group.new("NvimTreeSpecialFile", colors.mfed_2, nil)
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 -- Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
-Group.new("MDDate", colors.indigo_fg, nil, styles.bold)
+Group.new("MDDate", nil, colors.indigo, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Bold", nil, nil, styles.bold)
 Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
@@ -331,6 +333,10 @@ Group.new("Debug", colors.debug, colors.debug)
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.nb_background)
 Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("BlinkCmpMenu", nil, colors.bg_shade)
+Group.new("BlinkCmpDoc", nil, colors.bg_shade)
+Group.new("BlinkCmpDocBorder", nil, colors.bg_shade)
+
 Group.new("bg_shadeBorder", colors.black)
 
 Group.new("cmpborder", colors.nb_background, nil)
@@ -368,33 +374,25 @@ for _, l in ipairs(level_hl_raw) do
 	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
 end
 
---- @class HlConfig
---- @field fg string
---- @field bg (string|nil)
---- @field guicg? string
-
---- @param group string
---- @param M HlConfig
---- @return nil
-local set_hl = function(group, M)
-	local bg = M.bg or nil
-	local guicg = M.guicg or nil
-
-	Group.new(group, M.fg, bg, guicg)
-end
-
 local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
 	{ "RenderMarkdownCode", nil, colors.nb_background },
-	{ "MarkviewCode", nil, colors.nb_background },
-	{ "MarkviewCodeInfo", nil, colors.nb_background },
+	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
+	{ "MarkviewCodeInfo", nil, colors.bg_shade },
+	{ "MarkviewInlineCode", nil, colors.debug },
 	{ "MarkviewCodeInline", nil, colors.nb_background },
 	{ "InlineCode", nil, colors.nb_background },
 	{ "RenderMarkdownLink", colors.mfed_navy, nil },
 	{ "MarkviewHyperlink", colors.mfed_navy },
 	{ "MarkviewImageLink", colors.mfed_navy },
 	{ "MarkviewBlockQuoteDefault", colors.mfed_cyan },
+	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.mfed_0 },
+	{ "@markup.link", colors.mfed_0 },
+	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
+	{ "@markup.italic", nil, nil, styles.italic },
+	{ "@markup.list", colors.mfed_2, nil },
+	{ "@markup.raw", colors.mfed_bool:light() },
 }
 
 local dap_config = {
@@ -427,6 +425,11 @@ local notify_config = {
 	{ "NotifyTRACEBorder", colors.mfed_bg_accent },
 }
 
+local snacks_config = {
+	{ "SnacksInputBorder", colors.dimmed_white, colors.mfed_bg_accent },
+	{ "SnacksInputNormal", colors.white, colors.mfed_bg_accent },
+}
+
 local noice_config = {
 	{ "NoiceCmdlinePrompt", colors.nb_background },
 	{ "NoiceCmdlinePopup", nil, colors.indigo_fg },
@@ -446,6 +449,36 @@ local noice_config = {
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
 	{ "NoiceInputNormal", colors.white, colors.bg_shade },
 	{ "NoiceHoverNormal", nil, colors.bg_shade },
+}
+
+local cmp_config = {
+	{ "BlinkCmpKindFile", colors.mfed_2 },
+	{ "BlinkCmpKindModule", colors.mfed_2 },
+	{ "BlinkCmpKindNamespace", colors.mfed_2 },
+	{ "BlinkCmpKindPackage", colors.mfed_2 },
+	{ "BlinkCmpKindClass", colors.remove_fg },
+	{ "BlinkCmpKindMethod", colors.mfed_bool },
+	{ "BlinkCmpKindProperty", colors.mfed_cyan },
+	{ "BlinkCmpKindField", colors.mfed_cyan },
+	{ "BlinkCmpKindConstructor", colors.mfed_2 },
+	{ "BlinkCmpKindEnum", colors.add_fg },
+	{ "BlinkCmpKindInterface", colors.mfed_navy },
+	{ "BlinkCmpKindFunction", colors.mfed_bool },
+	{ "BlinkCmpKindVariable", colors.mfed_navy },
+	{ "BlinkCmpKindConstant", colors.mfed_2 },
+	{ "BlinkCmpKindString", colors.add_fg },
+	{ "BlinkCmpKindNumber", colors.mfed_2 },
+	{ "BlinkCmpKindBoolean", colors.mfed_2 },
+	{ "BlinkCmpKindArray", colors.mfed_2 },
+	{ "BlinkCmpKindObject", colors.mfed_2 },
+	{ "BlinkCmpKindKey", colors.add_fg },
+	{ "BlinkCmpKindNull", colors.mfed_2 },
+	{ "BlinkCmpKindEnumMember", colors.mfed_2 },
+	{ "BlinkCmpKindStruct", colors.mfed_2 },
+	{ "BlinkCmpKindEvent", colors.mfed_2 },
+	{ "BlinkCmpKindOperator", colors.mfed_2 },
+	{ "BlinkCmpKindTypeParameter", colors.mfed_2 },
+	{ "BlinkCmpKindUnit", colors.mfed_cyan },
 }
 
 local navic_config = {
@@ -498,19 +531,7 @@ local diagflow_config = {
 	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.yellow },
 	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
-	high,
 }
-
-local luasnip_config = {
-	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
-	-- { "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
-}
-
-for _, pair in pairs(luasnip_config) do
-	local hi_group = pair[1]
-	local hi_color = pair[2]
-	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
-end
 
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
@@ -529,7 +550,24 @@ local hl_group_configs = {
 	gpt_config,
 	diagflow_config,
 	md_config,
+	snacks_config,
+	cmp_config,
 }
+
+--- @class HlConfig
+--- @field fg string
+--- @field bg (string|nil)
+--- @field guicg? string
+
+--- @param group string
+--- @param M HlConfig
+--- @return nil
+local set_hl = function(group, M)
+	local bg = M.bg or nil
+	local guicg = M.guicg or nil
+
+	Group.new(group, M.fg, bg, guicg)
+end
 
 for _, config in ipairs(hl_group_configs) do
 	for _, l in ipairs(config) do

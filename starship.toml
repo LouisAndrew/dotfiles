@@ -12,9 +12,9 @@ $lua\
 $golang\
 $rust\
 $python\
-$shlvl\
 $jobs\
-$character"""
+$character\
+$vi_mode"""
 
 add_newline = false
 
@@ -35,12 +35,12 @@ ahead = " ${count} "
 behind = " ${count} "
 diverged = "  ${ahead_count}  ${behind_count} "
 untracked = " ${count} "
-stashed = " ${count}"
+stashed = " ${count} "
 modified = " ${count} "
 staged = " ${count} "
 renamed = " ${count} "
 deleted = " ${count} "
-style = "white"
+style = "bold white"
 format = " $all_status$ahead_behind"
 
 [python]
@@ -75,11 +75,10 @@ format = '- [lua@$version](blue) '
 [rust]
 format = "- [rust@$version]($style) "
 
-[shlvl]
-disabled = false
-style = "bright-blue"
-format = "\\[ [$shlvl]($style) \\] "
-
 [character]
 error_symbol = " [# ](white)"
 success_symbol = " [# ](white)"
+vimcmd_symbol = " [! ](gray)"
+vimcmd_replace_one_symbol = " [! ](bold green)"
+vimcmd_replace_symbol = " [! ](bold yellow)"
+vimcmd_visual_symbol = " [! ](bold purple)"

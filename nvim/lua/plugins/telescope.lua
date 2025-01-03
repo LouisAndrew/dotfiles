@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.4",
+	tag = "0.1.8",
 	dependencies = {
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
@@ -18,7 +18,6 @@ return {
 		local config = require("telescope.config")
 
 		local actions = require("telescope.actions")
-		local fb_actions = telescope.extensions.file_browser.actions
 
 		local function normalize_path(path)
 			return path:gsub("\\", "/")
@@ -85,19 +84,18 @@ return {
 
 		telescope.setup({
 			defaults = {
-				border = true,
+				-- border = "single",
 				mappings = default_maps,
 				path_display = path_display,
 				layout_strategy = "horizontal",
+				borderchars = {
+					prompt = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
+					results = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
+					preview = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
+				},
 				layout_config = {
 					horizontal = {
-						width = {
-							padding = 0,
-						},
-						height = {
-							padding = 0,
-						},
-						preview_width = 0.7,
+						preview_width = 0.6,
 					},
 				},
 				dynamic_preview_title = true,
@@ -147,6 +145,23 @@ return {
 		telescope.load_extension("undo")
 		telescope.load_extension("noice")
 
+		local backdrop = require("theme.backdrop")
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "TelescopePrompt",
+			callback = function(ctx)
+				local telescopeBufnr = ctx.buf
+				backdrop.show()
+
+				vim.api.nvim_create_autocmd({ "WinClosed", "BufLeave" }, {
+					once = true,
+					buffer = telescopeBufnr,
+					callback = function()
+						backdrop.hide()
+					end,
+				})
+			end,
+		})
+
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 		vim.keymap.set("n", "<C-o>", builtin.find_files, {})
 		-- find siblings
@@ -162,6 +177,7 @@ return {
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 		vim.keymap.set("n", "<leader>ph", builtin.help_tags, {})
+		vim.keymap.set("n", "<leader>pt", builtin.highlights, {})
 		vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})
 		vim.keymap.set("n", "<leader>pu", telescope.extensions.undo.undo, {})
 		vim.keymap.set("n", "<leader>pe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
@@ -169,5 +185,7 @@ return {
 		vim.keymap.set("n", "<leader>pn", function()
 			require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "Search for nvim-config" })
+
+		-- CONFIG
 	end,
 }

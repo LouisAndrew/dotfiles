@@ -1,11 +1,35 @@
 return {
 	{
 		"github/copilot.vim",
+		enabled = false,
 		lazy = false,
+	},
+
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					keymap = {
+						accept = "<M-l>",
+						next = "<M-j>",
+						prev = "<M-k>",
+						dismiss = "<M-h>",
+					},
+				},
+				filetypes = {
+					markdown = true,
+					snacks_input = false,
+				},
+			})
+		end,
 	},
 	{
 		{
 			"CopilotC-Nvim/CopilotChat.nvim",
+			branch = "main",
 			keys = {
 				{ "<leader>ac", "<cmd>:CopilotChat<CR>", mode = { "n", "v" } },
 				{

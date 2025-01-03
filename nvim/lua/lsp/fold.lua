@@ -1,14 +1,8 @@
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
+---@diagnostic disable: assign-type-mismatch
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 10
+vim.o.foldlevelstart = 10
 vim.o.foldenable = true
-
-vim.o.foldcolumn = "0"
-
-local ftMap = {
-	yaml = { "treesitter", "indent" },
-	json = { "treesitter", "indent" },
-	-- lua = { "treesitter", "indent" },
-}
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
@@ -40,6 +34,7 @@ end
 
 require("ufo").setup({
 	open_fold_hl_timeout = 150,
+	-- not working with TS provider
 	close_fold_kinds_for_ft = {
 		default = { "imports", "comment" },
 		json = { "array" },
@@ -58,13 +53,18 @@ require("ufo").setup({
 			jumpBot = "]",
 		},
 	},
-	provider_selector = function(bufnr, filetype, buftype)
-		return ftMap[filetype] or "lsp"
+	provider_selector = function()
+		return { "treesitter" }
 	end,
 	fold_virt_text_handler = handler,
 })
 
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeFoldsWith)
+
+vim.keymap.set("n", "z2", function()
+	require("ufo").closeFoldsWith(1)
+end)
+
 vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
 vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)

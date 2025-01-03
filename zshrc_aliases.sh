@@ -165,6 +165,7 @@ alias cte="EDITOR=nvim crontab -e"
 
 alias got="go test"
 alias pgpaste="$DOTFILES_PATH/pngpaste.sh"
+alias ai="aichat"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"

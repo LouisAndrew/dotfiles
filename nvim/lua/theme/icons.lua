@@ -45,4 +45,9 @@ return {
 	ArrowClosed = "",
 	Square = "",
 	Test = "",
+	TallVertLine = "│",
+	InfoCircle = "",
+	CircleCheck = "",
+	Circle = "",
+	Clippy = "",
 }

@@ -1,9 +1,13 @@
+local icons = require("theme.icons")
 local VAULT_PATH = os.getenv("VAULT_PATH")
 
 return {
 	{
 		"OXY2DEV/markview.nvim",
 		ft = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+		keys = {
+			{ "<leader>il", "<cmd>:Markview toggle<CR>" },
+		},
 		opts = {
 			filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 			headings = {
@@ -15,11 +19,13 @@ return {
 			checkboxes = {
 				enable = false,
 			},
+			---@type markview.conf.code_blocks
 			code_blocks = {
 				icons = "devicons",
-				style = "simple",
+				style = "block",
 				language_direction = "left",
 				sign = false,
+				pad_amount = 2,
 			},
 			inline_codes = {
 				hl = "MarkviewCodeInline",
@@ -43,6 +49,43 @@ return {
 					icon = " ",
 				},
 			},
+			block_quotes = {
+				default = {
+					border = icons.TallVertLine,
+				},
+				callouts = {
+					{
+						match_string = "NOTE",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.InfoCircle .. " Note",
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "TODO",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.CircleCheck .. " Todo",
+						title = true,
+						icon = icons.CircleCheck,
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "INFO",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.InfoCircle .. " Info",
+						custom_title = true,
+						icon = icons.CircleCheck,
+						border = icons.TallVertLine,
+					},
+					{
+						match_string = "TLDR",
+						hl = "MarkviewBlockQuoteNote",
+						preview = icons.Clippy .. " Tldr",
+						title = true,
+						icon = icons.Clippy,
+						border = icons.TallVertLine,
+					},
+				},
+			},
 		},
 	},
 	{
@@ -51,12 +94,13 @@ return {
 		ft = "markdown",
 		keys = {
 
-			{ "<leader>lo", "<cmd>:ObsidianOpen<cr>" },
-			{ "<leader>lf", "<cmd>:ObsidianQuickSwitch<cr>" },
-			{ "<leader>ls", "<cmd>:ObsidianSearch<cr>" },
+			{ "<leader>lO", "<cmd>:ObsidianOpen<cr>" },
+			{ "<leader>lo", "<cmd>:ObsidianQuickSwitch<cr>" },
+			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
 			{ "<leader>ln", ":ObsidianNew notes/" },
+			{ "<leader>ln", ":ObsidianExtractNote notes/", mode = "v" },
 			{ "<leader>lg", ":ObsidianLinkNew ", mode = "v" },
 			{ "<leader>lw", "<cmd>:ObsidianWorkspace<cr>" },
 			{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
@@ -70,119 +114,107 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"godlygeek/tabular",
-			{
-				"ellisonleao/glow.nvim",
-				cmd = "Glow",
-				config = function()
-					require("glow").setup({
-						path = "/opt/homebrew/bin/glow",
-						border = "rounded", -- floating window border config
-						style = "dark", -- filled automatically with your current editor background, you can override using glow json style
-						pager = false,
-						width = 150,
-						height = 300,
-						width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
-						height_ratio = 0.7,
-					})
-
-					vim.keymap.set("n", "<leader>lg", "<cmd>:Glow<cr>", { noremap = true, silent = true })
-				end,
-			},
 		},
 		config = function()
 			local colors = require("minimal_fedu")
 
-			require("obsidian").setup({
-				mappings = {
-					["gf"] = {
-						action = function()
-							return require("obsidian").util.gf_passthrough()
-						end,
-						opts = { noremap = false, expr = true, buffer = true },
+			require("obsidian").setup(
+				---@module 'obsidian'
+				---@type obsidian.config.ClientOpts
+				{
+					mappings = {
+						["gf"] = {
+							action = function()
+								return require("obsidian").util.gf_passthrough()
+							end,
+							opts = { noremap = false, expr = true, buffer = true },
+						},
 					},
-				},
-				picker = {
-					name = "telescope.nvim",
-					note_mappings = {
-						["<C-l>"] = "vsplit",
-						["<C-c>"] = "new",
+					picker = {
+						name = "telescope.nvim",
+						note_mappings = {
+							["<C-l>"] = "vsplit",
+							["<C-c>"] = "new",
+						},
+						tag_mappings = {
+							["<C-l>"] = "vsplit",
+							["<C-c>"] = "new",
+						},
 					},
-					tag_mappings = {
-						["<C-l>"] = "vsplit",
-						["<C-c>"] = "new",
+					ui = {
+						bullets = { char = "-", hl_group = "ObsidianBullet" },
+						reference_text = { hl_group = "ObsidianRefText" },
+						highlight_text = { hl_group = "ObsidianHighlightText" },
+						tags = { hl_group = "ObsTag" },
+						external_link_icon = {
+							char = "",
+							hl_group = "ObsidianExtLinkIcon",
+						},
+						checkboxes = {
+							[" "] = { char = icons.Circle, hl_group = "ObsidianTodo" },
+							["x"] = { char = icons.CircleCheck, hl_group = "ObsidianDone" },
+							[">"] = { char = "", hl_group = "ObsidianRightArrow" },
+							["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+						},
+						hl_groups = {
+							ObsidianRefText = { fg = colors.cyan },
+							ObsidianHighlightText = { fg = colors.debug },
+							ObsidianTag = { fg = colors.palette.blue_fg, bg = colors.palette.blue },
+							ObsidianExtLinkIcon = { fg = colors.navy },
+							ObsidianBullet = { bold = false, fg = colors.dimmed_white },
+						},
 					},
-				},
-				ui = {
-					bullets = { char = "-", hl_group = "ObsidianBullet" },
-					reference_text = { hl_group = "ObsidianRefText" },
-					highlight_text = { hl_group = "ObsidianHighlightText" },
-					tags = { hl_group = "ObsTag" },
-					external_link_icon = {
-						char = "",
-						hl_group = "ObsidianExtLinkIcon",
+					workspaces = {
+						{
+							name = "icloud",
+							path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
+						},
+						-- keeping this for backup for now
+						{
+							name = "personal",
+							path = "~/dev/documents",
+						},
 					},
-					checkboxes = {
-						[" "] = { char = "", hl_group = "ObsidianTodo" },
-						["x"] = { char = "", hl_group = "ObsidianDone" },
-						[">"] = { char = "", hl_group = "ObsidianRightArrow" },
-						["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+					open_app_foreground = true,
+					follow_url_func = function(url)
+						vim.fn.jobstart({ "open", url })
+					end,
+					attachments = {
+						img_folder = "imgs",
 					},
-					hl_groups = {
-						ObsidianRefText = { fg = colors.cyan },
-						ObsidianHighlightText = { fg = colors.debug },
-						ObsidianTag = { fg = colors.palette.blue_fg, bg = colors.palette.blue },
-						ObsidianExtLinkIcon = { fg = colors.navy },
-						ObsidianBullet = { bold = false, fg = colors.dimmed_white },
-					},
-				},
-				workspaces = {
-					{
-						name = "icloud",
-						path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
-					},
-					-- keeping this for backup for now
-					{
-						name = "personal",
-						path = "~/dev/documents",
-					},
-				},
-				open_app_foreground = true,
-				follow_url_func = function(url)
-					vim.fn.jobstart({ "open", url })
-				end,
-				attachments = {
-					img_folder = "imgs",
-				},
-				sort_by = "modified",
-				sort_reversed = true,
-				note_frontmatter_func = function(note)
-					local now = os.date("%d.%m.%Y")
-					local out =
-						{ id = note.id, aliases = note.aliases, tags = note.tags, created = now, modified = now }
+					sort_by = "modified",
+					sort_reversed = true,
+					note_frontmatter_func = function(note)
+						local now = os.date("%Y-%m-%d")
+						local out =
+							{ id = note.id, aliases = note.aliases, tags = note.tags, created = now, modified = now }
 
-					if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-						for k, v in pairs(note.metadata) do
-							out[k] = v
+						if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+							for k, v in pairs(note.metadata) do
+								out[k] = v
 
-							if k == "modified" then
-								out[k] = now
+								if k == "modified" then
+									out[k] = now
+								end
 							end
 						end
-					end
-					return out
-				end,
-				note_id_func = function(title)
-					local suffix = ""
-					if title ~= nil then
-						suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-					else
+
+						return out
+					end,
+					note_id_func = function(title)
+						local suffix = ""
+						if title ~= nil then
+							return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+						end
+
 						for _ = 1, 4 do
 							suffix = suffix .. string.char(math.random(65, 90))
 						end
-					end
-					return suffix
-				end,
-			})
+
+						return suffix
+					end,
+				}
+			)
 		end,
 	},
 	{

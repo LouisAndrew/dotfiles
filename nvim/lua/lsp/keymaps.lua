@@ -73,6 +73,26 @@ return {
 						})
 					end,
 				},
+				{
+					"[w",
+					function()
+						vim.diagnostic.jump({
+							count = -1,
+							float = diag_float_config,
+							severity = vim.diagnostic.severity.WARN,
+						})
+					end,
+				},
+				{
+					"]w",
+					function()
+						vim.diagnostic.jump({
+							count = 1,
+							float = diag_float_config,
+							severity = vim.diagnostic.severity.WARN,
+						})
+					end,
+				},
 				{ "<leader>ir", vim.lsp.buf.references },
 				{
 					"<leader>rl",

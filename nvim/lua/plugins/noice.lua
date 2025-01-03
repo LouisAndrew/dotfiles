@@ -7,7 +7,7 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
-	version = "4.4.7",
+	branch = "main",
 	config = function()
 		local noice = require("noice")
 		noice.setup({
@@ -130,6 +130,7 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 				signature = {
+					enabled = true,
 					auto_open = {
 						enabled = false,
 						trigger = false,

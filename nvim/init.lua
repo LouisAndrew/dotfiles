@@ -22,7 +22,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" } })
 require("keymaps")
-require("ui")
 
 vim.keymap.set("n", "<M-k>", "<C-w>+")
 

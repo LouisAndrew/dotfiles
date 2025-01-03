@@ -1,5 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_TMUX_AUTOSTART="true"
 
+plugins=(vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # # Env related
@@ -16,9 +18,7 @@ export STARSHIP_CONFIG="$DOTFILES_PATH/starship.toml"
 export ALIAS_FILE_PATH="$DOTFILES_PATH/zshrc_aliases.sh"
 export FS_CLI_CONFIG="~/.fs-cli.json"
 
-source $DOTFILES_PATH/vim.sh
 source $ALIAS_FILE_PATH
-
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -74,8 +74,8 @@ BG_COLOR_DARK="#0a0a0a"
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
-export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
-export EZA_COLORS="sc=0;$COLOR_CYAN:di=2;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
+export LS_COLORS=$LS_COLORS:"di=1;$COLOR_MAGENTA"; 
+export EZA_COLORS="sc=0;$COLOR_CYAN:di=0;30;45:bu=0;$COLOR_YELLOW"
 export MASON="/Users/louis.andrew/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
@@ -98,3 +98,43 @@ export FZF_CTRL_T_OPTS="
 export BAT_THEME="minimalfedu"
 
 source $DOTFILES_PATH/asdf.sh
+
+function ngowrapper() { ngo; }
+
+zle -N f
+zle -N rgf
+zle -N ngowrapper 
+bindkey '^o' f
+bindkey '^f' rgf
+bindkey '^g' ngowrapper 
+
+# tmux
+if [[ ! -n $TMUX  ]]; then
+  # Get the session IDs
+  session_ids="$(tmux list-sessions)"
+
+  # Create new session if no sessions exist
+  if [[ -z "$session_ids" ]]; then
+    tmux new-session
+  fi
+
+  # Select from following choices
+  #   - Attach existing session
+  #   - Create new session
+  #   - Start without tmux
+  create_new_session="Create new session"
+  start_without_tmux="Start without tmux"
+  choices="$session_ids\n${create_new_session}:\n${start_without_tmux}:"
+  choice="$(echo $choices | fzf | cut -d: -f1)"
+
+  if expr "$choice" : "[0-9]*$" >&/dev/null; then
+    # Attach existing session
+    tmux attach-session -t "$choice"
+  elif [[ "$choice" = "${create_new_session}" ]]; then
+    # Create new session
+    tmux new-session
+  elif [[ "$choice" = "${start_without_tmux}" ]]; then
+    # Start without tmux
+    :
+  fi
+fi

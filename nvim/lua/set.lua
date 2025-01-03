@@ -8,7 +8,7 @@ opt.iskeyword:append("-")
 vim.cmd("set noswapfile")
 
 vim.keymap.set("n", "<leader>pd", function()
-	local bufinfos = vim.fn.getbufinfo({ buflisted = true })
+	local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 	vim.tbl_map(function(bufinfo)
 		if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
 			-- vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
+		vim.cmd("syntax match MDDate /@\\d\\{4}-\\d\\{2}-\\d\\{2}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/ ")
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
@@ -45,6 +46,7 @@ local no_statuscol_filetypes = {
 	"DiffviewFiles",
 	"DiffviewFileHistory",
 	"Outline",
+	"oil",
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -108,7 +110,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.opt_local.relativenumber = false
 		vim.opt_local.statuscolumn = " "
-		-- vim.opt_local.nonumber = true
 
 		vim.keymap.set("n", "<C-l>", function()
 			print(require("CopilotChat").response())
@@ -121,7 +122,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
--- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "oil",
+	callback = function()
+		vim.opt_local.relativenumber = false
+		vim.opt_local.statuscolumn = " "
+	end,
+})
+
 vim.filetype.add({
 	extension = {
 		pcss = "scss",

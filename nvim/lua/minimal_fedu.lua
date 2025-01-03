@@ -10,6 +10,7 @@ local preset_config = {
 }
 
 local theme = "light"
+
 local preset = preset_config[theme]
 
 local red = "#431d1f"
@@ -27,7 +28,7 @@ local f = "#202020"
 local bg_shade = preset.shade
 local background = preset.bg
 
-local bg_accent_light = "#202020"
+local bg_accent_light = "#1a1a1a"
 -- local foreground = "#ffbb80"
 local foreground = "#ffcfa7"
 local debug = "#ff0000"
