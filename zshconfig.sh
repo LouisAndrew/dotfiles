@@ -102,11 +102,14 @@ source $DOTFILES_PATH/asdf.sh
 function ngowrapper() { ngo; }
 
 zle -N f
+zle -N fs
 zle -N rgf
 zle -N ngowrapper 
+
 bindkey '^o' f
 bindkey '^f' rgf
 bindkey '^g' ngowrapper 
+bindkey '^e' fs 
 
 # tmux
 if [[ ! -n $TMUX  ]]; then
