@@ -80,7 +80,12 @@ function f() {
   fd --type f --hidden --exclude .git | fzf $query \
     --preview='bat -n --color=always {}' | read filename
 
-  $editor $filename
+  if [ ! -z "$filename" ]; then
+    $editor $filename
+    return 0
+  fi
+  
+  return 1
 }
 
 function gchb() {
@@ -92,7 +97,7 @@ function gchb() {
 
 function e() {
   local filename=$1
-  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
+  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filenamefunc
 }
 
 function lsd() {

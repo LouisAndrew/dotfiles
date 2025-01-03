@@ -99,6 +99,15 @@ export BAT_THEME="minimalfedu"
 
 source $DOTFILES_PATH/asdf.sh
 
+function ngowrapper() { ngo; }
+
+zle -N f
+zle -N rgf
+zle -N ngowrapper 
+bindkey '^o' f
+bindkey '^f' rgf
+bindkey '^g' ngowrapper 
+
 # tmux
 if [[ ! -n $TMUX  ]]; then
   # Get the session IDs
