@@ -13,7 +13,8 @@ $golang\
 $rust\
 $python\
 $jobs\
-$character"""
+$character\
+$vi_mode"""
 
 add_newline = false
 
@@ -77,3 +78,7 @@ format = "- [rust@$version]($style) "
 [character]
 error_symbol = " [# ](white)"
 success_symbol = " [# ](white)"
+vimcmd_symbol = " [! ](gray)"
+vimcmd_replace_one_symbol = " [! ](bold green)"
+vimcmd_replace_symbol = " [! ](bold yellow)"
+vimcmd_visual_symbol = " [! ](bold purple)"

@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 10
 vim.o.foldlevelstart = 10
@@ -33,6 +34,7 @@ end
 
 require("ufo").setup({
 	open_fold_hl_timeout = 150,
+	-- not working with TS provider
 	close_fold_kinds_for_ft = {
 		default = { "imports", "comment" },
 		json = { "array" },
@@ -59,8 +61,10 @@ require("ufo").setup({
 
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeFoldsWith)
+
 vim.keymap.set("n", "z2", function()
 	require("ufo").closeFoldsWith(1)
 end)
+
 vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
 vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)

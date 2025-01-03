@@ -60,8 +60,6 @@ local M = {
 		{ "<C-n>", "<cmd>:bnext<cr>" },
 		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
 		-- Customs
-		{ "<S-j>", "}", "skip bracket" },
-		{ "<S-k>", "{", "skip bracket up" },
 		{ "<S-h>", "^", "start of line" },
 		{ "<S-l>", "$", "end of line" },
 		{ "'", "*", "next occurence" },
@@ -96,10 +94,10 @@ local M = {
 		-- ALT+L
 		{ "∆", require("smart-splits").resize_right },
 
-		{ "<C-h>", require("smart-splits").move_cursor_left },
-		{ "<C-j>", require("smart-splits").move_cursor_down },
-		{ "<C-k>", require("smart-splits").move_cursor_up },
-		{ "<C-l>", require("smart-splits").move_cursor_right },
+		{ "<C-h>", "<cmd>:SmartCursorMoveLeft<cr>" },
+		{ "<C-j>", "<cmd>:SmartCursorMoveDown<cr>" },
+		{ "<C-k>", "<cmd>:SmartCursorMoveUp<cr>" },
+		{ "<C-l>", "<cmd>:SmartCursorMoveRight<cr>" },
 
 		{ "å", "zh" },
 		{ "∂", "zl" },

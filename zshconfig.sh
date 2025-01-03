@@ -1,6 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_TMUX_AUTOSTART="true"
 
+plugins=(vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # # Env related
@@ -17,7 +18,6 @@ export STARSHIP_CONFIG="$DOTFILES_PATH/starship.toml"
 export ALIAS_FILE_PATH="$DOTFILES_PATH/zshrc_aliases.sh"
 export FS_CLI_CONFIG="~/.fs-cli.json"
 
-source $DOTFILES_PATH/vim.sh
 source $ALIAS_FILE_PATH
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
@@ -100,7 +100,6 @@ export BAT_THEME="minimalfedu"
 source $DOTFILES_PATH/asdf.sh
 
 # tmux
-#
 if [[ ! -n $TMUX  ]]; then
   # Get the session IDs
   session_ids="$(tmux list-sessions)"
