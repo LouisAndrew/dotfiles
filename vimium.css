@@ -1,250 +1,164 @@
-/* Original source: https://github.com/mxxjng/vimium-glass-theme/blob/main/stylesheet.css#L13. Modified */
-:root {
-  --font-size: 14;
-  --font-size-hints: 12;
-  --font-size-url: 12;
+/* #ui */
+/* ^ do not touch this line ^ */
+* {
+  font-family: "CommitMono", monospace !important;
+  font-weight: lighter;
+  font-size: 12px;
+  --fg: #212121;
+  --bg: #b4b4b4;
+  --border: #323232;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-  --font-weight: normal;
-  --font-weight-light: 200;
-  --font-weight-medium: medium;
-  --font-weight-bold: bold;
-
-  --font: CommitMono;
-
-  --padding: 2px;
-  --padding-vomnibar: 15px;
-  --shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
-  --blur: 40px;
-
-  /* -------- VOMNIBAR & HUD -------- */
-  --fg: #ffffff;
-  --fg-dark: #c9c9c9;
-  --fg-url: #84bffa;
-  --fg-match: #2165d9;
-
-  --bg: rgba(80, 80, 80, 0.7);
-  --bg-selected: rgba(150, 150, 150, 0.3);
-
-  --border: #464646;
-
-  /* -------- HINTS -------- */
-  --fg-hints: #d5d5d5;
-  /* Text color of link hints, (don't forget to change `#vimiumHintMarkerContainer div > .matchingCharacter ~ span`) */
+  --hud-bg: #212121;
+  --hud-fg: var(--bg);
 }
 
-/* --------------------------------- CSS --------------------------------- */
-
-/* -------- HINTS -------- */
-#vimiumHintMarkerContainer div.internalVimiumHintMarker,
-#vimiumHintMarkerContainer div.vimiumHintMarker {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow);
-  padding: 3px 4px;
-}
-
-#vimiumHintMarkerContainer div span {
-  color: var(--fg-hints);
-  font-family: var(--font);
-  font-size: var(--font-size-hints);
-  font-weight: var(--font-weight-light);
-  text-shadow: none;
-}
-
-#vimiumHintMarkerContainer div>.matchingCharacter {
-  opacity: 0.3;
-}
-
-#vimiumHintMarkerContainer div>.matchingCharacter~span {
-  color: var(--fg-hints);
-}
-
-/* -------- VOMNIBAR -------- */
-#vomnibar {
-  background: var(--bg);
-  backdrop-filter: blur(var(--blur));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  border-radius: 15px;
-  overflow: hidden;
-  left: 50%;
-  margin-left: -400px;
-  max-width: 800px;
-}
-
-#vomnibar .vomnibarSearchArea,
-#vomnibar input {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+.D .LH {
   color: var(--fg);
-  font-family: var(--font);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
+  border: 1px solid var(--nborder);
+  background: var(--bg);
+  box-shadow: var(--shadow);
 }
 
-#vomnibar .vomnibarSearchArea {
-  padding: 8px 15px;
+.m {
+  color: red !important;
+}
+
+.D .MC {
+  color: #616ad6;
+}
+
+.Sel {
+  box-shadow: none;
+  border: 1px solid #818cf8;
+  height: calc(100%-5px) !important;
+  width: calc(100%-5px) !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* bottom hud */
+.HUD {
+  /* bottom: 1rem; */
+  /* right: 1rem; */
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 100vw !important;
   border-radius: 6px;
+  padding: 0.5rem 1rem;
+  height: 1.5rem !important;
+  color: var(--hud-fg) !important;
+  min-width: unset;
+  line-height: 21px;
+  border: 3px var(--hud-bg) solid;
+  display: flex;
+  align-items: center;
+  background: var(--hud-bg) !important;
 }
 
-#vomnibar input {
+.HUD.UI {
+  min-width: 180px;
+  align-items: unset;
+}
+
+.Omnibar {
+  padding-bottom: 20px;
+}
+
+.HUD:after {
+  border-radius: unset;
   border: none;
-  padding: var(--padding);
 }
 
-.vomnibarNoInsertText {
+/* #omni */
+/* ^ do not touch this line ^ */
+
+* {
+  font-family: "CommitMono", monospace !important;
+  --hud-bg: #212121;
+  --hud-fg: #b4b4b4;
+}
+
+.transparent {
+  opacity: 1;
+}
+
+#bar {
+  background: var(--hud-bg);
+  color: var(--hud-fg);
+}
+
+#input {
+  border: none;
+  background: none;
+  box-shadow: unset;
+  font-size: 16px;
+  color: var(--hud-fg);
+}
+
+#toolbar {
   display: none;
 }
 
-#vomnibar ul {
-  background: transparent;
-  border-top: 1px solid var(--border);
-  margin: 0;
-  padding: var(--padding-vomnibar);
+#list {
+  background: var(--hud-bg);
 }
 
-#vomnibar li {
-  border-bottom: none;
-  padding: 15px;
+.bottom {
+  margin-left: 0 !important;
 }
 
-#vomnibar li .vomnibarTopHalf {
-  padding: var(--padding);
+/* #find:host */
+::selection {
+  background: #a5b4fc !important;
+  border: 2px solid #a5b4fc !important;
+  color: black !important;
 }
 
-#vomnibar li .vomnibarBottomHalf {
-  padding-top: 0px;
-  padding-bottom: 1px;
+/* #find:selection */
+::selection {
+  background: #a5b4fc !important;
+  border: 2px solid #a5b4fc !important;
+  color: black !important;
 }
 
-#vomnibar li .vomnibarSource {
-  color: var(--fg-dark);
-  font-family: var(--font);
-  font-size: 12;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  /* `.vomnibarSource` will be in all uppercase letters. Delete to revert to original */
+/* #find */
+/* ^ do not touch this line ^ */
+
+* {
+  font-family: "CommitMono", monospace !important;
+  background: unset;
+  --find-fg: #b4b4b4;
 }
 
-#vomnibar li em,
-#vomnibar li .vomnibarTitle {
-  color: var(--fg);
-  font-family: var(--font);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight-medium);
+:host,
+body {
+  background-color: unset !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-#vomnibar li .vomnibarUrl {
-  color: var(--fg-url);
-  font-family: var(--font);
-  font-size: var(--font-size-url);
-  font-weight: var(--font-weight-medium);
+:host(.D),
+body.D {
+  background-color: unset !important;
 }
 
-#vomnibar li .vomnibarMatch {
-  color: var(--fg-match);
-  font-weight: normal;
-}
-
-#vomnibar li .vomnibarTitle .vomnibarMatch {
-  color: var(--fg);
-  font-weight: bold;
-}
-
-#vomnibar li.vomnibarSelected {
-  background-color: var(--bg-selected);
-  backdrop-filter: blur(20px);
-  border-radius: 8px;
-}
-
-#vomnibar li.vomnibarSelected .vomnibarUrl {
-  /* Changes '.vomnibarURL' to '--fg-match' when selected */
-  color: var(--fg-url);
-}
-
-#vomnibar li.vomnibarSelected .vomnibarMatch {
-  /* Changes '.vomnibarMatch' to '--fg' when selected */
-  color: var(--fg);
-}
-
-/* -------- HUD -------- */
-div.vimiumHUD {
-  background: var(--bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  border-radius: 6px;
-}
-
-div.vimiumHUD span#hud-find-input,
-div.vimiumHUD .vimiumHUDSearchAreaInner {
-  color: var(--fg);
-  font-family: var(--font);
-  font-size: 13;
-  font-weight: var(--font-weight-medium);
-}
-
-div.vimiumHUD .hud-find {
-  background-color: transparent;
+.r {
   border: none;
+  border-radius: unset;
+  box-shadow: unset;
+  background: unset;
+  height: 1.5rem;
+  width: max-content;
 }
 
-div.vimiumHUD .vimiumHUDSearchArea {
-  background-color: transparent;
-  padding: 6px;
+.r.D {
+  background: unset;
+  color: var(--find-fg);
 }
 
-/* -------- HELP DIALOG -------- */
-div#vimiumHelpDialogContainer {
-  background-color: transparent !important;
-  border: none !important;
-}
-
-div#vimiumHelpDialog {
-  background: var(--bg);
-  backdrop-filter: blur(var(--blur));
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  font-family: var(--font);
-  font-size: var(--font-size);
-  padding: 15px 10px !important;
-}
-
-span#vimiumTitle {
-  color: var(--fg);
-}
-
-a:link.vimiumHelDialogLink,
-a:visited.vimiumHelDialogLink,
-a:hover.vimiumHelDialogLink,
-a:active.vimiumHelDialogLink,
-a#toggleAdvancedCommands {
-  color: var(--fg-url);
-  font-family: var(--font);
-  font-size: var(--font-size);
-}
-
-span.vimiumHelpDialogKey {
-  background-color: var(--bg-hints);
-  border: 1px solid var(--border-hints);
-  box-shadow: var(--shadow);
-  padding: 2px 3px;
-  color: var(--fg-hints);
-  font-family: var(--font);
-  font-size: var(--font-size-hints);
-  font-weight: var(--font-weight-bold);
-  text-shadow: none;
-}
-
-td.vimiumHelpSectionTitle,
-td.vimiumHelpDescription {
-  color: var(--fg);
-  font-family: var(--font);
-}
-
-div.vimiumColumn {
-  color: var(--fg);
-  font-family: var(--font);
+.r.D {
+  width: 97%;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
 }
