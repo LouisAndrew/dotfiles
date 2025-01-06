@@ -2,7 +2,7 @@ local icons = require("theme.icons")
 
 return {
 	"VonHeikemen/lsp-zero.nvim",
-	event = "BufEnter",
+	event = { "BufEnter", "BufWinEnter" },
 	branch = "v4.x",
 	dependencies = {
 		"williamboman/mason.nvim",

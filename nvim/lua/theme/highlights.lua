@@ -385,7 +385,7 @@ local md_config = {
 	{ "RenderMarkdownLink", colors.mfed_navy, nil },
 	{ "MarkviewHyperlink", colors.mfed_navy },
 	{ "MarkviewImageLink", colors.mfed_navy },
-	{ "MarkviewBlockQuoteDefault", colors.mfed_cyan },
+	{ "MarkviewBlockQuoteDefault", colors.indigo_fg },
 	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.mfed_0 },
 	{ "@markup.link", colors.mfed_0 },
@@ -393,6 +393,7 @@ local md_config = {
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
+	{ "MarkviewBlockQuoteNote", colors.indigo_fg },
 }
 
 local dap_config = {

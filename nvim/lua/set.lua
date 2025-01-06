@@ -1,9 +1,6 @@
 local config = require("config")
 local opt = vim.opt
 
-for key, value in pairs(config) do
-	opt[key] = value
-end
 opt.iskeyword:append("-")
 vim.cmd("set noswapfile")
 
@@ -139,3 +136,7 @@ vim.filetype.add({
 })
 
 vim.treesitter.language.register("markdown", "codecompanion")
+
+for key, value in pairs(config) do
+	opt[key] = value
+end

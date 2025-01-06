@@ -51,6 +51,12 @@ local M = {
 		{ "<leader>tt", create_spec },
 		{ "<leader>s", "<cmd>:w<cr>" },
 		{ "<leader>nr", ":so $MYVIMRC", "reload vimrc" },
+		{
+			"<leader>rc",
+			function()
+				vim.opt.statuscolumn = require("config").statuscolumn
+			end,
+		},
 
 		{ "<leader>tw", "<cmd>:tabclose<cr>" },
 		{ "<leader>q", "<cmd>:wqa<cr>" },

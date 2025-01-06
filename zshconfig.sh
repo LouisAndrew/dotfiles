@@ -100,16 +100,31 @@ export BAT_THEME="minimalfedu"
 source $DOTFILES_PATH/asdf.sh
 
 function ngowrapper() { ngo; }
+function tlt() {
+  tmux split-window -v -p 25
+  tmux split-window -h 
+  tmux select-pane -U
+  
+  tmux 
+
+  f
+}
+
+function m() {
+  nvim -c ObsidianQuickSwitch
+}
 
 zle -N f
 zle -N fs
 zle -N rgf
 zle -N ngowrapper 
+zle -N m
 
 bindkey '^o' f
 bindkey '^f' rgf
 bindkey '^g' ngowrapper 
 bindkey '^e' fs 
+bindkey '^u' m
 
 # tmux
 if [[ ! -n $TMUX  ]]; then

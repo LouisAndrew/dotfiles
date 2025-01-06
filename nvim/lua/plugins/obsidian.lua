@@ -90,7 +90,7 @@ return {
 	},
 	{
 		"epwalsh/obsidian.nvim",
-		lazy = true,
+		lazy = false,
 		ft = "markdown",
 		keys = {
 
@@ -99,8 +99,8 @@ return {
 			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
-			{ "<leader>ln", ":ObsidianNew notes/" },
-			{ "<leader>ln", ":ObsidianExtractNote notes/", mode = "v" },
+			{ "<leader>ln", ":ObsidianNew" },
+			{ "<leader>ln", ":ObsidianExtractNote", mode = "v" },
 			{ "<leader>lg", ":ObsidianLinkNew ", mode = "v" },
 			{ "<leader>lw", "<cmd>:ObsidianWorkspace<cr>" },
 			{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
@@ -122,6 +122,7 @@ return {
 				---@module 'obsidian'
 				---@type obsidian.config.ClientOpts
 				{
+					notes_subdir = "notes",
 					mappings = {
 						["gf"] = {
 							action = function()
@@ -212,6 +213,11 @@ return {
 						end
 
 						return suffix
+					end,
+					note_path_func = function(spec)
+						local title_lowercased = spec.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+						-- This is equivalent to the default behavior.
+						return title_lowercased .. ".md"
 					end,
 				}
 			)

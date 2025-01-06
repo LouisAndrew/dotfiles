@@ -11,6 +11,7 @@ alias ngo="nvim -c DiffviewOpen"
 alias ngd="nvim -c 'DiffviewOpen main'"
 alias ngl="nvim -c DiffviewFileHistory"
 alias nconfig="$EDITOR $HOME/.config/nvim"
+alias t="tmux"
 
 alias ll="ls -la"
 alias gh-cpr="gh pr create -w"
