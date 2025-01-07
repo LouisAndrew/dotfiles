@@ -176,3 +176,21 @@ function loadenv() {
     fi
   done
 }
+
+function ngowrapper() { ngo; }
+function tlt() {
+  tmux split-window -v -p 25
+  tmux split-window -h 
+  tmux select-pane -U
+  
+  tmux 
+
+  f
+}
+
+function m() {
+  nvim -c ObsidianQuickSwitch
+}
+function on() {
+  nvim -c ObsidianNew "$@"
+}
