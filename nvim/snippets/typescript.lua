@@ -3,6 +3,7 @@ local utils = require("utils")
 local s = ls.snippet
 local fmt = require("luasnip.extras.fmt").fmt
 local i = ls.insert_node
+local t = ls.text_node
 
 local f = ls.function_node
 local c = ls.choice_node
@@ -45,12 +46,26 @@ return {
 
 	s(
 		"arf",
-		fmt("({ar})=> {{ {body} }}", {
+		fmt("({ar}) => {body}", {
 			ar = c(1, {
 				sn(nil, fmt("{{ {} }}", { i(1) })),
 				sn(nil, fmt("{}", { i(1) })),
 			}),
-			body = i(2),
+			body = c(2, {
+				sn(nil, fmt("{}", i(1))),
+				sn(nil, fmt("{{ {} }}", i(1))),
+			}),
+		})
+	),
+	s(
+		"fn",
+		fmt("{declaration}({ar}) {{ {body} }}", {
+			declaration = c(1, {
+				sn(nil, t("function")),
+				sn(nil, t("async function")),
+			}),
+			ar = i(2),
+			body = i(3),
 		})
 	),
 }

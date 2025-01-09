@@ -93,7 +93,6 @@ return {
 		lazy = false,
 		ft = "markdown",
 		keys = {
-
 			{ "<leader>lO", "<cmd>:ObsidianOpen<cr>" },
 			{ "<leader>lo", "<cmd>:ObsidianQuickSwitch<cr>" },
 			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
@@ -109,6 +108,25 @@ return {
 				"<leader>lq",
 				":e " .. VAULT_PATH .. "/todos.md<CR>",
 				{ expr = true },
+			},
+			{
+				"<leader>la",
+				function()
+					local filename = vim.fn.expand("%:t:r")
+					local name = filename:gsub("%.%w+$", "")
+
+					name = name:gsub("[_-]", " ")
+					name = name:gsub("(%w)(%w*)", function(first, rest)
+						return first:upper() .. rest:lower()
+					end)
+
+					local pos = vim.api.nvim_win_get_cursor(0)
+					local row = pos[1] - 1 -- Convert to 0-based index
+					local col = pos[2]
+
+					-- Insert the title at cursor position
+					vim.api.nvim_buf_set_text(0, row, col, row, col, { "# " .. name })
+				end,
 			},
 		},
 		dependencies = {

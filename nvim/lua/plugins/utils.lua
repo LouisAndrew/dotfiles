@@ -1,5 +1,16 @@
 return {
 	{
+		"rmagatti/auto-session",
+		lazy = false,
+
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "/" },
+		},
+	},
+	{
 		"NvChad/nvim-colorizer.lua",
 		event = "BufRead",
 		config = function()
@@ -31,6 +42,11 @@ return {
 		keys = {
 			"ga", -- Default invocation prefix
 			{ "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
+			{
+				"gac",
+				":lua require('textcase').current_word('to_camel_case')<CR>",
+				mode = { "n", "x" },
+			},
 		},
 		cmd = {
 			"TextCaseOpenTelescope",

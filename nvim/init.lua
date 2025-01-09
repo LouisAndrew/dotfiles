@@ -7,6 +7,7 @@ vim.opt.clipboard = "unnamedplus"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
+---@diagnostic disable-next-line: undefined-field
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -31,3 +32,10 @@ vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
 vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
 
 vim.g.ENABLE_AUTOFORMAT = "true"
+
+local opt = vim.opt
+local config = require("config")
+for key, value in pairs(config) do
+	-- Important?
+	opt[key] = value
+end

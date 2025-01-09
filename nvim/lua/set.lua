@@ -37,6 +37,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "'leetcode\\.nvim'" },
+	group = md_group,
+	callback = function()
+		print("leetcode!")
+	end,
+})
+
 local has_value = require("utils").has_value
 -- Disable diff and numlines for certain filetypes
 local no_statuscol_filetypes = {
@@ -136,7 +144,3 @@ vim.filetype.add({
 })
 
 vim.treesitter.language.register("markdown", "codecompanion")
-
-for key, value in pairs(config) do
-	opt[key] = value
-end
