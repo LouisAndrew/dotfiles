@@ -47,6 +47,11 @@ return {
 				":lua require('textcase').current_word('to_camel_case')<CR>",
 				mode = { "n", "x" },
 			},
+			{
+				"gat",
+				":lua require('textcase').current_word('to_title_case')<CR>",
+				mode = { "n", "x" },
+			},
 		},
 		cmd = {
 			"TextCaseOpenTelescope",

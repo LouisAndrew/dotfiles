@@ -1,10 +1,12 @@
-local leet_arg = "lc"
+local utils = require("utils")
 
 return {
 	"kawre/leetcode.nvim",
-	lazy = leet_arg ~= vim.fn.argv(0, -1),
+	lazy = utils.CONST.leet_arg ~= vim.fn.argv(0, -1),
+	---@module 'leetcode'
+	---@type lc.LeetCode
 	opts = {
-		arg = leet_arg,
+		arg = utils.CONST.leet_arg,
 		hooks = {
 			["enter"] = {
 				function()
@@ -17,5 +19,6 @@ return {
 				end,
 			},
 		},
+		lang = "typescript",
 	},
 }

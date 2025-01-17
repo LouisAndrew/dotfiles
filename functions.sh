@@ -140,6 +140,7 @@ function fs() {
   fi
 
   cd $DEV_HOME/$scope/$project
+  echo "hh"
 }
 
 alias gco="git branch -a | fzf | sed 's/\*//' | sed 's/remotes\/origin\///' | xargs git checkout"

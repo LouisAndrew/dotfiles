@@ -50,9 +50,8 @@ local M = {
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
 		{ "<leader>s", "<cmd>:w<cr>" },
-		{ "<leader>nr", ":so $MYVIMRC", "reload vimrc" },
 		{
-			"<leader>rc",
+			"<S-u>",
 			function()
 				vim.opt.statuscolumn = require("config").statuscolumn
 			end,
@@ -83,11 +82,6 @@ local M = {
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
 		{ "<C-w>P", "<cmd>vertical resize 40<CR>" },
 		{ "<C-w>O", "<cmd>vertical resize 160<CR>" },
-		-- { "æ", "<C-w>=" },
-		-- line numbers
-
-		-- { "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true }  },
-		-- { "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true }  },
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 

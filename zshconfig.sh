@@ -45,11 +45,14 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export GOPATH="$HOME/go"
+
+source $DOTFILES_PATH/asdf.sh
+
+export GOBIN=`go env GOBIN`
 # export PATH="$BUN_INSTALL/bin:$PATH"autoload -U compinit; compinit
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
-PATH="$GOPATH/bin:$PATH"
+# PATH="$GOBIN:$PATH"
 export PATH
 # Add it to your shell init files
 [[ -d /Applications/WezTerm.app/Contents/MacOS ]] && export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
@@ -97,7 +100,6 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export BAT_THEME="minimalfedu"
 
-source $DOTFILES_PATH/asdf.sh
 
 zle -N f
 zle -N fs

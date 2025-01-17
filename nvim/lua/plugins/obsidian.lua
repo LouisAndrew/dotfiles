@@ -113,12 +113,7 @@ return {
 				"<leader>la",
 				function()
 					local filename = vim.fn.expand("%:t:r")
-					local name = filename:gsub("%.%w+$", "")
-
-					name = name:gsub("[_-]", " ")
-					name = name:gsub("(%w)(%w*)", function(first, rest)
-						return first:upper() .. rest:lower()
-					end)
+					local name = require("textcase").api.to_title_case(filename)
 
 					local pos = vim.api.nvim_win_get_cursor(0)
 					local row = pos[1] - 1 -- Convert to 0-based index

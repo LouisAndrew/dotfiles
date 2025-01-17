@@ -132,6 +132,7 @@ U.CONST = {
 	truthy = 1,
 	falsy = 0,
 	emptyString = "",
+	leet_arg = "lc",
 }
 
 function U.paste()

@@ -48,12 +48,12 @@ return {
 		"arf",
 		fmt("({ar}) => {body}", {
 			ar = c(1, {
-				sn(nil, fmt("{{ {} }}", { i(1) })),
 				sn(nil, fmt("{}", { i(1) })),
+				sn(nil, fmt("{{ {} }}", { i(1) })),
 			}),
 			body = c(2, {
-				sn(nil, fmt("{}", i(1))),
 				sn(nil, fmt("{{ {} }}", i(1))),
+				sn(nil, fmt("{}", i(1))),
 			}),
 		})
 	),
@@ -66,6 +66,18 @@ return {
 			}),
 			ar = i(2),
 			body = i(3),
+		})
+	),
+
+	s(
+		"fl",
+		fmt("for {loop} {{ {body} }}", {
+			loop = c(1, {
+				sn(nil, fmt("(let i = 0; i < {length}; i++)", { length = i(1) })),
+				sn(nil, fmt("(let i = {length}; i >= 0; i--)", { length = i(1) })),
+				sn(nil, fmt("({variable} of {iterable})", { variable = i(1), iterable = i(2) })),
+			}),
+			body = i(2),
 		})
 	),
 }

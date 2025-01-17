@@ -1,14 +1,16 @@
+local utils = require("utils")
+local enable_copilot = utils.CONST.leet_arg ~= vim.fn.argv(0, -1)
+
 return {
 	{
 		"github/copilot.vim",
 		enabled = false,
 		lazy = false,
 	},
-
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = "InsertEnter",
+		event = enable_copilot and "InsertEnter" or {},
 		config = function()
 			require("copilot").setup({
 				suggestion = {
