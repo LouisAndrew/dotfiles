@@ -50,7 +50,7 @@ Group.new("Folded", colors.noir_9, nil)
 Group.new("UfoFoldVirtualText", colors.mfed_6)
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
-Group.new("FoldColumn", colors.mfed_8)
+Group.new("FoldColumn", colors.mfed_7:dark())
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)

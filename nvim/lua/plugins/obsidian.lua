@@ -4,7 +4,7 @@ local VAULT_PATH = os.getenv("VAULT_PATH")
 return {
 	{
 		"OXY2DEV/markview.nvim",
-		ft = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+		lazy = false,
 		keys = {
 			{ "<leader>il", "<cmd>:Markview toggle<CR>" },
 		},

@@ -82,6 +82,7 @@ local M = {
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
 		{ "<C-w>P", "<cmd>vertical resize 40<CR>" },
 		{ "<C-w>O", "<cmd>vertical resize 160<CR>" },
+		{ "<C-w>I", "<cmd>vertical resize 100<CR>" },
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 

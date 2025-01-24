@@ -192,7 +192,6 @@ return {
 			"CodeCompanionChat",
 			"CodeCompanionToggle",
 			"CodeCompanionActions",
-
 			"CodeCompanionAdd",
 		},
 		keys = {
@@ -203,7 +202,20 @@ return {
 			{ "<leader>an", "<cmd>:CodeCompanionAdd<CR>" },
 		},
 		config = true,
+		---@module 'CodeCompanion'
 		opts = {
+			display = {
+				chat = {
+					window = {
+						width = 0.3,
+					},
+					---@param tokens number
+					---@param adapter CodeCompanion.Adapter
+					token_count = function(tokens, adapter)
+						return " [ " .. tokens .. "@" .. adapter.name .. " ]"
+					end,
+				},
+			},
 			strategies = {
 				chat = {
 					adapter = "anthropic",
@@ -221,6 +233,7 @@ return {
 					},
 				},
 				inline = {
+
 					adapter = "copilot",
 				},
 			},
