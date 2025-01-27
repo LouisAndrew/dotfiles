@@ -10,7 +10,7 @@ function cmto() {
 function cm() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3"
+ gcm "$1($2): $3" ${@:5}
 }
 
 function mcm() {
@@ -22,7 +22,7 @@ function mcm() {
 function mcmo() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3 ($ticket_number)"
+ gcm "$1($2): $3 ($ticket_number)" 
 }
 
 function mcm:nt() {
@@ -192,6 +192,11 @@ function tlt() {
 function m() {
   nvim -c ObsidianQuickSwitch
 }
+
 function on() {
   nvim -c ObsidianNew "$@"
+}
+
+function qn() {
+  nvim $COMMONPLACE
 }

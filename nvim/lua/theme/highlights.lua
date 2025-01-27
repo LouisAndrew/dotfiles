@@ -526,12 +526,18 @@ local gpt_config = {
 	},
 }
 
-local diagflow_config = {
-	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.remove },
-	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.yellow:dark() },
-	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.yellow },
+local diagnostic_config = {
+	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.bg_shade },
+	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.bg_shade },
+	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.bg_shade },
 	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
+}
+
+local flash_config = {
+	{ "FlashMatch", colors.indigo_fg },
+	{ "FlashCurrent", colors.indigo_fg },
+	{ "FlashLabel", colors.primary },
 }
 
 for _, lvl in ipairs(level) do
@@ -549,10 +555,11 @@ local hl_group_configs = {
 	noice_config,
 	navic_config,
 	gpt_config,
-	diagflow_config,
 	md_config,
 	snacks_config,
 	cmp_config,
+	flash_config,
+	diagnostic_config,
 }
 
 --- @class HlConfig

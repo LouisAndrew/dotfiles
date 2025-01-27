@@ -2,8 +2,8 @@ local keymaps = require("keymaps")
 local diag_float_config = {
 	severity_sort = true,
 	source = true,
-	prefix = "",
-	suffix = "",
+	prefix = { " ", "NoiceHoverNormal" },
+	suffix = { " ", "NoiceHoverNormal" },
 	header = "",
 }
 

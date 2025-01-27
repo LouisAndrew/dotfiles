@@ -1,5 +1,6 @@
 local icons = require("theme.icons")
 local VAULT_PATH = os.getenv("VAULT_PATH")
+local COMMONPLACE = os.getenv("COMMONPLACE")
 
 return {
 	{
@@ -95,6 +96,7 @@ return {
 		keys = {
 			{ "<leader>lO", "<cmd>:ObsidianOpen<cr>" },
 			{ "<leader>lo", "<cmd>:ObsidianQuickSwitch<cr>" },
+			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
 			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
@@ -106,7 +108,12 @@ return {
 			{ "<leader>lt", "<cmd>:ObsidianTags<CR>" },
 			{
 				"<leader>lq",
-				":e " .. VAULT_PATH .. "/todos.md<CR>",
+				":e " .. COMMONPLACE .. "<cr>",
+				{ expr = true },
+			},
+			{
+				"<C-q>",
+				":e " .. COMMONPLACE .. "<cr>",
 				{ expr = true },
 			},
 			{

@@ -18,3 +18,4 @@ km="louisandrew"
 
 export KB="$kb_basepath/rev7"
 export KM="keyboards/$kb_basepath/keymaps/$km"
+export COMMONPLACE="$VAULT_PATH/todos.md"

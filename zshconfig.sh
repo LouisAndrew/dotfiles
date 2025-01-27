@@ -100,18 +100,19 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export BAT_THEME="minimalfedu"
 
-
 zle -N f
 zle -N fs
 zle -N rgf
 zle -N ngowrapper 
 zle -N m
+zle -N qn
 
 bindkey '^o' f
 bindkey '^f' rgf
 bindkey '^g' ngowrapper 
 bindkey '^e' fs 
-bindkey '^u' m
+bindkey '^a' m
+bindkey '^q' qn
 
 # tmux
 source $DOTFILES_PATH/tmux.sh
