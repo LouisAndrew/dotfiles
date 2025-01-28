@@ -1,6 +1,6 @@
 function cmo() {
   echo "Committing without end-parantheses"
-  gcm "$1($2): $3"
+  gcm "$1($2): $3" ${@:4}
 }
 
 function cmto() {
@@ -10,7 +10,7 @@ function cmto() {
 function cm() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3" ${@:5}
+ gcm "$1($2): $3 ($ticket_number)" ${@:5}
 }
 
 function mcm() {
@@ -199,4 +199,8 @@ function on() {
 
 function qn() {
   nvim $COMMONPLACE
+}
+
+function grep_notes() {
+  nvim -c ObsidianSearch
 }

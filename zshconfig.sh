@@ -106,6 +106,7 @@ zle -N rgf
 zle -N ngowrapper 
 zle -N m
 zle -N qn
+zle -N grep_notes
 
 bindkey '^o' f
 bindkey '^f' rgf
@@ -113,6 +114,7 @@ bindkey '^g' ngowrapper
 bindkey '^e' fs 
 bindkey '^a' m
 bindkey '^q' qn
+bindkey '^v' grep_notes
 
 # tmux
 source $DOTFILES_PATH/tmux.sh

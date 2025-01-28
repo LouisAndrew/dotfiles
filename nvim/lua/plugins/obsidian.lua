@@ -1,5 +1,4 @@
 local icons = require("theme.icons")
-local VAULT_PATH = os.getenv("VAULT_PATH")
 local COMMONPLACE = os.getenv("COMMONPLACE")
 
 return {
@@ -96,7 +95,6 @@ return {
 		keys = {
 			{ "<leader>lO", "<cmd>:ObsidianOpen<cr>" },
 			{ "<leader>lo", "<cmd>:ObsidianQuickSwitch<cr>" },
-			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
 			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
@@ -111,6 +109,9 @@ return {
 				":e " .. COMMONPLACE .. "<cr>",
 				{ expr = true },
 			},
+
+			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
+			{ "<C-v>", "<cmd>:ObsidianSearch<cr>" },
 			{
 				"<C-q>",
 				":e " .. COMMONPLACE .. "<cr>",
@@ -217,6 +218,10 @@ return {
 								if k == "modified" then
 									out[k] = now
 								end
+							end
+
+							if string.find(note.path.filename, "scratchbook") and note.metadata["status"] == nil then
+								out["status"] = 0
 							end
 						end
 

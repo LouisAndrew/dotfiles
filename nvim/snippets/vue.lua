@@ -115,4 +115,45 @@ return {
 			}),
 		})
 	),
+
+	s(
+		"arf",
+		fmt("{async}({ar}) => {body}", {
+			async = c(1, {
+				sn(nil, fmt("{}", { i(1) })),
+				sn(nil, fmt("async {}", { i(1) })),
+			}),
+			ar = c(2, {
+				sn(nil, fmt("{}", { i(1) })),
+				sn(nil, fmt("{{ {} }}", { i(1) })),
+			}),
+			body = c(3, {
+				sn(nil, fmt("{{ {} }}", i(1))),
+				sn(nil, fmt("{}", i(1))),
+			}),
+		})
+	),
+	s(
+		"fn",
+		fmt("{declaration}({ar}) {{ {body} }}", {
+			declaration = c(1, {
+				sn(nil, t("function")),
+				sn(nil, t("async function")),
+			}),
+			ar = i(2),
+			body = i(3),
+		})
+	),
+
+	s(
+		"fl",
+		fmt("for {loop} {{ {body} }}", {
+			loop = c(1, {
+				sn(nil, fmt("(let i = 0; i < {length}; i++)", { length = i(1) })),
+				sn(nil, fmt("(let i = {length}; i >= 0; i--)", { length = i(1) })),
+				sn(nil, fmt("({variable} of {iterable})", { variable = i(1), iterable = i(2) })),
+			}),
+			body = i(2),
+		})
+	),
 }

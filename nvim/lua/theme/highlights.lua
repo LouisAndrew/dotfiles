@@ -537,7 +537,7 @@ local diagnostic_config = {
 local flash_config = {
 	{ "FlashMatch", colors.indigo_fg },
 	{ "FlashCurrent", colors.indigo_fg },
-	{ "FlashLabel", colors.primary },
+	{ "FlashLabel", colors.indigo_fg, colors.indigo },
 }
 
 for _, lvl in ipairs(level) do
