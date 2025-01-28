@@ -96,7 +96,6 @@ return {
 		keys = {
 			{ "<leader>lO", "<cmd>:ObsidianOpen<cr>" },
 			{ "<leader>lo", "<cmd>:ObsidianQuickSwitch<cr>" },
-			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
 			{ "<leader>lf", "<cmd>:ObsidianSearch<cr>" },
 			{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 			{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
@@ -111,6 +110,9 @@ return {
 				":e " .. COMMONPLACE .. "<cr>",
 				{ expr = true },
 			},
+
+			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
+			{ "<C-v>", "<cmd>:ObsidianSearch<cr>" },
 			{
 				"<C-q>",
 				":e " .. COMMONPLACE .. "<cr>",
