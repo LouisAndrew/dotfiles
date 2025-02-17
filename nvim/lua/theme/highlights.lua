@@ -434,6 +434,12 @@ local notify_config = {
 local snacks_config = {
 	{ "SnacksInputBorder", colors.dimmed_white, colors.mfed_bg_accent },
 	{ "SnacksInputNormal", colors.white, colors.mfed_bg_accent },
+	{ "SnacksPickerDir", colors.mfed_6 },
+	{ "SnacksPickerFile", colors.mfed_3 },
+	{ "SnacksPickerMatch", colors.white },
+	{ "SnacksPickerRow", colors.dimmed_white },
+	{ "SnacksPickerCol", colors.dimmed_white },
+	{ "SnacksPickerBox", nil, colors.bg_shade },
 }
 
 local noice_config = {

@@ -50,58 +50,6 @@ return {
 		},
 	},
 	{
-		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
-		---@module 'snacks'
-		---@type snacks.Config
-		opts = {
-			animate = { enabled = false },
-			bigfile = { enabled = true },
-			dashboard = {
-				enabled = true,
-				sections = {
-					{ section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
-					{ section = "startup" },
-				},
-			},
-			dim = { enabled = false },
-			git = { enabled = true },
-			gitbrowse = { enabled = true },
-			indent = {
-				enabled = false,
-				animate = {
-					enabled = false,
-				},
-			},
-			input = {
-				prompt_pos = "left",
-				icon_pos = "left",
-				expand = false,
-				icon = "",
-			},
-			styles = {
-				input = {
-					border = "none",
-					row = -1,
-					width = 0,
-				},
-			},
-			notifier = { enabled = false },
-			quickfile = { enabled = false },
-			scroll = { enabled = false },
-			statuscolumn = {
-				enabled = false,
-				folds = {
-					open = true, -- show open fold icons
-					git_hl = true, -- use Git Signs hl for fold icons
-				},
-			},
-			picker = {
-				enabled = true,
-			},
-			words = { enabled = true },
-			zen = { enabled = false },
-		},
+		"jghauser/mkdir.nvim",
 	},
 }

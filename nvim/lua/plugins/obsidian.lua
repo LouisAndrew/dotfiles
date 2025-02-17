@@ -9,15 +9,19 @@ return {
 			{ "<leader>il", "<cmd>:Markview toggle<CR>" },
 		},
 		opts = {
-			filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
-			headings = {
-				enable = false,
+			preview = {
+				filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 			},
-			list_items = {
-				enable = false,
-			},
-			checkboxes = {
-				enable = false,
+			markdown = {
+				headings = {
+					enable = false,
+				},
+				list_items = {
+					enable = false,
+				},
+				checkboxes = {
+					enable = false,
+				},
 			},
 			---@type markview.conf.code_blocks
 			code_blocks = {
@@ -53,37 +57,12 @@ return {
 				default = {
 					border = icons.TallVertLine,
 				},
-				callouts = {
-					{
-						match_string = "NOTE",
-						hl = "MarkviewBlockQuoteNote",
-						preview = icons.InfoCircle .. " Note",
-						border = icons.TallVertLine,
-					},
-					{
-						match_string = "TODO",
-						hl = "MarkviewBlockQuoteNote",
-						preview = icons.CircleCheck .. " Todo",
-						title = true,
-						icon = icons.CircleCheck,
-						border = icons.TallVertLine,
-					},
-					{
-						match_string = "INFO",
-						hl = "MarkviewBlockQuoteNote",
-						preview = icons.InfoCircle .. " Info",
-						custom_title = true,
-						icon = icons.CircleCheck,
-						border = icons.TallVertLine,
-					},
-					{
-						match_string = "TLDR",
-						hl = "MarkviewBlockQuoteNote",
-						preview = icons.Clippy .. " Tldr",
-						title = true,
-						icon = icons.Clippy,
-						border = icons.TallVertLine,
-					},
+				["INFO"] = {
+					hl = "MarkviewBlockQuoteNote",
+					preview = icons.CircleCheck .. " Todo",
+					title = true,
+					icon = icons.CircleCheck,
+					border = icons.TallVertLine,
 				},
 			},
 		},

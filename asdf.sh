@@ -1,5 +1,5 @@
-# import asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
+# # import asdf
+# . $(brew --prefix asdf)/bin/asdf
 
 # GOLANG
 # set GOROOT

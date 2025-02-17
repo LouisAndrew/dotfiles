@@ -162,17 +162,22 @@ return {
 			end,
 		})
 
+		-- vim.keymap.set("n", "<C-o>", builtin.find_files, {})
+		-- vim.keymap.set("n", "<C-b>", builtin.buffers, {})
+		-- vim.keymap.set("n", "<C-f>", telescope.extensions.egrepify.egrepify, {})
+
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-		vim.keymap.set("n", "<C-o>", builtin.find_files, {})
+
+		-- vim.keymap.set("n", "<C-o>", builtin.find_files, {})
+		-- vim.keymap.set("n", "<C-b>", builtin.buffers, {})
+		--
 		-- find siblings
 		vim.keymap.set("n", "<leader>pj", function()
 			builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
 		end)
 		vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
-		vim.keymap.set("n", "<C-b>", builtin.buffers, {})
 
 		vim.keymap.set("n", "<leader>ps", telescope.extensions.egrepify.egrepify, {})
-		vim.keymap.set("n", "<C-f>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
