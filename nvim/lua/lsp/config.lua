@@ -6,7 +6,7 @@ local navic = require("nvim-navic")
 local utils = require("utils")
 
 vim.diagnostic.config({
-	virtual_lines = { only_current_line = true },
+	virtual_lines = false,
 	virtual_text = false,
 	signs = false,
 	severity_sort = true,

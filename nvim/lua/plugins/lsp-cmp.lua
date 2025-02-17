@@ -5,7 +5,6 @@ return {
 	{
 		"saghen/blink.cmp",
 		lazy = false,
-		build = "cargo build --release",
 		branch = "main",
 		event = "InsertEnter",
 		dependencies = {
@@ -54,16 +53,6 @@ return {
 				},
 				sources = {
 					default = { "lsp", "path", "snippets" },
-					cmdline = function()
-						local type = vim.fn.getcmdtype()
-						if type == "/" or type == "?" then
-							return { "buffer" }
-						end
-						if type == ":" then
-							return { "cmdline" }
-						end
-						return {}
-					end,
 					providers = {
 						snippets = {
 							name = "snippets",

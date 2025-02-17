@@ -97,6 +97,9 @@ return {
 					git_hl = true, -- use Git Signs hl for fold icons
 				},
 			},
+			picker = {
+				enabled = true,
+			},
 			words = { enabled = true },
 			zen = { enabled = false },
 		},

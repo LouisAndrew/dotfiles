@@ -394,6 +394,11 @@ local md_config = {
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
 	{ "MarkviewBlockQuoteNote", colors.indigo_fg },
+	{ "MarkviewTableBorder", colors.mfed_7 },
+	{ "MarkviewTableHeader", colors.mfed_7 },
+	{ "MarkviewTableAlignLeft", colors.mfed_7 },
+	{ "MarkviewTableAlignRight", colors.mfed_7 },
+	{ "MarkviewTableAlignCenter", colors.mfed_7 },
 }
 
 local dap_config = {
