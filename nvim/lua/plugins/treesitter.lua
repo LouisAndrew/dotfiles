@@ -6,7 +6,19 @@ return {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		-- "nvim-treesitter/nvim-treesitter-context",
-		"danymat/neogen",
+		{
+			"danymat/neogen",
+			config = true,
+			keys = {
+				{
+					"<leader>ic",
+					function()
+						require("neogen").generate()
+					end,
+					"Generate annotation comment",
+				},
+			},
+		},
 		"windwp/nvim-ts-autotag",
 		{ "echasnovski/mini.ai", version = "*" },
 		{ "echasnovski/mini.pairs", branch = "stable" },
@@ -71,7 +83,6 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "<C-s>", ts_repeat_move.repeat_last_move_next)
 		vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previous)
 		vim.keymap.set("n", "<leader>ih", "<cmd>:TSHighlightCapturesUnderCursor<cr>")
-		vim.keymap.set("n", "<leader>ic", "<cmd>:TSCaptureUnderCursor<cr>")
 
 		local ai = require("mini.ai")
 		ai.setup({
@@ -106,9 +117,6 @@ return {
 			},
 			search_method = "cover_or_next",
 		})
-
-		require("neogen").setup()
-		vim.keymap.set("n", "<leader>tc", require("neogen").generate)
 
 		local pairs = require("mini.pairs")
 		pairs.setup()

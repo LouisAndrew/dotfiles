@@ -50,4 +50,6 @@ return {
 	CircleCheck = "",
 	Circle = "",
 	Clippy = "",
+	Box = " ",
+	BoxChecked = " ",
 }

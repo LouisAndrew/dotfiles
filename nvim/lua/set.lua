@@ -30,7 +30,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
 		local o = vim.opt
-		o.conceallevel = 2
 		o.tabstop = 2
 		o.softtabstop = 2
 		o.shiftwidth = 2
@@ -123,6 +122,20 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.keymap.set("n", "<leader>w", "<cmd>:CopilotChatToggle<CR>", {
 			remap = true,
 			buffer = true,
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "codecompanion",
+	callback = function()
+		print("hh")
+		vim.opt_local.relativenumber = false
+		vim.opt_local.statuscolumn = " "
+
+		vim.keymap.set("n", "<leader>w", "<cmd>:CodeCompanionChat Toggle<cr>", {
+			buffer = true,
+			remap = true,
 		})
 	end,
 })

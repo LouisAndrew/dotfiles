@@ -113,7 +113,7 @@ bindkey '^o' f
 bindkey '^f' rgf
 bindkey '^g' ngowrapper 
 bindkey '^e' fs 
-bindkey '^a' m
+bindkey "^b" m
 bindkey '^q' qn
 bindkey '^v' grep_notes
 

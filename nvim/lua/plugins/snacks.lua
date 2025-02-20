@@ -49,7 +49,17 @@ return {
 			{
 				"<leader>e",
 				function()
-					Snacks.explorer()
+					Snacks.explorer({
+						win = {
+							list = {
+								keys = {
+									["<C-l>"] = { "<C-w>l", expr = true },
+									["<C-h>"] = { "<C-w>h", expr = true },
+									["<leader>w"] = { "<cmd>:q<CR>", expr = true },
+								},
+							},
+						},
+					})
 				end,
 				desc = "File Explorer",
 			},
@@ -422,6 +432,15 @@ return {
 			},
 			picker = {
 				enabled = true,
+				sources = {
+					explorer = {
+						layout = {
+							layout = {
+								position = "right",
+							},
+						},
+					},
+				},
 				matcher = {
 					frecency = true,
 				},
@@ -430,12 +449,20 @@ return {
 						keys = {
 							["<c-j>"] = { "edit_split", mode = { "i", "n" } },
 							["<c-l>"] = { "edit_vsplit", mode = { "i", "n" } },
+							["<c-r>"] = { "toggle_hidden", mode = { "i", "n" } },
+							["<c-g>"] = { "toggle_ignored", mode = { "i", "n" } },
+							["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+							["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 						},
 					},
 					list = {
 						keys = {
 							["<c-j>"] = { "<c-j>", expr = true, desc = "move down" },
 							["<c-l>"] = { "<c-l>", expr = true, desc = "move right" },
+							["<c-r>"] = { "toggle_hidden", mode = { "i", "n" } },
+							["<c-g>"] = { "toggle_ignored", mode = { "i", "n" } },
+							["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+							["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 						},
 					},
 				},
@@ -444,6 +471,13 @@ return {
 						layout = {
 							backdrop = true,
 						},
+					},
+				},
+
+				icons = {
+					ui = {
+						selected = "* ",
+						unselected = "  ",
 					},
 				},
 			},

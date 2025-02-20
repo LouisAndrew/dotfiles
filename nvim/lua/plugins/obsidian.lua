@@ -12,24 +12,37 @@ return {
 			preview = {
 				filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
 			},
+			markdown_inline = {
+				checkboxes = {
+					checked = { text = icons.BoxChecked },
+					unchecked = { text = icons.Box },
+				},
+			},
+			---@type markview.config.markdown
 			markdown = {
 				headings = {
 					enable = false,
 				},
 				list_items = {
-					enable = false,
-				},
-				checkboxes = {
-					enable = false,
+					indent_size = 2,
+					shift_width = 2,
+					marker_minus = {
+						add_padding = false,
+						text = "-",
+					},
+					marker_star = {
+						add_padding = false,
+						text = "-",
+					},
 				},
 			},
 			---@type markview.conf.code_blocks
 			code_blocks = {
 				icons = "devicons",
 				style = "block",
-				language_direction = "left",
 				sign = false,
 				pad_amount = 2,
+				label_direction = "left",
 			},
 			inline_codes = {
 				hl = "MarkviewCodeInline",
@@ -88,8 +101,7 @@ return {
 				":e " .. COMMONPLACE .. "<cr>",
 				{ expr = true },
 			},
-
-			{ "<C-a>", "<cmd>:ObsidianQuickSwitch<cr>" },
+			{ "<C-b>", "<cmd>:ObsidianQuickSwitch<cr>" },
 			{ "<C-v>", "<cmd>:ObsidianSearch<cr>" },
 			{
 				"<C-q>",
@@ -143,7 +155,7 @@ return {
 						},
 					},
 					ui = {
-						bullets = { char = "-", hl_group = "ObsidianBullet" },
+						bullets = { char = "", hl_group = "ObsidianBullet" },
 						reference_text = { hl_group = "ObsidianRefText" },
 						highlight_text = { hl_group = "ObsidianHighlightText" },
 						tags = { hl_group = "ObsTag" },
@@ -152,10 +164,10 @@ return {
 							hl_group = "ObsidianExtLinkIcon",
 						},
 						checkboxes = {
-							[" "] = { char = icons.Circle, hl_group = "ObsidianTodo" },
-							["x"] = { char = icons.CircleCheck, hl_group = "ObsidianDone" },
-							[">"] = { char = "", hl_group = "ObsidianRightArrow" },
-							["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+							[" "] = { char = "", hl_group = "ObsidianTodo" },
+							["x"] = { char = "", hl_group = "ObsidianDone" },
+							[">"] = { char = "", hl_group = "ObsidianRightArrow" },
+							["~"] = { char = "", hl_group = "ObsidianTilde" },
 						},
 						hl_groups = {
 							ObsidianRefText = { fg = colors.cyan },

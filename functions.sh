@@ -204,3 +204,7 @@ function qn() {
 function grep_notes() {
   nvim -c ObsidianSearch
 }
+
+function tsh() {
+  sh $DOTFILES_PATH/tmux.sh
+}

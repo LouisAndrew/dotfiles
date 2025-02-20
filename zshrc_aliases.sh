@@ -48,6 +48,9 @@ alias gclean="git branch -D `git branch --merged | grep -v \* | xargs`" # delete
 alias gsync="git fetch --all -Pp && gclean"
 alias gs="git stash"
 alias gcub="git rev-parse --abbrev-ref HEAD" # current branch
+alias grro="git remote remove origin"
+alias grao="git remote add origin"
+alias gbsu="git branch --set-upstream-to=origin/main main"
 
 alias changed="gdn"
 alias staged="gdn --cached"
@@ -167,6 +170,9 @@ alias cte="EDITOR=nvim crontab -e"
 alias got="go test"
 alias pgpaste="$DOTFILES_PATH/pngpaste.sh"
 alias ai="aichat"
+alias bss="brew services start"
+alias bst="brew services stop"
+alias bsr="brew services restart"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"
