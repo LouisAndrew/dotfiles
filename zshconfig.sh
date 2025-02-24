@@ -52,6 +52,7 @@ export GOBIN=`go env GOBIN`
 # export PATH="$BUN_INSTALL/bin:$PATH"autoload -U compinit; compinit
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
+PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # PATH="$GOBIN:$PATH"
 export PATH
 # Add it to your shell init files

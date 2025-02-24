@@ -195,8 +195,7 @@ return {
 			"CodeCompanionAdd",
 		},
 		keys = {
-			{ "<leader>ap", "<cmd>:CodeCompanionChat<CR>" },
-			{ "<leader>aa", "<cmd>:CodeCompanionChat Toggle<CR>" },
+			{ "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
 			{ "<leader>al", "<cmd>:CodeCompanion " },
 			{ "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
 			{ "<leader>an", "<cmd>:CodeCompanionAdd<CR>" },

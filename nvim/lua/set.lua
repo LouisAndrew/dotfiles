@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = md_group,
 	callback = function()
 		vim.cmd("syntax match MDDone /@DONE/")
+		vim.cmd("syntax match MDDone /@done/")
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
@@ -129,14 +130,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "codecompanion",
 	callback = function()
-		print("hh")
 		vim.opt_local.relativenumber = false
 		vim.opt_local.statuscolumn = " "
-
-		vim.keymap.set("n", "<leader>w", "<cmd>:CodeCompanionChat Toggle<cr>", {
-			buffer = true,
-			remap = true,
-		})
 	end,
 })
 

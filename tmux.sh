@@ -18,14 +18,15 @@ if [[ ! -n $TMUX  ]]; then
   choices="$session_ids\n${create_new_session}:\n${start_without_tmux}:"
   choice="$(echo $choices | fzf | cut -d: -f1)"
 
-  if expr "$choice" : "[0-9]*$" >&/dev/null; then
-    # Attach existing session
-    tmux attach-session -t "$choice"
-  elif [[ "$choice" = "${create_new_session}" ]]; then
+  
+  if [[ "$choice" = "${create_new_session}" ]]; then
     # Create new session
     tmux new-session
   elif [[ "$choice" = "${start_without_tmux}" ]]; then
     # Start without tmux
     :
+  else 
+    # Attach existing session
+    tmux attach -t "$choice"
   fi
 fi
