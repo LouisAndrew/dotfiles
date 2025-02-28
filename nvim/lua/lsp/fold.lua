@@ -39,6 +39,7 @@ require("ufo").setup({
 		default = { "imports", "comment" },
 		json = { "array" },
 		c = { "comment", "region" },
+		ts = { "imports" },
 	},
 	preview = {
 		win_config = {

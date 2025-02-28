@@ -52,6 +52,7 @@ export GOBIN=`go env GOBIN`
 # export PATH="$BUN_INSTALL/bin:$PATH"autoload -U compinit; compinit
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
+PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # PATH="$GOBIN:$PATH"
 export PATH
 # Add it to your shell init files
@@ -85,13 +86,14 @@ export EDITOR="nvim"
 export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
 
-export FZF_DEFAULT_OPTS="--bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
+PROMPT_ICON=""
+export FZF_DEFAULT_OPTS="--layout reverse --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG_COLOR,bg+:$BG_COLOR
   --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#ffcfa7
   --color=prompt:#f2eaea,spinner:#af5fff,pointer:#ffcfa7,header:#87afaf
   --color=border:$BG_COLOR,preview-fg:-1,label:#aeaeae,query:#d9d9d9
-  --preview-window=\"border-rounded\" --padding=\"1\" --prompt=\"  \" --marker=\"◆\"
+  --preview-window=\"border-rounded\" --padding=\"1\" --prompt=\"$PROMPT_ICON \" --marker=\"◆\"
   --pointer=\"\" --separator=\"\" --scrollbar=\"│\""
 
 export FZF_CTRL_T_OPTS="
@@ -112,7 +114,7 @@ bindkey '^o' f
 bindkey '^f' rgf
 bindkey '^g' ngowrapper 
 bindkey '^e' fs 
-bindkey '^a' m
+bindkey "^b" m
 bindkey '^q' qn
 bindkey '^v' grep_notes
 

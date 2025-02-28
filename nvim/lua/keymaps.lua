@@ -49,7 +49,7 @@ local M = {
 		{ "<leader>pv", vim.cmd.Ex },
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
-		{ "<leader>s", "<cmd>:w<cr>" },
+		{ "<C-s>", "<cmd>:w<cr>" },
 		{
 			"<S-u>",
 			function()

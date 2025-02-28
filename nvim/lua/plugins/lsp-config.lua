@@ -9,6 +9,17 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
 		{
+			"rmagatti/goto-preview",
+			event = "BufEnter",
+			config = true,
+			keys = {
+				{ "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>" },
+				{ "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>" },
+				{ "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>" },
+			},
+			desc = "definition preview in a floating window",
+		},
+		{
 			"zeioth/garbage-day.nvim",
 			event = "VeryLazy",
 			opts = {},
@@ -17,6 +28,7 @@ return {
 		{
 			"stevearc/conform.nvim",
 			lazy = true,
+			desc = "Formatter",
 		},
 		{
 			"SmiteshP/nvim-navic",
@@ -36,11 +48,11 @@ return {
 			desc = "Breadcrumbs",
 		},
 		{
-			-- Folds
 			"kevinhwang91/nvim-ufo",
 			dependencies = {
 				"kevinhwang91/promise-async",
 			},
+			desc = "Folds",
 		},
 		-- json schema
 		"b0o/SchemaStore.nvim",

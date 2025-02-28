@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = md_group,
 	callback = function()
 		vim.cmd("syntax match MDDone /@DONE/")
+		vim.cmd("syntax match MDDone /@done/")
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
@@ -30,7 +31,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
 		local o = vim.opt
-		o.conceallevel = 2
 		o.tabstop = 2
 		o.softtabstop = 2
 		o.shiftwidth = 2
@@ -124,6 +124,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			remap = true,
 			buffer = true,
 		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "codecompanion",
+	callback = function()
+		vim.opt_local.relativenumber = false
+		vim.opt_local.statuscolumn = " "
 	end,
 })
 

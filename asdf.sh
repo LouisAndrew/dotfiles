@@ -1,5 +1,5 @@
-# import asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
+# # import asdf
+# . $(brew --prefix asdf)/bin/asdf
 
 # GOLANG
 # set GOROOT
@@ -7,4 +7,4 @@
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # NODEJS
-export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
+export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_available
