@@ -106,6 +106,7 @@ function lsd() {
 
 GO_BACK=".."
 CLONE="Clone from clipboard"
+GO_HERE="CD here"
 function fs() {
   scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,") 
   echo $scope_list | fzf \
@@ -117,9 +118,14 @@ function fs() {
   fi
 
   project_list=$(lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,,")
-  project_list+=("\n$GO_BACK"); project_list+=("\n$CLONE")
+  project_list+=("\n$GO_BACK\n$CLONE\n$GO_HERE")
 
   echo $project_list | fzf | read project
+
+  if [ "$project" = "$GO_HERE" ]; then
+    cd $DEV_HOME/$scope
+    return 0
+  fi
 
   if [ "$project" = "$CLONE" ]; then
     cd $DEV_HOME/$scope

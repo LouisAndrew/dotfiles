@@ -23,6 +23,13 @@ return {
 		},
 	},
 	{
+		"stevearc/quicker.nvim",
+		event = "FileType qf",
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {},
+	},
+	{
 		"johmsalas/text-case.nvim",
 		config = function()
 			require("textcase").setup({})

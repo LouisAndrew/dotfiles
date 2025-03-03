@@ -44,6 +44,13 @@ local M = {
 
 	n = {
 		{ "j", "gj" },
+		{
+			"<leader>rs",
+			"<cmd>:LspStart<cr>",
+			opts = {
+				desc = "Start LSP server manually",
+			},
+		},
 		{ "k", "gk" },
 		{ "<ESC>", "<cmd> noh <CR>", "no highlight" },
 		{ "<leader>pv", vim.cmd.Ex },

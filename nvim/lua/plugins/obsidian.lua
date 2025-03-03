@@ -46,8 +46,8 @@ return {
 			},
 			inline_codes = {
 				hl = "MarkviewCodeInline",
-				corner_right = "",
-				corner_left = "",
+				padding_right = "",
+				padding_left = "",
 			},
 			links = {
 				hyperlinks = {

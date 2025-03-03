@@ -32,14 +32,16 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 	return newVirtText
 end
 
+local ftMap = {
+	markdown = { "treesitter", "indent" },
+}
+
 require("ufo").setup({
 	open_fold_hl_timeout = 150,
 	-- not working with TS provider
 	close_fold_kinds_for_ft = {
 		default = { "imports", "comment" },
 		json = { "array" },
-		c = { "comment", "region" },
-		ts = { "imports" },
 	},
 	preview = {
 		win_config = {
@@ -54,8 +56,8 @@ require("ufo").setup({
 			jumpBot = "]",
 		},
 	},
-	provider_selector = function()
-		return { "treesitter" }
+	provider_selector = function(_, ft)
+		return ftMap[ft] or { "lsp", "indent" }
 	end,
 	fold_virt_text_handler = handler,
 })

@@ -1,4 +1,5 @@
 local ls = require("luasnip")
+local sn = ls.snippet_node
 local s = ls.snippet
 local fmt = require("luasnip.extras.fmt").fmt
 local i = ls.insert_node
@@ -80,5 +81,17 @@ return {
 				}),
 			}
 		)
+	),
+
+	s(
+		"fl",
+		fmt("for {loop} {{ {body} }}", {
+			loop = c(1, {
+				sn(nil, fmt("i := 0; i < {len}; i++", { len = i(1) })),
+				sn(nil, fmt("i := {len}; i >= 0; i--", { len = i(1) })),
+				sn(nil, fmt("_, {i} := range {j}", { i = i(1), j = i(2) })),
+			}),
+			body = i(2),
+		})
 	),
 }

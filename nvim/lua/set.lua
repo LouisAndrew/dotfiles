@@ -94,21 +94,21 @@ vim.api.nvim_create_user_command("PasteImgClipboardObsidian", function(args)
 	utils.insert(" ![[" .. filename .. ".png]]", true)
 end, { nargs = "?" })
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = vim.api.nvim_create_augroup("qflist", { clear = true }),
-	desc = "allow updating quickfix window",
-	pattern = "quickfix",
-	callback = function()
-		vim.bo.modifiable = true
-		vim.bo.errorformat = "%f|%l col %c| %m,%f|%l col %c-%k| %m"
-		vim.keymap.set(
-			"n",
-			"<leader>s",
-			'<Cmd>cgetbuffer|set nomodified|echo "quickfix/location list updated"<CR>',
-			{ buffer = true, desc = "Update quickfix/location list with changes made in quickfix window" }
-		)
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+-- 	group = vim.api.nvim_create_augroup("qflist", { clear = true }),
+-- 	desc = "allow updating quickfix window",
+-- 	pattern = "quickfix",
+-- 	callback = function()
+-- 		vim.bo.modifiable = true
+-- 		vim.bo.errorformat = "%f|%l col %c| %m,%f|%l col %c-%k| %m"
+-- 		vim.keymap.set(
+-- 			"n",
+-- 			"<leader>s",
+-- 			'<Cmd>cgetbuffer|set nomodified|echo "quickfix/location list updated"<CR>',
+-- 			{ buffer = true, desc = "Update quickfix/location list with changes made in quickfix window" }
+-- 		)
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "copilot-*",

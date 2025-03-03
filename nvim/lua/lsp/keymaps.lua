@@ -23,7 +23,6 @@ return {
 						end
 					end,
 				},
-				{ "<leader>rs", "<cmd>:LspStart<cr>" },
 				{ "<leader>is", vim.lsp.buf.workspace_symbol },
 				{
 					"<space>id",
