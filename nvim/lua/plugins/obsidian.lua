@@ -1,5 +1,6 @@
 local icons = require("theme.icons")
 local COMMONPLACE = os.getenv("COMMONPLACE")
+local VAULT = os.getenv("VAULT_PATH")
 
 return {
 	{
@@ -193,7 +194,7 @@ return {
 						vim.fn.jobstart({ "open", url })
 					end,
 					attachments = {
-						img_folder = "imgs",
+						img_folder = "assets/imgs",
 					},
 					sort_by = "modified",
 					sort_reversed = true,
@@ -232,7 +233,6 @@ return {
 					end,
 					note_path_func = function(spec)
 						local title_lowercased = spec.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-						-- This is equivalent to the default behavior.
 						return title_lowercased .. ".md"
 					end,
 				}
@@ -247,5 +247,25 @@ return {
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
+	},
+	{
+		"3rd/image.nvim",
+		build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+		opts = {
+			processor = "magick_cli",
+			integrations = {
+				markdown = {
+					clear_in_insert_mode = true,
+					only_render_image_at_cursor = true,
+					floating_windows = true,
+					resolve_image_path = function(document_path, image_path, fallback)
+						if document_path:find(VAULT, 1, true) then
+							return VAULT .. "/assets/imgs/" .. image_path
+						end
+						return fallback(document_path, image_path)
+					end,
+				},
+			},
+		},
 	},
 }

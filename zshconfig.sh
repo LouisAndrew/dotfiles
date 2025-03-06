@@ -122,3 +122,4 @@ bindkey '^v' grep_notes
 source $DOTFILES_PATH/tmux.sh
 
 export BEDROCK_KEYS="ASIA5FTZAVYJYBQW7SY2,GWM5Miffs/Xt4sEDvRuq2p8z1h8e+FdOaQWddoCp,eu-central-1"
+export pngpaste="$DOTFILES_PATH/pngpaste"

@@ -45,6 +45,19 @@ local M = {
 	n = {
 		{ "j", "gj" },
 		{
+			"<leader>pd",
+			function()
+				local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
+				vim.tbl_map(function(bufinfo)
+					if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
+						-- vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
+						vim.cmd("bd " .. tostring(bufinfo.bufnr))
+					end
+				end, bufinfos)
+			end,
+			opts = { silent = true, desc = "Wipeout all buffers not shown in a window" },
+		},
+		{
 			"<leader>rs",
 			"<cmd>:LspStart<cr>",
 			opts = {
