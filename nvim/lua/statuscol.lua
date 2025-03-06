@@ -69,13 +69,14 @@ end
 -- tuts: https://www.reddit.com/r/neovim/comments/1djjc6q/statuscolumn_a_beginers_guide/, https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/modules/status/components.lua
 function sc.myStatuscolumn()
 	return table.concat({
-		sc.sign(),
 		sc.num(),
+		sc.sign(),
 		sc.space(),
 		sc.fold(),
 		sc.space(),
 	})
 end
 
--- With this line we will be able to use myStatuscolumn by requiring this file and calling the function
+-- Disabling in favor of snacks statuscol
+---@deprecated
 return sc

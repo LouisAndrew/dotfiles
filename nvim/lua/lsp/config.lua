@@ -31,6 +31,25 @@ lsp_zero.on_attach(function(client, bufnr)
 	keymaps.generate_keymaps(bufnr)
 end)
 
+local custom_servers = {
+	"kulala_ls",
+}
+
+local nvim_lsp = require("lspconfig")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+for _, lsp in ipairs(custom_servers) do
+	if nvim_lsp[lsp] ~= nil then
+		if nvim_lsp[lsp].setup ~= nil then
+			nvim_lsp[lsp].setup({
+				capabilities = capabilities,
+			})
+		else
+			vim.notify("LSP server " .. lsp .. " does not have a setup function", vim.log.levels.ERROR)
+		end
+	end
+end
+
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {

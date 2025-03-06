@@ -15,19 +15,21 @@ return {
 	{
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
+		dependencies = {
+			{
+				"stevearc/quicker.nvim",
+				event = "FileType qf",
+				---@module "quicker"
+				---@type quicker.SetupOptions
+				opts = {},
+			},
+		},
 		opts = {
 			preview = {
 				border = "single",
 			},
 			winblend = 0,
 		},
-	},
-	{
-		"stevearc/quicker.nvim",
-		event = "FileType qf",
-		---@module "quicker"
-		---@type quicker.SetupOptions
-		opts = {},
 	},
 	{
 		"johmsalas/text-case.nvim",
@@ -58,5 +60,24 @@ return {
 	},
 	{
 		"jghauser/mkdir.nvim",
+	},
+	{
+		"mistweaverco/kulala.nvim",
+		keys = {
+			{
+				"<leader>r",
+				function()
+					require("kulala").run()
+				end,
+				desc = "Send request",
+			},
+			{ "<leader>Ra", desc = "Send all requests" },
+			{ "<leader>Rb", desc = "Open scratchpad" },
+		},
+		ft = { "http", "rest" },
+		opts = {
+			-- your configuration comes here
+			global_keymaps = false,
+		},
 	},
 }

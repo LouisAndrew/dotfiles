@@ -115,15 +115,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.opt_local.relativenumber = false
 		vim.opt_local.statuscolumn = " "
-
-		vim.keymap.set("n", "<C-l>", function()
-			print(require("CopilotChat").response())
-		end, { buffer = true, remap = true })
-
-		vim.keymap.set("n", "<leader>w", "<cmd>:CopilotChatToggle<CR>", {
-			remap = true,
-			buffer = true,
-		})
 	end,
 })
 

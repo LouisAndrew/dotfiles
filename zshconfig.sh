@@ -49,10 +49,10 @@ export BUN_INSTALL="$HOME/.bun"
 source $DOTFILES_PATH/asdf.sh
 
 export GOBIN=`go env GOBIN`
-# export PATH="$BUN_INSTALL/bin:$PATH"autoload -U compinit; compinit
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+PATH="$(brew --prefix)/opt/curl/bin:$PATH"
 # PATH="$GOBIN:$PATH"
 export PATH
 # Add it to your shell init files
@@ -120,3 +120,5 @@ bindkey '^v' grep_notes
 
 # tmux
 source $DOTFILES_PATH/tmux.sh
+
+export BEDROCK_KEYS="ASIA5FTZAVYJYBQW7SY2,GWM5Miffs/Xt4sEDvRuq2p8z1h8e+FdOaQWddoCp,eu-central-1"

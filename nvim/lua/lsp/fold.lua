@@ -34,6 +34,7 @@ end
 
 local ftMap = {
 	markdown = { "treesitter", "indent" },
+	vue = { "treesitter", "indent" },
 }
 
 require("ufo").setup({
@@ -42,6 +43,7 @@ require("ufo").setup({
 	close_fold_kinds_for_ft = {
 		default = { "imports", "comment" },
 		json = { "array" },
+		vue = { "import_statement" },
 	},
 	preview = {
 		win_config = {
@@ -57,7 +59,7 @@ require("ufo").setup({
 		},
 	},
 	provider_selector = function(_, ft)
-		return ftMap[ft] or { "lsp", "indent" }
+		return { "treesitter", "indent" }
 	end,
 	fold_virt_text_handler = handler,
 })

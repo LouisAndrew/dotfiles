@@ -376,7 +376,7 @@ end
 
 local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
-	{ "RenderMarkdownCode", nil, colors.nb_background },
+	{ "RenderMarkdownCode", nil, colors.mfed_bg_accent_light },
 	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
 	{ "MarkviewCodeInfo", nil, colors.bg_shade },
 	{ "MarkviewCodeInline", nil, colors.mfed_bg_accent_light },
