@@ -276,7 +276,6 @@ Group.new("SagaBeacon", colors.primary)
 Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
-Group.new("ObsTag", colors.magenta_fg:light())
 
 -- CMP
 Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
@@ -490,6 +489,7 @@ local cmp_config = {
 	{ "BlinkCmpKindOperator", colors.mfed_2 },
 	{ "BlinkCmpKindTypeParameter", colors.mfed_2 },
 	{ "BlinkCmpKindUnit", colors.mfed_cyan },
+	{ "BlinkCmpKindText", colors.mfed_2 },
 }
 
 local navic_config = {

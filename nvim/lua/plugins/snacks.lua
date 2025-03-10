@@ -323,7 +323,17 @@ return {
 			{
 				"<leader>su",
 				function()
-					Snacks.picker.undo()
+					Snacks.picker.undo({
+						actions = {},
+						win = {
+							input = {
+								keys = {
+									["<c-i>"] = { "yank_add", mode = { "n", "i" } },
+									["<c-a>"] = { "yank_del", mode = { "n", "i" } },
+								},
+							},
+						},
+					})
 				end,
 				desc = "Undo History",
 			},
@@ -424,7 +434,8 @@ return {
 			quickfile = { enabled = false },
 			scroll = { enabled = false },
 			statuscolumn = {
-				enabled = true,
+				-- enabled = true,
+				enabled = false,
 				left = { "mark", "sign" },
 				right = {},
 			},
