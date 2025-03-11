@@ -17,8 +17,19 @@ return {
 					checked = { text = icons.BoxChecked },
 					unchecked = { text = icons.Box },
 				},
+				hyperlinks = {
+					icon = " ",
+				},
+				images = {
+					icon = " ",
+				},
+				emails = {
+					icon = " ",
+				},
+				internal_links = {
+					icon = " ",
+				},
 			},
-			---@type markview.config.markdown
 			markdown = {
 				headings = {
 					enable = false,
@@ -36,37 +47,20 @@ return {
 						text = "-",
 					},
 				},
-			},
-			---@type markview.conf.code_blocks
-			code_blocks = {
-				icons = "devicons",
-				style = "block",
-				sign = false,
-				pad_amount = 2,
-				label_direction = "left",
+				code_blocks = {
+					icons = "devicons",
+					style = "block",
+					sign = false,
+					pad_amount = 2,
+					label_direction = "left",
+				},
 			},
 			inline_codes = {
 				hl = "MarkviewCodeInline",
 				padding_right = "",
 				padding_left = "",
 			},
-			links = {
-				hyperlinks = {
-					icon = " ",
-					custom = {
-						{ match_string = "^http[s]?://", icon = " ", highlight = "MarkviewExternalLink" },
-					},
-				},
-				images = {
-					icon = " ",
-				},
-				emails = {
-					icon = " ",
-				},
-				internal_links = {
-					icon = " ",
-				},
-			},
+			links = {},
 			block_quotes = {
 				default = {
 					border = icons.TallVertLine,

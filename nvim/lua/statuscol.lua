@@ -24,12 +24,12 @@ function sc.num()
 	end
 
 	local out = is_cursor and vim.v.lnum or vim.v.relnum
-	return v_hl .. out
+	-- Align to the right
+	return "%=" .. v_hl .. out
 end
 
 function sc.sign()
-	-- render sign (gitsigns) and align it to the right
-	return "%s%="
+	return "%s"
 end
 
 function sc.space()
@@ -47,8 +47,6 @@ local fold_chars = {
 	middle = '"│"',
 }
 
--- vimscript because it's a bit better than lua
--- Issue with lua: unfocusing window will make the foldcolumn disappear
 function sc.fold()
 	local hl = sc.hl("FoldColumn")
 	local fold_before = "foldlevel(v:lnum - 1)"
@@ -65,18 +63,21 @@ function sc.fold()
 	return hl .. "%{" .. is_not_fold_t .. "}"
 end
 
--- %s%=%{v:relnum?v:relnum:v:lnum} %#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*
--- tuts: https://www.reddit.com/r/neovim/comments/1djjc6q/statuscolumn_a_beginers_guide/, https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/modules/status/components.lua
+-- vimscript because it's a bit better than lua
+-- Issue with lua: unfocusing window will make the foldcolumn disappear
 function sc.myStatuscolumn()
-	return table.concat({
+	local s = {
 		sc.sign(),
 		sc.num(),
 		sc.space(),
-		-- sc.fold(),
-		-- sc.space(),
-	})
+	}
+
+	if vim.g.ENABLE_FOLD_CHARS == "true" then
+		table.insert(s, sc.fold())
+		table.insert(s, sc.space())
+	end
+
+	return table.concat(s)
 end
 
--- Disabling in favor of snacks statuscol
----@deprecated
 return sc

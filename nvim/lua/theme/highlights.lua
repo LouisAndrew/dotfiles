@@ -74,7 +74,8 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.mfed_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.mfed_0)
-Group.new("NormalFloat", colors.mfed_4, colors.nb_background)
+Group.new("NormalFloat", nil, colors.bg_shade)
+Group.new("FloatBorder", colors.bg_shade, colors.bg_shade)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -187,7 +188,6 @@ Group.new("Pmenu", colors.mfed_2, colors.nb_background)
 
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.nb_background)
 Group.new("DiagnosticShowBorder", colors.nb_background)
 
 -- code action
@@ -319,14 +319,7 @@ Group.new("NvimTreeIndentMarker", colors.mfed_6)
 Group.new("NvimTreeExecFile", colors.mfed_6)
 Group.new("NvimTreeSpecialFile", colors.mfed_2, nil)
 
-Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
-Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
--- Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
-Group.new("MDDate", nil, colors.indigo, styles.bold)
-Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Bold", nil, nil, styles.bold)
-Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
-Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
@@ -432,12 +425,18 @@ local notify_config = {
 local snacks_config = {
 	{ "SnacksInputBorder", colors.dimmed_white, colors.mfed_bg_accent },
 	{ "SnacksInputNormal", colors.white, colors.mfed_bg_accent },
-	{ "SnacksPickerDir", colors.mfed_6 },
-	{ "SnacksPickerFile", colors.mfed_3 },
-	{ "SnacksPickerMatch", colors.white },
-	{ "SnacksPickerRow", colors.dimmed_white },
-	{ "SnacksPickerCol", colors.dimmed_white },
-	{ "SnacksPickerBox", nil, colors.bg_shade },
+}
+
+local snacks_picker_config = {
+	prefix = "SnacksPicker",
+	{ "", nil, colors.nb_background },
+	{ "Border", colors.nb_background },
+	{ "Dir", colors.mfed_6 },
+	{ "File", colors.mfed_3 },
+	{ "Match", colors.white },
+	{ "Row", colors.dimmed_white },
+	{ "Col", colors.dimmed_white },
+	{ "Box", nil, colors.bg_shade },
 }
 
 local noice_config = {
@@ -462,34 +461,36 @@ local noice_config = {
 }
 
 local cmp_config = {
-	{ "BlinkCmpKindFile", colors.mfed_2 },
-	{ "BlinkCmpKindModule", colors.mfed_2 },
-	{ "BlinkCmpKindNamespace", colors.mfed_2 },
-	{ "BlinkCmpKindPackage", colors.mfed_2 },
-	{ "BlinkCmpKindClass", colors.remove_fg },
-	{ "BlinkCmpKindMethod", colors.mfed_bool },
-	{ "BlinkCmpKindProperty", colors.mfed_cyan },
-	{ "BlinkCmpKindField", colors.mfed_cyan },
-	{ "BlinkCmpKindConstructor", colors.mfed_2 },
-	{ "BlinkCmpKindEnum", colors.add_fg },
-	{ "BlinkCmpKindInterface", colors.mfed_navy },
-	{ "BlinkCmpKindFunction", colors.mfed_bool },
-	{ "BlinkCmpKindVariable", colors.mfed_navy },
-	{ "BlinkCmpKindConstant", colors.mfed_2 },
-	{ "BlinkCmpKindString", colors.add_fg },
-	{ "BlinkCmpKindNumber", colors.mfed_2 },
-	{ "BlinkCmpKindBoolean", colors.mfed_2 },
-	{ "BlinkCmpKindArray", colors.mfed_2 },
-	{ "BlinkCmpKindObject", colors.mfed_2 },
-	{ "BlinkCmpKindKey", colors.add_fg },
-	{ "BlinkCmpKindNull", colors.mfed_2 },
-	{ "BlinkCmpKindEnumMember", colors.mfed_2 },
-	{ "BlinkCmpKindStruct", colors.mfed_2 },
-	{ "BlinkCmpKindEvent", colors.mfed_2 },
-	{ "BlinkCmpKindOperator", colors.mfed_2 },
-	{ "BlinkCmpKindTypeParameter", colors.mfed_2 },
-	{ "BlinkCmpKindUnit", colors.mfed_cyan },
-	{ "BlinkCmpKindText", colors.mfed_2 },
+	prefix = "BlinkCmpKind",
+	{ "File", colors.mfed_2 },
+	{ "Module", colors.mfed_2 },
+	{ "Namespace", colors.mfed_2 },
+	{ "Package", colors.mfed_2 },
+	{ "Class", colors.remove_fg },
+	{ "Method", colors.mfed_bool },
+	{ "Property", colors.mfed_cyan },
+	{ "Field", colors.mfed_cyan },
+	{ "Constructor", colors.mfed_2 },
+	{ "Enum", colors.add_fg },
+	{ "Interface", colors.mfed_navy },
+	{ "Function", colors.mfed_bool },
+	{ "Variable", colors.mfed_navy },
+	{ "Constant", colors.mfed_2 },
+	{ "String", colors.add_fg },
+	{ "Number", colors.mfed_2 },
+	{ "Boolean", colors.mfed_2 },
+	{ "Array", colors.mfed_2 },
+	{ "Object", colors.mfed_2 },
+	{ "Key", colors.add_fg },
+	{ "Null", colors.mfed_2 },
+	{ "EnumMember", colors.mfed_2 },
+	{ "Struct", colors.mfed_2 },
+	{ "Event", colors.mfed_2 },
+	{ "Operator", colors.mfed_2 },
+	{ "TypeParameter", colors.mfed_2 },
+	{ "Unit", colors.mfed_cyan },
+	{ "Text", colors.mfed_2 },
+	{ "Snippet", colors.mfed_2 },
 }
 
 local navic_config = {
@@ -544,6 +545,14 @@ local diagnostic_config = {
 	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
 }
 
+local mini_hipatterns_config = {
+	prefix = "MiniHiPatterns",
+	{ "Todo", colors.remove_fg },
+	{ "MdDate", colors.magenta_fg:light() },
+	{ "MdDone", colors.add_fg },
+	{ "MDStuff", colors.blue_fg },
+}
+
 local flash_config = {
 	{ "FlashMatch", colors.indigo_fg },
 	{ "FlashCurrent", colors.indigo_fg },
@@ -567,9 +576,11 @@ local hl_group_configs = {
 	gpt_config,
 	md_config,
 	snacks_config,
+	snacks_picker_config,
 	cmp_config,
 	flash_config,
 	diagnostic_config,
+	mini_hipatterns_config,
 }
 
 --- @class HlConfig
@@ -588,8 +599,9 @@ local set_hl = function(group, M)
 end
 
 for _, config in ipairs(hl_group_configs) do
+	local prefix = config.prefix or ""
 	for _, l in ipairs(config) do
-		local group = l[1]
+		local group = prefix .. l[1]
 		local fg = l[2]
 		local bg = l[3] or nil
 		local guicg = l[4] or nil

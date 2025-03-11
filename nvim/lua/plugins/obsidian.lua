@@ -83,9 +83,13 @@ return {
 					},
 				},
 				workspaces = {
+					-- {
+					-- 	name = "icloud",
+					-- 	path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
+					-- },
 					{
-						name = "icloud",
-						path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
+						name = "link",
+						path = "~/vault",
 					},
 					-- keeping this for backup for now
 					{
@@ -101,7 +105,7 @@ return {
 					img_folder = "assets/imgs",
 				},
 				sort_by = "modified",
-				sort_reversed = false,
+				sort_reversed = true,
 				note_frontmatter_func = function(note)
 					local now = os.date("%Y-%m-%d")
 					local out =

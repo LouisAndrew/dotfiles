@@ -7,13 +7,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = { "*.md" },
 	group = md_group,
 	callback = function()
-		vim.cmd("syntax match MDDone /@DONE/")
 		vim.cmd("syntax match MDDone /@done/")
 		vim.cmd("syntax match MDReminder /@REMINDER/")
-		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
-		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
-		vim.cmd("syntax match MDDate /@\\d\\{4}-\\d\\{2}-\\d\\{2}/")
-		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/ ")
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
 		local o = vim.opt
@@ -45,13 +40,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		if has_value(no_statuscol_filetypes, vim.bo.filetype) then
 			vim.wo.statuscolumn = ""
 		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = global_group,
-	callback = function()
-		vim.cmd("syntax match TODO /@TODO/ containedin=@comment,@comment.documentation")
 	end,
 })
 

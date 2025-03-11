@@ -29,7 +29,6 @@ local bg_shade = preset.shade
 local background = preset.bg
 
 local bg_accent_light = "#1a1a1a"
--- local foreground = "#ffbb80"
 local foreground = "#ffcfa7"
 local debug = "#ff0000"
 local magenta = "#291A2E"

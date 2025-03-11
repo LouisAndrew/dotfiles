@@ -32,11 +32,6 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 	return newVirtText
 end
 
-local ftMap = {
-	markdown = { "treesitter", "indent" },
-	vue = { "treesitter", "indent" },
-}
-
 require("ufo").setup({
 	open_fold_hl_timeout = 150,
 	-- not working with TS provider
@@ -44,6 +39,7 @@ require("ufo").setup({
 		default = { "imports", "comment" },
 		json = { "array" },
 		vue = { "import_statement" },
+		go = { "import_declaration" },
 	},
 	preview = {
 		win_config = {
@@ -58,7 +54,7 @@ require("ufo").setup({
 			jumpBot = "]",
 		},
 	},
-	provider_selector = function(_, ft)
+	provider_selector = function()
 		return { "treesitter", "indent" }
 	end,
 	fold_virt_text_handler = handler,

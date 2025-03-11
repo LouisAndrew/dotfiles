@@ -101,9 +101,9 @@ return {
 			"CodeCompanionAdd",
 		},
 		keys = {
-			{ "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
+			{ modes = { "n", "v" }, "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
 			{ "<leader>al", "<cmd>:CodeCompanion " },
-			{ "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
+			{ modes = { "n", "v" }, "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
 			{ "<leader>an", "<cmd>:CodeCompanionAdd<CR>" },
 		},
 		config = true,

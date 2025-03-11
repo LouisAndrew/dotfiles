@@ -41,6 +41,16 @@ return {
 		},
 	},
 	config = function()
+		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+		parser_configs.lua_patterns = {
+			install_info = {
+				url = "https://github.com/OXY2DEV/tree-sitter-lua_patterns",
+				files = { "src/parser.c" },
+				branch = "main",
+			},
+		}
+
 		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 		require("nvim-treesitter.configs").setup({

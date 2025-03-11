@@ -80,4 +80,57 @@ return {
 			global_keymaps = false,
 		},
 	},
+	{
+		"echasnovski/mini.hipatterns",
+		version = "*",
+		desc = "Highlight patterns, avoid using `syn match`",
+		opts = {
+			highlighters = {
+				md_stuff = {
+					pattern = function(buf_id)
+						if vim.bo[buf_id].filetype ~= "markdown" then
+							return nil
+						end
+						return "@%l+%-?%l+"
+					end,
+					extmarks_opts = {
+						priority = 1,
+					},
+					group = "MiniHipatternsMdStuff",
+				},
+				todo = {
+					pattern = {
+						"@todo",
+						"@TODO",
+					},
+					extmarks_opts = {
+						priority = 10,
+					},
+					group = "MiniHipatternsTodo",
+				},
+				md_done = {
+					pattern = {
+						"@done",
+						"@DONE",
+					},
+					extmarks_opts = {
+						priority = 10,
+					},
+					group = "MiniHipatternsMdDone",
+				},
+				md_date = {
+					pattern = function(buf_id)
+						if vim.bo[buf_id].filetype ~= "markdown" then
+							return nil
+						end
+						return "@%d%d%d%d%-%d%d%-%d%d"
+					end,
+					extmarks_opts = {
+						priority = 10,
+					},
+					group = "MiniHipatternsMdDate",
+				},
+			},
+		},
+	},
 }
