@@ -13,7 +13,7 @@ local theme = "light"
 
 local preset = preset_config[theme]
 
-local red = "#431d1f"
+local red = "#42191b"
 local red_fg = "#ff8185"
 
 local yellow_fg = "#fed7aa"
@@ -93,8 +93,9 @@ return {
 		number = "#ffd6b3",
 		add_fg = "#81ffbb",
 		remove_fg = red_fg,
-		change = "#2f4557",
-		add = "#1d3629",
+		-- change = "#2f4557",
+		change = "#221f36",
+		add = "#173626",
 		remove = red,
 		-- 15% of visual in `modes.lua`
 		visual = "#242536",

@@ -65,6 +65,7 @@ end
 
 -- vimscript because it's a bit better than lua
 -- Issue with lua: unfocusing window will make the foldcolumn disappear
+vim.g.ENABLE_FOLD_CHARS = "false"
 function sc.myStatuscolumn()
 	local s = {
 		sc.sign(),

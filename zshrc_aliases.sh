@@ -174,6 +174,7 @@ alias bss="brew services start"
 alias bst="brew services stop"
 alias bsr="brew services restart"
 alias kctl="kubectl"
+alias hc="~/httpcollections/"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"

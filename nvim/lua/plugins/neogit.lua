@@ -15,17 +15,23 @@ return {
 	},
 	config = function()
 		local icons = require("theme.icons")
-		require("diffview").setup({
-			icons = { -- Only applies when use_icons is true.
-				folder_closed = icons.FolderClosed,
-				folder_open = icons.FolderOpened,
-			},
-			signs = {
-				fold_closed = icons.ArrowClosed,
-				fold_open = icons.ArrowOpened,
-				done = "✓",
-			},
-		})
+		---@module 'diffview'
+		require("diffview").setup(
+			---@type DiffviewConfig
+			{
+				icons = { -- Only applies when use_icons is true.
+					folder_closed = icons.FolderClosed,
+					folder_open = icons.FolderOpened,
+				},
+				signs = {
+					fold_closed = icons.ArrowClosed,
+					fold_open = icons.ArrowOpened,
+					done = "✓",
+				},
+			}
+		)
+		local set = vim.opt -- set options
+		set.fillchars = set.fillchars + "diff: "
 
 		local neogit = require("neogit")
 		neogit.setup({

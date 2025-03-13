@@ -94,4 +94,22 @@ return {
 			body = i(2),
 		})
 	),
+
+	s(
+		"ini",
+		fmt(
+			[[
+  if {var} != nil {{
+    {body}
+  }}
+  ]],
+			{
+				var = c(1, {
+					sn(nil, t("err")),
+					sn(nil, i(1)),
+				}),
+				body = i(2),
+			}
+		)
+	),
 }

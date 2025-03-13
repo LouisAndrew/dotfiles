@@ -20,8 +20,13 @@ return {
 			},
 		},
 		"windwp/nvim-ts-autotag",
-		{ "echasnovski/mini.ai", version = "*" },
-		{ "echasnovski/mini.pairs", branch = "stable" },
+		{
+			"echasnovski/mini.ai",
+			version = "*",
+			opts = true,
+			desc = "viq, vab, vib, vaq. not possible (or hard) with TS",
+		},
+		{ "echasnovski/mini.pairs", branch = "stable", opts = true },
 		{
 			"RRethy/vim-illuminate",
 			config = function()
@@ -76,6 +81,99 @@ return {
 			autotag = {
 				enable = true,
 			},
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+						["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+						["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+						["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+
+						-- works for javascript/typescript files (custom capture I created in after/queries/ecma/textobjects.scm)
+						["a:"] = { query = "@property.outer", desc = "Select outer part of an object property" },
+						["i:"] = { query = "@property.inner", desc = "Select inner part of an object property" },
+						["l:"] = { query = "@property.lhs", desc = "Select left part of an object property" },
+						["r:"] = { query = "@property.rhs", desc = "Select right part of an object property" },
+
+						["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
+						["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+
+						["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+						["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+
+						["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+						["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+
+						["ax"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+						["ix"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+
+						["af"] = {
+							query = "@function.outer",
+							desc = "Select outer part of a method/function definition",
+						},
+						["if"] = {
+							query = "@function.inner",
+							desc = "Select inner part of a method/function definition",
+						},
+
+						["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+						["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
+						["<leader>n:"] = "@property.outer", -- swap object property with next
+						["<leader>nm"] = "@function.outer", -- swap function with next
+					},
+					swap_previous = {
+						["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
+						["<leader>p:"] = "@property.outer", -- swap object property with prev
+						["<leader>pm"] = "@function.outer", -- swap function with previous
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]x"] = { query = "@call.outer", desc = "Next function call start" },
+						["]f"] = { query = "@function.outer", desc = "Next method/function def start" },
+						["]c"] = { query = "@class.outer", desc = "Next class start" },
+						["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
+						["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+
+						-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+						-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+						["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+						["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+					},
+					goto_next_end = {
+						["]X"] = { query = "@call.outer", desc = "Next function call end" },
+						["]F"] = { query = "@function.outer", desc = "Next method/function def end" },
+						["]C"] = { query = "@class.outer", desc = "Next class end" },
+						["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
+						["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+					},
+					goto_previous_start = {
+						["[x"] = { query = "@call.outer", desc = "Prev function call start" },
+						["[f"] = { query = "@function.outer", desc = "Prev method/function def start" },
+						["[c"] = { query = "@class.outer", desc = "Prev class start" },
+						["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
+						["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+					},
+					goto_previous_end = {
+						["[X"] = { query = "@call.outer", desc = "Prev function call end" },
+						["[F"] = { query = "@function.outer", desc = "Prev method/function def end" },
+						["[C"] = { query = "@class.outer", desc = "Prev class end" },
+						["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
+						["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+					},
+				},
+			},
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -93,42 +191,5 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "<C-s>", ts_repeat_move.repeat_last_move_next)
 		vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previous)
 		vim.keymap.set("n", "<leader>ih", "<cmd>:TSHighlightCapturesUnderCursor<cr>")
-
-		local ai = require("mini.ai")
-		ai.setup({
-			n_lines = 500,
-			mappings = {
-				goto_left = "[",
-				goto_right = "]",
-				-- `val=` -> goes to `local ->ai`
-			},
-			custom_textobjects = {
-				o = ai.gen_spec.treesitter({
-					a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-					i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-				}, {}),
-
-				["="] = ai.gen_spec.treesitter({
-					a = { "@assignment.lhs" },
-					i = { "@assignment.rhs" },
-				}),
-				a = ai.gen_spec.argument({ brackets = { "%b()" } }),
-
-				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-				-- @TODO find out more use cases
-				t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
-				-- <html></html>
-
-				x = ai.gen_spec.treesitter({
-					a = { "@call.outer" },
-					i = { "@call.inner" },
-				}, {}),
-			},
-			search_method = "cover_or_next",
-		})
-
-		local pairs = require("mini.pairs")
-		pairs.setup()
 	end,
 }

@@ -226,14 +226,14 @@ Group.new("TerminalNormal", colors.secondary, colors.nb_background)
 Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
 Group.new("diffChanged", colors.blue_fg)
-Group.new("GitSignsChange", colors.indigo_fg:dark())
-Group.new("GitSignsAdd", colors.add:light():light():light())
-Group.new("GitSignsDelete", colors.remove:light():light():light())
+Group.new("GitSignsChange", colors.indigo_fg)
+
+Group.new("GitSignsAdd", colors.add_fg)
+Group.new("GitSignsDelete", colors.remove_fg)
 
 Group.new("diffFile", colors.primary)
 Group.new("diffNewFile", colors.primary)
 Group.new("diffLine", colors.primary)
-
 -- DiffView
 Group.new("DiffAdd", nil, colors.add)
 Group.new("DiffDelete", nil, colors.remove)
@@ -370,7 +370,7 @@ local md_config = {
 	{ "RenderMarkdownCodeInline", nil, colors.background },
 	{ "RenderMarkdownCode", nil, colors.mfed_bg_accent_light },
 	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
-	{ "MarkviewCodeInfo", nil, colors.bg_shade },
+	-- { "MarkviewCodeInfo", nil, colors.debug },
 	{ "MarkviewCodeInline", nil, colors.mfed_bg_accent_light },
 	{ "InlineCode", nil, colors.nb_background },
 	{ "RenderMarkdownLink", colors.mfed_navy, nil },
@@ -491,6 +491,7 @@ local cmp_config = {
 	{ "Unit", colors.mfed_cyan },
 	{ "Text", colors.mfed_2 },
 	{ "Snippet", colors.mfed_2 },
+	{ "Keyword", colors.mfed_2 },
 }
 
 local navic_config = {
