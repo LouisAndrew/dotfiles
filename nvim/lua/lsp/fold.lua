@@ -40,6 +40,7 @@ require("ufo").setup({
 		json = { "array" },
 		vue = { "import_statement" },
 		go = { "import_declaration" },
+		tsplayground = {},
 	},
 	preview = {
 		win_config = {
@@ -54,7 +55,11 @@ require("ufo").setup({
 			jumpBot = "]",
 		},
 	},
-	provider_selector = function()
+	provider_selector = function(_, ft)
+		if ft == "tsplayground" then
+			return { "indent" }
+		end
+
 		return { "treesitter", "indent" }
 	end,
 	fold_virt_text_handler = handler,

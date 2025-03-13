@@ -1,3 +1,5 @@
+local icons = require("theme.icons")
+
 return {
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -19,8 +21,6 @@ return {
 			{
 				"stevearc/quicker.nvim",
 				event = "FileType qf",
-				---@module "quicker"
-				---@type quicker.SetupOptions
 				opts = {},
 			},
 		},
@@ -78,6 +78,23 @@ return {
 		opts = {
 			-- your configuration comes here
 			global_keymaps = false,
+			kulala_keymaps = {
+				["Show headers"] = {
+					"P",
+					function()
+						require("kulala.ui").show_headers()
+					end,
+				},
+			},
+			show_icons = "above_request",
+			icons = {
+				inlay = {
+					loading = icons.Circle,
+					done = icons.CircleCheck,
+					error = icons.Error,
+				},
+				textHighlight = "Normal",
+			},
 		},
 	},
 	{

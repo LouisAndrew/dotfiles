@@ -11,6 +11,7 @@ return {
 		opts = {
 			preview = {
 				filetypes = { "markdown", "codecompanion", "Avante", "copilot-chat" },
+				icon_provider = "devicons",
 			},
 			markdown_inline = {
 				checkboxes = {
@@ -48,7 +49,6 @@ return {
 					},
 				},
 				code_blocks = {
-					icons = "devicons",
 					style = "block",
 					sign = false,
 					pad_amount = 2,

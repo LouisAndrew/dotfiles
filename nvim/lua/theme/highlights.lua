@@ -380,7 +380,7 @@ local md_config = {
 	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.mfed_0 },
 	{ "@markup.link", colors.mfed_0 },
-	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
+	{ "@markup.heading", colors.mfed_2, nil, nil },
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
@@ -491,6 +491,7 @@ local cmp_config = {
 	{ "Unit", colors.mfed_cyan },
 	{ "Text", colors.mfed_2 },
 	{ "Snippet", colors.mfed_2 },
+	{ "Keyword", colors.mfed_2 },
 }
 
 local navic_config = {
