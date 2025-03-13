@@ -7,7 +7,10 @@ return {
 			{
 				"<C-o>",
 				function()
-					Snacks.picker.files()
+					Snacks.picker.files({
+						-- dotfiles, but not hidden (in gitignore)
+						hidden = true,
+					})
 				end,
 				desc = "Find Files",
 			},
@@ -50,6 +53,7 @@ return {
 				"<leader>e",
 				function()
 					Snacks.explorer({
+						hidden = true,
 						win = {
 							list = {
 								keys = {

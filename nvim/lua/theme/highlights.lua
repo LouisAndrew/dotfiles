@@ -491,6 +491,7 @@ local cmp_config = {
 	{ "Unit", colors.mfed_cyan },
 	{ "Text", colors.mfed_2 },
 	{ "Snippet", colors.mfed_2 },
+	{ "Keyword", colors.mfed_2 },
 }
 
 local navic_config = {
