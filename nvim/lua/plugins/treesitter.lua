@@ -15,7 +15,7 @@ return {
 					function()
 						require("neogen").generate()
 					end,
-					"Generate annotation comment",
+					desc = "Generate annotation comment",
 				},
 			},
 		},
@@ -23,7 +23,12 @@ return {
 		{
 			"echasnovski/mini.ai",
 			version = "*",
-			opts = true,
+			opts = {
+				mappings = {
+					goto_left = "[",
+					goto_right = "]",
+				},
+			},
 			desc = "viq, vab, vib, vaq. not possible (or hard) with TS",
 		},
 		{ "echasnovski/mini.pairs", branch = "stable", opts = true },

@@ -1,4 +1,3 @@
-local special_chars = require("theme.special_chars")
 local keymaps = require("lsp.keymaps")
 
 local lsp_zero = require("lsp-zero")

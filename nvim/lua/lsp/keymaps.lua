@@ -13,7 +13,7 @@ return {
 
 		local M = {
 			n = {
-				{ "go", vim.lsp.buf.definition },
+				{ "go", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
 				{
 					"K",
 					function()
@@ -22,17 +22,27 @@ return {
 							vim.lsp.buf.hover()
 						end
 					end,
+					opts = {
+						desc = "Hover",
+					},
 				},
-				{ "<leader>is", vim.lsp.buf.workspace_symbol },
+				{
+					"<leader>is",
+					vim.lsp.buf.document_symbol,
+					opts = { desc = "Document symbols" },
+				},
 				{
 					"<space>id",
 					function()
 						vim.diagnostic.open_float(diag_float_config)
 					end,
+					opts = {
+						desc = "Open diagnostic in float",
+					},
 				},
-				{ "<leader>ia", vim.lsp.buf.code_action },
+				{ "<leader>ia", vim.lsp.buf.code_action, opts = { desc = "Code actions" } },
 				{ "<leader>it", "<cmd>Outline<CR>" },
-				{ "<leader>in", vim.lsp.buf.rename },
+				{ "<leader>in", vim.lsp.buf.rename, opts = { desc = "Rename" } },
 				{ "<leader>rr", "<cmd>LspRestart<CR>" },
 				{
 					"[d",
@@ -42,7 +52,8 @@ return {
 							float = diag_float_config,
 						})
 					end,
-				}, -- jump to previous diagnostic in buffer
+					opts = { desc = "Prev diagnostic" },
+				},
 				{
 					"]d",
 					function()
@@ -51,8 +62,8 @@ return {
 							float = diag_float_config,
 						})
 					end,
+					opts = { desc = "Next diagnostic" },
 				},
-
 				{
 					"[e",
 					function()
@@ -62,6 +73,7 @@ return {
 							severity = vim.diagnostic.severity.ERROR,
 						})
 					end,
+					opts = { desc = "Prev error" },
 				},
 				{
 					"]e",
@@ -72,6 +84,7 @@ return {
 							severity = vim.diagnostic.severity.ERROR,
 						})
 					end,
+					opts = { desc = "Next error" },
 				},
 				{
 					"[w",
@@ -82,6 +95,7 @@ return {
 							severity = vim.diagnostic.severity.WARN,
 						})
 					end,
+					opts = { desc = "Prev warning" },
 				},
 				{
 					"]w",
@@ -92,8 +106,9 @@ return {
 							severity = vim.diagnostic.severity.WARN,
 						})
 					end,
+					opts = { desc = "Next warning" },
 				},
-				{ "<leader>ir", vim.lsp.buf.references },
+				{ "<leader>ir", vim.lsp.buf.references, opts = { desc = "Find references" } },
 				{
 					"<leader>rl",
 					function()
@@ -110,11 +125,18 @@ return {
 				{
 					"<c-b>",
 					vim.lsp.buf.signature_help,
+					opts = { desc = "Signature help" },
 				},
-				{ "<C-h>", "<Left>", opts },
+				{ "<C-h>", "<Left>" },
 			},
 			v = {
-				{ "<leader>ir", vim.lsp.buf.references, opts },
+				{
+					"<leader>ir",
+					vim.lsp.buf.references,
+					{
+						desc = "Find references",
+					},
+				},
 			},
 		}
 

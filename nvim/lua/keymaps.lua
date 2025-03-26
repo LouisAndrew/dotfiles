@@ -6,7 +6,7 @@ end
 local function build_keymaps(keymaps, opts)
 	for mode, t in pairs(keymaps) do
 		for _, remap in pairs(t) do
-			vim.keymap.set(mode, remap[1], remap[2], opts and opts or remap.opts)
+			vim.keymap.set(mode, remap[1], remap[2], vim.tbl_extend("force", opts or {}, remap.opts or {}))
 		end
 	end
 end

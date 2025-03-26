@@ -65,7 +65,7 @@ return {
 		"mistweaverco/kulala.nvim",
 		keys = {
 			{
-				"<leader>r",
+				"<leader>rq",
 				function()
 					require("kulala").run()
 				end,

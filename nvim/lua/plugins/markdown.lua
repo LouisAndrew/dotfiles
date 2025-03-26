@@ -19,7 +19,7 @@ return {
 					unchecked = { text = icons.Box },
 				},
 				hyperlinks = {
-					icon = " ",
+					enable = false,
 				},
 				images = {
 					icon = " ",

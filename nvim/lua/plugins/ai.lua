@@ -84,10 +84,11 @@ return {
 				antropic_version = "bedrock-2023-05-31",
 			})
 			require("avante").setup({
-				provider = "bedrockcustom",
-				vendors = {
-					bedrockcustom = require("avante_provider_bedrock").vendor(),
-				},
+				provider = "claude",
+				-- provider = "bedrockcustom",
+				-- vendors = {
+				-- 	bedrockcustom = require("avante_provider_bedrock").vendor(),
+				-- },
 			})
 		end,
 	},
