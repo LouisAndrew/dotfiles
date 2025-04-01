@@ -148,19 +148,19 @@ return {
 				local root = vim.fn.getcwd()
 				return string.gsub(root, "^.*/(.*)$", "%1")
 			end,
-			padding = { right = 1, left = 1 },
+			padding = { left = 1, right = 0 },
 			color = {
-				fg = minimal_fedu.dimmed_white,
+				fg = minimal_fedu.white,
 			},
 		})
 
 		ins_left({
 			"branch",
-			icon = "",
+			icon = "",
 			color = {
-				fg = minimal_fedu.palette.indigo_fg,
+				fg = minimal_fedu.dimmed_white,
 			},
-			padding = { right = 1, left = 1 },
+			padding = { right = 0, left = 0 },
 		})
 
 		ins_left({
@@ -175,47 +175,6 @@ return {
 					[""] = "visual",
 				}
 				return mode_info[mode] or mode
-			end,
-
-			color = function()
-				-- auto change color according to neovims mode
-				local mode_color = {
-					n = minimal_fedu.misc.remove_fg,
-					i = minimal_fedu.misc.add_fg,
-					v = minimal_fedu.palette.magenta_fg,
-					[""] = minimal_fedu.palette.magenta_fg,
-					V = minimal_fedu.palette.magenta_fg,
-					c = minimal_fedu.palette.orange,
-					no = colors.red,
-					s = colors.orange,
-					S = colors.orange,
-					[""] = colors.orange,
-					ic = colors.yellow,
-					R = colors.violet,
-					Rv = colors.violet,
-					cv = colors.red,
-					ce = colors.red,
-					r = colors.cyan,
-					rm = colors.cyan,
-					["r?"] = colors.cyan,
-					["!"] = colors.red,
-					t = colors.red,
-				}
-
-				local mode_color_bg = {
-					n = minimal_fedu.misc.remove,
-					i = minimal_fedu.misc.add,
-					v = minimal_fedu.misc.change,
-					[""] = minimal_fedu.misc.change,
-					c = minimal_fedu.palette.yellow,
-				}
-
-				-- local bg = mode_color_bg[vim.fn.mode()]
-
-				return {
-					fg = mode_color[vim.fn.mode()],
-					-- bg = bg,
-				}
 			end,
 			padding = { right = 1, left = 1 },
 		})
@@ -234,15 +193,15 @@ return {
 
 		ins_left({
 			function()
-				local mode = require("noice").api.statusline.mode.get()
+				local mode = require("noice").api.status.mode.get()
 				if mode:find("^recording") then
 					return mode
 				end
 
 				return ""
 			end,
-			cond = require("noice").api.statusline.mode.has,
-			color = { fg = minimal_fedu.dimmed_white },
+			cond = require("noice").api.status.mode.has,
+			-- color = { fg = minimal_fedu.dimmed_white },
 			padding = { left = 2 },
 		})
 
@@ -284,17 +243,14 @@ return {
 				alternate_file = "", -- Text to show to identify the alternate file
 				directory = "", -- Text to show when the buffer is a directory
 			},
-
-			padding = {
-				right = 1,
-			},
 		})
 
 		ins_right({
-			-- Lsp server name .
 			function()
-				local msg = "|    no lsp"
-				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+				local msg = "no lsp"
+				local buf_ft = vim.api.nvim_get_option_value("filetype", {
+					buf = 0,
+				})
 				local clients = vim.lsp.get_clients()
 
 				if next(clients) == nil then
@@ -338,16 +294,11 @@ return {
 				end
 
 				if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
-					return "|    " .. table.concat(client_names, ", ")
+					return table.concat(client_names, ", ")
 				elseif #client_names > 0 then
-					return "|    " .. #client_names .. " LSPs"
+					return #client_names .. " LSPs"
 				end
 			end,
-			color = {
-				fg = minimal_fedu.cyan,
-				-- bg = minimal_fedu.misc.add
-			},
-			padding = { left = 1, right = 1 },
 		})
 
 		lualine.setup(config)

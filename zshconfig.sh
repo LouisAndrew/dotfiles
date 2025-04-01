@@ -79,7 +79,7 @@ BG_COLOR_DARK="#0a0a0a"
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
 export LS_COLORS=$LS_COLORS:"di=1;$COLOR_MAGENTA"; 
-export EZA_COLORS="sc=0;$COLOR_CYAN:di=1;$COLOR_CYAN:bu=0;$COLOR_YELLOW"
+export EZA_COLORS="sc=0;$COLOR_CYAN:di=0;$COLOR_CYAN:bu=0;$COLOR_YELLOW"
 export MASON="$HOME/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="$HOME/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"
@@ -87,7 +87,7 @@ export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
 
 PROMPT_ICON=""
-export FZF_DEFAULT_OPTS="--layout reverse --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'"
+export FZF_DEFAULT_OPTS="--layout reverse --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' --no-bold"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG_COLOR,bg+:$BG_COLOR
   --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#ffcfa7

@@ -12,6 +12,10 @@ function jira_status() {
       ticket_status='ToDo'
     fi
 
+    if [[ $ticket_status == "dr" ]]; then
+      ticket_status='Design check'
+    fi
+
     if [[ $ticket_status == "cr" ]]; then
       ticket_status='Code Review'
     fi
