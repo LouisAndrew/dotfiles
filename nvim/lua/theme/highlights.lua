@@ -74,8 +74,8 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.mfed_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.mfed_0)
-Group.new("NormalFloat", nil, colors.bg_shade)
-Group.new("FloatBorder", colors.bg_shade, colors.bg_shade)
+Group.new("NormalFloat", nil, colors.nb_background)
+Group.new("FloatBorder", colors.mfed_bg_accent, colors.nb_background)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -378,9 +378,9 @@ local md_config = {
 	{ "MarkviewImageLink", colors.mfed_cyan },
 	{ "MarkviewBlockQuoteDefault", colors.indigo_fg },
 	{ "@spell.markdown", colors.mfed_2 },
-	{ "@markup", colors.mfed_0 },
+	{ "@markup", colors.dimmed_white },
 	{ "@markup.link", colors.mfed_0 },
-	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
+	{ "@markup.heading", colors.white, nil },
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
@@ -560,6 +560,14 @@ local flash_config = {
 	{ "FlashLabel", colors.indigo_fg, colors.indigo },
 }
 
+local avante_config = {
+	prefix = "Avante",
+	{ "SidebarNormal", nil, colors.nb_background },
+	{ "SidebarWinHorizontalSeparator", nil, colors.nb_background },
+	{ "SidebarWinSeparator", colors.mfed_bg_accent, colors.nb_background },
+	{ "InlineHint", colors.mfed_7 },
+}
+
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -582,6 +590,7 @@ local hl_group_configs = {
 	flash_config,
 	diagnostic_config,
 	mini_hipatterns_config,
+	avante_config,
 }
 
 --- @class HlConfig

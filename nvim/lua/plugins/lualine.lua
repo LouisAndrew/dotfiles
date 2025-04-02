@@ -7,29 +7,13 @@ return {
 		local search_count = require("search").search_count
 		local utils = require("utils")
 
-		local colors = {
-			-- Enable bg if transparent not disabled.
-			bg = minimal_fedu.background,
-			-- bg = nil,
-			fg = "#ffbb80",
-			yellow = "#ffad67",
-			cyan = "#008080",
-			darkblue = "#081633",
-			green = "#81ffbb",
-			orange = "#FF8800",
-			violet = "#a9a1e1",
-			magenta = "#c678dd",
-			blue = "#51afef",
-			red = "#ff8185",
-		}
-
 		local config = {
 			options = {
 				section_separators = "",
 				component_separators = "",
 				theme = {
-					normal = { c = { bg = colors.bg } },
-					inactive = { c = { bg = colors.bg } },
+					normal = { c = { bg = minimal_fedu.background } },
+					inactive = { c = { bg = minimal_fedu.background } },
 				},
 			},
 			disabled_filetypes = {
@@ -119,18 +103,9 @@ return {
 		})
 
 		ins_winbar_right({
-			"filetype",
-			colored = false,
-			icon_only = true,
-			icon = { align = "right" },
-			padding = { right = 0 },
-			color = { fg = minimal_fedu.noir_2, bg = nil },
-		}, { fg = minimal_fedu.noir_6, bg = nil })
-
-		ins_winbar_right({
 			"filename",
 			file_status = true, -- Displays file status (readonly status, modified status)
-			newfile_status = false, -- Display new file status (new file means no write after created)
+			newfile_status = true, -- Display new file status (new file means no write after created)
 			path = 4, -- 0: Just the filename
 			color = { fg = minimal_fedu.noir_2 },
 			shorting_target = 60,
@@ -176,7 +151,10 @@ return {
 				}
 				return mode_info[mode] or mode
 			end,
-			padding = { right = 1, left = 1 },
+			padding = { right = 0, left = 1 },
+			color = {
+				fg = minimal_fedu.dimmed_white,
+			},
 		})
 
 		ins_left({
@@ -247,7 +225,7 @@ return {
 
 		ins_right({
 			function()
-				local msg = "no lsp"
+				local msg = "| no lsp"
 				local buf_ft = vim.api.nvim_get_option_value("filetype", {
 					buf = 0,
 				})
@@ -294,11 +272,17 @@ return {
 				end
 
 				if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
-					return table.concat(client_names, ", ")
+					return "| " .. table.concat(client_names, ", ")
 				elseif #client_names > 0 then
-					return #client_names .. " LSPs"
+					return "| " .. #client_names .. " LSPs"
 				end
 			end,
+			padding = {
+				left = -1,
+			},
+			color = {
+				fg = minimal_fedu.dimmed_white,
+			},
 		})
 
 		lualine.setup(config)

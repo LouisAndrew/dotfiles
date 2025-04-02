@@ -92,6 +92,9 @@ return {
 		opts = {
 			processor = "magick_cli",
 			integrations = {
+				html = {
+					enabled = true,
+				},
 				markdown = {
 					clear_in_insert_mode = true,
 					only_render_image_at_cursor = true,

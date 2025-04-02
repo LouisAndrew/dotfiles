@@ -69,6 +69,13 @@ function jli() {
   jira issue list $assigner $ticket_status --plain --no-headers --columns $columns
 }
 
+function jb() {
+  q="project = MOPS AND (labels not in (Experiment) OR labels is EMPTY) AND statusCategory != Done AND status != Backlog"
+  columns="KEY,SUMMARY,STATUS,ASIGNEE"
+
+  jira issue list --no-headers --columns $columns -q $q --order-by status
+}
+
 function jmi() {
   ticket_status=$(jira_status $1)
   ticket_key=$2

@@ -7,18 +7,6 @@ return {
 	---@type lc.LeetCode
 	opts = {
 		arg = utils.CONST.leet_arg,
-		hooks = {
-			["enter"] = {
-				function()
-					print("enter")
-				end,
-			},
-			["question_enter"] = {
-				function()
-					print("")
-				end,
-			},
-		},
 		lang = "typescript",
 	},
 }
