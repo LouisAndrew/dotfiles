@@ -17,9 +17,6 @@ return {
 		lazy = false,
 		version = "*",
 		event = "InsertEnter",
-		dependencies = {
-			"xzbdmw/colorful-menu.nvim",
-		},
 		opts_extend = { "sources.default" },
 		config = function()
 			---@module 'blink.cmp'
@@ -35,12 +32,6 @@ return {
 					menu = {
 						draw = {
 							columns = { { "kind_icon" }, { "label", gap = 1 } },
-							components = {
-								label = {
-									text = require("colorful-menu").blink_components_text,
-									highlight = require("colorful-menu").blink_components_highlight,
-								},
-							},
 						},
 					},
 				},

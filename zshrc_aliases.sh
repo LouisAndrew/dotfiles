@@ -176,6 +176,9 @@ alias bsr="brew services restart"
 alias kctl="kubectl"
 alias hc="~/httpcollections/"
 
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"
 source "$DOTFILES_PATH/jira.sh"

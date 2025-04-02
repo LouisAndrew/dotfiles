@@ -26,8 +26,9 @@ truncation_length = 0
 
 [git_branch]
 style = "white"
-symbol = ""
-format = ' [$symbol $branch(:$remote_branch)]($style)'
+# symbol = ""
+symbol = ""
+format = '[$symbol $branch(:$remote_branch)]($style)'
 
 [git_status]
 conflicted = " "
