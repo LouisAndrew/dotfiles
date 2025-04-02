@@ -6,7 +6,7 @@ local styles = require("colorbuddy").styles
 Group.new("Normal", colors.mfed_4, colors.nb_background)
 Group.new("Search", colors.mfed_2, colors.mfed_8)
 Group.new("IncSearch", colors.mfed_2, colors.mfed_8)
-Group.new("CurSearch", colors.mfed_9, colors.yellow_fg)
+Group.new("CurSearch", colors.mfed_9, colors.indigo_fg)
 
 Group.new("Visual", nil, colors.visual)
 Group.new("SignColumn", nil, colors.nb_background)
@@ -27,12 +27,11 @@ Group.new("ColorColumn", nil, colors.mfed_8)
 Group.new("Conceal", colors.mfed_7)
 Group.new("CursorColumn", nil, colors.mfed_9)
 Group.new("CursorLine", nil, colors.mfed_9)
-Group.new("CursorLineNr", colors.mfed_6, colors.noir_9)
 Group.new("vCursorLine", colors.indigo_fg)
 Group.new("RCursorLine", colors.yellow_fg)
 
-Group.new("Cursor", nil, colors.yellow_fg)
-Group.new("iCursor", nil, colors.add_fg)
+Group.new("Cursor", nil, colors.indigo_fg)
+Group.new("iCursor", nil, colors.indigo_fg)
 Group.new("vCursor", nil, colors.indigo_fg)
 Group.new("oCursor", nil, colors.remove_fg)
 Group.new("rCursor", nil, colors.yellow_fg)
@@ -47,10 +46,10 @@ Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
 Group.new("Folded", colors.noir_9, nil)
 
-Group.new("UfoFoldVirtualText", colors.mfed_6)
+Group.new("UfoFoldVirtualText", colors.mfed_7)
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
-Group.new("FoldColumn", colors.mfed_7:dark())
+Group.new("FoldColumn", colors.mfed_8)
 Group.new("MatchParen", nil, colors.mfed_7)
 
 Group.new("MoreMsg", nil, colors.mfed_6)
@@ -74,8 +73,8 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.mfed_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.mfed_0)
-Group.new("NormalFloat", nil, colors.bg_shade)
-Group.new("FloatBorder", colors.bg_shade, colors.bg_shade)
+Group.new("NormalFloat", nil, colors.nb_background)
+Group.new("FloatBorder", colors.mfed_bg_accent, colors.nb_background)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -378,18 +377,19 @@ local md_config = {
 	{ "MarkviewImageLink", colors.mfed_cyan },
 	{ "MarkviewBlockQuoteDefault", colors.indigo_fg },
 	{ "@spell.markdown", colors.mfed_2 },
-	{ "@markup", colors.mfed_0 },
+	{ "@markup", colors.dimmed_white },
 	{ "@markup.link", colors.mfed_0 },
-	{ "@markup.heading", colors.mfed_2, nil, styles.bold },
+	{ "@markup.heading", colors.white, nil, styles.bold },
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
-	{ "MarkviewBlockQuoteNote", colors.indigo_fg },
+	{ "MarkviewBlockQuoteNote", colors.mfed_navy },
 	{ "MarkviewTableBorder", colors.mfed_7 },
 	{ "MarkviewTableHeader", colors.mfed_7 },
 	{ "MarkviewTableAlignLeft", colors.mfed_7 },
 	{ "MarkviewTableAlignRight", colors.mfed_7 },
 	{ "MarkviewTableAlignCenter", colors.mfed_7 },
+	{ "MarkviewPalette7Fg", colors.mfed_navy },
 }
 
 local dap_config = {
@@ -436,7 +436,13 @@ local snacks_picker_config = {
 	{ "Match", colors.white },
 	{ "Row", colors.dimmed_white },
 	{ "Col", colors.dimmed_white },
-	{ "Box", nil, colors.bg_shade },
+	{ "Box", nil, colors.debug },
+}
+
+local snacks_indent = {
+	prefix = "SnacksIndent",
+	{ "", colors.mfed_9 },
+	{ "Scope", colors.mfed_8 },
 }
 
 local noice_config = {
@@ -448,7 +454,7 @@ local noice_config = {
 	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
 	{ "NoiceCmdlinePopupBorderSearch", colors.nb_background:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.mfed_2, colors.noir_9 },
-	{ "NoiceVirtualText", colors.yellow_fg },
+	{ "NoiceVirtualText", colors.indigo_fg_light },
 	{ "NoicePopupBorder", colors.nb_background, colors.nb_background },
 	{ "NoicePopup", nil, colors.nb_background },
 	{ "NoiceCmdlineSearch", colors.mfed_2, colors.nb_background },
@@ -560,6 +566,14 @@ local flash_config = {
 	{ "FlashLabel", colors.indigo_fg, colors.indigo },
 }
 
+local avante_config = {
+	prefix = "Avante",
+	{ "SidebarNormal", nil, colors.nb_background },
+	{ "SidebarWinHorizontalSeparator", nil, colors.nb_background },
+	{ "SidebarWinSeparator", colors.mfed_bg_accent, colors.nb_background },
+	{ "InlineHint", colors.mfed_7 },
+}
+
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -582,6 +596,8 @@ local hl_group_configs = {
 	flash_config,
 	diagnostic_config,
 	mini_hipatterns_config,
+	avante_config,
+	snacks_indent,
 }
 
 --- @class HlConfig

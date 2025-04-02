@@ -77,17 +77,7 @@ return {
 					},
 					help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "  ? " },
 					input = {
-						opts = {
-							-- win_options = {
-							-- 	winhighlight = {
-							-- 		Normal = "NoiceInputNormal",
-							-- 	},
-							-- },
-
-							border = {
-								-- style = special_chars.create_special_border({ vertical_padding = false }),
-							},
-						},
+						opts = {},
 					},
 				},
 			},

@@ -52,4 +52,5 @@ return {
 	Clippy = "",
 	Box = " ",
 	BoxChecked = " ",
+	Bookmark = "",
 }

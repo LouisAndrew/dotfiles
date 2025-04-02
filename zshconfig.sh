@@ -78,8 +78,8 @@ BG_COLOR_DARK="#0a0a0a"
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
-export LS_COLORS=$LS_COLORS:"di=1;$COLOR_MAGENTA"; 
-export EZA_COLORS="sc=0;$COLOR_CYAN:di=0;$COLOR_CYAN:bu=0;$COLOR_YELLOW"
+export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
+export EZA_COLORS="sc=0;$COLOR_CYAN:di=0;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
 export MASON="$HOME/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="$HOME/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
 export EDITOR="nvim"

@@ -62,6 +62,12 @@ return {
 						end,
 						opts = { noremap = false, expr = true, buffer = true },
 					},
+					["go"] = {
+						action = function()
+							return require("obsidian").util.gf_passthrough()
+						end,
+						opts = { noremap = false, expr = true, buffer = true },
+					},
 				},
 				picker = {
 					-- snacks picker is not good enough. doesn't filter out assets
@@ -81,6 +87,7 @@ return {
 					hl_groups = {
 						ObsidianTag = { italic = false, fg = colors.palette.indigo_fg },
 					},
+					reference_text = { char = "" },
 				},
 				workspaces = {
 					-- {

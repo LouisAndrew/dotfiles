@@ -72,5 +72,13 @@ vim.keymap.set("n", "z2", function()
 	require("ufo").closeFoldsWith(1)
 end)
 
+vim.keymap.set("n", "z3", function()
+	require("ufo").closeFoldsWith(2)
+end)
+
+vim.keymap.set("n", "zn", function()
+	require("ufo").closeFoldsWith(1)
+end)
+
 vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
 vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)

@@ -21,13 +21,13 @@ add_newline = false
 [directory]
 format = "[$read_only]($read_only_style)[$path]($style)"
 read_only = "🔒 "
-style = "bold white"
+style = "fg:#ffffff"
 truncation_length = 0
 
 [git_branch]
-style = "white"
-symbol = ""
-format = ' [$symbol $branch(:$remote_branch)]($style)'
+style = "bright-white"
+symbol = ""
+format = '[$symbol $branch(:$remote_branch)]($style)'
 
 [git_status]
 conflicted = " "
@@ -40,8 +40,8 @@ modified = " ${count} "
 staged = " ${count} "
 renamed = " ${count} "
 deleted = " ${count} "
-style = "bold white"
-format = " $all_status$ahead_behind"
+style = "bright-white"
+format = ' ([$all_status$ahead_behind]($style))'
 
 [python]
 format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
@@ -76,9 +76,9 @@ format = '- [lua@$version](blue) '
 format = "- [rust@$version]($style) "
 
 [character]
-error_symbol = " [# ](white)"
-success_symbol = " [# ](white)"
-vimcmd_symbol = " [! ](gray)"
-vimcmd_replace_one_symbol = " [! ](bold green)"
-vimcmd_replace_symbol = " [! ](bold yellow)"
-vimcmd_visual_symbol = " [! ](bold purple)"
+error_symbol = " [# ](bright-white)"
+success_symbol = " [# ](bright-white)"
+vimcmd_symbol = " [! ](bright-white)"
+vimcmd_replace_one_symbol = " [! ](green)"
+vimcmd_replace_symbol = " [! ](yellow)"
+vimcmd_visual_symbol = " [! ](purple)"

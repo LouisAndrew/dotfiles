@@ -6,11 +6,11 @@ export KEYTIMEOUT=1
 
 # Change cursor with support for inside/outside tmux
 function _set_cursor() {
-    if [[ $TMUX = '' ]]; then
-      echo -ne $1
-    else
-      echo -ne "\ePtmux;\e\e$1\e\\"
-    fi
+  if [[ $TMUX = '' ]]; then
+    echo -ne $1
+  else
+    echo -ne "\ePtmux;\e\e$1\e\\"
+  fi
 }
 
 function _set_block_cursor() { _set_cursor '\e[2 q' }

@@ -1,6 +1,4 @@
-local config = require("config")
-
-local global_group = vim.api.nvim_create_augroup("Global Highlights", { clear = true })
+local utils = require("utils")
 local md_group = vim.api.nvim_create_augroup("MD Highlights", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -46,30 +44,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 local pasteImg = require("cmds.paste-img")
 vim.api.nvim_create_user_command("PasteImgClipboardObsidian", pasteImg, { nargs = "?" })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "copilot-*",
-	callback = function()
-		vim.opt_local.relativenumber = false
-		vim.opt_local.statuscolumn = " "
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "codecompanion",
-	callback = function()
-		vim.opt_local.relativenumber = false
-		vim.opt_local.statuscolumn = " "
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "oil",
-	callback = function()
-		vim.opt_local.relativenumber = false
-		vim.opt_local.statuscolumn = " "
-	end,
-})
 
 vim.filetype.add({
 	extension = {

@@ -1,5 +1,19 @@
 vim.g.mapleader = " "
 
+if vim.g.neovide then
+	vim.o.guifont = "CommitMono,nonicons:h16"
+	vim.o.linespace = 14
+	vim.g.neovide_padding_top = 6
+	vim.g.neovide_padding_bottom = 6
+	vim.g.neovide_padding_right = 6
+	vim.g.neovide_padding_left = 6
+	vim.g.neovide_floating_shadow = true
+	vim.g.neovide_floating_z_height = 10
+	vim.g.neovide_light_angle_degrees = 45
+	vim.g.neovide_light_radius = 5
+	vim.g.neovide_floating_corner_radius = 4
+end
+
 require("set")
 
 -- set system clipboard

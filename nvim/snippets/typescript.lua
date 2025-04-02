@@ -47,7 +47,7 @@ return {
 	s(
 		"arf",
 		fmt("{async}({ar}) => {body}", {
-			async = c(1, {
+			async = c(3, {
 				sn(nil, fmt("{}", { i(1) })),
 				sn(nil, fmt("async {}", { i(1) })),
 			}),
@@ -55,7 +55,7 @@ return {
 				sn(nil, fmt("{}", { i(1) })),
 				sn(nil, fmt("{{ {} }}", { i(1) })),
 			}),
-			body = c(3, {
+			body = c(1, {
 				sn(nil, fmt("{{ {} }}", i(1))),
 				sn(nil, fmt("{}", i(1))),
 			}),

@@ -1,3 +1,5 @@
+local VAULT = os.getenv("VAULT_PATH")
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -421,6 +423,18 @@ return {
 					enabled = false,
 				},
 			},
+			image = {
+				enabled = false,
+				resolve = function(file, src)
+					if file:find(VAULT, 1, true) then
+						return VAULT .. "/assets/imgs/" .. src
+					end
+				end,
+				doc = {
+					inline = false,
+					float = true,
+				},
+			},
 			input = {
 				prompt_pos = "left",
 				icon_pos = "left",
@@ -432,6 +446,14 @@ return {
 					border = "none",
 					row = -1,
 					width = 0,
+				},
+				image = {
+					border = false,
+					col = -1,
+					row = -1,
+					relative = "editor",
+					minimal = true,
+					position = "bottom",
 				},
 			},
 			notifier = { enabled = false },

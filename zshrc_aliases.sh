@@ -146,7 +146,7 @@ alias n18="nvm use 18"
 alias ndef="nvm use default"
 alias clc="cl & c"
 alias ca="c -a"
-alias k9="k9s -n default"
+alias kn="k9s -n default"
 alias z="eza"
 alias zt="eza -T --git-ignore"
 alias notes="cd $NOTES"
@@ -175,6 +175,9 @@ alias bst="brew services stop"
 alias bsr="brew services restart"
 alias kctl="kubectl"
 alias hc="~/httpcollections/"
+
+alias dcu="docker compose up"
+alias dcd="docker compose down"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"

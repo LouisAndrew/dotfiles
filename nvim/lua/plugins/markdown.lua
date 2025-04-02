@@ -19,16 +19,24 @@ return {
 					unchecked = { text = icons.Box },
 				},
 				hyperlinks = {
-					enable = false,
-				},
-				images = {
-					icon = " ",
-				},
-				emails = {
-					icon = " ",
+					default = {
+						icon = "",
+					},
 				},
 				internal_links = {
-					icon = " ",
+					default = {
+						icon = "",
+					},
+				},
+				images = {
+					default = {
+						icon = "",
+					},
+				},
+				embed_files = {
+					default = {
+						icon = "",
+					},
 				},
 			},
 			markdown = {
@@ -68,8 +76,22 @@ return {
 					border = icons.TallVertLine,
 				},
 				["INFO"] = {
-					hl = "MarkviewBlockQuoteNote",
+					hl = "MarkviewBlockQuoteDefault",
 					preview = icons.CircleCheck .. " Todo",
+					title = true,
+					icon = icons.CircleCheck,
+					border = icons.TallVertLine,
+				},
+				["NOTE"] = {
+					hl = "MarkviewBlockQuoteNote",
+					preview = icons.Bookmark .. " Note",
+					title = true,
+					icon = icons.CircleCheck,
+					border = icons.TallVertLine,
+				},
+				["QUOTE"] = {
+					hl = "MarkviewBlockQuoteNote",
+					preview = icons.Bookmark .. " Quote",
 					title = true,
 					icon = icons.CircleCheck,
 					border = icons.TallVertLine,
@@ -92,6 +114,9 @@ return {
 		opts = {
 			processor = "magick_cli",
 			integrations = {
+				html = {
+					enabled = true,
+				},
 				markdown = {
 					clear_in_insert_mode = true,
 					only_render_image_at_cursor = true,

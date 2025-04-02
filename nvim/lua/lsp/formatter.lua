@@ -6,6 +6,7 @@ local lsp_fallback_format_ft = {
 	"css",
 	"scss",
 	"docker",
+	"json",
 }
 
 conform.setup({
@@ -22,7 +23,6 @@ conform.setup({
 		astro = { "eslint_d" },
 		go = { "gofmt" },
 		markdown = { "prettierd" },
-		json = { "prettierd" },
 		http = { "kulala" },
 	},
 	format_on_save = function(bufnr)
