@@ -107,7 +107,7 @@ return {
 			file_status = true, -- Displays file status (readonly status, modified status)
 			newfile_status = true, -- Display new file status (new file means no write after created)
 			path = 4, -- 0: Just the filename
-			color = { fg = minimal_fedu.noir_2 },
+			color = { fg = minimal_fedu.mfed_6 },
 			shorting_target = 60,
 			symbols = {
 				modified = icons.Modified,
@@ -116,7 +116,7 @@ return {
 				newfile = "[New]",
 			},
 			padding = { left = -1 },
-		}, { fg = minimal_fedu.noir_6 })
+		}, { fg = minimal_fedu.mfed_7 })
 
 		ins_left({
 			function()

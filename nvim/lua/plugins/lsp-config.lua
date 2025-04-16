@@ -40,6 +40,7 @@ return {
 				format_text = function(text)
 					return text:gsub("callback", "cb")
 				end,
+				separator = " / ",
 				lsp = {
 					preference = { "volar" },
 					auto_attach = true,

@@ -65,8 +65,8 @@ return {
 		"fn",
 		fmt("{declaration}({ar}) {{ {body} }}", {
 			declaration = c(1, {
-				sn(nil, t("function")),
-				sn(nil, t("async function")),
+				sn(nil, fmt("function {}", { i(1) })),
+				sn(nil, fmt("async function {}", { i(1) })),
 			}),
 			ar = i(2),
 			body = i(3),
