@@ -1,5 +1,5 @@
 local icons = require("theme.icons")
-local trigger_text = ";"
+local utils = require("utils")
 
 local blink_keymap = {
 	["<C-e>"] = { "show", "hide" },
@@ -29,9 +29,22 @@ return {
 							auto_insert = false,
 						},
 					},
+					accept = {
+						auto_brackets = {
+							enabled = false,
+						},
+					},
 					menu = {
+						border = utils.CONST.border,
+						winblend = utils.CONST.winblend,
 						draw = {
-							columns = { { "kind_icon" }, { "label", gap = 1 } },
+							columns = { { "kind_icon", "label" } },
+						},
+					},
+					documentation = {
+						window = {
+							border = utils.CONST.border,
+							winblend = utils.CONST.winblend,
 						},
 					},
 				},

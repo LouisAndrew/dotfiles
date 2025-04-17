@@ -1,4 +1,5 @@
 local icons = require("theme.icons")
+local minimal_fedu = require("minimal_fedu")
 
 return {
 	"VonHeikemen/lsp-zero.nvim",
@@ -91,6 +92,21 @@ return {
 				},
 			},
 			desc = "Outline",
+		},
+		{
+			"luckasRanarison/tailwind-tools.nvim",
+			name = "tailwind-tools",
+			build = ":UpdateRemotePlugins",
+			opts = {
+				document_color = { enabled = false },
+				conceal = {
+					symbol = "…",
+					min_length = 32,
+					highlight = {
+						fg = minimal_fedu.primary,
+					},
+				},
+			},
 		},
 	},
 	config = function()

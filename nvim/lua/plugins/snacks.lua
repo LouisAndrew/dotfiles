@@ -1,4 +1,5 @@
 local VAULT = os.getenv("VAULT_PATH")
+local utils = require("utils")
 
 return {
 	{
@@ -530,13 +531,14 @@ return {
 		---@module 'which-key'
 		---@type wk.Config
 		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
 			preset = "helix",
 			delay = function(ctx)
 				return ctx.plugin and 0 or 1000
 			end,
+			win = {
+				border = utils.CONST.border,
+				title = false,
+			},
 		},
 		keys = {
 			{

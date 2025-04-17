@@ -97,7 +97,7 @@ function gchb() {
 
 function e() {
   local filename=$1
-  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filenamefunc
+  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
 }
 
 function lsd() {

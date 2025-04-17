@@ -18,6 +18,7 @@ local function create_spec()
 		["typescriptreact"] = ".spec.tsx",
 		["javascriptreact"] = ".spec.jsx",
 		["go"] = "_test.go",
+		["vue"] = ".spec.ts",
 	}
 
 	local ft = vim.bo.filetype

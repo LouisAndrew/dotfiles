@@ -33,7 +33,7 @@ return {
 		lazy = false,
 		config = function()
 			require("avante").setup({
-				provider = "bedrock",
+				provider = "claude",
 				bedrock = {
 					model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
 				},

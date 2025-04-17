@@ -31,4 +31,8 @@ return {
 	cursorlineopt = "number",
 	guicursor = block,
 	undofile = true,
+
+	-- winborder = "single", -- global border
+	-- DON'T set global border since it'll override all
+	-- Noice config (e.g. mini and cmdline_popup will also have border)
 }

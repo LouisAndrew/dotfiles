@@ -10,7 +10,6 @@ local c = ls.choice_node
 local sn = ls.snippet_node
 
 return {
-	-- ls.snippet({ trig = "vts" }, {t('<script setup lang="ts">$0</script>') }),
 	s(
 		"imd",
 		fmt('import {actual} from "{from}"', {
@@ -63,13 +62,14 @@ return {
 	),
 	s(
 		"fn",
-		fmt("{declaration}({ar}) {{ {body} }}", {
+		fmt("{declaration}({ar}){retType} {{ {body} }}", {
 			declaration = c(1, {
 				sn(nil, fmt("function {}", { i(1) })),
 				sn(nil, fmt("async function {}", { i(1) })),
 			}),
 			ar = i(2),
-			body = i(3),
+			retType = i(3),
+			body = i(4),
 		})
 	),
 
@@ -84,4 +84,16 @@ return {
 			body = i(2),
 		})
 	),
+
+	---- Specfile snippets
+
+	s(
+		"it",
+		fmt('it("{spec}", () => {{ {body} }})', {
+			spec = i(1),
+			body = i(2),
+		})
+	),
+
+	s("exp", fmt("expect({}).{}", { i(1), i(2) })),
 }

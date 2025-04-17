@@ -47,6 +47,7 @@ format = ' ([$all_status$ahead_behind]($style))'
 format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
 
 [golang]
+style = "blue"
 format = "- [go@$version]($style) "
 version_format = "$raw"
 
@@ -76,9 +77,6 @@ format = '- [lua@$version](blue) '
 format = "- [rust@$version]($style) "
 
 [character]
-error_symbol = " [# ](bright-white)"
-success_symbol = " [# ](bright-white)"
-vimcmd_symbol = " [! ](bright-white)"
-vimcmd_replace_one_symbol = " [! ](green)"
-vimcmd_replace_symbol = " [! ](yellow)"
-vimcmd_visual_symbol = " [! ](purple)"
+error_symbol = "[\\$](red)"
+success_symbol = "[\\$](white)"
+vimcmd_symbol = "[!](bright-white)"

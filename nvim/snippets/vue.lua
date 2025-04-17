@@ -135,13 +135,14 @@ return {
 	),
 	s(
 		"fn",
-		fmt("{declaration}({ar}) {{ {body} }}", {
+		fmt("{declaration}({ar}){retType} {{ {body} }}", {
 			declaration = c(1, {
-				sn(nil, t("function")),
-				sn(nil, t("async function")),
+				sn(nil, fmt("function {}", { i(1) })),
+				sn(nil, fmt("async function {}", { i(1) })),
 			}),
 			ar = i(2),
-			body = i(3),
+			retType = i(3),
+			body = i(4),
 		})
 	),
 
@@ -156,4 +157,5 @@ return {
 			body = i(2),
 		})
 	),
+	s("vm", fmt('v-model="{}"', i(1))),
 }
