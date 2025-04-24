@@ -78,5 +78,5 @@ format = "- [rust@$version]($style) "
 
 [character]
 error_symbol = "[\\$](red)"
-success_symbol = "[\\$](white)"
+success_symbol = "[\\$](bright-white)"
 vimcmd_symbol = "[!](bright-white)"

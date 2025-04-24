@@ -133,7 +133,7 @@ U.CONST = {
 	falsy = 0,
 	emptyString = "",
 	leet_arg = "lc",
-	winblend = 8,
+	winblend = 0,
 	border = "single",
 }
 

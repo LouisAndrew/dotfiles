@@ -112,7 +112,6 @@ Group.new("@parameter", colors.mfed_2)
 Group.new("@preproc", colors.mfed_2)
 Group.new("@property", colors.mfed_2)
 Group.new("@punctuation", colors.mfed_2)
-Group.new("@punctuation.bracket", colors.mfed_6)
 Group.new("@punctuation.delimiter", colors.mfed_6)
 Group.new("@repeat", colors.mfed_navy)
 Group.new("@storageclass", colors.mfed_2)
@@ -139,7 +138,8 @@ Group.new("@lsp.type.function", colors.mfed_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
-Group.new("@punctuation.special", colors.mfed_8) -- incl. separator on border hover
+Group.new("@punctuation.special", colors.mfed_6) -- incl. separator on border hover
+Group.new("@punctuation.bracket", colors.mfed_6)
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
