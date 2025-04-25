@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_TMUX_AUTOSTART="true"
 
-plugins=(vi-mode zsh-syntax-highlighting)
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 export DENO_INSTALL="$HOME/.deno"
@@ -98,6 +98,7 @@ zle -N ngowrapper
 zle -N m
 zle -N qn
 zle -N grep_notes
+zle -N tlt
 
 bindkey '^o' f
 bindkey '^f' rgf
@@ -106,6 +107,7 @@ bindkey '^e' fs
 bindkey "^b" m
 bindkey '^q' qn
 bindkey '^v' grep_notes
+bindkey '^t' tlt
 
 # tmux
 source $DOTFILES_PATH/tmux.sh

@@ -39,7 +39,7 @@ function ticket() {
  branch_details=$(awk -F-- '{print $2}' <<< $branch_without_prefix)
  if [[ -z "$branch_details" ]];
  then
-  echo "MOPS-0"
+  echo "BAY-0"
  else
   echo $(awk -F-- '{print $1}' <<< $branch_without_prefix)
  fi

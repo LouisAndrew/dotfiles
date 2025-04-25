@@ -94,17 +94,18 @@ return {
 			desc = "Outline",
 		},
 		{
-			"luckasRanarison/tailwind-tools.nvim",
-			name = "tailwind-tools",
-			build = ":UpdateRemotePlugins",
+			"razak17/tailwind-fold.nvim",
+			enabled = false,
+			opts = {},
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
+			ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+		},
+		{
+			"Chaitanyabsprip/fastaction.nvim",
+			---@type FastActionConfig
 			opts = {
-				document_color = { enabled = false },
-				conceal = {
-					symbol = "…",
-					min_length = 32,
-					highlight = {
-						fg = minimal_fedu.primary,
-					},
+				popup = {
+					border = "single",
 				},
 			},
 		},

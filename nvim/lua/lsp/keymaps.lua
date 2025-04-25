@@ -19,7 +19,7 @@ return {
 					function()
 						local winid = require("ufo").peekFoldedLinesUnderCursor()
 						if not winid then
-							vim.lsp.buf.hover()
+							require("noice.lsp").hover()
 						end
 					end,
 					opts = {
@@ -40,7 +40,22 @@ return {
 						desc = "Open diagnostic in float",
 					},
 				},
-				{ "<leader>ia", vim.lsp.buf.code_action, opts = { desc = "Code actions" } },
+				{
+					"J",
+					function()
+						vim.diagnostic.open_float(diag_float_config)
+					end,
+					opts = {
+						desc = "Open diagnostic in float",
+					},
+				},
+				{
+					"M",
+					function()
+						require("fastaction").code_action()
+					end,
+					opts = { desc = "Code actions" },
+				},
 				{ "<leader>it", "<cmd>Outline<CR>" },
 				{ "<leader>in", vim.lsp.buf.rename, opts = { desc = "Rename" } },
 				{ "<leader>rr", "<cmd>LspRestart<CR>" },

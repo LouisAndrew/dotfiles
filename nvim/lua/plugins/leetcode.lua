@@ -22,6 +22,7 @@ return {
 		hooks = {
 			["question_enter"] = {
 				function()
+					vim.cmd(":TimerStop")
 					vim.cmd(":TimerStart 20m")
 				end,
 			},

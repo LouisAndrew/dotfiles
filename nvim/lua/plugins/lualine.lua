@@ -138,24 +138,24 @@ return {
 			padding = { right = 0, left = 0 },
 		})
 
-		ins_left({
-			-- mode component
-			function()
-				local mode = vim.fn.mode()
-				local mode_info = {
-					n = "normal",
-					i = "insert",
-					c = "command",
-					v = "visual",
-					[""] = "visual",
-				}
-				return mode_info[mode] or mode
-			end,
-			padding = { right = 0, left = 1 },
-			color = {
-				fg = minimal_fedu.dimmed_white,
-			},
-		})
+		-- ins_left({
+		-- 	-- mode component
+		-- 	function()
+		-- 		local mode = vim.fn.mode()
+		-- 		local mode_info = {
+		-- 			n = "normal",
+		-- 			i = "insert",
+		-- 			c = "command",
+		-- 			v = "visual",
+		-- 			[""] = "visual",
+		-- 		}
+		-- 		return mode_info[mode] or mode
+		-- 	end,
+		-- 	padding = { right = 0, left = 1 },
+		-- 	color = {
+		-- 		fg = minimal_fedu.dimmed_white,
+		-- 	},
+		-- })
 
 		ins_left({
 			"diagnostics",

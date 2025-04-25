@@ -8,6 +8,7 @@ return {
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {
+			file_types = { "markdown", "codecompanion" },
 			completions = {
 				lsp = { enabled = true },
 				blink = { enabled = true },

@@ -44,39 +44,34 @@ style = "bright-white"
 format = ' ([$all_status$ahead_behind]($style))'
 
 [python]
+style = "bright-white"
 format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
 
 [golang]
-style = "blue"
+style = "bright-white"
 format = "- [go@$version]($style) "
 version_format = "$raw"
 
 [deno]
-format = "- $symbol[$version](green) "
-style = "green"
+style = "bright-white"
+format = "- $symbol[$version]($style) "
 version_format = "${raw}"
 
 [nodejs]
 detect_extensions = ["mjs", "cjs"]
 detect_files = ['package.json', '.node-version']
-format = "- [node@](green)"
-version_format = "raw"
-
-
-# node version not working
-[custom.node_custom]
-detect_extensions = ["mjs", "cjs"]
-command = 'node --version | cut -c 1-' # cuts the first character
-detect_files = ['package.json', '.node-version'] 
-format = '[$output](green) '
+format = "- [node@$version]($style) "
+style = "bright-white"
 
 [lua]
-format = '- [lua@$version](blue) '
+style = "bright-white"
+format = "- [lua@$version]($style) "
 
 [rust]
+style = "bright-white"
 format = "- [rust@$version]($style) "
 
 [character]
-error_symbol = "[\\$](red)"
+error_symbol = "[!](bright-white)"
 success_symbol = "[\\$](bright-white)"
-vimcmd_symbol = "[!](bright-white)"
+vimcmd_symbol = "[?](bright-white)"

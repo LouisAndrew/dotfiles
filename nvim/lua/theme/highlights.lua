@@ -138,8 +138,9 @@ Group.new("@lsp.type.function", colors.mfed_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
-Group.new("@punctuation.special", colors.mfed_6) -- incl. separator on border hover
+Group.new("@punctuation.special", colors.mfed_7) -- incl. separator on border hover
 Group.new("@punctuation.bracket", colors.mfed_6)
+Group.new("@line-separator", colors.mfed_8) -- Custom TS query
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
