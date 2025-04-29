@@ -62,14 +62,17 @@ detect_extensions = ["mjs", "cjs"]
 detect_files = ['package.json', '.node-version']
 format = "- [node@$version]($style) "
 style = "bright-white"
+version_format = "$raw"
 
 [lua]
 style = "bright-white"
 format = "- [lua@$version]($style) "
+version_format = "$raw"
 
 [rust]
 style = "bright-white"
 format = "- [rust@$version]($style) "
+version_format = "$raw"
 
 [character]
 error_symbol = "[!](bright-white)"

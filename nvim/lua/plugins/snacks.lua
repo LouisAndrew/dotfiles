@@ -408,13 +408,6 @@ return {
 		opts = {
 			animate = { enabled = false },
 			bigfile = { enabled = true },
-			dashboard = {
-				enabled = true,
-				sections = {
-					{ section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
-					{ section = "startup" },
-				},
-			},
 			dim = { enabled = false },
 			git = { enabled = true },
 			gitbrowse = { enabled = true },

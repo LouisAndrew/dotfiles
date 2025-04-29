@@ -79,7 +79,7 @@ return {
 			loop = c(1, {
 				sn(nil, fmt("(let i = 0; i < {length}; i++)", { length = i(1) })),
 				sn(nil, fmt("(let i = {length}; i >= 0; i--)", { length = i(1) })),
-				sn(nil, fmt("({variable} of {iterable})", { variable = i(1), iterable = i(2) })),
+				sn(nil, fmt("(const {variable} of {iterable})", { variable = i(1), iterable = i(2) })),
 			}),
 			body = i(2),
 		})

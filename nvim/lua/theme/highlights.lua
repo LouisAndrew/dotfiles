@@ -362,19 +362,20 @@ for _, l in ipairs(level_hl_raw) do
 	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
 end
 
+local render_markdown = {
+	prefix = "RenderMarkdown",
+	{ "CodeInline", nil, colors.background },
+	{ "Code", nil, colors.mfed_bg_accent_light },
+	{ "Quote", colors.indigo_fg },
+	{ "Update", colors.magenta_fg:light() },
+	{ "TableHead", colors.mfed_bg_accent },
+	{ "TableRow", colors.mfed_bg_accent },
+	{ "WikiLink", colors.mfed_navy, nil },
+	{ "Link", colors.mfed_navy, nil },
+}
+
 local md_config = {
-	{ "RenderMarkdownCodeInline", nil, colors.background },
-	{ "RenderMarkdownCode", nil, colors.mfed_bg_accent_light },
-	{ "RenderMarkdownQuote", colors.indigo_fg },
-	{ "RenderMarkdownUpdate", colors.magenta_fg:light() },
-	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
-	{ "MarkviewCodeInline", nil, colors.mfed_bg_accent_light },
 	{ "InlineCode", nil, colors.nb_background },
-	{ "RenderMarkdownLink", colors.mfed_navy, nil },
-	{ "RenderMarkdownWikiLink", colors.mfed_navy, nil },
-	{ "MarkviewHyperlink", colors.mfed_cyan },
-	{ "MarkviewImageLink", colors.mfed_cyan },
-	{ "MarkviewBlockQuoteDefault", colors.indigo_fg },
 	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.dimmed_white },
 	{ "@markup.link", colors.mfed_0 },
@@ -382,13 +383,6 @@ local md_config = {
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
-	{ "MarkviewBlockQuoteNote", colors.mfed_navy },
-	{ "MarkviewTableBorder", colors.mfed_7 },
-	{ "MarkviewTableHeader", colors.mfed_7 },
-	{ "MarkviewTableAlignLeft", colors.mfed_7 },
-	{ "MarkviewTableAlignRight", colors.mfed_7 },
-	{ "MarkviewTableAlignCenter", colors.mfed_7 },
-	{ "MarkviewPalette7Fg", colors.mfed_navy },
 }
 
 local dap_config = {
@@ -593,6 +587,12 @@ local mini_file_config = {
 	{ "TitleFocused", colors.mfed_6 },
 }
 
+local bqf_config = {
+	{ "BqfPreviewFloat", nil, colors.nb_background },
+	{ "QuickFixLine", colors.mfed_1 },
+	{ "Delimiter", colors.nb_background },
+}
+
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -608,6 +608,7 @@ local hl_group_configs = {
 	noice_config,
 	navic_config,
 	gpt_config,
+	render_markdown,
 	md_config,
 	snacks_config,
 	snacks_picker_config,
@@ -619,6 +620,7 @@ local hl_group_configs = {
 	snacks_indent,
 	blink_config,
 	mini_file_config,
+	bqf_config,
 }
 
 --- @class HlConfig
@@ -649,5 +651,3 @@ for _, config in ipairs(hl_group_configs) do
 end
 
 Group.new("WinSeparator", colors.mfed_bg_accent)
-Group.new("BqfPreviewFloat", nil, colors.nb_background)
-Group.new("QuickFixLine", colors.white, nil, styles.bold)
