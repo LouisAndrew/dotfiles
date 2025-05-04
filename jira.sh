@@ -1,3 +1,5 @@
+board="BAY"
+
 function jira_status() {
   local ticket_status='In Progress'
 
@@ -9,23 +11,23 @@ function jira_status() {
     fi
 
     if [[ $ticket_status == "td" ]]; then
-      ticket_status='ToDo'
+      ticket_status='To Do'
     fi
 
     if [[ $ticket_status == "dr" ]]; then
-      ticket_status='Design check'
+      ticket_status='Design-Check'
     fi
 
     if [[ $ticket_status == "cr" ]]; then
-      ticket_status='Code Review'
+      ticket_status='Code-Review'
     fi
 
     if [[ $ticket_status == "rv" ]]; then
-      ticket_status='Review'
+      ticket_status='TESTING'
     fi
 
     if [[ $ticket_status == "rr" ]]; then
-      ticket_status='Ready for Release'
+      ticket_status='Ready-For-Release'
     fi
   fi
 
@@ -41,7 +43,7 @@ function jai() {
   fi
   
   if [[ $ticket_key != *"-"* ]]; then
-    ticket_key="MOPS-$ticket_key"
+    ticket_key="$board-$ticket_key"
   fi
 
   jira issue assign $ticket_key $me
@@ -70,7 +72,7 @@ function jli() {
 }
 
 function jb() {
-  q="project = MOPS AND (labels not in (Experiment) OR labels is EMPTY) AND statusCategory != Done AND status != Backlog"
+  q="project = $board AND (labels not in (Experiment) OR labels is EMPTY) AND statusCategory != Done AND status != Backlog"
   columns="KEY,SUMMARY,STATUS,ASIGNEE"
 
   jira issue list --no-headers --columns $columns -q $q --order-by status
@@ -85,7 +87,7 @@ function jmi() {
   fi
   
   if [[ $ticket_key != *"-"* ]]; then
-    ticket_key="MOPS-$ticket_key"
+    ticket_key="$board-$ticket_key"
   fi
 
   jira issue move $ticket_key $ticket_status
@@ -99,7 +101,7 @@ function jvi() {
   fi
   
   if [[ $ticket_key != *"-"* ]]; then
-    ticket_key="MOPS-$ticket_key"
+    ticket_key="$board-$ticket_key"
   fi
 
   jira issue view $ticket_key

@@ -18,6 +18,7 @@ local function create_spec()
 		["typescriptreact"] = ".spec.tsx",
 		["javascriptreact"] = ".spec.jsx",
 		["go"] = "_test.go",
+		["vue"] = ".spec.ts",
 	}
 
 	local ft = vim.bo.filetype
@@ -125,6 +126,8 @@ local M = {
 
 		{ "å", "zh" },
 		{ "∂", "zl" },
+		{ "∫", "50zh" },
+		{ "∑", "50zl" },
 		{ "]z", "zj" },
 		{ "[z", "zk" },
 

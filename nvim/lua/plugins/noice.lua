@@ -1,5 +1,5 @@
-local special_chars = require("theme.special_chars")
 local icons = require("theme.icons")
+local utils = require("utils")
 
 return {
 	"folke/noice.nvim",
@@ -89,26 +89,29 @@ return {
 				cmdline_popup = {
 					relative = "editor",
 					position = {
-						row = "3%",
-						col = "50%",
+						row = "100%",
+						col = -1,
 					},
 					size = {
-						width = 64,
 						height = "auto",
+						width = "100%",
 					},
 					border = {
-						style = special_chars.create_special_border({
-							vertical_half = true,
-						}),
-						text = nil,
+						style = "none",
 					},
+				},
+				cmdline_input = {
+					border = { style = "none" },
 				},
 				mini = {},
 				hover = {
+					border = { style = utils.CONST.border },
 					win_options = {
-						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:cmpborder",
+						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:NoiceHoverBorder",
+						winblend = utils.CONST.winblend,
 					},
 				},
+				confirm = { border = { style = "single" } },
 			},
 			notify = {
 				enabled = false,
@@ -133,7 +136,7 @@ return {
 				command_palette = true,
 				long_message_to_split = true,
 				inc_rename = false,
-				lsp_doc_border = false,
+				lsp_doc_border = true,
 			},
 			popup_menu = {
 				enabled = true,

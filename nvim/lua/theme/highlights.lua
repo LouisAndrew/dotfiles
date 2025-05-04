@@ -30,7 +30,7 @@ Group.new("CursorLine", nil, colors.mfed_9)
 Group.new("vCursorLine", colors.indigo_fg)
 Group.new("RCursorLine", colors.yellow_fg)
 
-Group.new("Cursor", nil, colors.indigo_fg)
+Group.new("Cursor", colors.indigo_fg, colors.indigo_fg)
 Group.new("iCursor", nil, colors.indigo_fg)
 Group.new("vCursor", nil, colors.indigo_fg)
 Group.new("oCursor", nil, colors.remove_fg)
@@ -52,9 +52,9 @@ Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 Group.new("FoldColumn", colors.mfed_8)
 Group.new("MatchParen", nil, colors.mfed_7)
 
-Group.new("MoreMsg", nil, colors.mfed_6)
+Group.new("MoreMsg", colors.mfed_6, nil) -- `confirm` normal
 Group.new("NonText", colors.mfed_8, nil)
-Group.new("PmenuThumb", nil, colors.nb_background:light())
+Group.new("PmenuThumb", nil, colors.mfed_bg_accent)
 Group.new("PmenuSbar", nil, colors.nb_background)
 Group.new("Question", colors.mfed_1, colors.noir_8)
 Group.new("SpecialKey", colors.mfed_6, nil)
@@ -112,9 +112,7 @@ Group.new("@parameter", colors.mfed_2)
 Group.new("@preproc", colors.mfed_2)
 Group.new("@property", colors.mfed_2)
 Group.new("@punctuation", colors.mfed_2)
-Group.new("@punctuation.bracket", colors.mfed_6)
 Group.new("@punctuation.delimiter", colors.mfed_6)
-Group.new("@punctuation.special", colors.primary)
 Group.new("@repeat", colors.mfed_navy)
 Group.new("@storageclass", colors.mfed_2)
 Group.new("@string", colors.primary)
@@ -140,8 +138,9 @@ Group.new("@lsp.type.function", colors.mfed_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.mfed_2)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
-Group.new("@punctuation.special", colors.mfed_3)
--- Group.new("@comment", colors.mfed_7)
+Group.new("@punctuation.special", colors.mfed_7) -- incl. separator on border hover
+Group.new("@punctuation.bracket", colors.mfed_6)
+Group.new("@line-separator", colors.mfed_8) -- Custom TS query
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
@@ -185,7 +184,7 @@ Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
 Group.new("Pmenu", colors.mfed_2, colors.nb_background)
 
-Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
+Group.new("PmenuSel", nil, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
 Group.new("DiagnosticShowBorder", colors.nb_background)
 
@@ -261,6 +260,7 @@ Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
 Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
 Group.new("EgrepifyFile", colors.mfed_2, nil)
+Group.new("String", colors.primary)
 
 -- Saga
 Group.new("TitleString", colors.secondary)
@@ -324,9 +324,6 @@ Group.new("Debug", colors.debug, colors.debug)
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.nb_background)
 Group.new("cmpmenu", nil, colors.bg_shade)
-Group.new("BlinkCmpMenu", nil, colors.bg_shade)
-Group.new("BlinkCmpDoc", nil, colors.bg_shade)
-Group.new("BlinkCmpDocBorder", nil, colors.bg_shade)
 
 Group.new("bg_shadeBorder", colors.black)
 
@@ -365,17 +362,20 @@ for _, l in ipairs(level_hl_raw) do
 	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
 end
 
+local render_markdown = {
+	prefix = "RenderMarkdown",
+	{ "CodeInline", nil, colors.background },
+	{ "Code", nil, colors.mfed_bg_accent_light },
+	{ "Quote", colors.indigo_fg },
+	{ "Update", colors.magenta_fg:light() },
+	{ "TableHead", colors.mfed_bg_accent },
+	{ "TableRow", colors.mfed_bg_accent },
+	{ "WikiLink", colors.mfed_navy, nil },
+	{ "Link", colors.mfed_navy, nil },
+}
+
 local md_config = {
-	{ "RenderMarkdownCodeInline", nil, colors.background },
-	{ "RenderMarkdownCode", nil, colors.mfed_bg_accent_light },
-	{ "MarkviewCode", nil, colors.mfed_bg_accent_light },
-	-- { "MarkviewCodeInfo", nil, colors.debug },
-	{ "MarkviewCodeInline", nil, colors.mfed_bg_accent_light },
 	{ "InlineCode", nil, colors.nb_background },
-	{ "RenderMarkdownLink", colors.mfed_navy, nil },
-	{ "MarkviewHyperlink", colors.mfed_cyan },
-	{ "MarkviewImageLink", colors.mfed_cyan },
-	{ "MarkviewBlockQuoteDefault", colors.indigo_fg },
 	{ "@spell.markdown", colors.mfed_2 },
 	{ "@markup", colors.dimmed_white },
 	{ "@markup.link", colors.mfed_0 },
@@ -383,13 +383,6 @@ local md_config = {
 	{ "@markup.italic", nil, nil, styles.italic },
 	{ "@markup.list", colors.mfed_2, nil },
 	{ "@markup.raw", colors.mfed_bool:light() },
-	{ "MarkviewBlockQuoteNote", colors.mfed_navy },
-	{ "MarkviewTableBorder", colors.mfed_7 },
-	{ "MarkviewTableHeader", colors.mfed_7 },
-	{ "MarkviewTableAlignLeft", colors.mfed_7 },
-	{ "MarkviewTableAlignRight", colors.mfed_7 },
-	{ "MarkviewTableAlignCenter", colors.mfed_7 },
-	{ "MarkviewPalette7Fg", colors.mfed_navy },
 }
 
 local dap_config = {
@@ -446,24 +439,27 @@ local snacks_indent = {
 }
 
 local noice_config = {
-	{ "NoiceCmdlinePrompt", colors.nb_background },
-	{ "NoiceCmdlinePopup", nil, colors.indigo_fg },
-	{ "NoiceCmdlinePopupBorder", colors.nb_background, colors.nb_background },
-	{ "NoiceCmdlineIcon", colors.mfed_3, nil, styles.bold },
-	{ "NoiceCmdlineIconSearch", colors.mfed_2, nil, styles.bold },
-	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
-	{ "NoiceCmdlinePopupBorderSearch", colors.nb_background:dark(), colors.nb_background },
-	{ "NoiceCursor", colors.mfed_2, colors.noir_9 },
-	{ "NoiceVirtualText", colors.indigo_fg_light },
-	{ "NoicePopupBorder", colors.nb_background, colors.nb_background },
-	{ "NoicePopup", nil, colors.nb_background },
-	{ "NoiceCmdlineSearch", colors.mfed_2, colors.nb_background },
-	{ "NoiceCmdlineSearchBorder", colors.nb_background, colors.yellow_fg },
-	{ "NoiceCmdline", colors.white, colors.nb_background },
-	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
-	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
-	{ "NoiceInputNormal", colors.white, colors.bg_shade },
-	{ "NoiceHoverNormal", nil, colors.bg_shade },
+	prefix = "Noice",
+	{ "CmdlinePrompt", colors.white },
+	{ "CmdlinePopup", nil, colors.bg_shade },
+	{ "CmdlinePopupBorder", colors.debug, colors.nb_background },
+	{ "CmdlineIcon", colors.mfed_3, nil, styles.bold },
+	{ "CmdlineIconSearch", colors.mfed_2, nil, styles.bold },
+	{ "CmdlinePopupTitle", colors.dimmed_white:light() },
+	{ "CmdlinePopupBorderSearch", colors.nb_background:dark(), colors.nb_background },
+	{ "Cursor", colors.mfed_2, colors.noir_9 },
+	{ "VirtualText", colors.indigo_fg_light },
+	{ "PopupBorder", colors.nb_background, colors.nb_background },
+	{ "Popup", nil, colors.nb_background },
+	{ "CmdlineSearch", colors.mfed_2, colors.nb_background },
+	{ "CmdlineSearchBorder", colors.nb_background, colors.yellow_fg },
+	{ "Cmdline", colors.white, colors.nb_background },
+	{ "CmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
+	{ "CmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
+	{ "InputNormal", colors.white, colors.bg_shade },
+	{ "HoverNormal", nil, colors.nb_background },
+	{ "HoverBorder", colors.mfed_bg_accent },
+	{ "ConfirmBorder", colors.mfed_bg_accent },
 }
 
 local cmp_config = {
@@ -546,11 +542,20 @@ local gpt_config = {
 }
 
 local diagnostic_config = {
-	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.bg_shade },
-	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.bg_shade },
-	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.bg_shade },
-	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
-	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
+	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.nb_background },
+	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.nb_background },
+	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.nb_background },
+	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.nb_background },
+	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.nb_background },
+}
+
+local blink_config = {
+	prefix = "BlinkCmp",
+	{ "Menu", nil, colors.nb_background },
+	{ "MenuBorder", colors.mfed_bg_accent, nil },
+	{ "Doc", nil, colors.background },
+	{ "DocBorder", colors.mfed_bg_accent, nil },
+	{ "DocSeparator", colors.mfed_8 },
 }
 
 local mini_hipatterns_config = {
@@ -575,6 +580,19 @@ local avante_config = {
 	{ "InlineHint", colors.mfed_7 },
 }
 
+local mini_file_config = {
+	prefix = "MiniFiles",
+	{ "BorderModified", colors.indigo_fg },
+	{ "Title", colors.mfed_6 },
+	{ "TitleFocused", colors.mfed_6 },
+}
+
+local bqf_config = {
+	{ "BqfPreviewFloat", nil, colors.nb_background },
+	{ "QuickFixLine", colors.mfed_1 },
+	{ "Delimiter", colors.nb_background },
+}
+
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -590,6 +608,7 @@ local hl_group_configs = {
 	noice_config,
 	navic_config,
 	gpt_config,
+	render_markdown,
 	md_config,
 	snacks_config,
 	snacks_picker_config,
@@ -599,6 +618,9 @@ local hl_group_configs = {
 	mini_hipatterns_config,
 	avante_config,
 	snacks_indent,
+	blink_config,
+	mini_file_config,
+	bqf_config,
 }
 
 --- @class HlConfig
@@ -628,7 +650,4 @@ for _, config in ipairs(hl_group_configs) do
 	end
 end
 
-Group.new("VertSplit", colors.debug, colors.debug)
 Group.new("WinSeparator", colors.mfed_bg_accent)
-Group.new("BqfPreviewFloat", nil, colors.nb_background)
-Group.new("QuickFixLine", colors.white, nil, styles.bold)

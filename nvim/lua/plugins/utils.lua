@@ -58,9 +58,7 @@ return {
 			"TextCaseStartReplacingCommand",
 		},
 	},
-	{
-		"jghauser/mkdir.nvim",
-	},
+	"jghauser/mkdir.nvim",
 	{
 		"mistweaverco/kulala.nvim",
 		keys = {

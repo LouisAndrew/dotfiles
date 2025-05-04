@@ -178,6 +178,7 @@ alias hc="~/httpcollections/"
 
 alias dcu="docker compose up"
 alias dcd="docker compose down"
+alias lcd="termdown 20m --no-figlet"
 
 source $FUNCTIONS_PATH 
 source "$DOTFILES_PATH/glab.sh"

@@ -86,8 +86,11 @@ return {
 				ui = {
 					hl_groups = {
 						ObsidianTag = { italic = false, fg = colors.palette.indigo_fg },
+						ObsidianRefText = { fg = colors.navy },
+						-- ObsidianExtLinkIcon = { fg = "#c792ea" },
+						-- ObsidianBlockID = { italic = true, fg = "#89ddff" },
+						-- ObsidianHighlightText = { bg = "#75662e" },
 					},
-					reference_text = { char = "" },
 				},
 				workspaces = {
 					-- {

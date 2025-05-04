@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 ---@diagnostic disable: assign-type-mismatch
 vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 10
@@ -44,9 +46,8 @@ require("ufo").setup({
 	},
 	preview = {
 		win_config = {
-			border = { "", "", "", "", "", "", "", "" },
-			winhighlight = "Normal:UfoFoldPeekNormal",
-			winblend = 0,
+			border = utils.CONST.border,
+			winblend = utils.CONST.winblend,
 		},
 		mappings = {
 			scrollU = "<C-u>",

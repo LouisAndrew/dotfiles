@@ -1,15 +1,10 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_TMUX_AUTOSTART="true"
 
-plugins=(vi-mode)
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
-# # Env related
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export DENO_INSTALL="/Users/louis.andrew/.deno"
-
+export DENO_INSTALL="$HOME/.deno"
 eval "$(starship init zsh)"
 
 autoload -U +X bashcompinit && bashcompinit
@@ -19,10 +14,7 @@ export ALIAS_FILE_PATH="$DOTFILES_PATH/zshrc_aliases.sh"
 export FS_CLI_CONFIG="~/.fs-cli.json"
 
 source $ALIAS_FILE_PATH
-
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+brew_path=$(brew --prefix)
 
 zstyle :compinstall filename '/home/louis.andrew/.zshrc'
 autoload -Uz compinit
@@ -49,18 +41,13 @@ export BUN_INSTALL="$HOME/.bun"
 source $DOTFILES_PATH/asdf.sh
 
 export GOBIN=`go env GOBIN`
+
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-PATH="$(brew --prefix)/opt/curl/bin:$PATH"
-# PATH="$GOBIN:$PATH"
+PATH="$brew_path/opt/curl/bin:$PATH"
+PATH="$GOBIN:$PATH"
 export PATH
-# Add it to your shell init files
-[[ -d /Applications/WezTerm.app/Contents/MacOS ]] && export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
-
-# Run once to enable wezterm undercurl for nvim
-# $ curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
-export TERM="wezterm"
 
 COLOR_BLACK="30"
 COLOR_RED="31"
@@ -85,13 +72,15 @@ export VOLAR_GLOBAL="$HOME/.local/share/nvim/mason/packages/vue-language-server/
 export EDITOR="nvim"
 export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=white'
 
 PROMPT_ICON=""
 export FZF_DEFAULT_OPTS="--layout reverse --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' --no-bold"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG_COLOR,bg+:$BG_COLOR
-  --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#ffcfa7
-  --color=prompt:#f2eaea,spinner:#af5fff,pointer:#ffcfa7,header:#87afaf
+  --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#aeaeae
+  --color=prompt:#aeaeae,spinner:#af5fff,pointer:#aeaeae,header:#87afaf
   --color=border:$BG_COLOR,preview-fg:-1,label:#aeaeae,query:#d9d9d9
   --preview-window=\"border-rounded\" --padding=\"1\" --prompt=\"$PROMPT_ICON \" --marker=\"◆\"
   --pointer=\"\" --separator=\"\" --scrollbar=\"│\""
@@ -109,6 +98,7 @@ zle -N ngowrapper
 zle -N m
 zle -N qn
 zle -N grep_notes
+zle -N tlt
 
 bindkey '^o' f
 bindkey '^f' rgf
@@ -117,6 +107,7 @@ bindkey '^e' fs
 bindkey "^b" m
 bindkey '^q' qn
 bindkey '^v' grep_notes
+bindkey '^t' tlt
 
 # tmux
 source $DOTFILES_PATH/tmux.sh

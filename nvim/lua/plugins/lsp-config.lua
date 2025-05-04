@@ -1,4 +1,5 @@
 local icons = require("theme.icons")
+local minimal_fedu = require("minimal_fedu")
 
 return {
 	"VonHeikemen/lsp-zero.nvim",
@@ -91,6 +92,22 @@ return {
 				},
 			},
 			desc = "Outline",
+		},
+		{
+			"razak17/tailwind-fold.nvim",
+			enabled = false,
+			opts = {},
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
+			ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+		},
+		{
+			"Chaitanyabsprip/fastaction.nvim",
+			---@type FastActionConfig
+			opts = {
+				popup = {
+					border = "single",
+				},
+			},
 		},
 	},
 	config = function()

@@ -10,8 +10,6 @@ return {
 			mappings = {
 				close = "<leader>w",
 				go_in_plus = "<CR>",
-				go_out = "-",
-				go_out = "h",
 				synchronize = "<C-s>",
 			},
 		},

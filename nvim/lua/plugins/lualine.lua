@@ -138,24 +138,24 @@ return {
 			padding = { right = 0, left = 0 },
 		})
 
-		ins_left({
-			-- mode component
-			function()
-				local mode = vim.fn.mode()
-				local mode_info = {
-					n = "normal",
-					i = "insert",
-					c = "command",
-					v = "visual",
-					[""] = "visual",
-				}
-				return mode_info[mode] or mode
-			end,
-			padding = { right = 0, left = 1 },
-			color = {
-				fg = minimal_fedu.dimmed_white,
-			},
-		})
+		-- ins_left({
+		-- 	-- mode component
+		-- 	function()
+		-- 		local mode = vim.fn.mode()
+		-- 		local mode_info = {
+		-- 			n = "normal",
+		-- 			i = "insert",
+		-- 			c = "command",
+		-- 			v = "visual",
+		-- 			[""] = "visual",
+		-- 		}
+		-- 		return mode_info[mode] or mode
+		-- 	end,
+		-- 	padding = { right = 0, left = 1 },
+		-- 	color = {
+		-- 		fg = minimal_fedu.dimmed_white,
+		-- 	},
+		-- })
 
 		ins_left({
 			"diagnostics",
@@ -181,6 +181,24 @@ return {
 			cond = require("noice").api.status.mode.has,
 			color = { fg = minimal_fedu.mfed_6 },
 			padding = { left = 2 },
+		})
+
+		ins_left({
+			function()
+				local ok, pomo = pcall(require, "pomo")
+				if not ok then
+					return ""
+				end
+
+				local timer = pomo.get_first_to_finish()
+				if timer == nil then
+					return ""
+				end
+
+				return " " .. tostring(timer)
+			end,
+			padding = { left = 1 },
+			color = { fg = minimal_fedu.mfed_6 },
 		})
 
 		ins_right({

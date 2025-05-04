@@ -34,17 +34,17 @@ return {
 			if ls.expand_or_jumpable() then
 				ls.expand_or_jump()
 			end
-		end, { silent = true })
+		end, { silent = true, desc = "Expand or jump to next" })
 
 		vim.keymap.set({ "i", "s" }, "<C-u>", function()
 			ls.jump(-1)
-		end, { silent = true })
+		end, { silent = true, desc = "Jump back" })
 
 		vim.keymap.set({ "i", "s" }, "<C-q>", function()
 			if ls.choice_active() then
 				ls.change_choice(1)
 			end
-		end, { silent = true })
+		end, { silent = true, desc = "Change snippet choice" })
 
 		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 	end,

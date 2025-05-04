@@ -27,13 +27,65 @@ return {
 		end,
 	},
 	{
+		"olimorris/codecompanion.nvim",
+		cmd = {
+			"CodeCompanionChat",
+			"CodeCompanionToggle",
+			"CodeCompanionActions",
+			"CodeCompanionAdd",
+		},
+		keys = {
+			{ mode = { "n", "v" }, "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
+			{ mode = { "n", "v" }, "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
+			{ "<leader>an", "<cmd>:CodeCompanionAdd<CR>" },
+		},
+		config = true,
+		---@module 'CodeCompanion'
+		opts = {
+			display = {
+				chat = {
+					window = {
+						width = 0.3,
+					},
+					---@param tokens number
+					---@param adapter CodeCompanion.Adapter
+					token_count = function(tokens, adapter)
+						return " [ " .. tokens .. "@" .. adapter.name .. " ]"
+					end,
+				},
+			},
+			strategies = {
+				chat = {
+					adapter = "anthropic",
+					keymaps = {
+						next_chat = {
+							modes = {
+								n = "]a",
+							},
+						},
+						previous_chat = {
+							modes = {
+								n = "[a",
+							},
+						},
+					},
+				},
+				inline = {
+					adapter = "copilot",
+				},
+			},
+		},
+	},
+	{
+		-- not now
 		"yetone/avante.nvim",
+		enabled = false,
 		version = false,
 		build = "make BUILD_FROM_SOURCE=true",
 		lazy = false,
 		config = function()
 			require("avante").setup({
-				provider = "bedrock",
+				provider = "claude",
 				bedrock = {
 					model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
 				},

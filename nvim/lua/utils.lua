@@ -133,6 +133,8 @@ U.CONST = {
 	falsy = 0,
 	emptyString = "",
 	leet_arg = "lc",
+	winblend = 0,
+	border = "single",
 }
 
 function U.paste()

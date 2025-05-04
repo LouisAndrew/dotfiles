@@ -19,15 +19,14 @@ $vi_mode"""
 add_newline = false
 
 [directory]
-format = "[$read_only]($read_only_style)[$path]($style)"
+format = "[$read_only]($read_only_style)[$path ]($style)"
 read_only = "🔒 "
 style = "fg:#ffffff"
 truncation_length = 0
 
 [git_branch]
 style = "bright-white"
-symbol = ""
-format = '[$symbol $branch(:$remote_branch)]($style)'
+format = '[$branch(:$remote_branch)]($style)'
 
 [git_status]
 conflicted = " "
@@ -44,41 +43,37 @@ style = "bright-white"
 format = ' ([$all_status$ahead_behind]($style))'
 
 [python]
+style = "bright-white"
 format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
 
 [golang]
+style = "bright-white"
 format = "- [go@$version]($style) "
 version_format = "$raw"
 
 [deno]
-format = "- $symbol[$version](green) "
-style = "green"
+style = "bright-white"
+format = "- $symbol[$version]($style) "
 version_format = "${raw}"
 
 [nodejs]
 detect_extensions = ["mjs", "cjs"]
 detect_files = ['package.json', '.node-version']
-format = "- [node@](green)"
-version_format = "raw"
-
-
-# node version not working
-[custom.node_custom]
-detect_extensions = ["mjs", "cjs"]
-command = 'node --version | cut -c 1-' # cuts the first character
-detect_files = ['package.json', '.node-version'] 
-format = '[$output](green) '
+format = "- [node@$version]($style) "
+style = "bright-white"
+version_format = "$raw"
 
 [lua]
-format = '- [lua@$version](blue) '
+style = "bright-white"
+format = "- [lua@$version]($style) "
+version_format = "$raw"
 
 [rust]
+style = "bright-white"
 format = "- [rust@$version]($style) "
+version_format = "$raw"
 
 [character]
-error_symbol = " [# ](bright-white)"
-success_symbol = " [# ](bright-white)"
-vimcmd_symbol = " [! ](bright-white)"
-vimcmd_replace_one_symbol = " [! ](green)"
-vimcmd_replace_symbol = " [! ](yellow)"
-vimcmd_visual_symbol = " [! ](purple)"
+error_symbol = "[!](bright-white)"
+success_symbol = "[\\$](bright-white)"
+vimcmd_symbol = "[?](bright-white)"

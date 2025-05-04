@@ -8,6 +8,16 @@ local t = ls.text_node
 
 return {
 	s(
+		"fn",
+		fmt("func {fnName}({ar}){retType} {{ {body} }}", {
+			fnName = i(1),
+			ar = i(2),
+			retType = i(3),
+			body = i(4),
+		})
+	),
+
+	s(
 		"gto",
 		fmt(
 			[[
