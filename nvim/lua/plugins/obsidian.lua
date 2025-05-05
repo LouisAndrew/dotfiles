@@ -85,18 +85,11 @@ return {
 				},
 				ui = {
 					hl_groups = {
-						ObsidianTag = { italic = false, fg = colors.palette.indigo_fg },
-						ObsidianRefText = { fg = colors.navy },
-						-- ObsidianExtLinkIcon = { fg = "#c792ea" },
-						-- ObsidianBlockID = { italic = true, fg = "#89ddff" },
-						-- ObsidianHighlightText = { bg = "#75662e" },
+						ObsidianTag = { italic = false, fg = colors.palette.indigo[2] },
+						ObsidianRefText = { fg = colors.palette.navy[1] },
 					},
 				},
 				workspaces = {
-					-- {
-					-- 	name = "icloud",
-					-- 	path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
-					-- },
 					{
 						name = "link",
 						path = "~/vault",

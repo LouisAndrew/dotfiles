@@ -198,14 +198,13 @@ return {
 				return " " .. tostring(timer)
 			end,
 			padding = { left = 1 },
-			color = { fg = minimal_fedu.mfed_6 },
+			color = { fg = minimal_fedu.shades_of_grey[5] },
 		})
 
 		ins_right({
 			search_count,
 			padding = { right = 1 },
-			-- color = { fg = minimal_fedu.palette.yellow_fg },
-			color = { fg = minimal_fedu.palette.indigo_fg_light },
+			color = { fg = minimal_fedu.palette.indigo[3] },
 		})
 
 		ins_right({ "location", color = { fg = minimal_fedu.dimmed_white } })

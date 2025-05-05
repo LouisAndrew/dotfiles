@@ -181,7 +181,7 @@ Group.new("CursorLineNr", colors.white, nil)
 Group.new("TabLine", colors.dimmed_white, nil)
 Group.new("TabLineFill", nil, nil)
 Group.new("EndOfBuffer", colors.background, nil)
-Group.new("ErrorMsg", colors.dimmed_red)
+Group.new("ErrorMsg", colors.remove_fg)
 Group.new("Pmenu", colors.mfed_2, colors.nb_background)
 
 Group.new("PmenuSel", nil, colors.mfed_bg_accent)
@@ -276,27 +276,6 @@ Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
 
--- CMP
-Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
-Group.new("CmpItemAbbrMatch", colors.mfed_cyan)
-Group.new("CmpItemAbbrMatchFuzzy", colors.mfed_cyan)
-
-Group.new("CmpItemKindVariable", colors.mfed_navy)
-Group.new("CmpItemKindInterface", colors.mfed_navy)
-Group.new("CmpItemKindText", colors.mfed_navy)
-
-Group.new("CmpItemKindFunction", colors.mfed_bool)
-Group.new("CmpItemKindMethod", colors.mfed_bool)
-Group.new("CmpItemKindClass", colors.remove_fg)
-
-Group.new("CmpItemKindKeyword", colors.mfed_cyan)
-Group.new("CmpItemKindProperty", colors.mfed_cyan)
-Group.new("CmpItemKindUnit", colors.mfed_cyan)
-
-Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
-Group.new("CmpItemAbbrMatch", colors.mfed_cyan)
-Group.new("CmpItemAbbrMatchFuzzy", colors.mfed_cyan)
-
 -- Mason
 Group.new("MasonHeader", colors.secondary, colors.mfed_9)
 Group.new("MasonHeaderSecondary", colors.secondary)
@@ -325,8 +304,6 @@ Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.nb_background)
 Group.new("cmpmenu", nil, colors.bg_shade)
 
-Group.new("bg_shadeBorder", colors.black)
-
 Group.new("cmpborder", colors.nb_background, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
@@ -342,10 +319,10 @@ Group.new("RainbowDelimiterCyan", colors.mfed_cyan)
 Group.new("TreesitterContext", nil, colors.mfed_bg_accent)
 
 local level_hl_raw = {
-	{ "Error", minimal_fedu.diagnostic_error },
-	{ "Warn", minimal_fedu.diagnostic_warning },
-	{ "Hint", minimal_fedu.diagnostic_hint },
-	{ "Info", minimal_fedu.diagnostic_info },
+	{ "Error", minimal_fedu.diagnostic.error },
+	{ "Warn", minimal_fedu.diagnostic.warning },
+	{ "Hint", minimal_fedu.diagnostic.hint },
+	{ "Info", minimal_fedu.diagnostic.info },
 }
 
 local level = {
