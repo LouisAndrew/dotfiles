@@ -2,13 +2,11 @@ local icons = require("theme.icons")
 local minimal_fedu = require("minimal_fedu")
 
 return {
-	"VonHeikemen/lsp-zero.nvim",
+	"neovim/nvim-lspconfig",
 	event = { "BufEnter", "BufWinEnter" },
-	branch = "v4.x",
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
 		{
 			"rmagatti/goto-preview",
 			event = "BufEnter",

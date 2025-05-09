@@ -42,6 +42,7 @@ require("ufo").setup({
 		json = { "array" },
 		vue = { "import_statement" },
 		go = { "import_declaration" },
+		typescript = { "imports", "comment" },
 		tsplayground = {},
 	},
 	preview = {
@@ -59,6 +60,9 @@ require("ufo").setup({
 	provider_selector = function(_, ft)
 		if ft == "tsplayground" then
 			return { "indent" }
+		end
+		if ft == "typescript" then
+			return { "lsp", "indent" }
 		end
 
 		return { "treesitter", "indent" }

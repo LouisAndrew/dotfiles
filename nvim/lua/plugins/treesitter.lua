@@ -183,9 +183,9 @@ return {
 				enable = true,
 				keymaps = {
 					init_selection = "<C-t>",
-					node_incremental = "<C-n>",
+					node_incremental = "<C-p>",
 					scope_incremental = false,
-					node_decremental = "<C-p>",
+					node_decremental = "<C-n>",
 				},
 			},
 			playground = {

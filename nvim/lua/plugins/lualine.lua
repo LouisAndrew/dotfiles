@@ -138,25 +138,6 @@ return {
 			padding = { right = 0, left = 0 },
 		})
 
-		-- ins_left({
-		-- 	-- mode component
-		-- 	function()
-		-- 		local mode = vim.fn.mode()
-		-- 		local mode_info = {
-		-- 			n = "normal",
-		-- 			i = "insert",
-		-- 			c = "command",
-		-- 			v = "visual",
-		-- 			[""] = "visual",
-		-- 		}
-		-- 		return mode_info[mode] or mode
-		-- 	end,
-		-- 	padding = { right = 0, left = 1 },
-		-- 	color = {
-		-- 		fg = minimal_fedu.dimmed_white,
-		-- 	},
-		-- })
-
 		ins_left({
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
@@ -179,7 +160,7 @@ return {
 				return ""
 			end,
 			cond = require("noice").api.status.mode.has,
-			color = { fg = minimal_fedu.mfed_6 },
+			color = { fg = minimal_fedu.palette.grey[7] },
 			padding = { left = 2 },
 		})
 
@@ -198,7 +179,7 @@ return {
 				return " " .. tostring(timer)
 			end,
 			padding = { left = 1 },
-			color = { fg = minimal_fedu.shades_of_grey[5] },
+			color = { fg = minimal_fedu.palette.grey[5] },
 		})
 
 		ins_right({
