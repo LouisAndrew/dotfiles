@@ -143,6 +143,10 @@ return {
 					opts = { desc = "Signature help" },
 				},
 				{ "<C-h>", "<Left>" },
+				{
+					"jj",
+					"<esc>",
+				},
 			},
 			v = {
 				{

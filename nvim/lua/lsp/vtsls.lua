@@ -1,16 +1,8 @@
-local navic = require("nvim-navic")
-
 local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
 local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+
 return {
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-	on_attach = function(client, bufnr)
-		if vim.bo.filetype == "vue" then
-			return
-		end
-
-		navic.attach(client, bufnr)
-	end,
 	settings = {
 		vtsls = {
 			tsserver = {

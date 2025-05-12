@@ -15,7 +15,6 @@ return {
 		"svelte",
 		"pug",
 		"typescriptreact",
-		"vue",
 	},
 	init_options = {
 		html = {

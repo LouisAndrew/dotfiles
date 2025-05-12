@@ -18,9 +18,23 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp", {}),
 	callback = function(args)
+		-- commenting for now; it stops clients e.g. on preview buffers
+		-- local clients = vim.lsp.get_clients({ bufnr = args.buf })
+		--
+		-- local t = {}
+		-- for _, c in ipairs(clients) do
+		-- 	if t[c.name] ~= nil then
+		-- 		local old = t[c.name]
+		-- 		print("stopping duplicate LSP: ", c.name)
+		-- 		old.stop()
+		-- 	end
+		--
+		-- 	t[c.name] = c
+		-- end
+
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 		if
-			client.server_capabilities["ocumentSymbolProvide"]
+			client.server_capabilities["documentSymbolProvide"]
 			and utils.has_value({
 				"graphql",
 				"vtsls",
@@ -32,25 +46,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymaps.generate_keymaps(args.buf)
 	end,
 })
-
-local custom_servers = {
-	"kulala_ls",
-}
-
-local nvim_lsp = require("lspconfig")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-for _, lsp in ipairs(custom_servers) do
-	if nvim_lsp[lsp] ~= nil then
-		if nvim_lsp[lsp].setup ~= nil then
-			nvim_lsp[lsp].setup({
-				capabilities = capabilities,
-			})
-		else
-			vim.notify("LSP server " .. lsp .. " does not have a setup function", vim.log.levels.ERROR)
-		end
-	end
-end
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -65,17 +60,26 @@ require("mason-lspconfig").setup({
 	automatic_enable = true,
 })
 
-local lspconfig = require("lspconfig")
+-- custom configs
+local servers = {
+	"eslint",
+	"graphql",
+	"vtsls",
+	"jsonls",
+	"emmet_ls",
+	"yamlls",
+	"cssls",
+	"tailwindcss",
+}
 
-lspconfig.eslint.setup(require("lsp.eslint"))
-lspconfig.graphql.setup(require("lsp.graphql"))
-lspconfig.tailwindcss.setup(require("lsp.tailwindcss"))
-lspconfig.volar.setup(require("lsp.volar"))
-lspconfig.vtsls.setup(require("lsp.vtsls"))
-lspconfig.jsonls.setup(require("lsp.jsonls"))
-lspconfig.emmet_ls.setup(require("lsp.emmet_ls"))
-lspconfig.yamlls.setup(require("lsp.yamlls"))
-lspconfig.cssls.setup(require("lsp.cssls"))
+for _, srv in ipairs(servers) do
+	vim.lsp.config(srv, require("lsp." .. srv))
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+vim.lsp.config("kulala_ls", {
+	capabilities = capabilities,
+})
 
 local icons = require("theme.icons")
 
