@@ -20,18 +20,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-		-- adds autosave with eslint, since it's not possible to do so with
-		-- `on_attach` - the command is being injected on the default setting
-		-- with `on_attach` so providing this on our custom config will overwrite it
-		-- see https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua#L48
-
-		if client.name == "eslint" then
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = args.buf,
-				command = "LspEslintFixAll",
-			})
-		end
-
 		if
 			client.server_capabilities["documentSymbolProvide"]
 			and utils.has_value({
@@ -68,6 +56,7 @@ local servers = {
 	"yamlls",
 	"cssls",
 	"tailwindcss",
+	"eslint",
 }
 
 for _, srv in ipairs(servers) do
