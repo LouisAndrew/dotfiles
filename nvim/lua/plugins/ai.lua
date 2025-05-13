@@ -24,6 +24,10 @@ return {
 					snacks_input = false,
 				},
 			})
+
+			vim.keymap.set("n", "<leader>at", require("copilot.suggestion").toggle_auto_trigger, {
+				desc = "toggle copilot auto trigger",
+			})
 		end,
 	},
 	{

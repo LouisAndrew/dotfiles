@@ -188,8 +188,6 @@ return {
 			color = { fg = minimal_fedu.palette.indigo[3] },
 		})
 
-		ins_right({ "location", color = { fg = minimal_fedu.dimmed_white } })
-
 		ins_right({
 			"buffers",
 			show_filename_only = true, -- Shows shortened relative path when set to false.
@@ -222,67 +220,67 @@ return {
 			},
 		})
 
-		ins_right({
-			function()
-				local msg = "| no lsp"
-				local buf_ft = vim.api.nvim_get_option_value("filetype", {
-					buf = 0,
-				})
-				local clients = vim.lsp.get_clients()
-
-				if next(clients) == nil then
-					return msg
-				end
-
-				---
-				---@class Client
-				---@field name string
-				---@field count number
-				local client_map = {}
-
-				for _, client in ipairs(clients) do
-					local filetypes = client.config.filetypes
-					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-						local n = client.name
-						if n == "emmet_language_server" then
-							n = "emmet"
-						elseif n == "typescript-tools" then
-							n = "tss"
-						end
-
-						local entry = client_map[n]
-						if entry then
-							entry.count = entry.count + 1
-						else
-							client_map[n] = { name = n, count = 1 }
-						end
-					end
-				end
-
-				local client_names = {}
-				local display_count = true
-				for _, client in pairs(client_map) do
-					local count = (client.count == 1 or display_count == false) and "" or " (" .. client.count .. ")"
-					table.insert(client_names, client.name .. count)
-				end
-
-				if #client_names == 0 then
-					return msg
-				end
-
-				if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
-					return "| " .. table.concat(client_names, ", ")
-				elseif #client_names > 0 then
-					return "| " .. #client_names .. " LSPs"
-				end
-			end,
-			padding = {
-				left = -1,
-			},
-			color = {
-				fg = minimal_fedu.dimmed_white,
-			},
-		})
+		-- ins_right({
+		-- 	function()
+		-- 		local msg = "| no lsp"
+		-- 		local buf_ft = vim.api.nvim_get_option_value("filetype", {
+		-- 			buf = 0,
+		-- 		})
+		-- 		local clients = vim.lsp.get_clients()
+		--
+		-- 		if next(clients) == nil then
+		-- 			return msg
+		-- 		end
+		--
+		-- 		---
+		-- 		---@class Client
+		-- 		---@field name string
+		-- 		---@field count number
+		-- 		local client_map = {}
+		--
+		-- 		for _, client in ipairs(clients) do
+		-- 			local filetypes = client.config.filetypes
+		-- 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+		-- 				local n = client.name
+		-- 				if n == "emmet_language_server" then
+		-- 					n = "emmet"
+		-- 				elseif n == "typescript-tools" then
+		-- 					n = "tss"
+		-- 				end
+		--
+		-- 				local entry = client_map[n]
+		-- 				if entry then
+		-- 					entry.count = entry.count + 1
+		-- 				else
+		-- 					client_map[n] = { name = n, count = 1 }
+		-- 				end
+		-- 			end
+		-- 		end
+		--
+		-- 		local client_names = {}
+		-- 		local display_count = true
+		-- 		for _, client in pairs(client_map) do
+		-- 			local count = (client.count == 1 or display_count == false) and "" or " (" .. client.count .. ")"
+		-- 			table.insert(client_names, client.name .. count)
+		-- 		end
+		--
+		-- 		if #client_names == 0 then
+		-- 			return msg
+		-- 		end
+		--
+		-- 		if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
+		-- 			return "| " .. table.concat(client_names, ", ")
+		-- 		elseif #client_names > 0 then
+		-- 			return "| " .. #client_names .. " LSPs"
+		-- 		end
+		-- 	end,
+		-- 	padding = {
+		-- 		left = -1,
+		-- 	},
+		-- 	color = {
+		-- 		fg = minimal_fedu.dimmed_white,
+		-- 	},
+		-- })
 
 		lualine.setup(config)
 	end,

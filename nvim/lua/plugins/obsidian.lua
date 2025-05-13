@@ -72,8 +72,8 @@ return {
 				picker = {
 					-- snacks picker is not good enough. doesn't filter out assets
 					-- and sorting doesn't work correctly
-					-- name = "snacks.pick",
-					name = "telescope.nvim",
+					name = "snacks.pick",
+					-- name = "telescope.nvim",
 					note_mappings = {
 						["<C-l>"] = "vsplit",
 						["<C-c>"] = "new",

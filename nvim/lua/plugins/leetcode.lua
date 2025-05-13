@@ -1,4 +1,5 @@
 local utils = require("utils")
+local colors = require("minimal_fedu")
 
 return {
 	"kawre/leetcode.nvim",
@@ -24,6 +25,18 @@ return {
 				function()
 					vim.cmd(":TimerStop")
 					vim.cmd(":TimerStart 20m")
+
+					vim.api.nvim_set_hl(0, "leetcode_dyn_p", {
+						foreground = colors.palette.grey[5],
+					})
+
+					vim.api.nvim_set_hl(0, "leetcode_alt", {
+						foreground = colors.palette.grey[5],
+					})
+
+					vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>:Leet submit<cr>", {})
+					vim.api.nvim_set_keymap("n", "<leader>nr", "<cmd>:Leet run<cr>", {})
+					vim.api.nvim_set_keymap("n", "<leader>nc", "<cmd>:Leet console<cr>", {})
 				end,
 			},
 		},

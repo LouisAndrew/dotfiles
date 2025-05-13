@@ -107,7 +107,6 @@ return {
 				hover = {
 					border = { style = utils.CONST.border },
 					win_options = {
-						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:NoiceHoverBorder",
 						winblend = utils.CONST.winblend,
 					},
 				},

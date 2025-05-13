@@ -18,21 +18,20 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp", {}),
 	callback = function(args)
-		-- commenting for now; it stops clients e.g. on preview buffers
-		-- local clients = vim.lsp.get_clients({ bufnr = args.buf })
-		--
-		-- local t = {}
-		-- for _, c in ipairs(clients) do
-		-- 	if t[c.name] ~= nil then
-		-- 		local old = t[c.name]
-		-- 		print("stopping duplicate LSP: ", c.name)
-		-- 		old.stop()
-		-- 	end
-		--
-		-- 	t[c.name] = c
-		-- end
-
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+		-- adds autosave with eslint, since it's not possible to do so with
+		-- `on_attach` - the command is being injected on the default setting
+		-- with `on_attach` so providing this on our custom config will overwrite it
+		-- see https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua#L48
+
+		if client.name == "eslint" then
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = args.buf,
+				command = "LspEslintFixAll",
+			})
+		end
+
 		if
 			client.server_capabilities["documentSymbolProvide"]
 			and utils.has_value({
@@ -62,7 +61,6 @@ require("mason-lspconfig").setup({
 
 -- custom configs
 local servers = {
-	"eslint",
 	"graphql",
 	"vtsls",
 	"jsonls",
