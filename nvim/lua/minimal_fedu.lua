@@ -13,6 +13,9 @@ local theme = "light"
 
 local preset = preset_config[theme]
 
+local dimmed_white = "#9a9a9a"
+local white = "#ffffff"
+
 local palette = {
 	red = {
 		"#42191b",
@@ -47,10 +50,19 @@ local palette = {
 	navy = {
 		"#678CB1",
 	},
+	grey = {
+		white,
+		"#f5f5f5",
+		"#d5d5d5",
+		"#b4b4b4",
+		"#a7a7a7",
+		dimmed_white,
+		"#737373",
+		"#434343",
+		"#323232",
+		"#212121",
+	},
 }
-
-local dimmed_white = "#9a9a9a"
-local white = "#ffffff"
 
 local bg_shade = preset.shade
 local background = preset.bg
@@ -59,33 +71,21 @@ local bg_accent_light = "#1a1a1a"
 local foreground = "#ffcfa7"
 local debug = "#ff0000"
 
-return {
+local diagnostic = {
+	error = palette.red[2],
+	warning = palette.yellow[2],
+	info = palette.blue[2],
+	hint = dimmed_white,
+}
+
+local M = {
 	-- noirbuddy related.
 	primary = foreground,
-	diagnostic = {
-		error = palette.red[2],
-		warning = palette.yellow[2],
-		info = palette.blue[2],
-		hint = dimmed_white,
-	},
-	shades_of_grey = {
-		white,
-		"#f5f5f5",
-		"#d5d5d5",
-		"#b4b4b4",
-		"#a7a7a7",
-		palette.navy[1], -- @todo put dimmed_white here
-		"#737373",
-		"#535353",
-		"#323232",
-		"#212121",
-	},
-
-	shades_of_background = {},
+	diagnostic = diagnostic,
 
 	cyan = palette.cyan[1],
 	white = "#ffffff",
-	navy = palette.cyan[1],
+	navy = palette.navy[1],
 	dimmed_white = dimmed_white,
 	debug = debug,
 	foreground = foreground,
@@ -106,3 +106,5 @@ return {
 		visual = palette.indigo[4],
 	},
 }
+
+return M

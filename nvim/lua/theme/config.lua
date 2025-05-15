@@ -11,7 +11,7 @@ M.hl = {
 		minimal_fedu.bg_accent,
 		minimal_fedu.background,
 	},
-	normal = {
+	float = {
 		nil,
 		minimal_fedu.background,
 	},

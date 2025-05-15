@@ -41,10 +41,12 @@ local M = {
 		{ "<C-4>", "<End>" },
 		{ "<C-6>", "<cmd>:norm ^<CR>" },
 		{ "<S-Tab>", "<cmd>:norm <<^<CR>" },
+		{ "jj", "<esc>" },
 	},
 
 	n = {
 		{ "j", "gj" },
+		{ "zo", "za" },
 		{
 			"<leader>pd",
 			function()
@@ -70,12 +72,10 @@ local M = {
 		{ "<leader>pv", vim.cmd.Ex },
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
-		{ "<C-s>", "<cmd>:w<cr>" },
 		{
 			"<S-u>",
 			function()
 				vim.opt.statuscolumn = require("config").statuscolumn
-				-- Restart UFO
 				vim.cmd("UfoDisable")
 				vim.cmd("UfoEnable")
 			end,
@@ -126,6 +126,8 @@ local M = {
 
 		{ "å", "zh" },
 		{ "∂", "zl" },
+		{ "ß", "zh" },
+		{ "ƒ", "zl" },
 		{ "∫", "50zh" },
 		{ "∑", "50zl" },
 		{ "]z", "zj" },
@@ -148,6 +150,10 @@ local M = {
 		{ "<C-j>", require("smart-splits").move_cursor_down },
 		{ "<C-k>", require("smart-splits").move_cursor_up },
 		{ "<C-l>", require("smart-splits").move_cursor_right },
+		{
+			"S",
+			"<cmd>:w<cr>",
+		},
 	},
 
 	t = { { "<C-x>", termcodes("<C-\\><C-N>"), "escape terminal " } },

@@ -74,14 +74,4 @@ return {
 			})
 		end,
 	},
-	{
-		"harrisoncramer/gitlab.nvim",
-		enabled = true,
-		build = function()
-			require("gitlab.server").build(true)
-		end, -- Builds the Go binary
-		config = function()
-			require("gitlab").setup()
-		end,
-	},
 }

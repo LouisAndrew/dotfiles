@@ -13,6 +13,10 @@ return {
 				notifiers = {},
 			},
 		},
+		{
+			"nvim-telescope/telescope.nvim",
+			tag = "0.1.8",
+		},
 	},
 	lazy = utils.CONST.leet_arg ~= vim.fn.argv(0, -1),
 	---@module 'leetcode'
