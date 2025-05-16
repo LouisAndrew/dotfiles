@@ -47,20 +47,10 @@ require("mason-lspconfig").setup({
 	automatic_enable = true,
 })
 
--- custom configs
-local servers = {
-	"graphql",
-	"vtsls",
-	"jsonls",
-	"emmet_ls",
-	"yamlls",
-	"cssls",
-	"tailwindcss",
-	"eslint",
-}
+local servers = require("utils").loaddir("lua/lsp/servers/*.lua")
 
-for _, srv in ipairs(servers) do
-	vim.lsp.config(srv, require("lsp." .. srv))
+for name, cfg in pairs(servers) do
+	vim.lsp.config(name:gsub("lsp.servers.", ""), cfg)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

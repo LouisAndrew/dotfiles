@@ -13,10 +13,10 @@ return {
 					auto_trigger = false,
 					hide_during_completion = false,
 					keymap = {
-						accept = "<M-l>",
-						next = "<M-j>",
-						prev = "<M-k>",
-						dismiss = "<M-h>",
+						accept = "<C-l>",
+						next = "<C-j>",
+						prev = "<C-k>",
+						dismiss = "<C-h>",
 					},
 				},
 				filetypes = {
