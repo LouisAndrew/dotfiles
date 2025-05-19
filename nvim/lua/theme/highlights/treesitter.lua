@@ -131,6 +131,6 @@ local config = {
 	{ "Function", colors.palette.grey[1] },
 }
 
-vim.tbl_deep_extend("force", config, md_config)
+config = vim.tbl_deep_extend("force", config, md_config)
 
 return config

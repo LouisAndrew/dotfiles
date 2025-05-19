@@ -58,6 +58,7 @@ local palette = {
 		"#a7a7a7",
 		dimmed_white,
 		"#737373",
+		"#545454",
 		"#434343",
 		"#323232",
 		"#212121",
@@ -73,7 +74,7 @@ local debug = "#ff0000"
 
 local diagnostic = {
 	error = palette.red[2],
-	warning = palette.yellow[2],
+	warn = palette.yellow[2],
 	info = palette.blue[2],
 	hint = dimmed_white,
 }

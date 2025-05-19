@@ -162,4 +162,8 @@ function U.loaddir(path, ignore_list)
 	return out
 end
 
+function U.capitalize(str)
+	return str:gsub("^%l", string.upper)
+end
+
 return U

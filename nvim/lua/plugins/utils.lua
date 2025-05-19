@@ -93,6 +93,9 @@ return {
 				},
 				textHighlight = "Normal",
 			},
+			ui = {
+				display_mode = "float",
+			},
 		},
 	},
 	{

@@ -42,7 +42,6 @@ require("mason-lspconfig").setup({
 		"tailwindcss",
 		"cssls",
 		"html",
-		"volar",
 	},
 	automatic_enable = true,
 })

@@ -5,20 +5,6 @@ return {
 	dependencies = {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		-- "nvim-treesitter/nvim-treesitter-context",
-		{
-			"danymat/neogen",
-			config = true,
-			keys = {
-				{
-					"<leader>ic",
-					function()
-						require("neogen").generate()
-					end,
-					desc = "Generate annotation comment",
-				},
-			},
-		},
 		"windwp/nvim-ts-autotag",
 		{
 			"echasnovski/mini.ai",

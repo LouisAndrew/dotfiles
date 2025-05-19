@@ -18,12 +18,6 @@ return {
 						hl_group = "LuaSnipInsertPassive",
 					},
 				},
-				[types.choiceNode] = {
-					active = {
-						virt_text = { { "<-", "LuaLineDiffChange" } },
-						hl_mode = "combine",
-					},
-				},
 			},
 			ext_base_prio = 200,
 			ext_prio_increase = 2,

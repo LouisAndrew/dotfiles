@@ -1,5 +1,4 @@
 local icons = require("theme.icons")
-local minimal_fedu = require("minimal_fedu")
 
 return {
 	"neovim/nvim-lspconfig",
@@ -33,7 +32,7 @@ return {
 			"SmiteshP/nvim-navic",
 			opts = {
 				icons = icons,
-				depth_limit = 4,
+				depth_limit = 6,
 				highlight = true,
 				---@param text string
 				format_text = function(text)
@@ -41,7 +40,6 @@ return {
 				end,
 				separator = " / ",
 				lsp = {
-					preference = { "volar" },
 					auto_attach = true,
 				},
 			},
@@ -90,15 +88,6 @@ return {
 				},
 			},
 			desc = "Outline",
-		},
-		{
-			"Chaitanyabsprip/fastaction.nvim",
-			---@type FastActionConfig
-			opts = {
-				popup = {
-					border = "single",
-				},
-			},
 		},
 	},
 	config = function()

@@ -18,16 +18,13 @@ return {
 				desc = "Find Files",
 			},
 			{
-				"<leader><space>",
-				function()
-					Snacks.picker.smart()
-				end,
-				desc = "Smart Find Files",
-			},
-			{
 				"<leader>,",
 				function()
-					Snacks.picker.buffers()
+					Snacks.picker.buffers({
+						layout = {
+							preset = "select",
+						},
+					})
 				end,
 				desc = "Buffers",
 			},
@@ -506,7 +503,7 @@ return {
 						},
 					},
 				},
-
+				ui_select = false,
 				icons = {
 					ui = {
 						selected = "* ",
