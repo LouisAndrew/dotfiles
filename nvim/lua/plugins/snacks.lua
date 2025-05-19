@@ -506,7 +506,7 @@ return {
 						},
 					},
 				},
-
+				ui_select = false,
 				icons = {
 					ui = {
 						selected = "* ",

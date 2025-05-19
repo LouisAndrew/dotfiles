@@ -4,7 +4,6 @@
   "avante.nvim": { "branch": "main", "commit": "f9aa75459d403d9e963ef2647c9791e0dfc9e5f9" },
   "blink.cmp": { "branch": "main", "commit": "54cbaac2064fe6198ec55b636b53cc8c9791ead3" },
   "codecompanion.nvim": { "branch": "main", "commit": "d19670a44c35e9ba0674cc7a25ff3b8f22bbf062" },
-  "colorbuddy.nvim": { "branch": "master", "commit": "8b968581e5c19d22a861d5f3fe5dbd83394fa681" },
   "conform.nvim": { "branch": "master", "commit": "2b2b30260203af3b93a7470ac6c8457ddd6e32d9" },
   "copilot.lua": { "branch": "master", "commit": "2fe34db04570f6c47db0b752ca421a49b7357c03" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
@@ -67,6 +66,7 @@
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "text-case.nvim": { "branch": "main", "commit": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
+  "vesper.nvim": { "branch": "main", "commit": "1717b1ad657c94bec3fc2bdebb0c55452d9fe46d" },
   "vim-illuminate": { "branch": "master", "commit": "fbc16dee336d8cc0d3d2382ea4a53f4a29725abf" },
   "vscode-js-debug": { "branch": "main", "commit": "9419f572e768563273aca4e28179d8d5413cf5e0" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }

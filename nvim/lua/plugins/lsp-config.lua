@@ -1,5 +1,4 @@
 local icons = require("theme.icons")
-local minimal_fedu = require("minimal_fedu")
 
 return {
 	"neovim/nvim-lspconfig",
@@ -90,15 +89,6 @@ return {
 				},
 			},
 			desc = "Outline",
-		},
-		{
-			"Chaitanyabsprip/fastaction.nvim",
-			---@type FastActionConfig
-			opts = {
-				popup = {
-					border = "single",
-				},
-			},
 		},
 	},
 	config = function()

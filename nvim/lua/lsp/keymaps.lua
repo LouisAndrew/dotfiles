@@ -51,9 +51,7 @@ return {
 				},
 				{
 					"M",
-					function()
-						require("fastaction").code_action()
-					end,
+					require("fastaction").code_action,
 					opts = { desc = "Code actions" },
 				},
 				{ "<leader>it", "<cmd>Outline<CR>" },

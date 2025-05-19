@@ -6,7 +6,7 @@ Color.new("primary", minimal_fedu.foreground)
 Color.new("secondary", minimal_fedu.white)
 
 Color.new("diagnostic_error", minimal_fedu.diagnostic.error)
-Color.new("diagnostic_warning", minimal_fedu.diagnostic.warning)
+Color.new("diagnostic_warning", minimal_fedu.diagnostic.warn)
 Color.new("diagnostic_info", minimal_fedu.diagnostic.info)
 Color.new("diagnostic_hint", minimal_fedu.diagnostic.hint)
 

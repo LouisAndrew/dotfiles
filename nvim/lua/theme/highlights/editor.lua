@@ -42,7 +42,7 @@ local M = {
 	{ "NormalFloat", nil, colors.background },
 	{ "FloatBorder", colors.bg_accent, colors.background },
 
-	{ "MoreMsg", colors.palette.grey[7], nil }, -- `confirm` normal
+	{ "MoreMsg", colors.palette.grey[6], nil }, -- `confirm` normal
 	{ "NonText", colors.palette.grey[9], nil },
 	{ "PmenuThumb", nil, colors.bg_accent },
 	{ "PmenuSbar", nil, colors.background },

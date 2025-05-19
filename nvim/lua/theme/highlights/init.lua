@@ -1,23 +1,6 @@
-local minimal_fedu = require("minimal_fedu")
 local Group = require("colorbuddy").Group
 local colors = require("colorbuddy").colors
 local styles = require("colorbuddy").styles
-
--- Semantic Highlighting
-Group.new("DiagnosticError", colors.diagnostic_error)
-Group.new("DiagnosticWarn", colors.diagnostic_warning)
-Group.new("DiagnosticInfo", colors.diagnostic_info)
-Group.new("DiagnosticHint", colors.diagnostic_hint)
-Group.new("DiagnosticSignError", colors.diagnostic_error, colors.remove)
-Group.new("DiagnosticSignWarn", colors.diagnostic_warning)
-Group.new("DiagnosticSignInfo", colors.diagnostic_info)
-Group.new("DiagnosticSignHint", colors.diagnostic_hint)
-
-Group.new("DiffAdd", nil, colors.add)
-Group.new("DiffDelete", nil, colors.remove)
-Group.new("DiffChange", nil, colors.change)
-Group.new("DiffText", nil, colors.change)
-Group.new("DiagnosticShowBorder", colors.nb_background)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)
@@ -28,10 +11,6 @@ Group.new("CodeActionConceal", colors.add)
 Group.new("HoverNormal", colors.primary)
 -- rename
 Group.new("RenameNormal", colors.secondary, colors.nb_background)
--- diagnostic
-Group.new("DiagnosticSource", colors.primary)
-Group.new("DiagnosticPos", colors.mfed_7)
-Group.new("DiagnosticWord", colors.secondary)
 -- call heirarchy
 Group.new("CallHierarchyIcon", colors.primary)
 Group.new("CallHierarchyTitle", colors.secondary)
@@ -58,38 +37,11 @@ Group.new("DiffDelete", nil, colors.remove)
 Group.new("DiffChange", nil, colors.change)
 Group.new("DiffText", nil, colors.change)
 
--- Group.new("BufferInactive", nil, colors.mfed_bg_accent)
-
-Group.new("DiagnosticError", colors.diagnostic_error, nil)
-Group.new("DiagnosticWarn", colors.yellow_fg, nil)
-
 -- LuaLine
-Group.new("LuaLineDiffChange", colors.blue_fg, nil)
-Group.new("LuaLineDiffAdd", colors.add_fg, nil)
-Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 Group.new("WinBar", nil, nil, nil)
 Group.new("WinBarNC", nil, nil, nil)
 
--- Telescope
--- Group.new("TelescopeTitle", colors.white, colors.nb_background, styles.bold)
-Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
-Group.new("TelescopeNormal", nil)
-Group.new("TelescopeBorder", colors.background, nil)
-Group.new("TelescopeMatching", colors.mfed_0)
-Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
-Group.new("TelescopeResultsNormal", colors.mfed_dim)
-Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
-Group.new("EgrepifyFile", colors.mfed_2, nil)
-Group.new("String", colors.primary)
-
--- Saga
-Group.new("TitleString", colors.secondary)
-Group.new("TitleSymbol", colors.primary)
-Group.new("TitleIcon", colors.primary)
-Group.new("SagaNormal", nil, colors.nb_background)
-Group.new("SagaExpand", colors.remove_fg)
-Group.new("SagaCollapse", colors.remove_fg)
-Group.new("SagaBeacon", colors.primary)
+Group.new("TelescopeBorder", colors.mfed_bg_accent, nil)
 
 -- Obsidian
 Group.new("ObsidianRefText", colors.mfed_cyan)
@@ -110,76 +62,18 @@ Group.new("MasonMutedBlock", colors.mfed_5)
 Group.new("MasonMutedBlockBold", colors.mfed_5)
 Group.new("MasonError", colors.remove_fg)
 
--- Nvim tree
-Group.new("NvimTreeRootFolder", colors.mfed_6)
-Group.new("NvimTreeFolderIcon", colors.primary)
-Group.new("NvimTreeIndentMarker", colors.mfed_6)
-Group.new("NvimTreeExecFile", colors.mfed_6)
-Group.new("NvimTreeSpecialFile", colors.mfed_2, nil)
-
 Group.new("Bold", nil, nil, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
-Group.new("nvimtreefoldericon", colors.mfed_dim)
-Group.new("sagaborder", colors.nb_background)
-Group.new("cmpmenu", nil, colors.bg_shade)
-
-Group.new("cmpborder", colors.nb_background, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
-Group.new("paletteborder", colors.nb_background)
-Group.new("wildermatch", colors.yellow_fg)
 Group.new("IlluminatedWordText", nil, colors.mfed_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.mfed_9, nil)
 Group.new("IlluminatedWordWrite", nil, colors.mfed_9, nil)
 
 Group.new("InclineNormal", colors.mfed_2, nil)
 Group.new("InclineNormalNC", colors.mfed_6, nil)
-Group.new("RainbowDelimiterCyan", colors.mfed_cyan)
 Group.new("TreesitterContext", nil, colors.mfed_bg_accent)
-
-local level_hl_raw = {
-	{ "Error", minimal_fedu.diagnostic.error },
-	{ "Warn", minimal_fedu.diagnostic.warning },
-	{ "Hint", minimal_fedu.diagnostic.hint },
-	{ "Info", minimal_fedu.diagnostic.info },
-}
-
-local level = {
-	{ "Error", colors.diagnostic_error },
-	{ "Warn", colors.diagnostic_warning },
-	{ "Hint", colors.diagnostic_hint },
-	{ "Info", colors.diagnostic_info },
-}
-
-for _, l in ipairs(level_hl_raw) do
-	local hi_group = "DiagnosticUnderline" .. l[1]
-	local hi_color = l[2]
-
-	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
-end
-
-local render_markdown = {
-	prefix = "RenderMarkdown",
-	{ "CodeInline", nil, colors.background },
-	{ "Code", nil, colors.mfed_bg_accent_light },
-	{ "Quote", colors.indigo_fg },
-	{ "Update", colors.magenta_fg:light() },
-	{ "TableHead", colors.mfed_bg_accent },
-	{ "TableRow", colors.mfed_bg_accent },
-	{ "WikiLink", colors.mfed_navy, nil },
-	{ "Link", colors.mfed_navy, nil },
-}
-
-local md_config = {
-	{ "@spell.markdown", colors.mfed_2 },
-	{ "@markup", colors.dimmed_white },
-	{ "@markup.link", colors.mfed_0 },
-	{ "@markup.heading", colors.white, nil, styles.bold },
-	{ "@markup.italic", nil, nil, styles.italic },
-	{ "@markup.list", colors.mfed_2, nil },
-	{ "@markup.raw", colors.mfed_bool:light() },
-}
 
 local dap_config = {
 	{ "DapUIScope", colors.mfed_navy },
@@ -247,14 +141,6 @@ local gpt_config = {
 	},
 }
 
-local diagnostic_config = {
-	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.nb_background },
-	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.nb_background },
-	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.nb_background },
-	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.nb_background },
-	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.nb_background },
-}
-
 local mini_hipatterns_config = {
 	prefix = "MiniHiPatterns",
 	{ "Todo", colors.remove_fg },
@@ -284,29 +170,39 @@ local bqf_config = {
 	{ "Delimiter", colors.nb_background },
 }
 
-for _, lvl in ipairs(level) do
-	for _, group in ipairs({ "Icon", "Title" }) do
-		local hl_group = "Notify" .. lvl[1] .. group
-		local hl_color = lvl[2]
+-- for _, lvl in ipairs(level) do
+-- 	for _, group in ipairs({ "Icon", "Title" }) do
+-- 		local hl_group = "Notify" .. lvl[1] .. group
+-- 		local hl_color = lvl[2]
+--
+-- 		notify_config[#notify_config + 1] = { hl_group, hl_color }
+-- 	end
+-- end
 
-		notify_config[#notify_config + 1] = { hl_group, hl_color }
-	end
-end
+local render_markdown = {
+	prefix = "RenderMarkdown",
+	{ "CodeInline", nil, colors.background },
+	{ "Code", nil, colors.mfed_bg_accent_light },
+	{ "Quote", colors.indigo_fg },
+	{ "Update", colors.magenta_fg:light() },
+	{ "TableHead", colors.mfed_bg_accent },
+	{ "TableRow", colors.mfed_bg_accent },
+	{ "WikiLink", colors.mfed_navy, nil },
+	{ "Link", colors.mfed_navy, nil },
+}
 
 local hl_group_configs = {
 	dap_config,
 	notify_config,
 	gpt_config,
-	render_markdown,
-	md_config,
 	snacks_config,
 	snacks_picker_config,
-	diagnostic_config,
 	mini_hipatterns_config,
 	avante_config,
 	snacks_indent,
 	mini_file_config,
 	bqf_config,
+	render_markdown,
 }
 
 --- @class HlConfig
@@ -338,7 +234,7 @@ end
 
 local hl = require("utils").loaddir("lua/theme/highlights/*.lua", { "theme.highlights.init" })
 
----@alias GroupDefinition { [1]: string, [2]: string, [3]?: string, bold?: boolean, italic?: boolean, link?: boolean }
+---@alias GroupDefinition { [1]: string, [2]: string, [3]?: string, bold?: boolean, italic?: boolean, link?: boolean, underline?: boolean, sp?: string }
 ---@alias _HlConfig {prefix?: string, fg?: string} | GroupDefinition[]
 
 ---@param config _HlConfig
@@ -361,6 +257,9 @@ local function apply_hl(config)
 				foreground = fg,
 				background = bg,
 				bold = l.bold,
+				underline = l.underline,
+				italic = l.italic,
+				sp = l.sp,
 				force = true,
 			})
 		end

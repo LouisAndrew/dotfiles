@@ -54,7 +54,7 @@ return {
 					---@param tokens number
 					---@param adapter CodeCompanion.Adapter
 					token_count = function(tokens, adapter)
-						return " [ " .. tokens .. "@" .. adapter.name .. " ]"
+						return " [ " .. tokens .. "@" .. adapter.name .. "/" .. adapter.model.name .. " ]"
 					end,
 				},
 			},
@@ -77,6 +77,17 @@ return {
 				inline = {
 					adapter = "copilot",
 				},
+			},
+			adapters = {
+				anthropic = function()
+					return require("codecompanion.adapters").extend("anthropic", {
+						schema = {
+							model = {
+								default = "claude-3-5-sonnet-20241022",
+							},
+						},
+					})
+				end,
 			},
 		},
 	},
