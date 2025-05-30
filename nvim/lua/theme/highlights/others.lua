@@ -8,9 +8,9 @@ local ufo = {
 
 local flash = {
 	prefix = "Flash",
-	{ "Match", colors.palette.grey[6] },
+	{ "Match", colors.palette.grey[5] },
 	{ "Current", colors.palette.grey[6] },
-	{ "Label", colors.palette.grey[2], nil },
+	{ "Label", colors.palette.indigo[2], colors.palette.indigo[4] },
 }
 
 local M = {}

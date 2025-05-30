@@ -31,7 +31,7 @@ local M = {
 	{ "RCursorLine", colors.palette.yellow[2] },
 
 	--- cursor
-	{ "Cursor", colors.palette.indigo[2], colors.palette.indigo[2] },
+	{ "Cursor", nil, colors.palette.indigo[2] },
 	{ "iCursor", nil, colors.palette.indigo[2] },
 	{ "vCursor", nil, colors.palette.indigo[2] },
 	{ "oCursor", nil, colors.misc.remove_fg },

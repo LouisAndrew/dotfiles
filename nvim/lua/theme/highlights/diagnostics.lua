@@ -14,6 +14,7 @@ local prefixes = {
 }
 
 local levels = {}
+
 local utils = require("utils")
 for name, hl in pairs(colors.diagnostic) do
 	levels[utils.capitalize(name)] = hl
