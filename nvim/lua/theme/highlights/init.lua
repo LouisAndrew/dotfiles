@@ -56,8 +56,6 @@ Group.new("MasonError", colors.remove_fg)
 Group.new("Bold", nil, nil, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
-Group.new("dapbreakpoint", colors.remove_fg)
-
 Group.new("IlluminatedWordText", nil, colors.mfed_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.mfed_9, nil)
 Group.new("IlluminatedWordWrite", nil, colors.mfed_9, nil)
@@ -65,28 +63,6 @@ Group.new("IlluminatedWordWrite", nil, colors.mfed_9, nil)
 Group.new("InclineNormal", colors.mfed_2, nil)
 Group.new("InclineNormalNC", colors.mfed_6, nil)
 Group.new("TreesitterContext", nil, colors.mfed_bg_accent)
-
-local dap_config = {
-	{ "DapUIScope", colors.mfed_navy },
-	{ "DapUIModifiedValue", colors.mfed_navy },
-	{ "DapUIDecoration", colors.mfed_navy },
-	{ "DapUIStoppedThread", colors.mfed_navy },
-	{ "DapUILineNumber", colors.mfed_navy },
-	{ "DapUIFloatBorder", colors.mfed_navy },
-	{ "DapUIBreakpointsPath", colors.mfed_navy },
-	{ "DapUIStepOver", colors.mfed_navy },
-	{ "DapUIStepInto", colors.mfed_navy },
-	{ "DapUIStepBack", colors.mfed_navy },
-	{ "DapUIStepOut", colors.mfed_navy },
-	{ "DapUIType", colors.mfed_cyan },
-	{ "DapUISource", colors.mfed_cyan },
-	{ "DapUILineNumber", colors.mfed_dim },
-	{ "DapUIBreakpointsInfo", colors.mfed_cyan },
-	{ "DapUIBreakpointsCurrentLine", colors.mfed_cyan },
-	{ "DapUIWatchesValue", colors.mfed_cyan },
-	{ "DapUIWatchesEmpty", colors.diagnostic_error },
-	{ "DapUIWatchesError", colors.diagnostic_error },
-}
 
 local notify_config = {
 	{ "NotifyERRORBorder", colors.mfed_bg_accent },
@@ -183,7 +159,6 @@ local render_markdown = {
 }
 
 local hl_group_configs = {
-	dap_config,
 	notify_config,
 	gpt_config,
 	snacks_config,

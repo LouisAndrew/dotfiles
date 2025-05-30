@@ -1,10 +1,10 @@
 local colors = require("minimal_fedu")
 
 local syn_hl = {
-	-- keyword = colors.palette.navy[1],
-	keyword = colors.palette.grey[7],
-	-- return_keyword = colors.palette.cyan[1],
-	return_keyword = colors.palette.grey[7],
+	keyword = colors.palette.navy[1],
+	-- keyword = colors.palette.grey[7],
+	return_keyword = colors.palette.cyan[1],
+	-- return_keyword = colors.palette.grey[7],
 	fn = colors.palette.grey[3],
 	fn_call = colors.palette.grey[6],
 	-- fn_call = colors.palette.yellow[2], -- NestJS like

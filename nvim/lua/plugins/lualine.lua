@@ -5,7 +5,7 @@ return {
 		local lualine = require("lualine")
 		local icons = require("theme.icons")
 		local search_count = require("search").search_count
-		local utils = require("utils")
+		-- local utils = require("utils")
 
 		local config = {
 			options = {
@@ -75,48 +75,38 @@ return {
 			table.insert(config.sections.lualine_x, component)
 		end
 
-		local function ins_winbar_left(component, inactive_color)
-			table.insert(config.winbar.lualine_c, component)
+		-- local function ins_winbar_left(component, inactive_color)
+		-- 	table.insert(config.winbar.lualine_c, component)
+		--
+		-- 	local inactive_component = vim.deepcopy(component)
+		-- 	inactive_component.color = inactive_color
+		-- 	table.insert(config.inactive_winbar.lualine_c, inactive_component)
+		-- end
+		--
+		-- local function ins_winbar_right(component, inactive_color)
+		-- 	table.insert(config.winbar.lualine_x, component)
+		--
+		-- 	local inactive_component = vim.deepcopy(component)
+		-- 	inactive_component.color = inactive_color
+		-- 	table.insert(config.inactive_winbar.lualine_x, inactive_component)
+		-- end
 
-			local inactive_component = vim.deepcopy(component)
-			inactive_component.color = inactive_color
-			table.insert(config.inactive_winbar.lualine_c, inactive_component)
-		end
-
-		local function ins_winbar_right(component, inactive_color)
-			table.insert(config.winbar.lualine_x, component)
-
-			local inactive_component = vim.deepcopy(component)
-			inactive_component.color = inactive_color
-			table.insert(config.inactive_winbar.lualine_x, inactive_component)
-		end
-
-		ins_winbar_left({
-			"navic",
-			fmt = function(text)
-				if vim.g.DISPLAY_NAVIC == utils.CONST.falsy then
-					return ""
-				end
-
-				return string.gsub(text, "%%%*$", "")
-			end,
-		})
-
-		ins_winbar_right({
-			"filename",
-			file_status = true, -- Displays file status (readonly status, modified status)
-			newfile_status = true, -- Display new file status (new file means no write after created)
-			path = 4, -- 0: Just the filename
-			color = { fg = minimal_fedu.mfed_6 },
-			shorting_target = 60,
-			symbols = {
-				modified = icons.Modified,
-				readonly = "",
-				unnamed = "",
-				newfile = "[New]",
-			},
-			padding = { left = -1 },
-		}, { fg = minimal_fedu.mfed_7 })
+		-- ins_winbar_left({
+		-- 	"navic",
+		-- 	fmt = function(text)
+		-- 		if vim.g.DISPLAY_NAVIC == utils.CONST.falsy then
+		-- 			return " "
+		-- 		end
+		--
+		-- 		return string.gsub(text, "%%%*$", "")
+		-- 	end,
+		-- })
+		--
+		-- ins_winbar_right({
+		-- 	function()
+		-- 		return " "
+		-- 	end,
+		-- })
 
 		ins_left({
 			function()
@@ -152,6 +142,7 @@ return {
 
 		ins_left({
 			function()
+				---@diagnostic disable-next-line: undefined-field
 				local mode = require("noice").api.status.mode.get()
 				if mode:find("^recording") then
 					return mode
@@ -159,6 +150,7 @@ return {
 
 				return ""
 			end,
+			---@diagnostic disable-next-line: undefined-field
 			cond = require("noice").api.status.mode.has,
 			color = { fg = minimal_fedu.palette.grey[7] },
 			padding = { left = 2 },
@@ -189,36 +181,52 @@ return {
 		})
 
 		ins_right({
-			"buffers",
-			show_filename_only = true, -- Shows shortened relative path when set to false.
-			hide_filename_extension = false, -- Hide filename extension when set to true.
-			show_modified_status = true, -- Shows indicator when the buffer is modified.
-
-			mode = 0,
-
-			max_length = vim.o.columns * 3 / 5, -- Maximum width of buffers component,
-			-- it can also be a function that returns
-			-- the value of `max_length` dynamically.
-			filetype_names = {
-				TelescopePrompt = "",
-			},
-			use_mode_colors = false,
-			buffers_color = {
-				-- Same values as the general color option can be used here.
-				active = {
-					fg = minimal_fedu.white,
-				}, -- Color for active buffer.
-				inactive = {
-					fg = minimal_fedu.dimmed_white,
-				}, -- Color for inactive buffer.
-			},
-
+			"filename",
+			file_status = true, -- Displays file status (readonly status, modified status)
+			newfile_status = true, -- Display new file status (new file means no write after created)
+			path = 4, -- 0: Just the filename
+			color = { fg = minimal_fedu.palette.grey[5] },
+			shorting_target = 100,
 			symbols = {
-				modified = " " .. icons.Modified, -- Text to show when the buffer is modified
-				alternate_file = "", -- Text to show to identify the alternate file
-				directory = "", -- Text to show when the buffer is a directory
+				modified = icons.Modified,
+				readonly = "[R]",
+				unnamed = "",
+				newfile = "[New]",
 			},
+			padding = { left = -1 },
 		})
+
+		-- ins_right({
+		-- 	"buffers",
+		-- 	show_filename_only = true, -- Shows shortened relative path when set to false.
+		-- 	hide_filename_extension = false, -- Hide filename extension when set to true.
+		-- 	show_modified_status = true, -- Shows indicator when the buffer is modified.
+		--
+		-- 	mode = 0,
+		--
+		-- 	max_length = vim.o.columns * 3 / 5, -- Maximum width of buffers component,
+		-- 	-- it can also be a function that returns
+		-- 	-- the value of `max_length` dynamically.
+		-- 	filetype_names = {
+		-- 		TelescopePrompt = "",
+		-- 	},
+		-- 	use_mode_colors = false,
+		-- 	buffers_color = {
+		-- 		-- Same values as the general color option can be used here.
+		-- 		active = {
+		-- 			fg = minimal_fedu.white,
+		-- 		}, -- Color for active buffer.
+		-- 		inactive = {
+		-- 			fg = minimal_fedu.dimmed_white,
+		-- 		}, -- Color for inactive buffer.
+		-- 	},
+		--
+		-- 	symbols = {
+		-- 		modified = " " .. icons.Modified, -- Text to show when the buffer is modified
+		-- 		alternate_file = "", -- Text to show to identify the alternate file
+		-- 		directory = "", -- Text to show when the buffer is a directory
+		-- 	},
+		-- })
 
 		-- ins_right({
 		-- 	function()

@@ -1,6 +1,17 @@
 local VAULT = os.getenv("VAULT_PATH")
 local utils = require("utils")
 
+vim.api.nvim_create_user_command("PickFiles", function()
+	Snacks.picker.files({
+		-- dotfiles, but not hidden (in gitignore)
+		hidden = true,
+	})
+end, {})
+
+vim.api.nvim_create_user_command("Grep", function()
+	Snacks.picker.grep()
+end, {})
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -9,12 +20,7 @@ return {
 		keys = {
 			{
 				"<C-o>",
-				function()
-					Snacks.picker.files({
-						-- dotfiles, but not hidden (in gitignore)
-						hidden = true,
-					})
-				end,
+				"<cmd>:PickFiles<cr>",
 				desc = "Find Files",
 			},
 			{
@@ -177,9 +183,7 @@ return {
 			},
 			{
 				"<C-f>",
-				function()
-					Snacks.picker.grep()
-				end,
+				"<cmd>:Grep<cr>",
 				desc = "Grep",
 			},
 			{

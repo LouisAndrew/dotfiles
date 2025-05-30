@@ -88,10 +88,6 @@ return {
 				cmdline = {},
 				cmdline_popup = {
 					relative = "editor",
-					position = {
-						row = "100%",
-						col = -1,
-					},
 					size = {
 						height = "auto",
 						width = "100%",
