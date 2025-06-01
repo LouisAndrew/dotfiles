@@ -18,32 +18,9 @@ return {
 			desc = "definition preview in a floating window",
 		},
 		{
-			"zeioth/garbage-day.nvim",
-			event = "VeryLazy",
-			opts = {},
-			desc = "Auto-close LSP",
-		},
-		{
 			"stevearc/conform.nvim",
 			lazy = true,
 			desc = "Formatter",
-		},
-		{
-			"SmiteshP/nvim-navic",
-			opts = {
-				icons = icons,
-				depth_limit = 6,
-				highlight = true,
-				---@param text string
-				format_text = function(text)
-					return text:gsub("callback", "cb")
-				end,
-				separator = " / ",
-				lsp = {
-					auto_attach = true,
-				},
-			},
-			desc = "Breadcrumbs",
 		},
 		{
 			"kevinhwang91/nvim-ufo",
@@ -55,10 +32,6 @@ return {
 		-- json schema
 		"b0o/SchemaStore.nvim",
 		{
-			"yioneko/nvim-vtsls",
-			desc = "TS LSP",
-		},
-		{
 			-- Lua LSP
 			"folke/lazydev.nvim",
 			ft = "lua",
@@ -69,6 +42,18 @@ return {
 			},
 		},
 		{ "Bilal2453/luvit-meta", lazy = true },
+		{
+			"folke/trouble.nvim",
+			lazy = true,
+			keys = {
+				{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Toggle trouble tab" },
+			},
+			---@module 'trouble'
+			---@type trouble.Config
+			opts = {
+				auto_preview = false,
+			},
+		},
 		{
 			"hedyhli/outline.nvim",
 			lazy = true,

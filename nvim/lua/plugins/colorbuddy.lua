@@ -1,11 +1,10 @@
 return {
-	"tjdevries/colorbuddy.nvim",
-	lazy = false,
-	priority = 1000,
-	config = function()
-		require("colorbuddy").setup()
-		require("theme").setup()
-	end,
+	{
+		"tjdevries/colorbuddy.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 }
 
 -- in case you need a "higher contrast" uncomment below

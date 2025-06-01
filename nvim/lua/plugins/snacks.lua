@@ -24,6 +24,11 @@ return {
 				desc = "Find Files",
 			},
 			{
+				"<leader><space>",
+				"<cmd>:PickFiles<cr>",
+				desc = "Find Files",
+			},
+			{
 				"<leader>,",
 				function()
 					Snacks.picker.buffers({
@@ -183,7 +188,9 @@ return {
 			},
 			{
 				"<C-f>",
-				"<cmd>:Grep<cr>",
+				function()
+					Snacks.picker.grep()
+				end,
 				desc = "Grep",
 			},
 			{

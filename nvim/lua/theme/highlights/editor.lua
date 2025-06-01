@@ -41,6 +41,8 @@ local M = {
 	{ "FloatTitle", colors.palette.grey[5] },
 	{ "NormalFloat", nil, colors.background },
 	{ "FloatBorder", colors.bg_accent, colors.background },
+	-- { "NormalFloat", nil, colors.bg_shade },
+	-- { "FloatBorder", colors.bg_shade, colors.bg_shade },
 
 	{ "MoreMsg", colors.palette.grey[6], nil }, -- `confirm` normal
 	{ "NonText", colors.palette.grey[9], nil },

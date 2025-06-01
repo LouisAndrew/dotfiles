@@ -5,7 +5,6 @@ return {
 		local lualine = require("lualine")
 		local icons = require("theme.icons")
 		local search_count = require("search").search_count
-		-- local utils = require("utils")
 
 		local config = {
 			options = {
@@ -74,39 +73,6 @@ return {
 		local function ins_right(component)
 			table.insert(config.sections.lualine_x, component)
 		end
-
-		-- local function ins_winbar_left(component, inactive_color)
-		-- 	table.insert(config.winbar.lualine_c, component)
-		--
-		-- 	local inactive_component = vim.deepcopy(component)
-		-- 	inactive_component.color = inactive_color
-		-- 	table.insert(config.inactive_winbar.lualine_c, inactive_component)
-		-- end
-		--
-		-- local function ins_winbar_right(component, inactive_color)
-		-- 	table.insert(config.winbar.lualine_x, component)
-		--
-		-- 	local inactive_component = vim.deepcopy(component)
-		-- 	inactive_component.color = inactive_color
-		-- 	table.insert(config.inactive_winbar.lualine_x, inactive_component)
-		-- end
-
-		-- ins_winbar_left({
-		-- 	"navic",
-		-- 	fmt = function(text)
-		-- 		if vim.g.DISPLAY_NAVIC == utils.CONST.falsy then
-		-- 			return " "
-		-- 		end
-		--
-		-- 		return string.gsub(text, "%%%*$", "")
-		-- 	end,
-		-- })
-		--
-		-- ins_winbar_right({
-		-- 	function()
-		-- 		return " "
-		-- 	end,
-		-- })
 
 		ins_left({
 			function()
@@ -181,114 +147,25 @@ return {
 		})
 
 		ins_right({
-			"filename",
-			file_status = true, -- Displays file status (readonly status, modified status)
-			newfile_status = true, -- Display new file status (new file means no write after created)
-			path = 4, -- 0: Just the filename
-			color = { fg = minimal_fedu.palette.grey[5] },
-			shorting_target = 100,
-			symbols = {
-				modified = icons.Modified,
-				readonly = "[R]",
-				unnamed = "",
-				newfile = "[New]",
+			"buffers",
+			filetype_names = {
+				TelescopePrompt = "",
 			},
-			padding = { left = -1 },
+			buffers_color = {
+				active = {
+					fg = minimal_fedu.white,
+				},
+				inactive = {
+					fg = minimal_fedu.dimmed_white,
+				}, -- Color for inactive buffer.
+			},
+
+			symbols = {
+				modified = " " .. icons.Modified, -- Text to show when the buffer is modified
+				alternate_file = "", -- Text to show to identify the alternate file
+				directory = "", -- Text to show when the buffer is a directory
+			},
 		})
-
-		-- ins_right({
-		-- 	"buffers",
-		-- 	show_filename_only = true, -- Shows shortened relative path when set to false.
-		-- 	hide_filename_extension = false, -- Hide filename extension when set to true.
-		-- 	show_modified_status = true, -- Shows indicator when the buffer is modified.
-		--
-		-- 	mode = 0,
-		--
-		-- 	max_length = vim.o.columns * 3 / 5, -- Maximum width of buffers component,
-		-- 	-- it can also be a function that returns
-		-- 	-- the value of `max_length` dynamically.
-		-- 	filetype_names = {
-		-- 		TelescopePrompt = "",
-		-- 	},
-		-- 	use_mode_colors = false,
-		-- 	buffers_color = {
-		-- 		-- Same values as the general color option can be used here.
-		-- 		active = {
-		-- 			fg = minimal_fedu.white,
-		-- 		}, -- Color for active buffer.
-		-- 		inactive = {
-		-- 			fg = minimal_fedu.dimmed_white,
-		-- 		}, -- Color for inactive buffer.
-		-- 	},
-		--
-		-- 	symbols = {
-		-- 		modified = " " .. icons.Modified, -- Text to show when the buffer is modified
-		-- 		alternate_file = "", -- Text to show to identify the alternate file
-		-- 		directory = "", -- Text to show when the buffer is a directory
-		-- 	},
-		-- })
-
-		-- ins_right({
-		-- 	function()
-		-- 		local msg = "| no lsp"
-		-- 		local buf_ft = vim.api.nvim_get_option_value("filetype", {
-		-- 			buf = 0,
-		-- 		})
-		-- 		local clients = vim.lsp.get_clients()
-		--
-		-- 		if next(clients) == nil then
-		-- 			return msg
-		-- 		end
-		--
-		-- 		---
-		-- 		---@class Client
-		-- 		---@field name string
-		-- 		---@field count number
-		-- 		local client_map = {}
-		--
-		-- 		for _, client in ipairs(clients) do
-		-- 			local filetypes = client.config.filetypes
-		-- 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-		-- 				local n = client.name
-		-- 				if n == "emmet_language_server" then
-		-- 					n = "emmet"
-		-- 				elseif n == "typescript-tools" then
-		-- 					n = "tss"
-		-- 				end
-		--
-		-- 				local entry = client_map[n]
-		-- 				if entry then
-		-- 					entry.count = entry.count + 1
-		-- 				else
-		-- 					client_map[n] = { name = n, count = 1 }
-		-- 				end
-		-- 			end
-		-- 		end
-		--
-		-- 		local client_names = {}
-		-- 		local display_count = true
-		-- 		for _, client in pairs(client_map) do
-		-- 			local count = (client.count == 1 or display_count == false) and "" or " (" .. client.count .. ")"
-		-- 			table.insert(client_names, client.name .. count)
-		-- 		end
-		--
-		-- 		if #client_names == 0 then
-		-- 			return msg
-		-- 		end
-		--
-		-- 		if #client_names == 1 or vim.g.EXPAND_LSP == "true" then
-		-- 			return "| " .. table.concat(client_names, ", ")
-		-- 		elseif #client_names > 0 then
-		-- 			return "| " .. #client_names .. " LSPs"
-		-- 		end
-		-- 	end,
-		-- 	padding = {
-		-- 		left = -1,
-		-- 	},
-		-- 	color = {
-		-- 		fg = minimal_fedu.dimmed_white,
-		-- 	},
-		-- })
 
 		lualine.setup(config)
 	end,

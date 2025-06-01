@@ -56,3 +56,6 @@ for key, value in pairs(config) do
 	-- Important?
 	opt[key] = value
 end
+
+vim.cmd("colorscheme minimal_fedu")
+opt.laststatus = 3

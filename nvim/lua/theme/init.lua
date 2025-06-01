@@ -2,14 +2,19 @@
 
 local M = {}
 
-function M.setup()
-	vim.api.nvim_command("set termguicolors")
-	vim.api.nvim_command(string.format("set background=%s", "dark"))
+function M.load()
+	vim.cmd("hi clear")
+
+	vim.o.background = "dark"
+	if vim.fn.exists("syntax_on") then
+		vim.cmd("syntax reset")
+	end
+
+	vim.o.termguicolors = true
+	vim.g.colors_name = "minimal_fedu"
 
 	require("theme.colors")
 	require("theme.highlights")
-
-	vim.api.nvim_command(string.format('let g:colors_name = "%s"', "minimal_fedu"))
 end
 
 return M

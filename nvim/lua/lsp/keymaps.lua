@@ -54,7 +54,6 @@ return {
 					require("fastaction").code_action,
 					opts = { desc = "Code actions" },
 				},
-				{ "<leader>it", "<cmd>Outline<CR>" },
 				{ "<leader>in", vim.lsp.buf.rename, opts = { desc = "Rename" } },
 				{ "<leader>rr", "<cmd>LspRestart<CR>" },
 				{

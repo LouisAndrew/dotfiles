@@ -50,7 +50,7 @@ return {
 				},
 				appearance = {
 					kind_icons = icons,
-					nerd_font_variant = "normal",
+					nerd_font_variant = "mono",
 					use_nvim_cmp_as_default = false,
 				},
 				keymap = blink_keymap,

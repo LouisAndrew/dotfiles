@@ -36,7 +36,7 @@ return {
 						title = "",
 						kind = "search",
 						pattern = "^%?",
-						icon = "   ",
+						icon = " ",
 						lang = "regex",
 						opts = {
 							win_options = {

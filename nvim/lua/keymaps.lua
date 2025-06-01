@@ -52,24 +52,20 @@ local M = {
 			function()
 				local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 				vim.tbl_map(function(bufinfo)
+					local count = 0
 					if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
-						-- vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
 						vim.cmd("bd " .. tostring(bufinfo.bufnr))
+						count = count + 1
 					end
+
+					print(count .. " buffers deleted")
 				end, bufinfos)
 			end,
 			opts = { silent = true, desc = "Wipeout all buffers not shown in a window" },
 		},
-		{
-			"<leader>rs",
-			"<cmd>:LspStart<cr>",
-			opts = {
-				desc = "Start LSP server manually",
-			},
-		},
-		{ "k", "gk" },
+
 		{ "<ESC>", "<cmd> noh <CR>", "no highlight" },
-		{ "<leader>pv", vim.cmd.Ex },
+		{ "k", "gk" },
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
 		{
@@ -83,8 +79,6 @@ local M = {
 
 		{ "<leader>tw", "<cmd>:tabclose<cr>" },
 		{ "<leader>q", "<cmd>:wqa<cr>" },
-		{ "<leader>]", "<cmd>:bnext<cr>" },
-		{ "<leader>[", "<cmd>:bprev<cr>" },
 		{ "<C-p>", "<cmd>:bprev<cr>" },
 		{ "<C-n>", "<cmd>:bnext<cr>" },
 		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
@@ -95,8 +89,6 @@ local M = {
 		{ ";", "#", "last occurence" },
 		{ "<C-u>", "<C-u>zz", "scroll page down" },
 		{ "<C-d>", "<C-d>zz", "scroll page up" },
-
-		{ "<A-k>", "O", "move line up" },
 
 		{ "<leader>mk", "<cmd> :m-2 <CR>", "line up" },
 		{ "<leader>mj", "<cmd> :m+ <CR>", "line down" },
@@ -146,29 +138,27 @@ local M = {
 
 		{ "<leader>t[", "<cmd>:tabprev<cr>" }, -- adjacent
 		{ "<leader>t]", "<cmd>:tabnext<cr>" }, -- spec file
-		{ "<C-h>", require("smart-splits").move_cursor_left },
-		{ "<C-j>", require("smart-splits").move_cursor_down },
-		{ "<C-k>", require("smart-splits").move_cursor_up },
-		{ "<C-l>", require("smart-splits").move_cursor_right },
+		{ "<c-h>", require("smart-splits").move_cursor_left },
+		{ "<c-j>", require("smart-splits").move_cursor_down },
+		{ "<c-k>", require("smart-splits").move_cursor_up },
+		{ "<c-l>", require("smart-splits").move_cursor_right },
+
 		{
 			"S",
 			"<cmd>:w<cr>",
+			desc = "Save file",
 		},
-	},
 
-	t = { { "<C-x>", termcodes("<C-\\><C-N>"), "escape terminal " } },
+		{ "W", "<cmd>:bd<cr>", desc = "Exit buffer" },
+	},
 
 	v = {
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		{ "<S-j>", "}", "skip bracket" },
-		{ "<S-k>", "{", "skip bracket up" },
 		{ "<S-h>", "^", "start of line" },
 		{ "<S-l>", "$", "end of line" },
 		{ "n", "*", "next occurence" },
 		{ "N", "#", "last occurence" },
-		{ "<C-l>", "%" },
-		{ "<C-k>", ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
 		{ "s", "<Plug>(nvim-surround-visual)" },
 	},
 
