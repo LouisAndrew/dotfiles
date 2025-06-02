@@ -10,6 +10,9 @@ return {
         synchronize = "S",
         go_in_plus = "<CR>",
       },
+      windows = {
+        width_preview = 60,
+      },
     },
   },
 }

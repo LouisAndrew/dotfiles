@@ -1,4 +1,5 @@
 local icons = require("theme.minimal_fedu.icons")
+local config = require("theme.minimal_fedu.config")
 
 return {
   "folke/noice.nvim",
@@ -93,12 +94,12 @@ return {
       },
       mini = {},
       hover = {
-        -- border = { style = utils.CONST.border },
-        -- win_options = {
-        --   winblend = utils.CONST.winblend,
-        -- },
+        border = { style = config.winborder },
+        win_options = {
+          winblend = config.winblend,
+        },
       },
-      confirm = { border = { style = "single" } },
+      confirm = { border = { style = config.winborder } },
     },
     notify = {
       enabled = false,
@@ -136,23 +137,6 @@ return {
     },
     format = {
       level = { icons = { error = icons.Error, warn = icons.Warn, info = icons.Info } },
-    },
-    progress = {
-      view = "mini",
-    },
-    routes = {
-      {
-        filter = {
-          event = "lsp",
-          cond = function(message)
-            local client = vim.tbl_get(message.opts, "progress", "client")
-            return client == "null-ls"
-          end,
-        },
-        opts = {
-          skip = true,
-        },
-      },
     },
   },
 }

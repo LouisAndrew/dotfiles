@@ -1,3 +1,6 @@
+local icons = require("theme.minimal_fedu.icons")
+local config = require("theme.minimal_fedu.config")
+
 local blink_keymap = {
   ["<C-e>"] = { "show", "hide" },
   ["<CR>"] = { "accept", "fallback" },
@@ -11,6 +14,9 @@ local blink_keymap = {
 return {
   "saghen/blink.cmp",
   opts = {
+    appearance = {
+      kind_icons = icons,
+    },
     completion = {
       list = {
         selection = {
@@ -23,19 +29,19 @@ return {
           enabled = false,
         },
       },
-      -- menu = {
-      --   border = utils.CONST.border,
-      --   winblend = utils.CONST.winblend,
-      --   draw = {
-      --     columns = { { "kind_icon", "label" } },
-      --   },
-      -- },
-      -- documentation = {
-      --   window = {
-      --     border = utils.CONST.border,
-      --     winblend = utils.CONST.winblend,
-      --   },
-      -- },
+      menu = {
+        border = config.winborder,
+        winblend = config.winblend,
+        draw = {
+          columns = { { "kind_icon", "label" } },
+        },
+      },
+      documentation = {
+        window = {
+          border = config.winborder,
+          winblend = config.winblend,
+        },
+      },
     },
     keymap = blink_keymap,
     -- snippets = {

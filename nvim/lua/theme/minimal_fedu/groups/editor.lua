@@ -1,4 +1,5 @@
 local colors = require("theme.minimal_fedu.palette")
+local config = require("theme.minimal_fedu.config")
 
 local M = {
   { "Normal", colors.palette.grey[5], colors.background },
@@ -40,8 +41,8 @@ local M = {
 
   --- floats
   { "FloatTitle", colors.palette.grey[5] },
-  { "NormalFloat", nil, colors.background },
-  { "FloatBorder", colors.bg_accent, colors.background },
+  { "NormalFloat", config.popup.normal[1], config.popup.normal[2] },
+  { "FloatBorder", config.popup.border[1], config.popup.border[2] },
 
   { "MoreMsg", colors.palette.grey[6], nil }, -- `confirm` normal
   { "NonText", colors.palette.grey[9], nil },
@@ -61,6 +62,8 @@ local M = {
   { "Title", colors.palette.grey[4] },
   { "VisualNOS", colors.primary, colors.palette.grey[9] },
   { "WarningMsg", colors.primary },
+  { "WinSeparator", colors.bg_accent },
+  { "Folded", nil, colors.background },
 }
 
 return M

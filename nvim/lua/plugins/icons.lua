@@ -4,6 +4,7 @@ return {
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
+    lazy = false,
     priority = 999,
     config = function()
       local devicons = require("nvim-web-devicons")

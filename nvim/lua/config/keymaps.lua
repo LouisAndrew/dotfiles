@@ -1,7 +1,9 @@
+local map = vim.keymap
+
 local function build_keymaps(keymaps, opts)
   for mode, t in pairs(keymaps) do
     for _, remap in pairs(t) do
-      vim.keymap.set(mode, remap[1], remap[2], vim.tbl_extend("force", opts or {}, remap.opts or {}))
+      map.set(mode, remap[1], remap[2], vim.tbl_extend("force", opts or {}, remap.opts or {}))
     end
   end
 end
@@ -22,18 +24,36 @@ local M = {
     { ";", "#", "last occurence" },
     { "<c-u>", "<c-u>zz", "scroll up" },
     { "<c-d>", "<c-d>zz", "scroll up" },
-    { "<A-h>", splits.resize_left },
-    { "¬", splits.resize_down },
-    { "˚", splits.resize_up },
-    { "∆", splits.resize_right },
-    { "<c-h>", splits.move_cursor_left },
-    { "<c-j>", splits.move_cursor_down },
-    { "<c-k>", splits.move_cursor_up },
-    { "<c-l>", splits.move_cursor_right },
+    { "<M-h>", splits.resize_left },
+    { "<M-j>", splits.resize_down },
+    { "<M-k>", splits.resize_up },
+    { "<M-l>", splits.resize_right },
+    { "<C-h>", splits.move_cursor_left },
+    { "<C-j>", splits.move_cursor_down },
+    { "<C-k>", splits.move_cursor_up },
+    { "<C-l>", splits.move_cursor_right },
     { "<leader>tj", "<cmd>:sp<cr>", desc = "Split current buffer" },
     { "<leader>tl", "<cmd>:vsp<cr>", desc = "VSplit current buffer" },
     { "W", "<cmd>:bd<cr>", desc = "Exit buffer" },
     { "<leader>Q", "<cmd>:wqa<cr>", desc = "Exit nvim" },
+    { "zo", "za", desc = "Toggle fold under cursor" },
+    {
+      "<leader>pd",
+      function()
+        local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
+        vim.tbl_map(function(bufinfo)
+          local count = 0
+          if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
+            vim.cmd("bd " .. tostring(bufinfo.bufnr))
+            count = count + 1
+          end
+
+          print(count .. " buffers deleted")
+        end, bufinfos)
+      end,
+      opts = { silent = true, desc = "Wipeout all buffers not shown in a window" },
+    },
+    { "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
   },
   v = {
     { "<S-h>", "^", "start of line" },

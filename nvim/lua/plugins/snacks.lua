@@ -1,16 +1,20 @@
 return {
   "folke/snacks.nvim",
   opts = {
-    indent = {
-      enabled = false,
-    },
-    animate = {
-      enabled = false,
-    },
-    scroll = {
-      enabled = false,
-    },
+    indent = { enabled = false },
+    animate = { enabled = false },
+    scroll = { enabled = false },
+    scope = { enabled = false },
     picker = {
+      sources = {
+        select = {
+          layout = {
+            layout = {
+              backdrop = true,
+            },
+          },
+        },
+      },
       win = {
         input = {
           keys = {
@@ -22,5 +26,6 @@ return {
         },
       },
     },
+    dashboard = { enabled = false },
   },
 }
