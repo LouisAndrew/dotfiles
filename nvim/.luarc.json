@@ -1,9 +1,0 @@
-{
-    "diagnostics.disable": [
-        "missing-fields",
-        "assign-type-mismatch"
-    ],
-    "diagnostics.globals": [
-        "MiniFiles"
-    ]
-}
