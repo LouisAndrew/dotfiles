@@ -41,10 +41,8 @@ return {
 		keys = {
 			{ mode = { "n", "v" }, "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
 			{ mode = { "n", "v" }, "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
-			{ "<leader>an", "<cmd>:CodeCompanionAdd<CR>" },
 		},
 		config = true,
-		---@module 'CodeCompanion'
 		opts = {
 			display = {
 				chat = {
@@ -56,6 +54,9 @@ return {
 					token_count = function(tokens, adapter)
 						return " [ " .. tokens .. "@" .. adapter.name .. "/" .. adapter.model.name .. " ]"
 					end,
+				},
+				action_palette = {
+					provider = "snacks",
 				},
 			},
 			strategies = {
@@ -90,25 +91,5 @@ return {
 				end,
 			},
 		},
-	},
-	{
-		-- not now
-		"yetone/avante.nvim",
-		enabled = false,
-		version = false,
-		build = "make BUILD_FROM_SOURCE=true",
-		lazy = false,
-		config = function()
-			require("avante").setup({
-				provider = "claude",
-				bedrock = {
-					model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
-				},
-				ollama = {
-					model = "deepseek-r1",
-					api_key_name = "",
-				},
-			})
-		end,
 	},
 }

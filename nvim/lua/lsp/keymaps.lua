@@ -1,11 +1,4 @@
 local keymaps = require("keymaps")
-local diag_float_config = {
-	severity_sort = true,
-	source = true,
-	prefix = { " ", "NoiceHoverNormal" },
-	suffix = { " ", "NoiceHoverNormal" },
-	header = "",
-}
 
 return {
 	generate_keymaps = function(bufnr)
@@ -32,26 +25,15 @@ return {
 					opts = { desc = "Document symbols" },
 				},
 				{
-					"<space>id",
-					function()
-						vim.diagnostic.open_float(diag_float_config)
-					end,
-					opts = {
-						desc = "Open diagnostic in float",
-					},
-				},
-				{
 					"J",
-					function()
-						vim.diagnostic.open_float(diag_float_config)
-					end,
+					vim.diagnostic.open_float,
 					opts = {
 						desc = "Open diagnostic in float",
 					},
 				},
 				{
 					"M",
-					require("fastaction").code_action,
+					vim.lsp.buf.code_action,
 					opts = { desc = "Code actions" },
 				},
 				{ "<leader>in", vim.lsp.buf.rename, opts = { desc = "Rename" } },
@@ -61,7 +43,6 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = -1,
-							float = diag_float_config,
 						})
 					end,
 					opts = { desc = "Prev diagnostic" },
@@ -71,7 +52,6 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = 1,
-							float = diag_float_config,
 						})
 					end,
 					opts = { desc = "Next diagnostic" },
@@ -81,7 +61,6 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = -1,
-							float = diag_float_config,
 							severity = vim.diagnostic.severity.ERROR,
 						})
 					end,

@@ -104,6 +104,7 @@ local M = {
 		add_fg = palette.green[2],
 		add = palette.green[1],
 		change = palette.indigo[5],
+		change_fg = palette.indigo[3],
 		visual = palette.indigo[4],
 	},
 }

@@ -462,10 +462,7 @@ return {
 			quickfile = { enabled = false },
 			scroll = { enabled = false },
 			statuscolumn = {
-				-- enabled = true,
 				enabled = false,
-				left = { "mark", "sign" },
-				right = {},
 			},
 			picker = {
 				enabled = true,
@@ -474,6 +471,13 @@ return {
 						layout = {
 							layout = {
 								position = "right",
+							},
+						},
+					},
+					select = {
+						layout = {
+							layout = {
+								ba,
 							},
 						},
 					},
@@ -514,7 +518,7 @@ return {
 						},
 					},
 				},
-				ui_select = false,
+				ui_select = true,
 				icons = {
 					ui = {
 						selected = "* ",

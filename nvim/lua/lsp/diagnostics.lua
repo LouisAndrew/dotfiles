@@ -7,6 +7,11 @@ vim.diagnostic.config({
 	underline = true,
 	float = {
 		border = "single",
+		severity_sort = true,
+		source = true,
+		prefix = { " ", "NoiceHoverNormal" },
+		suffix = { " ", "NoiceHoverNormal" },
+		header = "",
 	},
 })
 

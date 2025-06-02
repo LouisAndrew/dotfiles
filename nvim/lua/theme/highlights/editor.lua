@@ -20,7 +20,6 @@ local M = {
 	{ "ErrorMsg", colors.misc.remove_fg },
 	{ "Pmenu", colors.palette.grey[3], colors.background },
 	{ "PmenuSel", nil, colors.bg_accent },
-	{ "StatusLine", colors.bg_accent, colors.bg_accent },
 
 	--- statuscol
 	{ "ColorColumn", nil, colors.palette.grey[9] },
@@ -55,13 +54,15 @@ local M = {
 	{ "SpellLocal", colors.palette.grey[6] },
 	{ "SpellRare", colors.primary },
 
-	{ "StatusLine", nil, colors.palette.grey[10] },
+	{ "StatusLine", nil, colors.background },
 	{ "TabLine", colors.palette.grey[4], colors.background },
 	{ "TabLineFill", nil, colors.background },
 	{ "TabLineSel", colors.palette.grey[3], nil },
 	{ "Title", colors.palette.grey[4] },
 	{ "VisualNOS", colors.primary, colors.palette.grey[9] },
 	{ "WarningMsg", colors.primary },
+	{ "WinSeparator", colors.bg_accent },
+	{ "Folded", nil, colors.background },
 }
 
 return M

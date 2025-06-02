@@ -18,23 +18,6 @@ return {
 			desc = "viq, vab, vib, vaq. not possible (or hard) with TS",
 		},
 		{ "echasnovski/mini.pairs", branch = "stable", opts = true },
-		{
-			"RRethy/vim-illuminate",
-			config = function()
-				require("illuminate").configure({
-					min_count_to_highlight = 2,
-					delay = 200,
-					filetypes_denylist = {
-						"dirbuf",
-						"dirvish",
-						"NvimTree",
-						"DiffviewFiles",
-						"DiffviewFileHistory",
-						"qf",
-					},
-				})
-			end,
-		},
 	},
 	config = function()
 		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()

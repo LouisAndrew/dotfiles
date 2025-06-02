@@ -86,7 +86,6 @@ return {
 						path = "~/dev/documents",
 					},
 				},
-				open_app_foreground = true,
 				follow_url_func = function(url)
 					vim.fn.jobstart({ "open", url })
 				end,

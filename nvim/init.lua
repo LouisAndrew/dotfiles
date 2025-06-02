@@ -51,11 +51,9 @@ vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
 vim.g.ENABLE_AUTOFORMAT = "true"
 
 local opt = vim.opt
-local config = require("config")
+local config = require("opts")
 for key, value in pairs(config) do
-	-- Important?
 	opt[key] = value
 end
 
 vim.cmd("colorscheme minimal_fedu")
-opt.laststatus = 3
