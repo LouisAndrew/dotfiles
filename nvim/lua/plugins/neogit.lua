@@ -10,7 +10,6 @@ return {
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
 		"sindrets/diffview.nvim",
 	},
 	config = function()
@@ -36,7 +35,7 @@ return {
 		local neogit = require("neogit")
 		neogit.setup({
 			integrations = {
-				telescope = true,
+				telescope = false,
 				diffview = true,
 			},
 			mappings = {

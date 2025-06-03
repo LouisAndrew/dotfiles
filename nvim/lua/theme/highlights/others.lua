@@ -1,5 +1,13 @@
 local colors = require("minimal_fedu")
 
+local mini_hipatterns = {
+	prefix = "MiniHiPatterns",
+	{ "Todo", colors.misc.remove_fg },
+	{ "MdDate", colors.palette.magenta[2] },
+	{ "MdDone", colors.misc.add_fg },
+	{ "MDStuff", colors.palette.blue[2] },
+}
+
 local ufo = {
 	prefix = "UfoFold",
 	{ "VirtualText", "Comment", link = true },
@@ -13,13 +21,10 @@ local flash = {
 	{ "Label", colors.palette.indigo[2], colors.palette.indigo[4] },
 }
 
-local M = {}
+local bqf = {
+	{ "BqfPreviewFloat", nil, colors.bg_shade },
+	{ "QuickFixLine", colors.palette.grey[1] },
+	{ "Delimiter", colors.bg_shade },
+}
 
-for _, cfg in pairs({ flash, ufo }) do
-	for _, n in ipairs(cfg) do
-		n[1] = cfg.prefix .. n[1]
-		M[#M + 1] = n
-	end
-end
-
-return M
+return require("theme.config").mergeHlConfig({ flash, ufo, mini_hipatterns, bqf })

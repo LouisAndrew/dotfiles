@@ -8,4 +8,7 @@ return {
 	{ "DiffDelete", nil, colors.misc.remove },
 	{ "DiffChange", nil, colors.misc.change },
 	{ "DiffText", nil, colors.misc.change },
+	{ "diffAdded", "Added", link = true },
+	{ "DiffRemoved", "Removed", link = true },
+	{ "DiffChanged", "Changed", link = true },
 }

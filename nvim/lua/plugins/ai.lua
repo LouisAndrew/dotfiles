@@ -32,6 +32,18 @@ return {
 	},
 	{
 		"olimorris/codecompanion.nvim",
+		enabled = false,
+		dependencies = {
+			{
+				"echasnovski/mini.diff",
+				config = function()
+					local diff = require("mini.diff")
+					diff.setup({
+						source = diff.gen_source.none(),
+					})
+				end,
+			},
+		},
 		cmd = {
 			"CodeCompanionChat",
 			"CodeCompanionToggle",
@@ -61,7 +73,7 @@ return {
 			},
 			strategies = {
 				chat = {
-					adapter = "anthropic",
+					-- adapter = "anthropic",
 					keymaps = {
 						next_chat = {
 							modes = {
@@ -71,6 +83,18 @@ return {
 						previous_chat = {
 							modes = {
 								n = "[a",
+							},
+						},
+					},
+					slash_commands = {
+						file = {
+							opts = {
+								provider = "snacks",
+							},
+						},
+						buffer = {
+							opts = {
+								provider = "snacks",
 							},
 						},
 					},
@@ -89,6 +113,31 @@ return {
 						},
 					})
 				end,
+			},
+		},
+	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		version = false,
+		opts = {
+			provider = "claude",
+		},
+		build = "make",
+		dependencies = {
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+					},
+				},
 			},
 		},
 	},

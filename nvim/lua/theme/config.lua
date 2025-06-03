@@ -21,8 +21,9 @@ M.mergeHlConfig = function(configlist)
 	local P = {}
 
 	for _, cfg in pairs(configlist) do
+		local p = cfg.prefix or ""
 		for _, n in ipairs(cfg) do
-			n[1] = cfg.prefix .. n[1]
+			n[1] = p .. n[1]
 			P[#P + 1] = n
 		end
 	end

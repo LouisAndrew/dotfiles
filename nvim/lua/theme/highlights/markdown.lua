@@ -1,6 +1,6 @@
 local colors = require("minimal_fedu")
 
-return {
+local markdown = {
 	prefix = "RenderMarkdown",
 	{ "CodeInline", nil, colors.background },
 	{ "Code", nil, colors.bg_accent_light },
@@ -11,3 +11,12 @@ return {
 	{ "WikiLink", colors.palette.navy[1], nil },
 	{ "Link", colors.palette.navy[1], nil },
 }
+
+local obsidian = {
+	prefix = "Obsidian",
+	{ "RefText", colors.cyan, nil },
+	{ "HighlightText", colors.debug, nil },
+	{ "ExtLinkIcon", colors.navy, nil },
+}
+
+return require("theme.config").mergeHlConfig({ markdown, obsidian })

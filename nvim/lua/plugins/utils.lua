@@ -35,7 +35,6 @@ return {
 		"johmsalas/text-case.nvim",
 		config = function()
 			require("textcase").setup({})
-			require("telescope").load_extension("textcase")
 		end,
 		keys = {
 			"ga", -- Default invocation prefix
@@ -50,12 +49,6 @@ return {
 				":lua require('textcase').current_word('to_title_case')<CR>",
 				mode = { "n", "x" },
 			},
-		},
-		cmd = {
-			"TextCaseOpenTelescope",
-			"TextCaseOpenTelescopeQuickChange",
-			"TextCaseOpenTelescopeLSPChange",
-			"TextCaseStartReplacingCommand",
 		},
 	},
 	"jghauser/mkdir.nvim",

@@ -71,7 +71,7 @@ local M = {
 		{
 			"<S-u>",
 			function()
-				vim.opt.statuscolumn = require("config").statuscolumn
+				vim.opt.statuscolumn = require("opts").statuscolumn
 				vim.cmd("UfoDisable")
 				vim.cmd("UfoEnable")
 			end,

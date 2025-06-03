@@ -35,23 +35,10 @@
 -- Group.new("TelescopeBorder", colors.mfed_bg_accent, nil)
 --
 -- -- Obsidian
--- Group.new("ObsidianRefText", colors.mfed_cyan)
--- Group.new("ObsidianHighlightText", colors.debug)
--- Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
+
 --
 -- -- -- Mason
--- Group.new("MasonHeader", colors.secondary, colors.mfed_9)
--- Group.new("MasonHeaderSecondary", colors.secondary)
--- Group.new("MasonHighlight", colors.primary)
--- Group.new("MasonHighlightBlock", colors.primary)
--- Group.new("MasonHighlightBlockBold", colors.secondary, colors.mfed_9)
--- Group.new("MasonHighlightSecondary", colors.primary)
--- Group.new("MasonHighlightBlockSecondary", colors.primary)
--- Group.new("MasonHighlightBlockBoldSecondary", colors.secondary, colors.mfed_9)
--- Group.new("MasonMuted", colors.mfed_5)
--- Group.new("MasonMutedBlock", colors.mfed_5)
--- Group.new("MasonMutedBlockBold", colors.mfed_5)
--- Group.new("MasonError", colors.remove_fg)
+
 --
 -- Group.new("Bold", nil, nil, styles.bold)
 -- Group.new("Debug", colors.debug, colors.debug)
@@ -129,12 +116,6 @@
 -- 	{ "BorderModified", colors.indigo_fg },
 -- 	{ "Title", colors.mfed_6 },
 -- 	{ "TitleFocused", colors.mfed_6 },
--- }
---
--- local bqf_config = {
--- 	{ "BqfPreviewFloat", nil, colors.nb_background },
--- 	{ "QuickFixLine", colors.mfed_1 },
--- 	{ "Delimiter", colors.nb_background },
 -- }
 --
 -- -- for _, lvl in ipairs(level) do
