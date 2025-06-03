@@ -477,13 +477,30 @@ return {
 					select = {
 						layout = {
 							layout = {
-								ba,
+								backdrop = true,
 							},
 						},
 					},
 				},
 				matcher = {
 					frecency = true,
+				},
+				layout = {
+					backdrop = true,
+					layout = {
+						box = "horizontal",
+						width = 0.6,
+						min_width = 120,
+						height = 0.6,
+						{
+							box = "vertical",
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+						},
+						{ win = "preview", border = "solid", width = 0.6 },
+					},
 				},
 				win = {
 					input = {
