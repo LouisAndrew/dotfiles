@@ -74,7 +74,7 @@ function f() {
 
 function gchb() {
   type=$1
-  ticket=$2
+  ticket=BAY-$2
   description=$3
   git checkout -b $type/$ticket--$description
 }

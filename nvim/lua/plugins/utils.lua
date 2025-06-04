@@ -17,18 +17,12 @@ return {
 	{
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
-		dependencies = {
-			-- {
-			-- 	"stevearc/quicker.nvim",
-			-- 	event = "FileType qf",
-			-- 	opts = {},
-			-- },
-		},
+		dependencies = {},
 		opts = {
 			preview = {
 				border = "single",
+				winblend = 0,
 			},
-			winblend = 0,
 		},
 	},
 	{

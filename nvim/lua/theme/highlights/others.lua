@@ -22,9 +22,13 @@ local flash = {
 }
 
 local bqf = {
-	{ "BqfPreviewFloat", nil, colors.bg_shade },
+	{ "BqfPreviewFloat", "NormalFloat", link = true },
 	{ "QuickFixLine", colors.palette.grey[1] },
 	{ "Delimiter", colors.bg_shade },
 }
 
-return require("theme.config").mergeHlConfig({ flash, ufo, mini_hipatterns, bqf })
+local utils = {
+	{ "TelescopeBorder", "FloatBorder", link = true },
+}
+
+return require("theme.config").mergeHlConfig({ flash, ufo, mini_hipatterns, bqf, utils })

@@ -25,7 +25,7 @@ return {
 				border = utils.CONST.border,
 				winblend = utils.CONST.winblend,
 				draw = {
-					columns = { { "kind_icon", "label" } },
+					columns = { { "kind_icon", padding = 2 }, { "label" } },
 				},
 			},
 			documentation = {
@@ -34,6 +34,7 @@ return {
 					winblend = utils.CONST.winblend,
 				},
 			},
+			list = { selection = { auto_insert = false, preselect = true } },
 		},
 		appearance = {
 			kind_icons = icons,

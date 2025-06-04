@@ -1,8 +1,3 @@
--- n, v, i, t = mode names
-local function termcodes(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 local function build_keymaps(keymaps, opts)
 	for mode, t in pairs(keymaps) do
 		for _, remap in pairs(t) do
@@ -52,13 +47,9 @@ local M = {
 			function()
 				local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 				vim.tbl_map(function(bufinfo)
-					local count = 0
 					if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
 						vim.cmd("bd " .. tostring(bufinfo.bufnr))
-						count = count + 1
 					end
-
-					print(count .. " buffers deleted")
 				end, bufinfos)
 			end,
 			opts = { silent = true, desc = "Wipeout all buffers not shown in a window" },
@@ -103,7 +94,7 @@ local M = {
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
 		-- ALT+H
-		{ "˙", require("smart-splits").resize_left },
+		{ "<M-h>", require("smart-splits").resize_left },
 		-- ALT+J
 		{ "¬", require("smart-splits").resize_down },
 		-- ALT+K

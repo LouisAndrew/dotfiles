@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 local VAULT = os.getenv("VAULT_PATH")
 local utils = require("utils")
 
@@ -31,11 +32,7 @@ return {
 			{
 				"<leader>,",
 				function()
-					Snacks.picker.buffers({
-						layout = {
-							preset = "select",
-						},
-					})
+					Snacks.picker.buffers()
 				end,
 				desc = "Buffers",
 			},
@@ -339,7 +336,6 @@ return {
 				"<leader>su",
 				function()
 					Snacks.picker.undo({
-						actions = {},
 						win = {
 							input = {
 								keys = {
@@ -426,7 +422,7 @@ return {
 				},
 			},
 			image = {
-				enabled = false,
+				enabled = true,
 				resolve = function(file, src)
 					if file:find(VAULT, 1, true) then
 						return VAULT .. "/assets/imgs/" .. src
@@ -461,9 +457,7 @@ return {
 			notifier = { enabled = false },
 			quickfile = { enabled = false },
 			scroll = { enabled = false },
-			statuscolumn = {
-				enabled = false,
-			},
+			statuscolumn = { enabled = false },
 			picker = {
 				enabled = true,
 				sources = {
@@ -484,23 +478,6 @@ return {
 				},
 				matcher = {
 					frecency = true,
-				},
-				layout = {
-					backdrop = true,
-					layout = {
-						box = "horizontal",
-						width = 0.6,
-						min_width = 120,
-						height = 0.6,
-						{
-							box = "vertical",
-							border = "rounded",
-							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "bottom" },
-							{ win = "list", border = "none" },
-						},
-						{ win = "preview", border = "solid", width = 0.6 },
-					},
 				},
 				win = {
 					input = {
@@ -528,14 +505,23 @@ return {
 						},
 					},
 				},
-				layouts = {
-					select = {
-						layout = {
-							backdrop = true,
+				layout = {
+					layout = {
+						box = "horizontal",
+						width = 0.6,
+						min_width = 120,
+						height = 0.6,
+						{
+							box = "vertical",
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
 						},
+						{ win = "preview", border = "solid", width = 0.6 },
 					},
 				},
-				ui_select = true,
+				ui_select = false,
 				icons = {
 					ui = {
 						selected = "* ",

@@ -18,7 +18,7 @@ local M = {
 	{ "TabLineFill", nil, nil },
 	{ "EndOfBuffer", colors.background, nil },
 	{ "ErrorMsg", colors.misc.remove_fg },
-	{ "Pmenu", colors.palette.grey[3], colors.background },
+	{ "Pmenu", colors.palette.grey[3], nil },
 	{ "PmenuSel", nil, colors.bg_accent },
 
 	--- statuscol
@@ -57,12 +57,14 @@ local M = {
 	{ "StatusLine", nil, colors.background },
 	{ "TabLine", colors.palette.grey[4], colors.background },
 	{ "TabLineFill", nil, colors.background },
-	{ "TabLineSel", colors.palette.grey[3], nil },
+	{ "TabLineSel", colors.white, nil },
 	{ "Title", colors.palette.grey[4] },
 	{ "VisualNOS", colors.primary, colors.palette.grey[9] },
 	{ "WarningMsg", colors.primary },
 	{ "WinSeparator", colors.bg_accent },
 	{ "Folded", nil, colors.background },
+	{ "WinBar", nil, colors.background },
+	{ "WinBarNC", nil, colors.background, bold = true },
 }
 
 return M
