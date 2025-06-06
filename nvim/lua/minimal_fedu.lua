@@ -9,7 +9,7 @@ local preset_config = {
 	},
 }
 
-local theme = "light"
+local theme = "dark"
 
 local preset = preset_config[theme]
 

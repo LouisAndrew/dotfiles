@@ -72,6 +72,13 @@ function f() {
   nvim -c PickFiles
 }
 
+function gcho() {
+  jli $1 | fzf | grep -o '[0-9]\+' | read t
+  read b
+  read desc
+  gchb $b $t $desc
+}
+
 function gchb() {
   type=$1
   ticket=BAY-$2
