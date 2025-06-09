@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 if vim.g.neovide then
 	-- vim.o.guifont = "CommitMonoxx,nonicons:h18:w2"
-	vim.o.linespace = 20
+	vim.o.linespace = 16
 	vim.g.neovide_padding_top = 6
 	vim.g.neovide_padding_bottom = 6
 	vim.g.neovide_padding_right = 6

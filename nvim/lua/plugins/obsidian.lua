@@ -68,12 +68,6 @@ return {
 						["<C-c>"] = "new",
 					},
 				},
-				ui = {
-					hl_groups = {
-						ObsidianTag = { italic = false, fg = colors.palette.indigo[2] },
-						ObsidianRefText = { fg = colors.palette.navy[1] },
-					},
-				},
 				workspaces = {
 					{
 						name = "link",

@@ -17,6 +17,7 @@ local obsidian = {
 	{ "RefText", colors.cyan, nil },
 	{ "HighlightText", colors.debug, nil },
 	{ "ExtLinkIcon", colors.navy, nil },
+	{ "Tag", colors.palette.indigo[2] },
 }
 
 return require("theme.config").mergeHlConfig({ markdown, obsidian })

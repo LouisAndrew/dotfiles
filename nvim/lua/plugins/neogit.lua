@@ -18,7 +18,7 @@ return {
 		require("diffview").setup(
 			---@type DiffviewConfig
 			{
-				icons = { -- Only applies when use_icons is true.
+				icons = {
 					folder_closed = icons.FolderClosed,
 					folder_open = icons.FolderOpened,
 				},

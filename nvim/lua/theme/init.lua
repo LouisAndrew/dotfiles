@@ -3,7 +3,7 @@ local M = {}
 M.load_theme = function()
 	local hl = require("utils").loaddir("lua/theme/highlights/*.lua")
 
-	---@alias GroupDefinition { [1]: string, [2]: string, [3]?: string, bold?: boolean, italic?: boolean, link?: boolean, underline?: boolean, sp?: string }
+	---@alias GroupDefinition { [1]: string, [2]: string, [3]?: string, bold?: boolean, italic?: boolean, link?: boolean, underline?: boolean, sp?: string, undercurl?: boolean }
 	---@alias _HlConfig {prefix?: string, fg?: string} | GroupDefinition[]
 
 	---@param config _HlConfig
@@ -27,6 +27,7 @@ M.load_theme = function()
 					background = bg,
 					bold = l.bold,
 					underline = l.underline,
+					undercurl = l.undercurl,
 					italic = l.italic,
 					sp = l.sp,
 					force = true,

@@ -96,16 +96,16 @@ local M = {
 		-- ALT+H
 		{ "<M-h>", require("smart-splits").resize_left },
 		-- ALT+J
-		{ "¬", require("smart-splits").resize_down },
+		{ "<M-j>", require("smart-splits").resize_down },
 		-- ALT+K
-		{ "˚", require("smart-splits").resize_up },
+		{ "<M-k>", require("smart-splits").resize_up },
 		-- ALT+L
-		{ "∆", require("smart-splits").resize_right },
+		{ "<M-l>", require("smart-splits").resize_right },
 
-		{ "<C-h>", "<cmd>:SmartCursorMoveLeft<cr>" },
-		{ "<C-j>", "<cmd>:SmartCursorMoveDown<cr>" },
-		{ "<C-k>", "<cmd>:SmartCursorMoveUp<cr>" },
-		{ "<C-l>", "<cmd>:SmartCursorMoveRight<cr>" },
+		{ "<C-h>", require("smart-splits").move_cursor_left },
+		{ "<C-j>", require("smart-splits").move_cursor_down },
+		{ "<C-k>", require("smart-splits").move_cursor_up },
+		{ "<C-l>", require("smart-splits").move_cursor_right },
 
 		{ "å", "zh" },
 		{ "∂", "zl" },

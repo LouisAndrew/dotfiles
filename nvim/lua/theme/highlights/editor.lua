@@ -2,7 +2,7 @@ local colors = require("minimal_fedu")
 
 local M = {
 	{ "Normal", colors.palette.grey[5], colors.background },
-	{ "Search", colors.palette.grey[3], colors.palette.grey[9] },
+	{ "Search", colors.palette.grey[6], colors.palette.grey[10] },
 	{ "IncSearch", colors.palette.grey[3], colors.palette.grey[9] },
 	{ "CurSearch", colors.palette.grey[10], colors.palette.indigo[2] },
 	{ "Visual", nil, colors.misc.visual },

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local keymaps = require("keymaps")
 
 return {
@@ -6,7 +7,7 @@ return {
 
 		local M = {
 			n = {
-				{ "go", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
+				{ "gd", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
 				{
 					"K",
 					function()
@@ -36,7 +37,6 @@ return {
 					vim.lsp.buf.code_action,
 					opts = { desc = "Code actions" },
 				},
-				{ "<leader>in", vim.lsp.buf.rename, opts = { desc = "Rename" } },
 				{ "<leader>rr", "<cmd>LspRestart<CR>" },
 				{
 					"[d",
@@ -71,7 +71,6 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = 1,
-							float = diag_float_config,
 							severity = vim.diagnostic.severity.ERROR,
 						})
 					end,
@@ -82,7 +81,6 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = -1,
-							float = diag_float_config,
 							severity = vim.diagnostic.severity.WARN,
 						})
 					end,
@@ -93,23 +91,83 @@ return {
 					function()
 						vim.diagnostic.jump({
 							count = 1,
-							float = diag_float_config,
 							severity = vim.diagnostic.severity.WARN,
 						})
 					end,
 					opts = { desc = "Next warning" },
 				},
-				{ "<leader>ir", vim.lsp.buf.references, opts = { desc = "Find references" } },
+				{ "gr", vim.lsp.buf.references, opts = { desc = "Find references" } },
+				{ "gI", vim.lsp.buf.implementation, opts = { desc = "goto impl" } },
+				{ "gy", vim.lsp.buf.type_definition, opts = { desc = "goto typedef" } },
+				{ "gD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
 				{
-					"<leader>rl",
+					"<leader>ca",
+					vim.lsp.buf.code_action,
+					desc = "Code Action",
+					mode = { "n", "v" },
+					has = "codeAction",
+				},
+				{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+				{
+					"<leader>cC",
+					vim.lsp.codelens.refresh,
+					desc = "Refresh & Display Codelens",
+					mode = { "n" },
+					has = "codeLens",
+				},
+				{
+					"<leader>cR",
 					function()
-						if vim.g.EXPAND_LSP == "true" then
-							vim.g.EXPAND_LSP = "false"
-						else
-							vim.g.EXPAND_LSP = "true"
-						end
+						Snacks.rename.rename_file()
 					end,
-					"toggle lualine lsp expand",
+					desc = "Rename File",
+					mode = { "n" },
+					has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
+				},
+				{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+				{
+					"]]",
+					function()
+						Snacks.words.jump(vim.v.count1)
+					end,
+					has = "documentHighlight",
+					desc = "Next Reference",
+					cond = function()
+						return Snacks.words.is_enabled()
+					end,
+				},
+				{
+					"[[",
+					function()
+						Snacks.words.jump(-vim.v.count1)
+					end,
+					has = "documentHighlight",
+					desc = "Prev Reference",
+					cond = function()
+						return Snacks.words.is_enabled()
+					end,
+				},
+				{
+					"<a-n>",
+					function()
+						Snacks.words.jump(vim.v.count1, true)
+					end,
+					has = "documentHighlight",
+					desc = "Next Reference",
+					cond = function()
+						return Snacks.words.is_enabled()
+					end,
+				},
+				{
+					"<a-p>",
+					function()
+						Snacks.words.jump(-vim.v.count1, true)
+					end,
+					has = "documentHighlight",
+					desc = "Prev Reference",
+					cond = function()
+						return Snacks.words.is_enabled()
+					end,
 				},
 			},
 			i = {

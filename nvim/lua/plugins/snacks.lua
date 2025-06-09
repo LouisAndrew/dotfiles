@@ -505,21 +505,26 @@ return {
 						},
 					},
 				},
-				layout = {
-					layout = {
-						box = "horizontal",
-						width = 0.6,
-						min_width = 120,
-						height = 0.6,
-						{
-							box = "vertical",
-							border = "rounded",
-							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "bottom" },
-							{ win = "list", border = "none" },
+				layouts = {
+					custom = {
+						layout = {
+							box = "horizontal",
+							width = 0.8,
+							min_width = 120,
+							height = 0.8,
+							{
+								box = "vertical",
+								border = "rounded",
+								title = "{title} {live} {flags}",
+								{ win = "input", height = 1, border = "bottom" },
+								{ win = "list", border = "none" },
+							},
+							{ win = "preview", border = "solid", width = 0.6 },
 						},
-						{ win = "preview", border = "solid", width = 0.6 },
 					},
+				},
+				layout = {
+					preset = "custom",
 				},
 				ui_select = false,
 				icons = {

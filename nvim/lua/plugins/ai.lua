@@ -32,18 +32,6 @@ return {
 	},
 	{
 		"olimorris/codecompanion.nvim",
-		enabled = false,
-		dependencies = {
-			{
-				"echasnovski/mini.diff",
-				config = function()
-					local diff = require("mini.diff")
-					diff.setup({
-						source = diff.gen_source.none(),
-					})
-				end,
-			},
-		},
 		cmd = {
 			"CodeCompanionChat",
 			"CodeCompanionToggle",

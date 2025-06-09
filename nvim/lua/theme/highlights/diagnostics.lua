@@ -5,6 +5,7 @@ local M = {
 	{ "Source", colors.primary },
 	{ "Pos", colors.mfed_7 },
 	{ "Word", colors.secondary },
+	{ "VirtualTextError", colors.diagnostic.error, colors.misc.remove },
 }
 
 local prefixes = {
@@ -24,7 +25,7 @@ for _, p in ipairs(prefixes) do
 	for name, hl in pairs(levels) do
 		local cfg = { p .. name, hl }
 		if p == "Underline" then
-			cfg.underline = true
+			cfg.undercurl = true
 			cfg.sp = hl
 			cfg[2] = nil
 		end
