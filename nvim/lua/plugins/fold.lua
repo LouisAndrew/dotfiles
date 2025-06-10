@@ -1,5 +1,10 @@
 local utils = require("utils")
 
+local ft_fold_provider = {
+	tsplayground = { "indent" },
+	vue = { "treesitter", "indent" },
+}
+
 return {
 	"kevinhwang91/nvim-ufo",
 	event = "BufEnter",
@@ -31,11 +36,7 @@ return {
 				},
 			},
 			provider_selector = function(_, ft)
-				if ft == "tsplayground" then
-					return { "indent" }
-				end
-
-				return { "lsp", "indent" }
+				return ft_fold_provider[ft] or { "lsp", "indent" }
 			end,
 		})
 

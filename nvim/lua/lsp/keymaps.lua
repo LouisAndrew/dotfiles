@@ -7,7 +7,6 @@ return {
 
 		local M = {
 			n = {
-				{ "gd", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
 				{
 					"K",
 					function()
@@ -96,17 +95,9 @@ return {
 					end,
 					opts = { desc = "Next warning" },
 				},
-				{ "gr", vim.lsp.buf.references, opts = { desc = "Find references" } },
-				{ "gI", vim.lsp.buf.implementation, opts = { desc = "goto impl" } },
-				{ "gy", vim.lsp.buf.type_definition, opts = { desc = "goto typedef" } },
-				{ "gD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
-				{
-					"<leader>ca",
-					vim.lsp.buf.code_action,
-					desc = "Code Action",
-					mode = { "n", "v" },
-					has = "codeAction",
-				},
+				{ "gry", vim.lsp.buf.type_definition, opts = { desc = "goto typedef" } },
+				{ "gro", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
+				{ "grD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
 				{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
 				{
 					"<leader>cC",
@@ -115,16 +106,6 @@ return {
 					mode = { "n" },
 					has = "codeLens",
 				},
-				{
-					"<leader>cR",
-					function()
-						Snacks.rename.rename_file()
-					end,
-					desc = "Rename File",
-					mode = { "n" },
-					has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
-				},
-				{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
 				{
 					"]]",
 					function()
