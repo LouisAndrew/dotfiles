@@ -10,7 +10,6 @@ return {
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
 		"sindrets/diffview.nvim",
 	},
 	config = function()
@@ -19,7 +18,7 @@ return {
 		require("diffview").setup(
 			---@type DiffviewConfig
 			{
-				icons = { -- Only applies when use_icons is true.
+				icons = {
 					folder_closed = icons.FolderClosed,
 					folder_open = icons.FolderOpened,
 				},
@@ -36,7 +35,7 @@ return {
 		local neogit = require("neogit")
 		neogit.setup({
 			integrations = {
-				telescope = true,
+				telescope = false,
 				diffview = true,
 			},
 			mappings = {

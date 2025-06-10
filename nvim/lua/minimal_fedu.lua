@@ -9,21 +9,61 @@ local preset_config = {
 	},
 }
 
-local theme = "light"
+local theme = "dark"
 
 local preset = preset_config[theme]
 
-local red = "#42191b"
-local red_fg = "#ff8185"
-
-local yellow_fg = "#fed7aa"
-local yellow = "#713f12"
-
 local dimmed_white = "#9a9a9a"
 local white = "#ffffff"
-local navy = "#678CB1"
 
-local f = "#202020"
+local palette = {
+	red = {
+		"#42191b",
+		"#ff8185",
+	},
+	blue = {
+		"#172554",
+		"#93c5fd",
+	},
+	indigo = {
+		"#1e1b4b",
+		"#818cf8",
+		"#a5b4fc",
+		"#242536",
+		"#221f36",
+	},
+	yellow = {
+		"#713f12",
+		"#fed7aa",
+	},
+	green = {
+		"#173626",
+		"#81ffbb",
+	},
+	magenta = {
+		"#291A2E",
+		"#e879f9",
+	},
+	cyan = {
+		"#97CCF1",
+	},
+	navy = {
+		"#678CB1",
+	},
+	grey = {
+		white,
+		"#f5f5f5",
+		"#d5d5d5",
+		"#b4b4b4",
+		"#a7a7a7",
+		dimmed_white,
+		"#737373",
+		"#545454",
+		"#434343",
+		"#323232",
+		"#212121",
+	},
+}
 
 local bg_shade = preset.shade
 local background = preset.bg
@@ -31,39 +71,22 @@ local background = preset.bg
 local bg_accent_light = "#1a1a1a"
 local foreground = "#ffcfa7"
 local debug = "#ff0000"
-local magenta = "#291A2E"
-local orange = "#fb923c"
 
-return {
+local diagnostic = {
+	error = palette.red[2],
+	warn = palette.yellow[2],
+	info = palette.blue[2],
+	hint = dimmed_white,
+}
+
+local M = {
 	-- noirbuddy related.
 	primary = foreground,
-	diagnostic_error = red_fg,
-	diagnostic_warning = yellow_fg,
-	diagnostic_info = "#81c5ff",
-	diagnostic_hint = dimmed_white,
-	diag = {
-		Error = red_fg,
-		Warn = yellow_fg,
-		ErrorInactive = "#b75c5f",
-		WarnInactive = "#b19676",
-	},
+	diagnostic = diagnostic,
 
-	mfed_0 = white,
-	mfed_1 = "#f5f5f5",
-	mfed_2 = "#d5d5d5",
-	mfed_3 = "#b4b4b4",
-	mfed_4 = "#a7a7a7",
-	mfed_5 = navy,
-	mfed_6 = "#737373",
-	mfed_7 = "#535353",
-	mfed_8 = "#323232",
-	mfed_9 = "#212121",
-
-	cyan = "#97CCF1",
+	cyan = palette.cyan[1],
 	white = "#ffffff",
-	navy = navy,
-	white_accent = "#727272",
-	white_softened = "#5a5a5a",
+	navy = palette.navy[1],
 	dimmed_white = dimmed_white,
 	debug = debug,
 	foreground = foreground,
@@ -72,34 +95,18 @@ return {
 	bg_shade = bg_shade,
 	bg_accent = "#1f2425",
 	bg_accent_light = bg_accent_light,
-
-	palette = {
-		blue = "#172554",
-		blue_fg = "#93c5fd",
-		indigo = "#1e1b4b",
-		indigo_fg_light = "#a5b4fc",
-		indigo_fg = "#818cf8",
-		yellow = yellow,
-		yellow_fg = yellow_fg,
-		red_softened = "#ff8185",
-		red = red,
-		red_fg = red_fg,
-		magenta = magenta,
-		magenta_fg = "#e879f9",
-		orange = orange,
-	},
+	palette = palette,
 	misc = {
 		bool = "#eeb684",
 		number = "#ffd6b3",
-		add_fg = "#81ffbb",
-		remove_fg = red_fg,
-		-- change = "#2f4557",
-		change = "#221f36",
-		add = "#173626",
-		remove = red,
-		-- 15% of visual in `modes.lua`
-		visual = "#242536",
-		-- visual = "#2e1065",
-		f = f,
+		remove_fg = palette.red[2],
+		remove = palette.red[1],
+		add_fg = palette.green[2],
+		add = palette.green[1],
+		change = palette.indigo[5],
+		change_fg = palette.indigo[3],
+		visual = palette.indigo[4],
 	},
 }
+
+return M

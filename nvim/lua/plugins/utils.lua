@@ -17,25 +17,18 @@ return {
 	{
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
-		dependencies = {
-			{
-				"stevearc/quicker.nvim",
-				event = "FileType qf",
-				opts = {},
-			},
-		},
+		dependencies = {},
 		opts = {
 			preview = {
 				border = "single",
+				winblend = 0,
 			},
-			winblend = 0,
 		},
 	},
 	{
 		"johmsalas/text-case.nvim",
 		config = function()
 			require("textcase").setup({})
-			require("telescope").load_extension("textcase")
 		end,
 		keys = {
 			"ga", -- Default invocation prefix
@@ -50,12 +43,6 @@ return {
 				":lua require('textcase').current_word('to_title_case')<CR>",
 				mode = { "n", "x" },
 			},
-		},
-		cmd = {
-			"TextCaseOpenTelescope",
-			"TextCaseOpenTelescopeQuickChange",
-			"TextCaseOpenTelescopeLSPChange",
-			"TextCaseStartReplacingCommand",
 		},
 	},
 	"jghauser/mkdir.nvim",
@@ -92,6 +79,9 @@ return {
 					error = icons.Error,
 				},
 				textHighlight = "Normal",
+			},
+			ui = {
+				display_mode = "float",
 			},
 		},
 	},

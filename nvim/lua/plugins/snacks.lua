@@ -1,5 +1,17 @@
+---@diagnostic disable: param-type-mismatch
 local VAULT = os.getenv("VAULT_PATH")
 local utils = require("utils")
+
+vim.api.nvim_create_user_command("PickFiles", function()
+	Snacks.picker.files({
+		-- dotfiles, but not hidden (in gitignore)
+		hidden = true,
+	})
+end, {})
+
+vim.api.nvim_create_user_command("Grep", function()
+	Snacks.picker.grep()
+end, {})
 
 return {
 	{
@@ -9,20 +21,13 @@ return {
 		keys = {
 			{
 				"<C-o>",
-				function()
-					Snacks.picker.files({
-						-- dotfiles, but not hidden (in gitignore)
-						hidden = true,
-					})
-				end,
+				"<cmd>:PickFiles<cr>",
 				desc = "Find Files",
 			},
 			{
 				"<leader><space>",
-				function()
-					Snacks.picker.smart()
-				end,
-				desc = "Smart Find Files",
+				"<cmd>:PickFiles<cr>",
+				desc = "Find Files",
 			},
 			{
 				"<leader>,",
@@ -331,7 +336,6 @@ return {
 				"<leader>su",
 				function()
 					Snacks.picker.undo({
-						actions = {},
 						win = {
 							input = {
 								keys = {
@@ -418,7 +422,7 @@ return {
 				},
 			},
 			image = {
-				enabled = false,
+				enabled = true,
 				resolve = function(file, src)
 					if file:find(VAULT, 1, true) then
 						return VAULT .. "/assets/imgs/" .. src
@@ -453,12 +457,7 @@ return {
 			notifier = { enabled = false },
 			quickfile = { enabled = false },
 			scroll = { enabled = false },
-			statuscolumn = {
-				-- enabled = true,
-				enabled = false,
-				left = { "mark", "sign" },
-				right = {},
-			},
+			statuscolumn = { enabled = false },
 			picker = {
 				enabled = true,
 				sources = {
@@ -466,6 +465,13 @@ return {
 						layout = {
 							layout = {
 								position = "right",
+							},
+						},
+					},
+					select = {
+						layout = {
+							layout = {
+								backdrop = true,
 							},
 						},
 					},
@@ -500,13 +506,27 @@ return {
 					},
 				},
 				layouts = {
-					select = {
+					custom = {
 						layout = {
-							backdrop = true,
+							box = "horizontal",
+							width = 0.8,
+							min_width = 120,
+							height = 0.8,
+							{
+								box = "vertical",
+								border = "rounded",
+								title = "{title} {live} {flags}",
+								{ win = "input", height = 1, border = "bottom" },
+								{ win = "list", border = "none" },
+							},
+							{ win = "preview", border = "solid", width = 0.6 },
 						},
 					},
 				},
-
+				layout = {
+					preset = "custom",
+				},
+				ui_select = false,
 				icons = {
 					ui = {
 						selected = "* ",

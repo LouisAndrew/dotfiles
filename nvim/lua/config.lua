@@ -13,7 +13,6 @@ return {
 	expandtab = true,
 	autoindent = true,
 	wrap = false,
-	laststatus = 3,
 	smartindent = true,
 
 	-- search
@@ -26,7 +25,6 @@ return {
 	-- split
 	splitright = true,
 	splitbelow = true,
-	background = "dark", -- set this to dark or light
 	cursorline = true,
 	cursorlineopt = "number",
 	guicursor = block,
@@ -35,4 +33,6 @@ return {
 	-- winborder = "single", -- global border
 	-- DON'T set global border since it'll override all
 	-- Noice config (e.g. mini and cmdline_popup will also have border)
+
+	laststatus = 3,
 }

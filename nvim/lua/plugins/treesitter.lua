@@ -5,20 +5,6 @@ return {
 	dependencies = {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		-- "nvim-treesitter/nvim-treesitter-context",
-		{
-			"danymat/neogen",
-			config = true,
-			keys = {
-				{
-					"<leader>ic",
-					function()
-						require("neogen").generate()
-					end,
-					desc = "Generate annotation comment",
-				},
-			},
-		},
 		"windwp/nvim-ts-autotag",
 		{
 			"echasnovski/mini.ai",
@@ -32,23 +18,6 @@ return {
 			desc = "viq, vab, vib, vaq. not possible (or hard) with TS",
 		},
 		{ "echasnovski/mini.pairs", branch = "stable", opts = true },
-		{
-			"RRethy/vim-illuminate",
-			config = function()
-				require("illuminate").configure({
-					min_count_to_highlight = 2,
-					delay = 200,
-					filetypes_denylist = {
-						"dirbuf",
-						"dirvish",
-						"NvimTree",
-						"DiffviewFiles",
-						"DiffviewFileHistory",
-						"qf",
-					},
-				})
-			end,
-		},
 	},
 	config = function()
 		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
@@ -183,9 +152,9 @@ return {
 				enable = true,
 				keymaps = {
 					init_selection = "<C-t>",
-					node_incremental = "<C-n>",
+					node_incremental = "<C-p>",
 					scope_incremental = false,
-					node_decremental = "<C-p>",
+					node_decremental = "<C-n>",
 				},
 			},
 			playground = {

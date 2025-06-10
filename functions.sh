@@ -69,28 +69,19 @@ function ywm() {
 }
 
 function f() {
-  local query=""
-  # checks if the first argument is empty
-  if [ ! -z "$1" ]; then
-    query="-q $1"
-  fi
+  nvim -c PickFiles
+}
 
-  # can use xargs, but seems that newly touched files
-  # are not properly opened.
-  fd --type f --hidden --exclude .git | fzf $query \
-    --preview='bat -n --color=always {}' | read filename
-
-  if [ ! -z "$filename" ]; then
-    $editor $filename
-    return 0
-  fi
-  
-  return 1
+function gcho() {
+  jli $1 | fzf | grep -o '[0-9]\+' | read t
+  read b
+  read desc
+  gchb $b $t $desc
 }
 
 function gchb() {
   type=$1
-  ticket=$2
+  ticket=BAY-$2
   description=$3
   git checkout -b $type/$ticket--$description
 }
@@ -153,22 +144,7 @@ alias gco="git branch -a | fzf | sed 's/\*//' | sed 's/remotes\/origin\///' | xa
 alias gcd="git branch -r | fzf | xargs git checkout"
 
 function rgf() {
-  c="rg --column -nS --no-heading --color=always -e "
-
-  query=""
-  fzf_query=""
-  if [ ! -z "$1" ]; then
-    query=$(rg --column -nS --no-heading --color=always -e $1)
-    fzf_query="-q $1"
-  fi 
-
-  a="$(echo $query | fzf $fzf_query --bind "change:reload:$c {q} || true" \
-    --ansi --preview "$DOTFILES_PATH/bat-ripgrep.sh {}" \
-    --header 'Search in files')"
-  if [[ -n $a ]]; then
-      IFS=':' read -r file line char _ <<< "$a"
-      "$EDITOR" "$file" +"$line" -c "norm ${char}lh"
-  fi
+  nvim -c Grep
 }
 
 function loadenv() {

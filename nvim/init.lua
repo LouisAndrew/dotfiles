@@ -1,8 +1,8 @@
 vim.g.mapleader = " "
 
 if vim.g.neovide then
-	vim.o.guifont = "CommitMono,nonicons:h16"
-	vim.o.linespace = 14
+	-- vim.o.guifont = "CommitMonoxx,nonicons:h18:w2"
+	vim.o.linespace = 16
 	vim.g.neovide_padding_top = 6
 	vim.g.neovide_padding_bottom = 6
 	vim.g.neovide_padding_right = 6
@@ -11,7 +11,9 @@ if vim.g.neovide then
 	vim.g.neovide_floating_z_height = 10
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 5
-	vim.g.neovide_floating_corner_radius = 4
+	-- vim.g.neovide_floating_corner_radius = 4
+	vim.g.neovide_text_gamma = 0.8
+	vim.g.neovide_text_contrast = 0.1
 end
 
 require("set")
@@ -48,8 +50,9 @@ vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
 vim.g.ENABLE_AUTOFORMAT = "true"
 
 local opt = vim.opt
-local config = require("config")
+local config = require("opts")
 for key, value in pairs(config) do
-	-- Important?
 	opt[key] = value
 end
+
+vim.cmd("colorscheme minimal_fedu")

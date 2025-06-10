@@ -36,7 +36,7 @@ return {
 						title = "",
 						kind = "search",
 						pattern = "^%?",
-						icon = "   ",
+						icon = " ",
 						lang = "regex",
 						opts = {
 							win_options = {
@@ -88,10 +88,6 @@ return {
 				cmdline = {},
 				cmdline_popup = {
 					relative = "editor",
-					position = {
-						row = "100%",
-						col = -1,
-					},
 					size = {
 						height = "auto",
 						width = "100%",
@@ -107,7 +103,6 @@ return {
 				hover = {
 					border = { style = utils.CONST.border },
 					win_options = {
-						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:NoiceHoverBorder",
 						winblend = utils.CONST.winblend,
 					},
 				},
@@ -136,7 +131,7 @@ return {
 				command_palette = true,
 				long_message_to_split = true,
 				inc_rename = false,
-				lsp_doc_border = true,
+				lsp_doc_border = false,
 			},
 			popup_menu = {
 				enabled = true,

@@ -1,8 +1,3 @@
--- n, v, i, t = mode names
-local function termcodes(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 local function build_keymaps(keymaps, opts)
 	for mode, t in pairs(keymaps) do
 		for _, remap in pairs(t) do
@@ -41,41 +36,33 @@ local M = {
 		{ "<C-4>", "<End>" },
 		{ "<C-6>", "<cmd>:norm ^<CR>" },
 		{ "<S-Tab>", "<cmd>:norm <<^<CR>" },
+		{ "jj", "<esc>" },
 	},
 
 	n = {
 		{ "j", "gj" },
+		{ "zo", "za" },
 		{
 			"<leader>pd",
 			function()
 				local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 				vim.tbl_map(function(bufinfo)
 					if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
-						-- vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
 						vim.cmd("bd " .. tostring(bufinfo.bufnr))
 					end
 				end, bufinfos)
 			end,
 			opts = { silent = true, desc = "Wipeout all buffers not shown in a window" },
 		},
-		{
-			"<leader>rs",
-			"<cmd>:LspStart<cr>",
-			opts = {
-				desc = "Start LSP server manually",
-			},
-		},
-		{ "k", "gk" },
+
 		{ "<ESC>", "<cmd> noh <CR>", "no highlight" },
-		{ "<leader>pv", vim.cmd.Ex },
+		{ "k", "gk" },
 		{ "<leader>tn", ":e %:h" }, -- adjacent
 		{ "<leader>tt", create_spec },
-		{ "<C-s>", "<cmd>:w<cr>" },
 		{
 			"<S-u>",
 			function()
-				vim.opt.statuscolumn = require("config").statuscolumn
-				-- Restart UFO
+				vim.opt.statuscolumn = require("opts").statuscolumn
 				vim.cmd("UfoDisable")
 				vim.cmd("UfoEnable")
 			end,
@@ -83,8 +70,6 @@ local M = {
 
 		{ "<leader>tw", "<cmd>:tabclose<cr>" },
 		{ "<leader>q", "<cmd>:wqa<cr>" },
-		{ "<leader>]", "<cmd>:bnext<cr>" },
-		{ "<leader>[", "<cmd>:bprev<cr>" },
 		{ "<C-p>", "<cmd>:bprev<cr>" },
 		{ "<C-n>", "<cmd>:bnext<cr>" },
 		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
@@ -96,8 +81,6 @@ local M = {
 		{ "<C-u>", "<C-u>zz", "scroll page down" },
 		{ "<C-d>", "<C-d>zz", "scroll page up" },
 
-		{ "<A-k>", "O", "move line up" },
-
 		{ "<leader>mk", "<cmd> :m-2 <CR>", "line up" },
 		{ "<leader>mj", "<cmd> :m+ <CR>", "line down" },
 		-- { "gh", "<Plug>VSCodeCommentaryLine"  },
@@ -106,26 +89,28 @@ local M = {
 		{ "<C-c>", "<cmd> %y+ <CR>", "copy whole file" },
 		{ "<C-w>P", "<cmd>vertical resize 40<CR>" },
 		{ "<C-w>O", "<cmd>vertical resize 160<CR>" },
-		{ "<C-w>I", "<cmd>vertical resize 100<CR>" },
+		{ "<C-w>I", "<cmd>vertical resize 80<CR>" },
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
 		-- ALT+H
-		{ "˙", require("smart-splits").resize_left },
+		{ "<M-h>", require("smart-splits").resize_left },
 		-- ALT+J
-		{ "¬", require("smart-splits").resize_down },
+		{ "<M-j>", require("smart-splits").resize_down },
 		-- ALT+K
-		{ "˚", require("smart-splits").resize_up },
+		{ "<M-k>", require("smart-splits").resize_up },
 		-- ALT+L
-		{ "∆", require("smart-splits").resize_right },
+		{ "<M-l>", require("smart-splits").resize_right },
 
-		{ "<C-h>", "<cmd>:SmartCursorMoveLeft<cr>" },
-		{ "<C-j>", "<cmd>:SmartCursorMoveDown<cr>" },
-		{ "<C-k>", "<cmd>:SmartCursorMoveUp<cr>" },
-		{ "<C-l>", "<cmd>:SmartCursorMoveRight<cr>" },
+		{ "<C-h>", require("smart-splits").move_cursor_left },
+		{ "<C-j>", require("smart-splits").move_cursor_down },
+		{ "<C-k>", require("smart-splits").move_cursor_up },
+		{ "<C-l>", require("smart-splits").move_cursor_right },
 
 		{ "å", "zh" },
 		{ "∂", "zl" },
+		{ "ß", "zh" },
+		{ "ƒ", "zl" },
 		{ "∫", "50zh" },
 		{ "∑", "50zl" },
 		{ "]z", "zj" },
@@ -144,25 +129,27 @@ local M = {
 
 		{ "<leader>t[", "<cmd>:tabprev<cr>" }, -- adjacent
 		{ "<leader>t]", "<cmd>:tabnext<cr>" }, -- spec file
-		{ "<C-h>", require("smart-splits").move_cursor_left },
-		{ "<C-j>", require("smart-splits").move_cursor_down },
-		{ "<C-k>", require("smart-splits").move_cursor_up },
-		{ "<C-l>", require("smart-splits").move_cursor_right },
-	},
+		{ "<c-h>", require("smart-splits").move_cursor_left },
+		{ "<c-j>", require("smart-splits").move_cursor_down },
+		{ "<c-k>", require("smart-splits").move_cursor_up },
+		{ "<c-l>", require("smart-splits").move_cursor_right },
 
-	t = { { "<C-x>", termcodes("<C-\\><C-N>"), "escape terminal " } },
+		{
+			"S",
+			"<cmd>:w<cr>",
+			desc = "Save file",
+		},
+
+		{ "W", "<cmd>:bd<cr>", desc = "Exit buffer" },
+	},
 
 	v = {
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		{ "<S-j>", "}", "skip bracket" },
-		{ "<S-k>", "{", "skip bracket up" },
 		{ "<S-h>", "^", "start of line" },
 		{ "<S-l>", "$", "end of line" },
 		{ "n", "*", "next occurence" },
 		{ "N", "#", "last occurence" },
-		{ "<C-l>", "%" },
-		{ "<C-k>", ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
 		{ "s", "<Plug>(nvim-surround-visual)" },
 	},
 

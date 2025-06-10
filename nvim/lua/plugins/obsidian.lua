@@ -29,20 +29,6 @@ return {
 			":e " .. COMMONPLACE .. "<cr>",
 			{ expr = true },
 		},
-		{
-			"<leader>la",
-			function()
-				local filename = vim.fn.expand("%:t:r")
-				local name = require("textcase").api.to_title_case(filename)
-
-				local pos = vim.api.nvim_win_get_cursor(0)
-				local row = pos[1] - 1 -- Convert to 0-based index
-				local col = pos[2]
-
-				-- Insert the title at cursor position
-				vim.api.nvim_buf_set_text(0, row, col, row, col, { "# " .. name })
-			end,
-		},
 	},
 	dependencies = {
 		"godlygeek/tabular",
@@ -72,8 +58,7 @@ return {
 				picker = {
 					-- snacks picker is not good enough. doesn't filter out assets
 					-- and sorting doesn't work correctly
-					-- name = "snacks.pick",
-					name = "telescope.nvim",
+					name = "snacks.pick",
 					note_mappings = {
 						["<C-l>"] = "vsplit",
 						["<C-c>"] = "new",
@@ -83,20 +68,7 @@ return {
 						["<C-c>"] = "new",
 					},
 				},
-				ui = {
-					hl_groups = {
-						ObsidianTag = { italic = false, fg = colors.palette.indigo_fg },
-						ObsidianRefText = { fg = colors.navy },
-						-- ObsidianExtLinkIcon = { fg = "#c792ea" },
-						-- ObsidianBlockID = { italic = true, fg = "#89ddff" },
-						-- ObsidianHighlightText = { bg = "#75662e" },
-					},
-				},
 				workspaces = {
-					-- {
-					-- 	name = "icloud",
-					-- 	path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
-					-- },
 					{
 						name = "link",
 						path = "~/vault",
@@ -107,7 +79,6 @@ return {
 						path = "~/dev/documents",
 					},
 				},
-				open_app_foreground = true,
 				follow_url_func = function(url)
 					vim.fn.jobstart({ "open", url })
 				end,

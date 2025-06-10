@@ -15,7 +15,7 @@ function sc.num()
 		local v_range = utils.get_visual_range()
 		local is_in_range = vim.v.lnum >= v_range[1] and vim.v.lnum <= v_range[3]
 		if is_in_range then
-			v_hl = sc.hl("vCursorLine")
+			v_hl = sc.hl("vSelected")
 		end
 
 		if is_cursor then

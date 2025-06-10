@@ -141,4 +141,29 @@ function U.paste()
 	return io.popen("pbpaste", "r"):read()
 end
 
+function U.get_relative_path(path)
+	local vim_runtime = vim.fn.stdpath("config")
+	local relative_path = path:gsub(vim_runtime .. "/lua/", "")
+	relative_path = relative_path:gsub("/", "."):gsub(".lua", "")
+	return relative_path
+end
+
+function U.loaddir(path, ignore_list)
+	local l = vim.api.nvim_get_runtime_file(path, true)
+
+	local out = {}
+	for _, name in ipairs(l) do
+		name = U.get_relative_path(name)
+		if U.has_value(ignore_list or {}, name) ~= true then
+			out[name] = require(name)
+		end
+	end
+
+	return out
+end
+
+function U.capitalize(str)
+	return str:gsub("^%l", string.upper)
+end
+
 return U

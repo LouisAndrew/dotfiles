@@ -63,6 +63,9 @@ JQ_PROP="0;$COLOR_YELLOW"
 BG_COLOR="#131313"
 BG_COLOR_DARK="#0a0a0a"
 
+BG=$BG_COLOR_DARK
+BORDER=$BG_COLOR
+
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
 export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
@@ -78,10 +81,10 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=white'
 PROMPT_ICON=""
 export FZF_DEFAULT_OPTS="--layout reverse --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' --no-bold"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
-  --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG_COLOR,bg+:$BG_COLOR
+  --color=fg:#9a9a9a,fg+:#ffffff,bg:$BG,bg+:$BG
   --color=hl:#678CB1,hl+:#97CCF1,info:#afaf87,marker:#aeaeae
   --color=prompt:#aeaeae,spinner:#af5fff,pointer:#aeaeae,header:#87afaf
-  --color=border:$BG_COLOR,preview-fg:-1,label:#aeaeae,query:#d9d9d9
+  --color=border:$BORDER,preview-fg:-1,label:#aeaeae,query:#d9d9d9
   --preview-window=\"border-rounded\" --padding=\"1\" --prompt=\"$PROMPT_ICON \" --marker=\"◆\"
   --pointer=\"\" --separator=\"\" --scrollbar=\"│\""
 
