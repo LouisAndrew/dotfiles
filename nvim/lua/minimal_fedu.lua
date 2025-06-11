@@ -56,7 +56,7 @@ local palette = {
 		"#d5d5d5",
 		"#b4b4b4",
 		"#a7a7a7",
-		dimmed_white,
+		dimmed_white, -- 5
 		"#737373",
 		"#545454",
 		"#434343",

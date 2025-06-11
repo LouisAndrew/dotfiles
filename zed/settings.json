@@ -1,0 +1,41 @@
+{
+  "format_on_save": "language_server",
+  "icon_theme": "Zed (Default)",
+  "agent": {
+    "model_parameters": [],
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-haiku-latest"
+    },
+    "version": "2"
+  },
+  "features": {
+    "edit_prediction_provider": "none"
+  },
+  "theme": "Minimal Fedu",
+  "indent_guides": {
+    "enabled": false
+  },
+  "experimental.theme_overrides": {},
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "ui_font_family": "CommitMono",
+  "buffer_font_family": "CommitMono",
+  "buffer_line_height": {
+    "custom": 1.5
+  },
+  "current_line_highlight": "none",
+  "diagnostics": {
+    "include_warnings": true,
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 250,
+      "padding": 2,
+      "min_column": 0,
+      "max_severity": null
+    }
+  }
+}

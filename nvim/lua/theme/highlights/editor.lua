@@ -19,7 +19,7 @@ local M = {
 	{ "EndOfBuffer", colors.background, nil },
 	{ "ErrorMsg", colors.misc.remove_fg },
 	{ "Pmenu", colors.palette.grey[3], nil },
-	{ "PmenuSel", nil, colors.bg_accent },
+	{ "PmenuSel", nil, colors.bg_shade },
 
 	--- statuscol
 	{ "ColorColumn", nil, colors.palette.grey[9] },

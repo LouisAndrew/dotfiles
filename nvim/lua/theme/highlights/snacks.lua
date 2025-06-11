@@ -17,4 +17,9 @@ local picker = {
 	{ "Col", colors.palette.grey[5] },
 }
 
-return require("theme.config").mergeHlConfig({ input, picker })
+local rest = {
+	prefix = "Snacks",
+	{ "StatusColumnMark", colors.palette.grey[7] },
+}
+
+return require("theme.config").mergeHlConfig({ input, picker, rest })

@@ -1,0 +1,61 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-o": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {}
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "s": ["vim::PushAddSurrounds", {}]
+    }
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "shift-s": "workspace::Save",
+      "shift-k": "editor::Hover",
+      "space ,": "tab_switcher::Toggle",
+      "ctrl-o": "file_finder::Toggle",
+      "ctrl-f": "pane::DeploySearch",
+      "shift-j": "editor::ToggleInlineDiagnostics",
+      "z o": "editor::ToggleFold",
+      "shift-w": "pane::CloseActiveItem",
+      "ctrl-n": "pane::ActivateNextItem",
+      "ctrl-p": "pane::ActivatePreviousItem",
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      "ctrl-e": "editor::ShowCompletions",
+      "ctrl-b": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace"
+    }
+  },
+  {
+    "context": "Editor && showing_completions",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {}
+  }
+]

@@ -25,7 +25,7 @@ for _, p in ipairs(prefixes) do
 	for name, hl in pairs(levels) do
 		local cfg = { p .. name, hl }
 		if p == "Underline" then
-			cfg.undercurl = true
+			cfg.underline = true
 			cfg.sp = hl
 			cfg[2] = nil
 		end

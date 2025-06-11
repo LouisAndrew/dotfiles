@@ -1,0 +1,3 @@
+zed/*
+!zed/*.json
+!zed/themes/*
