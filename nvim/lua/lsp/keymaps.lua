@@ -96,7 +96,19 @@ return {
 					opts = { desc = "Next warning" },
 				},
 				{ "gry", vim.lsp.buf.type_definition, opts = { desc = "goto typedef" } },
-				{ "gro", vim.lsp.buf.definition, opts = { desc = "Go to definition" } },
+				{
+					"gro",
+					function()
+						local ft = vim.bo.filetype
+						if ft == "markdown" then
+							vim.cmd("ObsidianFollowLink")
+							return
+						end
+
+						vim.lsp.buf.definition()
+					end,
+					opts = { desc = "Go to definition" },
+				},
 				{ "grD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
 				{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
 				{

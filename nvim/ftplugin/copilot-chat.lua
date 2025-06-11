@@ -1,5 +1,0 @@
-vim.cmd("set filetype=markdown")
-vim.cmd("set conceallevel=3")
-vim.cmd(":Markview enable")
-vim.cmd(":Markview attach")
-vim.keymap.set("n", "<C-l>", "<cmd>:SmartCursorMoveRight<cr>")

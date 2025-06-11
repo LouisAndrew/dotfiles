@@ -26,9 +26,6 @@ return {
 			quote = {
 				icon = icons.TallVertLine,
 			},
-			anti_conceal = {
-				ignore = { bullet = true },
-			},
 			callout = {
 				update = {
 					raw = "[!update]",

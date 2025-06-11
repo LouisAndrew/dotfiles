@@ -104,15 +104,15 @@ local config = {
 	{ "@include", colors.palette.cyan[1] },
 	{ "@punctuation.delimiter", colors.palette.grey[5] },
 	{ "@tag", colors.white },
-	{ "@type.builtin", colors.mfed_dim },
+	{ "@type.builtin", colors.palette.grey[5] },
 
 	{ "@number", colors.misc.number },
 	{ "@float", colors.misc.number },
 
-	{ "@conditional", colors.mfed_cyan },
+	{ "@conditional", colors.palette.cyan[1] },
 	{ "@text.strong", bold = true },
 	{ "@text.emphasis", italic = true },
-	{ "LspSignatureActiveParameter", colors.mfed_cyan },
+	{ "LspSignatureActiveParameter", colors.palette.cyan[1] },
 
 	-- Consts
 	{ "@constant", syn_hl.const },

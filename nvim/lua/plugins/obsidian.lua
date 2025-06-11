@@ -1,4 +1,5 @@
 local COMMONPLACE = os.getenv("COMMONPLACE")
+local HOME = os.getenv("HOME")
 
 return {
 	"obsidian-nvim/obsidian.nvim",
@@ -34,33 +35,12 @@ return {
 		"godlygeek/tabular",
 	},
 	config = function()
-		local colors = require("minimal_fedu")
-
 		require("obsidian").setup(
 			---@module 'obsidian'
 			---@type obsidian.config.ClientOpts
 			{
+				ui = { enable = false },
 				notes_subdir = "notes",
-				mappings = {
-					["gf"] = {
-						action = function()
-							return require("obsidian").util.gf_passthrough()
-						end,
-						opts = { noremap = false, expr = true, buffer = true },
-					},
-					["gro"] = {
-						action = function()
-							return require("obsidian").util.gf_passthrough()
-						end,
-						opts = { noremap = false, expr = true, buffer = true },
-					},
-					["<cr>"] = {
-						action = function()
-							return require("obsidian").util.smart_action()
-						end,
-						opts = { buffer = true, expr = true },
-					},
-				},
 				picker = {
 					-- snacks picker is not good enough. doesn't filter out assets
 					-- and sorting doesn't work correctly
@@ -77,17 +57,9 @@ return {
 				workspaces = {
 					{
 						name = "link",
-						path = "~/vault",
-					},
-					-- keeping this for backup for now
-					{
-						name = "personal",
-						path = "~/dev/documents",
+						path = HOME .. "/vault",
 					},
 				},
-				follow_url_func = function(url)
-					vim.fn.jobstart({ "open", url })
-				end,
 				attachments = {
 					img_folder = "assets/imgs",
 				},
