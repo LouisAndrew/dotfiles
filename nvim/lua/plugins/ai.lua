@@ -38,6 +38,17 @@ return {
 			"CodeCompanionActions",
 			"CodeCompanionAdd",
 		},
+		dependencies = {
+			{
+				"echasnovski/mini.diff",
+				config = function()
+					local diff = require("mini.diff")
+					diff.setup({
+						source = diff.gen_source.none(),
+					})
+				end,
+			},
+		},
 		keys = {
 			{ mode = { "n", "v" }, "<leader>aa", "<cmd>:CodeCompanionChat<CR>" },
 			{ mode = { "n", "v" }, "<leader>ax", "<cmd>:CodeCompanionActions<CR>" },
@@ -71,6 +82,11 @@ return {
 						previous_chat = {
 							modes = {
 								n = "[a",
+							},
+						},
+						change_adapter = {
+							modes = {
+								n = "gp",
 							},
 						},
 					},
@@ -110,6 +126,9 @@ return {
 		version = false,
 		opts = {
 			provider = "claude",
+			selector = {
+				provider = "snacks",
+			},
 		},
 		build = "make",
 		dependencies = {
