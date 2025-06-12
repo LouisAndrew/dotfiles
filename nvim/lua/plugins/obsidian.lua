@@ -35,7 +35,8 @@ return {
 		"godlygeek/tabular",
 	},
 	config = function()
-		require("obsidian").setup(
+		local obs = require("obsidian")
+		obs.setup(
 			---@module 'obsidian'
 			---@type obsidian.config.ClientOpts
 			{
@@ -64,7 +65,7 @@ return {
 					img_folder = "assets/imgs",
 				},
 				sort_by = "modified",
-				sort_reversed = true,
+				wiki_link_func = "use_alias_only",
 				note_frontmatter_func = function(note)
 					local now = os.date("%Y-%m-%d")
 					local out =

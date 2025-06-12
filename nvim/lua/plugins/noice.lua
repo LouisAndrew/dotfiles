@@ -86,15 +86,17 @@ return {
 					merge = true,
 				},
 				cmdline = {},
+				-- %s/hi/mom/gc
 				cmdline_popup = {
 					relative = "editor",
+					position = {
+						row = -1,
+						col = 1,
+					},
 					size = {
-						height = "auto",
 						width = "100%",
 					},
-					border = {
-						style = "none",
-					},
+					border = {},
 				},
 				cmdline_input = {
 					border = { style = "none" },
