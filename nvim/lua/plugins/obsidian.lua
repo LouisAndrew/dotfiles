@@ -1,5 +1,5 @@
 local COMMONPLACE = os.getenv("COMMONPLACE")
-local HOME = os.getenv("HOME")
+local VAULT_PATH = os.getenv("VAULT_PATH")
 
 return {
 	"obsidian-nvim/obsidian.nvim",
@@ -58,7 +58,7 @@ return {
 				workspaces = {
 					{
 						name = "link",
-						path = HOME .. "/vault",
+						path = VAULT_PATH,
 					},
 				},
 				attachments = {

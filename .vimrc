@@ -2,6 +2,8 @@
 map j gj
 map k gk
 
+imap jj <Esc>
+
 " I like using H and L for beginning/end of line
 map H ^
 map L $
@@ -11,6 +13,9 @@ map J }
 
 map n *
 map N #
+
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
 
 " Quickly remove search highlights
 nmap <F9> :nohl
