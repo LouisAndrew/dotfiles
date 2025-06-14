@@ -20,7 +20,16 @@ end
 local high_level_dir = {
 	"area",
 	"projects",
+	"books",
 }
+
+---@param n obsidian.Note
+---@param newpath string
+local function move_note(n, newpath)
+	n.path:rename(newpath)
+	vim.cmd("e " .. newpath)
+	print("moved to " .. newpath)
+end
 
 ---@param client obsidian.Client
 local function get_tag_groups(client)
@@ -47,6 +56,12 @@ vim.keymap.set("n", "<leader>ok", function()
 		return
 	end
 
+	if n:has_tag("archive") then
+		local newpath = string.format("%s/archive/%s.md", client.dir.filename, n.path.stem)
+		move_note(n, newpath)
+		return
+	end
+
 	-- {[tag_value]: parent_dir}
 	local tag_groups = get_tag_groups(client)
 	for _, dir in ipairs(high_level_dir) do
@@ -64,9 +79,7 @@ vim.keymap.set("n", "<leader>ok", function()
 					vim.fn.mkdir(target_dir, "p")
 				end
 
-				n.path:rename(newpath)
-				vim.cmd("e " .. newpath)
-				print("moved to " .. newpath)
+				move_note(n, newpath)
 				return
 			end
 		end
