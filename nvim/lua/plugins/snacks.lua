@@ -490,7 +490,7 @@ return {
 				layout = {
 					preset = "custom",
 				},
-				ui_select = false,
+				ui_select = true,
 				icons = {
 					ui = {
 						selected = "* ",
