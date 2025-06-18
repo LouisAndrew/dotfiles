@@ -26,6 +26,10 @@ return {
 			go = { "gofmt" },
 			markdown = { "prettierd" },
 			http = { "kulala" },
+
+			-- enable for biome projects
+			-- typescriptreact = { "biome" },
+			-- typescript = { "biome" },
 		},
 		format_on_save = function(bufnr)
 			-- Disable with a global or buffer-local variable
