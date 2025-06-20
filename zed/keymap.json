@@ -29,7 +29,8 @@
       "ctrl-n": "pane::ActivateNextItem",
       "ctrl-p": "pane::ActivatePreviousItem",
       "shift-l": "vim::EndOfLine",
-      "shift-h": "vim::FirstNonWhitespace"
+      "shift-h": "vim::FirstNonWhitespace",
+      "space p d": "pane::CloseInactiveItems"
     }
   },
   {
@@ -37,7 +38,9 @@
     "bindings": {
       "j j": "vim::NormalBefore",
       "ctrl-e": "editor::ShowCompletions",
-      "ctrl-b": "editor::ShowSignatureHelp"
+      "ctrl-x ctrl-a": "assistant::InlineAssist", // zed specific
+      "ctrl-x ctrl-c": "editor::ShowEditPrediction", // zed specific
+      "ctrl-x ctrl-l": "editor::ToggleCodeActions" // zed specific
     }
   },
   {
