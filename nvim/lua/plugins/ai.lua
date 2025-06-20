@@ -40,6 +40,16 @@ return {
 		},
 		dependencies = {
 			{
+				"ravitemer/mcphub.nvim",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+				build = "pnpm add -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+				config = function()
+					require("mcphub").setup()
+				end,
+			},
+			{
 				"echasnovski/mini.diff",
 				config = function()
 					local diff = require("mini.diff")
@@ -55,6 +65,16 @@ return {
 		},
 		config = true,
 		opts = {
+			extensions = {
+				mcphub = {
+					callback = "mcphub.extensions.codecompanion",
+					opts = {
+						show_result_in_chat = true, -- Show mcp tool results in chat
+						make_vars = true, -- Convert resources to #variables
+						make_slash_commands = true, -- Add prompts as /slash commands
+					},
+				},
+			},
 			display = {
 				chat = {
 					window = {
@@ -86,7 +106,7 @@ return {
 						},
 						change_adapter = {
 							modes = {
-								n = "gp",
+								n = "gra",
 							},
 						},
 					},
@@ -122,12 +142,21 @@ return {
 	},
 	{
 		"yetone/avante.nvim",
-		event = "VeryLazy",
+		keys = {
+			"AvanteAsk",
+		},
 		version = false,
 		opts = {
-			provider = "claude",
+			provider = "bedrock",
 			selector = {
 				provider = "snacks",
+			},
+			providers = {
+				bedrock = {
+					model = "eu.anthropic.claude-3-7-sonnet-20250219-v1:0",
+					aws_profile = "bedrock",
+					aws_region = "eu-central-1",
+				},
 			},
 		},
 		build = "make",

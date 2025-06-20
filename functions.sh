@@ -190,3 +190,13 @@ function grep_notes() {
 function tsh() {
   sh $DOTFILES_PATH/tmux.sh
 }
+
+function br() {
+  profile="${1:-default}"
+  credentials="$(aws configure export-credentials --profile "$profile")"
+  access_key=$(jq -r '.AccessKeyId' <<<"$credentials")
+  secret_key=$(jq -r '.SecretAccessKey' <<<"$credentials")
+  session_token=$(jq -r '.SessionToken' <<<"$credentials")
+  region=$(aws configure get region --profile "$profile")
+  export BEDROCK_KEYS="$access_key,$secret_key,$region,$session_token"
+}
