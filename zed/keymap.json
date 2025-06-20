@@ -30,7 +30,11 @@
       "ctrl-p": "pane::ActivatePreviousItem",
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
-      "space p d": "pane::CloseInactiveItems"
+      "space p d": "pane::CloseInactiveItems",
+      "alt-l": "vim::ResizePaneRight",
+      "alt-h": "vim::ResizePaneLeft",
+      "alt-j": "vim::ResizePaneDown",
+      "alt-k": "vim::ResizePaneUp"
     }
   },
   {
