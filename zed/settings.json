@@ -19,18 +19,23 @@
   },
   "use_smartcase_search": true,
   "vim_mode": true,
-  "ui_font_size": 16,
+  "ui_font_size": 17,
   "buffer_font_size": 16,
   "agent_font_size": 16,
   "cursor_blink": false,
   "relative_line_numbers": true,
   "ui_font_family": "CommitMonossssss",
   "buffer_font_family": "CommitMonossssss",
+  "ui_font_fallbacks": ["nonicons"],
+  "buffer_font_fallbacks": ["nonicons"],
   "buffer_line_height": {
-    "custom": 1.8
+    "custom": 1.5
   },
   "diagnostics": {
     "include_warnings": true
+  },
+  "active_pane_modifiers": {
+    "border_size": 1.75
   },
   "languages": {
     "Vue.js": {

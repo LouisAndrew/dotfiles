@@ -7,6 +7,7 @@
       "name": "Minimal Fedu",
       "appearance": "dark",
       "style": {
+        "background.appearance": "opaque",
         "border": "#212121",
         "border.variant": "#212121",
         "border.focused": "#212121",
@@ -113,7 +114,7 @@
         "deleted.border": "#212121",
         "error": "#ff8185",
         "error.background": "#42191b88",
-        "error.border": "#212121",
+        "error.border": "#42191b",
         "hint": "#545454",
         "hint.background": "#17255488",
         "hint.border": "#212121",
@@ -140,7 +141,7 @@
         "unreachable.border": "#212121",
         "warning": "#fed7aa",
         "warning.background": "#713f1244",
-        "warning.border": "#212121",
+        "warning.border": "#713f1277",
         "players": [
           {
             "cursor": "#818cf8",

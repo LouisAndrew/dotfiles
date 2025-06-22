@@ -22,7 +22,15 @@
       "ctrl-p": "pane::ActivatePreviousItem",
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
-      "space p d": "pane::CloseInactiveItems"
+      "space p d": "pane::CloseInactiveItems",
+      "f4": "debugger::Start",
+      "shift-f5": "debugger::Stop",
+      "shift-cmd-f5": "debugger::Restart",
+      "f6": "debugger::Pause",
+      "f7": "debugger::StepOver",
+      "f11": "debugger::StepInto",
+      "space d O": "debugger::StepOut",
+      "space d t": "editor::ToggleBreakpoint"
     }
   },
   {
@@ -32,8 +40,7 @@
       "j j": "vim::NormalBefore",
       "ctrl-e": "editor::ShowCompletions",
       "ctrl-x ctrl-a": "assistant::InlineAssist", // zed specific
-      "ctrl-x ctrl-c": "editor::ShowEditPrediction", // zed specific
-      "ctrl-x ctrl-l": "editor::ToggleCodeActions" // zed specific
+      "ctrl-j": "editor::ShowEditPrediction" // zed specific
     }
   },
   {
@@ -61,6 +68,16 @@
     }
   },
   {
+    "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-j": "pane::SplitDown",
+      "ctrl-k": "pane::SplitUp",
+      "ctrl-h": "pane::SplitLeft",
+      "ctrl-l": "pane::SplitRight"
+    }
+  },
+  {
     // completions
     "context": "Editor && showing_completions",
     "use_key_equivalents": true,
@@ -71,5 +88,13 @@
   {
     "context": "EmptyPane || SharedScreen",
     "bindings": {}
+  },
+  {
+    "context": "Editor && mode == full && edit_prediction",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-j": "editor::NextEditPrediction",
+      "ctrl-k": "editor::PreviousEditPrediction"
+    }
   }
 ]
