@@ -1,21 +1,13 @@
 [
   {
+    // global
     "context": "Workspace",
     "bindings": {
       "ctrl-o": "file_finder::Toggle"
     }
   },
   {
-    "context": "VimControl && !menu",
-    "bindings": {}
-  },
-  {
-    "context": "vim_mode == visual",
-    "bindings": {
-      "s": ["vim::PushAddSurrounds", {}]
-    }
-  },
-  {
+    // normal
     "context": "vim_mode == normal && !menu",
     "bindings": {
       "shift-s": "workspace::Save",
@@ -30,14 +22,11 @@
       "ctrl-p": "pane::ActivatePreviousItem",
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
-      "space p d": "pane::CloseInactiveItems",
-      "alt-l": "vim::ResizePaneRight",
-      "alt-h": "vim::ResizePaneLeft",
-      "alt-j": "vim::ResizePaneDown",
-      "alt-k": "vim::ResizePaneUp"
+      "space p d": "pane::CloseInactiveItems"
     }
   },
   {
+    // insert
     "context": "vim_mode == insert",
     "bindings": {
       "j j": "vim::NormalBefore",
@@ -48,13 +37,31 @@
     }
   },
   {
+    // visual
     "context": "vim_mode == visual",
     "bindings": {
       "shift-l": "vim::EndOfLine",
-      "shift-h": "vim::FirstNonWhitespace"
+      "shift-h": "vim::FirstNonWhitespace",
+      "s": ["vim::PushAddSurrounds", {}]
     }
   },
   {
+    // window navigation
+    "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
+    "bindings": {
+      // window related commands (ctrl-w X)
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "alt-l": "vim::ResizePaneRight",
+      "alt-h": "vim::ResizePaneLeft",
+      "alt-j": "vim::ResizePaneDown",
+      "alt-k": "vim::ResizePaneUp"
+    }
+  },
+  {
+    // completions
     "context": "Editor && showing_completions",
     "use_key_equivalents": true,
     "bindings": {

@@ -9,6 +9,7 @@
     },
     "version": "2"
   },
+  "current_line_highlight": "none",
   "theme": "Minimal Fedu",
   "indent_guides": {
     "enabled": true
