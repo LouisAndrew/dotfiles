@@ -8,7 +8,7 @@
       "appearance": "dark",
       "style": {
         "background.appearance": "opaque",
-        "border": "#212121",
+        "border": "#252525",
         "border.variant": "#212121",
         "border.focused": "#212121",
         "border.selected": "#212121",
@@ -36,15 +36,15 @@
         "icon.disabled": "#878a98ff",
         "icon.placeholder": "#a9afbcff",
         "icon.accent": "#ffffff",
-        "status_bar.background": "#131313",
-        "title_bar.background": "#131313",
-        "title_bar.inactive_background": "#131313",
+        "status_bar.background": "#0d0d0d",
+        "title_bar.background": "#0d0d0d",
+        "title_bar.inactive_background": "#0d0d0d",
         "toolbar.background": "#131313",
-        "tab_bar.background": "#131313",
-        "tab.inactive_background": "#131313",
+        "tab_bar.background": "#0d0d0d",
+        "tab.inactive_background": "#0d0d0d",
         "tab.active_background": "#131313",
         "search.match_background": "#343950",
-        "panel.background": "#131313",
+        "panel.background": "#0d0d0d",
         "pane.focused_brder": "#ff0000",
         "panel.focused_border": "#434343",
         "scrollbar.thumb.background": "#323232",
@@ -52,7 +52,7 @@
         "scrollbar.thumb.border": "#212121",
         "scrollbar.track.background": "#131313",
         "scrollbar.track.border": "#212121",
-        "editor.foreground": "#b4b4b4",
+        "editor.foreground": "#a7a7a7",
         "editor.background": "#131313",
         "editor.gutter.background": "#131313",
         "editor.subheader.background": "#131313",
@@ -146,7 +146,7 @@
           {
             "cursor": "#818cf8",
             "background": "#131313",
-            "selection": "#242536"
+            "selection": "#343950"
           },
           {
             "cursor": "#be5046ff",
@@ -236,7 +236,7 @@
             "font_weight": null
           },
           "function": {
-            "color": "#b4b4b4",
+            "color": "#bfbfbf",
             "font_style": null,
             "font_weight": null
           },

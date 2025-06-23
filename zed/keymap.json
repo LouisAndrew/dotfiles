@@ -3,7 +3,10 @@
     // global
     "context": "Workspace",
     "bindings": {
-      "ctrl-o": "file_finder::Toggle"
+      "ctrl-o": "file_finder::Toggle",
+      "shift-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-f": "pane::DeploySearch"
     }
   },
   {
@@ -14,10 +17,8 @@
       "shift-k": "editor::Hover",
       "space ,": "tab_switcher::Toggle",
       "ctrl-o": "file_finder::Toggle",
-      "ctrl-f": "pane::DeploySearch",
       "shift-j": "editor::ToggleInlineDiagnostics",
       "z o": "editor::ToggleFold",
-      "shift-w": "pane::CloseActiveItem",
       "ctrl-n": "pane::ActivateNextItem",
       "ctrl-p": "pane::ActivatePreviousItem",
       "shift-l": "vim::EndOfLine",
@@ -30,7 +31,11 @@
       "f7": "debugger::StepOver",
       "f11": "debugger::StepInto",
       "space d O": "debugger::StepOut",
-      "space d t": "editor::ToggleBreakpoint"
+      "space d t": "editor::ToggleBreakpoint",
+      "shift-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-g": "git::Diff"
     }
   },
   {
@@ -64,7 +69,9 @@
       "alt-l": "vim::ResizePaneRight",
       "alt-h": "vim::ResizePaneLeft",
       "alt-j": "vim::ResizePaneDown",
-      "alt-k": "vim::ResizePaneUp"
+      "alt-k": "vim::ResizePaneUp",
+      "ctrl-shift-n": "workspace::ActivateNextWindow",
+      "ctrl-shift-p": "workspace::ActivatePreviousWindow"
     }
   },
   {
