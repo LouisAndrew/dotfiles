@@ -68,11 +68,11 @@ BORDER=$BG_COLOR
 
 export JQ_COLORS="0;90:$JQ_PROP:$JQ_PROP:$JQ_PROP:$JQ_STRING:$JQ_OBJECT:$JQ_OBJECT:$JQ_OBJECT"
 
-export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA"; 
+export LS_COLORS=$LS_COLORS:"di=0;$COLOR_MAGENTA";
 export EZA_COLORS="sc=0;$COLOR_CYAN:di=0;$COLOR_MAGENTA:bu=0;$COLOR_YELLOW"
 export MASON="$HOME/.local/share/nvim/mason/packages"
 export VOLAR_GLOBAL="$HOME/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js"
-export EDITOR="nvim"
+export EDITOR="zed"
 export KUBE_EDITOR="$EDITOR"
 export NEOVIDE_FRAME="none"
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
@@ -94,19 +94,20 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export BAT_THEME="minimalfedu"
 
+zle -N open_project
 zle -N f
 zle -N fs
 zle -N rgf
-zle -N ngowrapper 
+zle -N ngowrapper
 zle -N m
 zle -N qn
 zle -N grep_notes
 zle -N tlt
 
-bindkey '^o' f
+bindkey '^o' open_project
 bindkey '^f' rgf
-bindkey '^g' ngowrapper 
-bindkey '^e' fs 
+bindkey '^g' ngowrapper
+bindkey '^e' fs
 bindkey "^b" m
 bindkey '^q' qn
 bindkey '^v' grep_notes

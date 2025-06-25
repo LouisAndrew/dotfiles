@@ -1,3 +1,7 @@
+function open_project() {
+    $EDITOR .
+}
+
 function cmo() {
   echo "Committing without end-parantheses"
   gcm "$1($2): $3" ${@:4}
@@ -22,7 +26,7 @@ function mcm() {
 function mcmo() {
  ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
  echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3 ($ticket_number)" 
+ gcm "$1($2): $3 ($ticket_number)"
 }
 
 function mcm:nt() {
@@ -99,7 +103,7 @@ GO_BACK=".."
 CLONE="Clone from clipboard"
 GO_HERE="CD here"
 function fs() {
-  scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,") 
+  scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,")
   echo $scope_list | fzf \
     --preview "fd . $DEV_HOME/{} -t d -d 1 | sed \
     s,$DEV_HOME/{},," | read scope
@@ -152,7 +156,7 @@ function loadenv() {
   if [[ ! -z "$1" ]]; then
     file=$1
   fi
-  
+
   grep -v '^#' $file | xargs -0 | while read -r line; do
     if [[ ! -z "${line// }" ]]; then
       export "${line//\"/}"
@@ -163,10 +167,10 @@ function loadenv() {
 function ngowrapper() { ngo; }
 function tlt() {
   tmux split-window -v -p 25
-  tmux split-window -h 
+  tmux split-window -h
   tmux select-pane -U
-  
-  tmux 
+
+  tmux
 
   f
 }

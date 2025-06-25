@@ -4,7 +4,6 @@
     "context": "Workspace",
     "bindings": {
       "ctrl-o": "file_finder::Toggle",
-      "shift-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
       "ctrl-f": "pane::DeploySearch"
     }
@@ -35,7 +34,8 @@
       "shift-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
       "ctrl-f": "pane::DeploySearch",
-      "ctrl-g": "git::Diff"
+      "ctrl-g": "git::Diff",
+      "g R": "editor::ConfirmCodeAction"
     }
   },
   {
@@ -44,7 +44,9 @@
     "bindings": {
       "j j": "vim::NormalBefore",
       "ctrl-e": "editor::ShowCompletions",
+      "ctrl-b": "editor::ShowSignatureHelp",
       "ctrl-x ctrl-a": "assistant::InlineAssist", // zed specific
+      "ctrl-a": "assistant::InlineAssist", // zed specific
       "ctrl-j": "editor::ShowEditPrediction" // zed specific
     }
   },
@@ -54,7 +56,8 @@
     "bindings": {
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
-      "s": ["vim::PushAddSurrounds", {}]
+      "s": ["vim::PushAddSurrounds", {}],
+      "ctrl-a": "assistant::InlineAssist" // zed specific
     }
   },
   {
