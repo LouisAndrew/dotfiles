@@ -1,11 +1,11 @@
 [
   {
     // global
-    "context": "Workspace",
     "bindings": {
       "ctrl-o": "file_finder::Toggle",
       "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-f": "pane::DeploySearch"
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-shift-q": "workspace::CloseWindow"
     }
   },
   {
