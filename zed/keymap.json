@@ -1,11 +1,11 @@
 [
   {
     // global
-    "context": "Workspace",
     "bindings": {
       "ctrl-o": "file_finder::Toggle",
       "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-f": "pane::DeploySearch"
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-shift-q": "workspace::CloseWindow"
     }
   },
   {
@@ -45,9 +45,8 @@
       "j j": "vim::NormalBefore",
       "ctrl-e": "editor::ShowCompletions",
       "ctrl-b": "editor::ShowSignatureHelp",
-      "ctrl-x ctrl-a": "assistant::InlineAssist", // zed specific
       "ctrl-a": "assistant::InlineAssist", // zed specific
-      "ctrl-j": "editor::ShowEditPrediction" // zed specific
+      "ctrl-j": "editor::ToggleEditPrediction" // zed specific
     }
   },
   {

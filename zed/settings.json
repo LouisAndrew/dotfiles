@@ -3,7 +3,7 @@
     "model_parameters": [],
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.0-flash-lite"
+      "model": "gemini-2.0-flash"
     },
     "version": "2"
   },
@@ -37,7 +37,7 @@
     }
   },
   "current_line_highlight": "none",
-  "theme": "Minimal Fedu NestJS",
+  "theme": "Minimal Fedu Github",
   "features": {
     "edit_prediction_provider": "copilot"
   },
@@ -45,8 +45,8 @@
   "vim_mode": true,
   "cursor_blink": false,
   "relative_line_numbers": true,
-  "ui_font_family": "CommitMonoLight",
-  "buffer_font_family": "CommitMonoLight",
+  "ui_font_family": "CommitMono",
+  "buffer_font_family": "CommitMono",
   "buffer_font_fallbacks": ["nonicons"],
   "diagnostics": {
     "include_warnings": false
@@ -76,5 +76,6 @@
         "source.fixAll.eslint": true
       }
     }
-  }
+  },
+  "snippet_sort_order": "top"
 }

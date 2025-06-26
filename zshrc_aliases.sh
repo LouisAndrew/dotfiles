@@ -115,7 +115,6 @@ alias nd="nr dev"
 alias nx="npx"
 alias ntu="nr test:unit"
 alias nsw="nr serve"
-alias nc="npm-check -u"
 
 alias vsc="$vscode ."
 alias vc="$vscodium ."
@@ -180,6 +179,6 @@ alias dcu="docker compose up"
 alias dcd="docker compose down"
 alias lcd="termdown 20m --no-figlet"
 
-source $FUNCTIONS_PATH 
+source $FUNCTIONS_PATH
 source "$DOTFILES_PATH/glab.sh"
 source "$DOTFILES_PATH/jira.sh"
