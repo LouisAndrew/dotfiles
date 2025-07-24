@@ -5,7 +5,8 @@
       "ctrl-o": "file_finder::Toggle",
       "ctrl-shift-w": "pane::CloseAllItems",
       "ctrl-f": "pane::DeploySearch",
-      "ctrl-shift-q": "workspace::CloseWindow"
+      "ctrl-shift-q": "workspace::CloseWindow",
+      "ctrl-shift-p": "workspace::ClearAllNotifications"
     }
   },
   {
@@ -23,14 +24,11 @@
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
       "space p d": "pane::CloseInactiveItems",
-      "f4": "debugger::Start",
-      "shift-f5": "debugger::Stop",
-      "shift-cmd-f5": "debugger::Restart",
-      "f6": "debugger::Pause",
-      "f7": "debugger::StepOver",
-      "f11": "debugger::StepInto",
-      "space d O": "debugger::StepOut",
       "space d t": "editor::ToggleBreakpoint",
+      "space d j": "debugger::StepOver",
+      "space d l": "debugger::StepInto",
+      "space d h": "debugger::StepOut",
+      "space d J": "debugger::Continue",
       "shift-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
       "ctrl-f": "pane::DeploySearch",
@@ -55,7 +53,7 @@
     "bindings": {
       "shift-l": "vim::EndOfLine",
       "shift-h": "vim::FirstNonWhitespace",
-      "s": ["vim::PushAddSurrounds", {}],
+      "s": "vim::PushAddSurrounds",
       "ctrl-a": "assistant::InlineAssist" // zed specific
     }
   },
@@ -103,7 +101,16 @@
     "use_key_equivalents": true,
     "bindings": {
       "ctrl-j": "editor::NextEditPrediction",
-      "ctrl-k": "editor::PreviousEditPrediction"
+      "ctrl-k": "editor::ToggleEditPrediction"
+    }
+  },
+  {
+    "context": "DebugPanel",
+    "bindings": {
+      "space d j": "debugger::StepOver",
+      "space d l": "debugger::StepInto",
+      "space d h": "debugger::StepOut",
+      "space d J": "debugger::Continue"
     }
   }
 ]

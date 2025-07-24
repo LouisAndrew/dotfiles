@@ -30,3 +30,10 @@ nmap <F9> :nohl
 
 " Yank to system clipboard
 set clipboard=unnamed
+
+
+exmap foldopen obcommand editor:fold-less
+exmap foldclose obcommand editor:fold-more
+
+nmap zr :foldopen<CR>
+nmap zm :foldclose<CR>

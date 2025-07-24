@@ -1,11 +1,11 @@
 {
+  "show_edit_predictions": true,
   "agent": {
     "model_parameters": [],
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.0-flash"
-    },
-    "version": "2"
+      "model": "gemini-2.0-flash-lite"
+    }
   },
   "buffer_font_size": 17,
   "ui_font_size": 18,
@@ -36,7 +36,7 @@
       "profile": "bedrock"
     }
   },
-  "current_line_highlight": "none",
+  "current_line_highlight": "all",
   "theme": "Minimal Fedu Github",
   "features": {
     "edit_prediction_provider": "copilot"
@@ -49,7 +49,7 @@
   "buffer_font_family": "CommitMono",
   "buffer_font_fallbacks": ["nonicons"],
   "diagnostics": {
-    "include_warnings": false
+    "include_warnings": true
   },
   "active_pane_modifiers": {
     "border_size": 1.75
@@ -77,5 +77,12 @@
       }
     }
   },
-  "snippet_sort_order": "top"
+  "snippet_sort_order": "top",
+  "edit_predictions": {
+    "disabled_globs": ["~/dev/ui/**"],
+    "mode": "subtle"
+  },
+  "indent_guides": {
+    "enabled": false
+  }
 }

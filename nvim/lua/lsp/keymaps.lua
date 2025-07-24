@@ -97,7 +97,7 @@ return {
 				},
 				{ "gry", vim.lsp.buf.type_definition, opts = { desc = "goto typedef" } },
 				{
-					"gro",
+					"gd",
 					function()
 						local ft = vim.bo.filetype
 						if ft == "markdown" then
