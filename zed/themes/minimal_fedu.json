@@ -805,7 +805,7 @@
         "border.transparent": "#212121",
         "elevated_surface.background": "#202020",
         "surface.background": "#131313",
-        "background": "#131313",
+        "background": "#202020",
         "element.background": "#232323",
         "element.hover": "#242536",
         "element.active": "#242536",
