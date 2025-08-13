@@ -5,6 +5,6 @@
   },
   {
     "label": "httpyac all requests",
-    "command": "httpyac send ${ZED_RELATIVE_FILE} --quiet --all"
+    "command": "httpyac send ${ZED_RELATIVE_FILE} --all"
   }
 ]

@@ -37,3 +37,6 @@ exmap foldclose obcommand editor:fold-more
 
 nmap zr :foldopen<CR>
 nmap zm :foldclose<CR>
+
+exmap symbols obcommand darlal-switcher-plus:switcher-plus:open-symbols
+nmap gs :symbols<CR>

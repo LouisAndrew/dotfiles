@@ -1,12 +1,19 @@
 [
   {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      // [...]
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }]
+    }
+  },
+  {
     // global
     "bindings": {
       "ctrl-o": "file_finder::Toggle",
       "ctrl-shift-w": "pane::CloseAllItems",
       "ctrl-f": "pane::DeploySearch",
       "ctrl-shift-q": "workspace::CloseWindow",
-      "ctrl-shift-p": "workspace::ClearAllNotifications",
       "ctrl-shift-r": ["task::Spawn", { "reveal_target": "center" }]
     }
   },
