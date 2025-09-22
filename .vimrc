@@ -22,7 +22,7 @@ nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
 
 " open file with <c-o> and search with <c-f> done via global keymap
-exmap savefile obcommand editor:save-file
+exmap savefile obcommand prettier:format-content
 nmap S :savefile<CR>
 
 " Quickly remove search highlights

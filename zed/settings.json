@@ -28,7 +28,8 @@
   },
   "inline_code_actions": false,
   "vim": {
-    "use_system_clipboard": "always"
+    "use_system_clipboard": "always",
+    "default_mode": "normal"
   },
   "use_system_path_prompts": false,
   "use_system_prompts": false,
