@@ -85,7 +85,7 @@ function gcho() {
 
 function gchb() {
   type=$1
-  ticket=BAY-$2
+  ticket=CCT-$2
   description=$3
   git checkout -b $type/$ticket--$description
 }

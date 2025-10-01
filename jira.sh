@@ -1,4 +1,4 @@
-board="BAY"
+board="CCT"
 
 function jira_status() {
   local ticket_status='In Progress'
@@ -41,7 +41,7 @@ function jai() {
   if [[ -z "$1" ]]; then
     ticket_key=$(echo `ticket`)
   fi
-  
+
   if [[ $ticket_key != *"-"* ]]; then
     ticket_key="$board-$ticket_key"
   fi
@@ -85,7 +85,7 @@ function jmi() {
   if [[ -z "$2" ]]; then
     ticket_key=$(echo `ticket`)
   fi
-  
+
   if [[ $ticket_key != *"-"* ]]; then
     ticket_key="$board-$ticket_key"
   fi
@@ -99,7 +99,7 @@ function jvi() {
   if [[ -z "$1" ]]; then
     ticket_key=$(echo `ticket`)
   fi
-  
+
   if [[ $ticket_key != *"-"* ]]; then
     ticket_key="$board-$ticket_key"
   fi

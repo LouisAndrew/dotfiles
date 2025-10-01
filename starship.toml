@@ -53,7 +53,7 @@ version_format = "$raw"
 
 [deno]
 style = "bright-white"
-format = "- $symbol[$version]($style) "
+format = "- [deno@$version]($style) "
 version_format = "${raw}"
 
 [nodejs]

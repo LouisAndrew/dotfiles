@@ -8,8 +8,8 @@
     "always_allow_tool_actions": true,
     "model_parameters": [],
     "default_model": {
-      "provider": "amazon-bedrock",
-      "model": "claude-sonnet-4"
+      "provider": "google",
+      "model": "gemini-2.0-flash"
     }
   },
   "buffer_font_size": 17,
@@ -78,6 +78,7 @@
       }
     },
     "TypeScript": {
+      "language_servers": ["!deno", "..."],
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       }
