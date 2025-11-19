@@ -1,0 +1,164 @@
+/* #ui */
+/* ^ do not touch this line ^ */
+* {
+  font-family: "CommitMono", monospace !important;
+  font-weight: lighter;
+  font-size: 12px;
+  --fg: #212121;
+  --bg: #b4b4b4;
+  --border: #323232;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  --hud-bg: #212121;
+  --hud-fg: var(--bg);
+}
+
+.D .LH {
+  color: var(--fg);
+  border: 1px solid var(--nborder);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.m {
+  color: red !important;
+}
+
+.D .MC {
+  color: #616ad6;
+}
+
+.Sel {
+  box-shadow: none;
+  border: 1px solid #818cf8;
+  height: calc(100%-5px) !important;
+  width: calc(100%-5px) !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* bottom hud */
+.HUD {
+  /* bottom: 1rem; */
+  /* right: 1rem; */
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 100vw !important;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  height: 1.5rem !important;
+  color: var(--hud-fg) !important;
+  min-width: unset;
+  line-height: 21px;
+  border: 3px var(--hud-bg) solid;
+  display: flex;
+  align-items: center;
+  background: var(--hud-bg) !important;
+}
+
+.HUD.UI {
+  min-width: 180px;
+  align-items: unset;
+}
+
+.Omnibar {
+  padding-bottom: 20px;
+}
+
+.HUD:after {
+  border-radius: unset;
+  border: none;
+}
+
+/* #omni */
+/* ^ do not touch this line ^ */
+
+* {
+  font-family: "CommitMono", monospace !important;
+  --hud-bg: #212121;
+  --hud-fg: #b4b4b4;
+}
+
+.transparent {
+  opacity: 1;
+}
+
+#bar {
+  background: var(--hud-bg);
+  color: var(--hud-fg);
+}
+
+#input {
+  border: none;
+  background: none;
+  box-shadow: unset;
+  font-size: 16px;
+  color: var(--hud-fg);
+}
+
+#toolbar {
+  display: none;
+}
+
+#list {
+  background: var(--hud-bg);
+}
+
+.bottom {
+  margin-left: 0 !important;
+}
+
+/* #find:host */
+::selection {
+  background: #a5b4fc !important;
+  border: 2px solid #a5b4fc !important;
+  color: black !important;
+}
+
+/* #find:selection */
+::selection {
+  background: #a5b4fc !important;
+  border: 2px solid #a5b4fc !important;
+  color: black !important;
+}
+
+/* #find */
+/* ^ do not touch this line ^ */
+
+* {
+  font-family: "CommitMono", monospace !important;
+  background: unset;
+  --find-fg: #b4b4b4;
+}
+
+:host,
+body {
+  background-color: unset !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+:host(.D),
+body.D {
+  background-color: unset !important;
+}
+
+.r {
+  border: none;
+  border-radius: unset;
+  box-shadow: unset;
+  background: unset;
+  height: 1.5rem;
+  width: max-content;
+}
+
+.r.D {
+  background: unset;
+  color: var(--find-fg);
+}
+
+.r.D {
+  width: 97%;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+}

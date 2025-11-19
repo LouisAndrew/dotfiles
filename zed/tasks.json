@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Run request by name",
+    "command": "httpyac send ${ZED_RELATIVE_FILE} --quiet --name ${ZED_SELECTED_TEXT}"
+  },
+  {
+    "label": "httpyac all requests",
+    "command": "httpyac send ${ZED_RELATIVE_FILE} --all"
+  }
+]

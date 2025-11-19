@@ -1,0 +1,151 @@
+[
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }],
+      "g D": "editor::GoToDefinitionSplit",
+      "g Y": "editor::GoToTypeDefinitionSplit",
+      "ctrl-shift-x": "project_panel::Delete"
+    }
+  },
+  {
+    // global
+    "bindings": {
+      "ctrl-o": "file_finder::Toggle",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-shift-q": "workspace::CloseWindow",
+      "ctrl-shift-r": ["task::Spawn", { "reveal_target": "center" }],
+      "cmd-e": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    // normal
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "shift-s": "workspace::Save",
+      "shift-k": "editor::Hover",
+      "space ,": "tab_switcher::Toggle",
+      "ctrl-o": "file_finder::Toggle",
+      "shift-j": "editor::ToggleInlineDiagnostics",
+      "z o": "editor::ToggleFold",
+      "ctrl-n": "pane::ActivateNextItem",
+      "ctrl-p": "pane::ActivatePreviousItem",
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace",
+      "space p d": "pane::CloseOtherItems",
+      "space d t": "editor::ToggleBreakpoint",
+      "space d j": "debugger::StepOver",
+      "space d l": "debugger::StepInto",
+      "space d h": "debugger::StepOut",
+      "space d J": "debugger::Continue",
+      "shift-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-f": "pane::DeploySearch",
+      "ctrl-g": "git::Diff",
+      "g R": "editor::ConfirmCodeAction",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk"
+    }
+  },
+  {
+    // insert
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      "ctrl-e": "editor::ShowCompletions",
+      "ctrl-b": "editor::ShowSignatureHelp",
+      "ctrl-a": "assistant::InlineAssist", // zed specific
+      "ctrl-j": "editor::ToggleEditPrediction" // zed specific
+    }
+  },
+  {
+    // visual
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace",
+      "s": "vim::PushAddSurrounds",
+      "ctrl-a": "assistant::InlineAssist" // zed specific
+    }
+  },
+  {
+    // window navigation
+    "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
+    "bindings": {
+      // window related commands (ctrl-w X)
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "alt-l": "vim::ResizePaneRight",
+      "alt-h": "vim::ResizePaneLeft",
+      "alt-j": "vim::ResizePaneDown",
+      "alt-k": "vim::ResizePaneUp",
+      "ctrl-shift-n": "workspace::ActivateNextWindow",
+      "ctrl-shift-p": "workspace::ActivatePreviousWindow"
+    }
+  },
+  {
+    "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-j": "pane::SplitDown",
+      "ctrl-k": "pane::SplitUp",
+      "ctrl-h": "pane::SplitLeft",
+      "ctrl-l": "pane::SplitRight"
+    }
+  },
+  {
+    // completions
+    "context": "Editor && showing_completions",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {}
+  },
+  {
+    "context": "Editor && mode == full && edit_prediction",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-j": "editor::NextEditPrediction",
+      "ctrl-k": "editor::ToggleEditPrediction"
+    }
+  },
+  {
+    "context": "DebugPanel",
+    "bindings": {
+      "space d j": "debugger::StepOver",
+      "space d l": "debugger::StepInto",
+      "space d h": "debugger::StepOut",
+      "space d J": "debugger::Continue"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-q": "terminal::ToggleViMode"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-,": "zed::OpenSettingsFile"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-<": "zed::OpenSettings"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-o": "command_palette::Toggle"
+    }
+  }
+]

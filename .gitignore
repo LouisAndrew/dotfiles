@@ -1,0 +1,4 @@
+zed/embeddings/*
+zed/converstations/*
+zed/prompts/*
+zed/.tmp*

@@ -1,0 +1,6 @@
+{
+  "fn": {
+    "prefix": "fn",
+    "body": ["func$1 ${2:functionName}(${3:params}) ${4}{", "\t$0", "}"]
+  }
+}

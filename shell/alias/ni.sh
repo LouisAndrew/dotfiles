@@ -1,0 +1,8 @@
+alias ns="nr start"
+alias nt="nr test"
+alias ntw="nr test:watch"
+alias nb="nr build"
+alias nd="nr dev"
+alias nx="npx"
+alias ntu="nr test:unit"
+alias nsw="nr serve"

@@ -1,0 +1,26 @@
+{
+  "Console log": {
+    "prefix": "clg",
+    "body": ["console.log(${1:message});", "$0"]
+  },
+  "Function declaration": {
+    "prefix": "fn",
+    "body": ["$1function ${2:functionName}(${3:params}) {", "\t$0", "}"],
+    "description": "Create a function"
+  },
+  "Import a module": {
+    "prefix": "imd",
+    "body": ["import { ${2:module} } from '${1:modulePath}';", "$0"],
+    "description": "Import a module"
+  },
+  "Import whole module": {
+    "prefix": "imw",
+    "body": ["import ${2:module} from '${1:modulePath}';", "$0"],
+    "description": "Import the whole module"
+  },
+  "Arrow function": {
+    "prefix": "afn",
+    "body": ["$1const ${2:functionName} = (${3:params}) => {", "\t$0", "}"],
+    "description": "Create an arrow function"
+  }
+}

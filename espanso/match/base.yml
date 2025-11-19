@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+matches:
+  - trigger: ":arr"
+    replace: "→"
+
+  - trigger: ":arl"
+    replace: "←"
+
+  - trigger: ":em"
+    replace: "louisandrew3@gmail.com"
+
+  - trigger: ":lk"
+    replace: "[$|$]()"
+
+  - trigger: ":ae"
+    replace: "ä"
+
+  - trigger: ":oe"
+    replace: "ö"
+
+  - trigger: ":ue"
+    replace: "ü"
+
+  - trigger: ":Ae"
+    replace: "Ä"
+
+  - trigger: ":Oe"
+    replace: "Ö"
+
+  - trigger: ":Ue"
+    replace: "Ü"
+
+  - trigger: ":ss"
+    replace: "ß"
+
+  - trigger: ":lp"
+    replace: "[$|$]({{clipb}})"
+    vars:
+      - name: "clipb"
+        type: "clipboard"

@@ -1,0 +1,79 @@
+format = """
+$time\
+$directory\
+$git_branch\
+$git_commit\
+$git_status\
+$git_state\
+$deno\
+$nodejs\
+$custom\
+$lua\
+$golang\
+$rust\
+$python\
+$jobs\
+$character\
+$vi_mode"""
+
+add_newline = false
+
+[directory]
+format = "[$read_only]($read_only_style)[$path ]($style)"
+read_only = "🔒 "
+style = "fg:#ffffff"
+truncation_length = 0
+
+[git_branch]
+style = "bright-white"
+format = '[$branch(:$remote_branch)]($style)'
+
+[git_status]
+conflicted = " "
+ahead = " ${count} "
+behind = " ${count} "
+diverged = "  ${ahead_count}  ${behind_count} "
+untracked = " ${count} "
+stashed = " ${count} "
+modified = " ${count} "
+staged = " ${count} "
+renamed = "R ${count} "
+deleted = " ${count} "
+style = "bright-white"
+format = ' ([$all_status$ahead_behind]($style))'
+
+[python]
+style = "bright-white"
+format = "[${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
+
+[golang]
+style = "bright-white"
+format = "- [go@$version]($style) "
+version_format = "$raw"
+
+[deno]
+style = "bright-white"
+format = "- [deno@$version]($style) "
+version_format = "${raw}"
+
+[nodejs]
+detect_extensions = ["mjs", "cjs"]
+detect_files = ['package.json', '.node-version']
+format = "- [node@$version]($style) "
+style = "bright-white"
+version_format = "$raw"
+
+[lua]
+style = "bright-white"
+format = "- [lua@$version]($style) "
+version_format = "$raw"
+
+[rust]
+style = "bright-white"
+format = "- [rust@$version]($style) "
+version_format = "$raw"
+
+[character]
+error_symbol = "[!](bright-white)"
+success_symbol = "[\\$](bright-white)"
+vimcmd_symbol = "[?](bright-white)"
