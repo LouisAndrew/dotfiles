@@ -1,5 +1,3 @@
-source ./colors.sh
-
 JQ_OBJECT="0;$COLOR_WHITE"
 JQ_PROP="0;$COLOR_YELLOW"
 

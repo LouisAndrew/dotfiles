@@ -147,5 +147,10 @@
     "bindings": {
       "ctrl-shift-o": "command_palette::Toggle"
     }
+  },
+  {
+    "bindings": {
+      "alt-a": "copilot::NextSuggestion"
+    }
   }
 ]

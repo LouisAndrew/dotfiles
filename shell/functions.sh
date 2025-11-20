@@ -2,106 +2,41 @@ function open_project() {
     $EDITOR .
 }
 
-function cmo() {
-  echo "Committing without end-parantheses"
-  gcm "$1($2): $3" ${@:4}
-}
-
-function cmto() {
-  npm t && cmo $1 $2 $3
-}
-
+# @TODO: find next branch structure
 function cm() {
- ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
- echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3 ($ticket_number)" ${@:5}
+ # ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
+ # echo "🎊 Committing for $ticket_number"
+ # gcm "$1($2): $3 ($ticket_number)" ${@:5}
+
+ gcm
 }
 
-function mcm() {
- ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
- echo "🎊 Committing for $ticket_number"
- pre "$1($2): $3 ($ticket_number)"
-}
-
-function mcmo() {
- ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
- echo "🎊 Committing for $ticket_number"
- gcm "$1($2): $3 ($ticket_number)"
-}
-
-function mcm:nt() {
-  pre "$1($2): $3"
-}
-
-function mcmo:nt() {
- gcm "$1($2): $3"
-}
-
+# @TODO: find branch structure
 function ticket() {
- branch_name=`gb`
- branch_without_prefix=${branch_name//(*\/)/""}
- branch_details=$(awk -F-- '{print $2}' <<< $branch_without_prefix)
- if [[ -z "$branch_details" ]];
- then
-  echo "BAY-0"
- else
-  echo $(awk -F-- '{print $1}' <<< $branch_without_prefix)
- fi
+ # branch_name=`gb`
+ # branch_without_prefix=${branch_name//(*\/)/""}
+ # branch_details=$(awk -F-- '{print $2}' <<< $branch_without_prefix)
+ # if [[ -z "$branch_details" ]];
+ # then
+ #  echo "BAY-0"
+ # else
+ #  echo $(awk -F-- '{print $1}' <<< $branch_without_prefix)
+ # fi
 }
 
-function isWork() {
- work_email="louis.andrew@share-now.com"
- current=`git config user.email`
- if [[ $current == $work_email ]];
- then
-   echo 1
- else
-  echo 0
- fi
-}
-
-function g-rename() {
-  git branch -m `gb` $1
-}
-
-function ywp() {
-  yw $PBN/$1 ${@:2:99}
-}
-
-function ywm() {
-  yw $MC/$1 ${@:2:99}
-}
-
-function f() {
-  nvim -c PickFiles
-}
-
-function gcho() {
-  jli $1 | fzf | grep -o '[0-9]\+' | read t
-  read b
-  read desc
-  gchb $b $t $desc
-}
-
+# @TODO
 function gchb() {
-  type=$1
-  ticket=CCT-$2
-  description=$3
-  git checkout -b $type/$ticket--$description
-}
-
-function e() {
-  local filename=$1
-  mkdir -p "$(dirname "$1")" && touch $filename && $editor $filename
-}
-
-function lsd() {
-  fd . $1 -t d -d 1
+  # type=$1
+  # ticket=CCT-$2
+  # description=$3
+  # git checkout -b $type/$ticket--$description
 }
 
 GO_BACK=".."
 CLONE="Clone from clipboard"
 GO_HERE="CD here"
+
+# $DEV_HOME is defined in local .zshrc - machine dependent
 function fs() {
   scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,")
   echo $scope_list | fzf \
@@ -144,13 +79,11 @@ function fs() {
   echo "hh"
 }
 
+# Display branches in a picker
 alias gco="git branch -a | fzf | sed 's/\*//' | sed 's/remotes\/origin\///' | xargs git checkout"
 alias gcd="git branch -r | fzf | xargs git checkout"
 
-function rgf() {
-  nvim -c Grep
-}
-
+# Load env variables into shell based on `.env` file
 function loadenv() {
   local file=".env"
   if [[ ! -z "$1" ]]; then
@@ -162,37 +95,6 @@ function loadenv() {
       export "${line//\"/}"
     fi
   done
-}
-
-function ngowrapper() { ngo; }
-function tlt() {
-  tmux split-window -v -p 25
-  tmux split-window -h
-  tmux select-pane -U
-
-  tmux
-
-  f
-}
-
-function m() {
-  nvim -c ObsidianQuickSwitch
-}
-
-function on() {
-  nvim -c ObsidianNew "$@"
-}
-
-function qn() {
-  nvim $COMMONPLACE
-}
-
-function grep_notes() {
-  nvim -c ObsidianSearch
-}
-
-function tsh() {
-  sh $DOTFILES_PATH/tmux.sh
 }
 
 function br() {
