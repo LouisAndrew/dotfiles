@@ -1,11 +1,17 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_TMUX_AUTOSTART="true"
 
-plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(zsh-vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 export DENO_INSTALL="$HOME/.deno"
-eval "$(starship init zsh)"
+
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+  {
+    eval "$(/usr/local/bin/starship init zsh)"
+  }
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/aws-okta aws-okta
@@ -40,8 +46,7 @@ PATH="$brew_path/opt/curl/bin:$PATH"
 PATH="$GOBIN:$PATH"
 export PATH
 
-zle -N open_project
-bindkey '^o' open_project # binds ctrl-o to `$EDITOR .` - e.g. `nvim .` or `zed .`
+
 
 # tmux
 source $DOTFILES_PATH/shell/tmux.sh

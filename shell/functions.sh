@@ -1,7 +1,3 @@
-function open_project() {
-    $EDITOR .
-}
-
 # @TODO: find next branch structure
 function cm() {
  # ticket_number=$([[ -z "$4" ]] && echo `ticket` || echo $4)
