@@ -28,6 +28,10 @@ function gchb() {
   # git checkout -b $type/$ticket--$description
 }
 
+function lsd() {
+  fd . $1 -t d -d 1
+}
+
 GO_BACK=".."
 CLONE="Clone from clipboard"
 GO_HERE="CD here"
