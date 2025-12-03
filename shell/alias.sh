@@ -13,6 +13,7 @@ alias c-="cd -"
 
 alias dcu="docker compose up"
 alias dcd="docker compose down"
+alias icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
 
 for f in $DOTFILES_PATH/shell/alias/*.sh; do
   source $f

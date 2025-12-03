@@ -10,7 +10,7 @@ export DENO_INSTALL="$HOME/.deno"
 # xref: https://github.com/starship/starship/issues/3418
 type starship_zle-keymap-select >/dev/null || \
   {
-    eval "$(/usr/local/bin/starship init zsh)"
+    eval "$(/opt/homebrew/bin/starship init zsh)"
   }
 
 autoload -U +X bashcompinit && bashcompinit

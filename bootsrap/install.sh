@@ -21,6 +21,8 @@ pkgs=(
     neovim
     kubernetes-cli
     derailed/k9s/k9s
+    carapace
+    fd
 )
 
 gui_pkgs=(
@@ -45,3 +47,5 @@ for gui in "${gui_pkgs[@]}"; do
         install-gui $gui
     fi
 done
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
