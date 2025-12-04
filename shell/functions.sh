@@ -36,6 +36,12 @@ GO_BACK=".."
 CLONE="Clone from clipboard"
 GO_HERE="CD here"
 
+declare -A toplevel
+for constant in "certs/" "dotfiles/"
+do
+    toplevel[$constant]=1
+done
+
 # $DEV_HOME is defined in local .zshrc - machine dependent
 function fs() {
   scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,")
@@ -45,6 +51,11 @@ function fs() {
 
   if [ -z "$scope" ]; then
     return 0
+  fi
+
+  if [[ ${toplevel[$scope]} ]]; then
+      cd $DEV_HOME/$scope
+      return 1
   fi
 
   project_list=$(lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,,")
@@ -76,7 +87,6 @@ function fs() {
   fi
 
   cd $DEV_HOME/$scope/$project
-  echo "hh"
 }
 
 # Display branches in a picker
