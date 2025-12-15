@@ -23,6 +23,8 @@ pkgs=(
     derailed/k9s/k9s
     carapace
     fd
+    ni
+    gh
 )
 
 gui_pkgs=(

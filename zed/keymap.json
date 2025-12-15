@@ -1,5 +1,12 @@
 [
   {
+    "context": "(Editor && multibuffer)",
+    "bindings": {
+      "ctrl-shift-j": "editor::MoveToStartOfNextExcerpt",
+      "ctrl-shift-k": "editor::MoveToEndOfPreviousExcerpt"
+    }
+  },
+  {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "j": ["vim::Down", { "display_lines": true }],

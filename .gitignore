@@ -2,3 +2,4 @@ zed/embeddings/*
 zed/converstations/*
 zed/prompts/*
 zed/.tmp*
+lazygit/state.yml
