@@ -13,7 +13,7 @@ fi
 
 pkgs=(
     starship
-    asdf
+    mise
     tmux
     fzf
     jq

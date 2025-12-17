@@ -11,4 +11,3 @@ ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
 ln -s $DOTFILES_PATH/starship.toml $XDG_CONFIG/starship.toml
 ln -s $DOTFILES_PATH/tmux.conf $HOME/tmux.conf
-ln -s $DOTFILES_PATH/.asdfrc $HOME/.asdfrc

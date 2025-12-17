@@ -2,10 +2,10 @@
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
+      "model": "claude-sonnet-4.5",
     },
     "default_profile": "ask",
-    "model_parameters": []
+    "model_parameters": [],
   },
   "ui_font_weight": 400.0,
   "agent_buffer_font_size": 16,
@@ -14,15 +14,15 @@
   "agent_ui_font_size": 18,
   "tab_bar": {
     "show_nav_history_buttons": false,
-    "show_tab_bar_buttons": false
+    "show_tab_bar_buttons": false,
   },
   "buffer_font_features": {
-    "calt": false
+    "calt": false,
   },
   "inline_code_actions": false,
   "vim": {
     "use_system_clipboard": "always",
-    "default_mode": "normal"
+    "default_mode": "normal",
   },
   "use_system_path_prompts": false,
   "use_system_prompts": false,
@@ -32,90 +32,90 @@
     "bedrock": {
       "authentication_method": "named_profile",
       "region": "eu-central-1",
-      "profile": "bedrock"
-    }
+      "profile": "bedrock",
+    },
   },
   "current_line_highlight": "none",
   "theme": "Minimal Fedu Github",
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "use_smartcase_search": true,
   "vim_mode": true,
   "cursor_blink": false,
   "relative_line_numbers": "enabled",
-  "ui_font_family": "JetBrains Mono NL",
-  "buffer_font_family": "JetBrains Mono NL",
+  "ui_font_family": "CommitMono",
+  "buffer_font_family": "CommitMono",
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 300,
   "buffer_font_fallbacks": ["nonicons"],
   "diagnostics": {
-    "include_warnings": true
+    "include_warnings": true,
   },
   "active_pane_modifiers": {
-    "border_size": 1.75
+    "border_size": 1.75,
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "completions": {
-    "words": "disabled"
+    "words": "disabled",
   },
   "scrollbar": {
-    "git_diff": false
+    "git_diff": false,
   },
   "format_on_save": "on",
   "languages": {
     "Vue.js": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
+        "source.fixAll.eslint": true,
+      },
     },
     "JavaScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "language_servers": ["!deno", "!typescript-language-server", "..."]
+      "language_servers": ["!deno", "!typescript-language-server", "..."],
     },
     "TypeScript": {
       "formatter": "auto",
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "language_servers": ["!deno", "!typescript-language-server", "..."]
+      "language_servers": ["!deno", "!typescript-language-server", "..."],
     },
     "TSX": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "language_servers": ["!deno", "!typescript-language-server", "..."]
+      "language_servers": ["!deno", "!typescript-language-server", "..."],
     },
     "http": {
-      "enable_language_server": false
-    }
+      "enable_language_server": false,
+    },
   },
   "snippet_sort_order": "top",
   "indent_guides": {
-    "enabled": true
+    "enabled": true,
   },
   "search": {
-    "regex": true
+    "regex": true,
   },
   "seed_search_query_from_cursor": "selection",
   "toolbar": {
     "breadcrumbs": true,
-    "quick_actions": false
+    "quick_actions": false,
   },
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "show_edit_predictions": true,
   "lsp": {
     "omnisharp": {
       "initialization_options": {},
-      "settings": {}
-    }
-  }
+      "settings": {},
+    },
+  },
 }

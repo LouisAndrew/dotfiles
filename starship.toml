@@ -12,6 +12,7 @@ $lua\
 $golang\
 $rust\
 $python\
+$java\
 $jobs\
 $character\
 $vi_mode"""
@@ -77,3 +78,8 @@ version_format = "$raw"
 error_symbol = "[!](bright-white)"
 success_symbol = "[\\$](bright-white)"
 vimcmd_symbol = "[?](bright-white)"
+
+[java]
+style = "bright-white"
+format = "- [java@$version]($style) "
+version_format = "$raw"

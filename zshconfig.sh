@@ -35,13 +35,8 @@ for file in $DOTFILES_PATH/shell/config/*.sh; do
   source $file
 done
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export GOBIN=`go env GOBIN`
-
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
-PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 PATH="$brew_path/opt/curl/bin:$PATH"
 PATH="$GOBIN:$PATH"
 export PATH
