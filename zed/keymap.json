@@ -159,5 +159,17 @@
     "bindings": {
       "alt-a": "copilot::NextSuggestion"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-cmd-f": "editor::SelectRight"
+    }
+  },
+  {
+    "context": "Pane || Editor",
+    "bindings": {
+      "ctrl-shift-f": "project_search::ToggleFilters"
+    }
   }
 ]
