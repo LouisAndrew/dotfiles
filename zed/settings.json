@@ -1,4 +1,14 @@
 {
+    "agent_servers": {
+        "opencode": {
+            "type": "extension",
+            "favorite_models": [
+                "github-copilot/claude-opus-4.5"
+            ],
+            "default_config_options": {},
+            "favorite_config_option_values": {}
+        }
+    },
     "tab_size": 4,
     "agent": {
         "default_model": {

@@ -44,18 +44,22 @@ done
 
 # $DEV_HOME is defined in local .zshrc - machine dependent
 function fs() {
-  scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,")
-  echo $scope_list | fzf \
-    --preview "fd . $DEV_HOME/{} -t d -d 1 | sed \
-    s,$DEV_HOME/{},," | read scope
+  if [ -n "$1" ]; then
+    scope="$1/"
+  else
+    scope_list=$(lsd $DEV_HOME | sed "s,$DEV_HOME/,,")
+    echo $scope_list | fzf \
+      --preview "fd . $DEV_HOME/{} -t d -d 1 | sed \
+      s,$DEV_HOME/{},," | read scope
 
-  if [ -z "$scope" ]; then
-    return 0
-  fi
+    if [ -z "$scope" ]; then
+      return 0
+    fi
 
-  if [[ ${toplevel[$scope]} ]]; then
-      cd $DEV_HOME/$scope
-      return 1
+    if [[ ${toplevel[$scope]} ]]; then
+        cd $DEV_HOME/$scope
+        return 1
+    fi
   fi
 
   project_list=$(lsd $DEV_HOME/$scope | sed "s,$DEV_HOME/$scope,,")
