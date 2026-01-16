@@ -43,7 +43,7 @@ do
 done
 
 # $DEV_HOME is defined in local .zshrc - machine dependent
-function fs() {
+function fsf() {
   if [ -n "$1" ]; then
     scope="$1/"
   else
@@ -83,7 +83,7 @@ function fs() {
   fi
 
   if [ "$project" = "$GO_BACK" ]; then
-    fs
+    fsf
   fi
 
   if [ -z "$project" ]; then
@@ -91,6 +91,11 @@ function fs() {
   fi
 
   cd $DEV_HOME/$scope/$project
+}
+
+function fs() {
+    session=$(tmux display-message -p '#S')
+    fsf $session
 }
 
 # Display branches in a picker
