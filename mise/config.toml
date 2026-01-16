@@ -1,0 +1,13 @@
+[tools]
+node = "24"
+ruby = "2.6.10"
+yarn = "1"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "go", "python", "ruby"]
+
+[tasks.open]
+description = "Open editor"
+run = [
+  "$EDITOR .",
+]
