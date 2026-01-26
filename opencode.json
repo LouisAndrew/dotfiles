@@ -7,8 +7,8 @@
         "messages_half_page_up": "shift+up"
     },
     "plugin": [
-        "oh-my-opencode@beta",
-        "opencode-antigravity-auth@1.3.0"
+        // "oh-my-opencode@beta",
+        // "opencode-antigravity-auth@1.3.0"
     ],
     "provider": {}
 }

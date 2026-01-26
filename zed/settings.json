@@ -8,7 +8,7 @@
         }
     },
     "use_system_window_tabs": true,
-    "tab_size": 4,
+    "tab_size": 2,
     "agent": {
         "default_model": {
             "provider": "copilot_chat",
