@@ -6,7 +6,6 @@ local blink_keymap = {
 	["<C-r>"] = { "show_documentation", "hide_documentation" },
 	["<C-u>"] = { "scroll_documentation_up", "fallback" },
 	["<C-d>"] = { "scroll_documentation_down", "fallback" },
-	["<Tab>"] = {},
 }
 
 return {

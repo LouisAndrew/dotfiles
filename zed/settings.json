@@ -1,132 +1,132 @@
 {
-    "agent_servers": {
-        "opencode": {
-            "type": "extension",
-            "favorite_models": ["github-copilot/claude-opus-4.5"],
-            "default_config_options": {},
-            "favorite_config_option_values": {}
-        }
-    },
-    "use_system_window_tabs": true,
-    "tab_size": 2,
-    "agent": {
-        "default_model": {
-            "provider": "copilot_chat",
-            "model": "claude-sonnet-4.5"
-        },
-        "default_profile": "ask",
-        "model_parameters": []
-    },
-    "ui_font_weight": 400.0,
-    "agent_buffer_font_size": 16,
-    "buffer_font_size": 16,
-    "ui_font_size": 18.0,
-    "agent_ui_font_size": 18,
-    "tab_bar": {
-        "show_nav_history_buttons": false,
-        "show_tab_bar_buttons": false
-    },
-    "buffer_font_features": {
-        "calt": false
-    },
-    "inline_code_actions": false,
-    "vim": {
-        "use_system_clipboard": "always",
-        "default_mode": "normal"
-    },
-    "use_system_path_prompts": false,
-    "use_system_prompts": false,
-    "pane_split_direction_vertical": "right",
-    "pane_split_direction_horizontal": "down",
-    "language_models": {
-        "bedrock": {
-            "authentication_method": "named_profile",
-            "region": "eu-central-1",
-            "profile": "bedrock"
-        }
-    },
-    "current_line_highlight": "none",
-    "theme": "Minimal Fedu Github",
-    "features": {
-        "edit_prediction_provider": "copilot"
-    },
-    "use_smartcase_search": true,
-    "vim_mode": true,
-    "cursor_blink": false,
-    "relative_line_numbers": "enabled",
-    "ui_font_family": "CommitMono",
-    "buffer_font_family": "CommitMono",
-    // "buffer_font_family": "JetBrains Mono NL",
-    "buffer_line_height": {
-        "custom": 1.75
-    },
-    "buffer_font_weight": 400,
-    "buffer_font_fallbacks": ["nonicons"],
-    "diagnostics": {
-        "include_warnings": true
-    },
-    "active_pane_modifiers": {
-        "border_size": 1.75
-    },
-    "git": {
-        "inline_blame": {
-            "enabled": false
-        }
-    },
-    "completions": {
-        "words": "disabled"
-    },
-    "scrollbar": {
-        "git_diff": false
-    },
-    "format_on_save": "on",
-    "languages": {
-        "JavaScript": {
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-            },
-            "language_servers": ["!deno", "!typescript-language-server", "..."]
-        },
-        "TypeScript": {
-            "formatter": "auto",
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-            },
-            "language_servers": ["!deno", "!typescript-language-server", "..."]
-        },
-        "TSX": {
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-            },
-            "language_servers": ["!deno", "!typescript-language-server", "..."]
-        },
-        "http": {
-            "enable_language_server": false
-        },
-        "JSON": {
-            "formatter": "language_server"
-        }
-    },
-    "snippet_sort_order": "top",
-    "indent_guides": {
-        "enabled": true
-    },
-    "search": {
-        "regex": true
-    },
-    "seed_search_query_from_cursor": "selection",
-    "toolbar": {
-        "breadcrumbs": true,
-        "quick_actions": false
-    },
-    "edit_predictions": {
-        "mode": "eager"
-    },
-    "show_edit_predictions": true,
-    "file_types": {
-        "C++": ["mm", "m"]
-    },
-    "which_key": {
-        "enabled": true
+  "agent_servers": {
+    "opencode": {
+      "type": "extension",
+      "favorite_models": ["github-copilot/claude-opus-4.5"],
+      "default_config_options": {},
+      "favorite_config_option_values": {}
     }
+  },
+  "use_system_window_tabs": true,
+  "tab_size": 2,
+  "agent": {
+    "always_allow_tool_actions": true,
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-haiku-4.5"
+    },
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.5"
+    }
+  },
+  "ui_font_weight": 400.0,
+  "agent_buffer_font_size": 16,
+  "buffer_font_size": 16,
+  "ui_font_size": 18.0,
+  "agent_ui_font_size": 18,
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "buffer_font_features": {
+    "calt": false
+  },
+  "inline_code_actions": false,
+  "vim": {
+    "use_system_clipboard": "always",
+    "default_mode": "normal"
+  },
+  "use_system_path_prompts": false,
+  "use_system_prompts": false,
+  "pane_split_direction_vertical": "right",
+  "pane_split_direction_horizontal": "down",
+  "current_line_highlight": "none",
+  "theme": "Minimal Fedu Github",
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "use_smartcase_search": true,
+  "vim_mode": true,
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "ui_font_family": "CommitMono",
+  "buffer_font_family": "CommitMono",
+  // "buffer_font_family": "JetBrains Mono NL",
+  "buffer_line_height": {
+    "custom": 1.75
+  },
+  "buffer_font_weight": 400,
+  "buffer_font_fallbacks": ["nonicons"],
+  "diagnostics": {
+    "include_warnings": true
+  },
+  "active_pane_modifiers": {
+    "border_size": 1.75
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "completions": {
+    "words": "disabled"
+  },
+  "scrollbar": {
+    "git_diff": false
+  },
+  "format_on_save": "on",
+  "languages": {
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "language_servers": ["!deno", "!typescript-language-server", "..."]
+    },
+    "TypeScript": {
+      "formatter": "auto",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "language_servers": ["!deno", "!typescript-language-server", "..."]
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "language_servers": ["!deno", "!typescript-language-server", "..."]
+    },
+    "http": {
+      "enable_language_server": false
+    },
+    "JSON": {
+      "formatter": "language_server"
+    }
+  },
+  "snippet_sort_order": "top",
+  "indent_guides": {
+    "enabled": true
+  },
+  "search": {
+    "regex": true
+  },
+  "seed_search_query_from_cursor": "selection",
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
+  },
+  "edit_predictions": {
+    "mode": "eager"
+  },
+  "show_edit_predictions": true,
+  "file_types": {
+    "C++": ["mm", "m"]
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "unstable.ui_density": "compact",
+  "gutter": {
+    "min_line_number_digits": 0
+  }
 }

@@ -1,14 +1,14 @@
 {
-    "$schema": "https://opencode.ai/config.json",
-    "model": "github-copilot/claude-opus-4.5",
-    "keybinds": {
-        "leader": "ctrl-a",
-        "messages_half_page_down": "shift+down",
-        "messages_half_page_up": "shift+up"
-    },
-    "plugin": [
-        // "oh-my-opencode@beta",
-        // "opencode-antigravity-auth@1.3.0"
-    ],
-    "provider": {}
+  "$schema": "https://opencode.ai/config.json",
+  "model": "github-copilot/claude-opus-4.5",
+  "keybinds": {
+    "leader": "ctrl+o",
+    "messages_half_page_down": "shift+down",
+    "messages_half_page_up": "shift+up"
+  },
+  "plugin": [
+    // "oh-my-opencode@beta",
+    // "opencode-antigravity-auth@1.3.0"
+  ],
+  "provider": {}
 }
