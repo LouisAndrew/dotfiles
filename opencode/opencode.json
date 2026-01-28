@@ -10,5 +10,8 @@
     "@plannotator/opencode",
     "cc-safety-net"
   ],
+  "instructions": [
+    "context/**/*.md"
+  ],
   "provider": {}
 }
