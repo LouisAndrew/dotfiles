@@ -1,8 +1,9 @@
 ---
 description: Reviews code for quality and best practices
-mode: agent
-model: anthropic/claude-sonnet-4-20250514
+mode: primary
+model: github-copilot/claude-opus-4.5
 temperature: 0.1
+color: "#20B2AA"
 tools:
   write: false
   edit: false
