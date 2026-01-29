@@ -13,12 +13,13 @@
     "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-haiku-4.5"
+      "model": "claude-sonnet-4.5"
     },
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4.5"
-    }
+    },
+    "default_view": "text_thread"
   },
   "ui_font_weight": 400.0,
   "agent_buffer_font_size": 16,
