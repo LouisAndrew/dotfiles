@@ -1,6 +1,7 @@
 {
   "agent_servers": {
     "opencode": {
+      "default_mode": "OpenCoder",
       "type": "extension",
       "favorite_models": ["github-copilot/claude-opus-4.5"],
       "default_config_options": {},

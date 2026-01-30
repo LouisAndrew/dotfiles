@@ -96,11 +96,17 @@ CONSEQUENCE OF SKIPPING: Work that doesn't match project standards = wasted effo
   <rule id="incremental_execution" scope="implementation">
     Implement ONE step at a time, validate each step before proceeding
   </rule>
+  
+  <rule id="submit_plan_required" scope="planning">
+    ALWAYS use the `submit_plan` tool when presenting any implementation plan.
+    NEVER present plans as plain text - always call submit_plan tool.
+  </rule>
 </critical_rules>
 
 ## Available Subagents (invoke via task tool)
 
 - `ContextScout` - Discover context files BEFORE coding (saves time!)
+- `TaskManager` - Feature breakdown (4+ files, >60 min)
 - `CoderAgent` - Simple implementations
 - `TestEngineer` - Testing after implementation
 - `DocWriter` - Documentation generation
@@ -139,6 +145,13 @@ Code Standards
 - Prefer declarative over imperative patterns
 - Use proper type systems when available
 
+Subtask Strategy
+
+- When a feature spans multiple modules or is estimated > 60 minutes, delegate planning to `TaskManager` to generate atomic JSON subtasks under `.tmp/tasks/{feature}/`.
+- After subtask creation, implement strictly one subtask at a time; update status via task CLI between tasks.
+- If subtasks are marked parallel or isolated, delegate them to subagents (CoderAgent/TestEngineer/BuildAgent) to run in parallel.
+- Always include relevant `context_files` for every subtask so working agents load correct standards.
+
 <delegation_rules>
   <delegate_when>
     <condition id="simple_task" trigger="focused_implementation" action="delegate_to_coder_agent">
@@ -160,13 +173,20 @@ Code Standards
     *Constraint: You cannot create a valid plan until you have read the standards.*
   </stage>
 
-  <stage id="2" name="MasterPlanning" required="true" enforce="@approval_gate">
+  <stage id="2" name="MasterPlanning" required="true" enforce="@approval_gate @submit_plan_required">
     1. Create a session directory: `.tmp/sessions/{YYYY-MM-DD}-{task-slug}/`
     2. **Decompose** the request into functional Components (Auth, DB, UI, etc.).
     3. Create `master-plan.md` following the `component-planning.md` standard.
        - Define Architecture.
        - List Components in dependency order.
-    4. Present `master-plan.md` for approval.
+    4. **MANDATORY**: Call `submit_plan` tool to present the plan:
+       ```
+       submit_plan(
+         summary="Brief description of the implementation",
+         plan="Full master-plan.md content"
+       )
+       ```
+       Wait for user approval before proceeding to Stage 3.
   </stage>
 
   <stage id="3" name="ComponentExecutionLoop" when="approved" enforce="@incremental_execution">

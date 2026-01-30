@@ -103,6 +103,11 @@ CONSEQUENCE OF SKIPPING: Work that doesn't match project standards = wasted effo
   <rule id="confirm_cleanup" scope="session_management">
     Confirm before deleting session files/cleanup ops
   </rule>
+  
+  <rule id="submit_plan_required" scope="planning">
+    ALWAYS use the `submit_plan` tool when presenting any implementation plan.
+    NEVER present plans as plain text - always call submit_plan tool.
+  </rule>
 </critical_rules>
 
 <context>
@@ -196,9 +201,15 @@ task(
     <checkpoint>Context discovered</checkpoint>
   </stage>
 
-  <stage id="2" name="Approve" when="task_path" required="true" enforce="@approval_gate">
-    Present plan BASED ON discovered context→Request approval→Wait confirm
-    <format>## Proposed Plan\n[steps]\n\n**Approval needed before proceeding.**</format>
+  <stage id="2" name="Approve" when="task_path" required="true" enforce="@approval_gate @submit_plan_required">
+    **MANDATORY**: Use `submit_plan` tool to present plan for approval:
+    ```
+    submit_plan(
+      summary="Brief description of the task",
+      plan="## Proposed Plan\n[steps]\n\n**Approval needed before proceeding.**"
+    )
+    ```
+    Wait for user confirmation before proceeding.
     <skip_only_if>Pure info question w/ zero exec</skip_only_if>
   </stage>
 
