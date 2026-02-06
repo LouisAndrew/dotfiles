@@ -1,4 +1,21 @@
 {
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
   "agent_servers": {
     "opencode": {
       "default_mode": "OpenCoder",
@@ -45,9 +62,6 @@
   "pane_split_direction_horizontal": "down",
   "current_line_highlight": "none",
   "theme": "Minimal Fedu Github",
-  "features": {
-    "edit_prediction_provider": "copilot"
-  },
   "use_smartcase_search": true,
   "vim_mode": true,
   "cursor_blink": false,
@@ -118,6 +132,7 @@
     "quick_actions": false
   },
   "edit_predictions": {
+    "provider": "copilot",
     "mode": "eager"
   },
   "show_edit_predictions": true,

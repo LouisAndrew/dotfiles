@@ -13,7 +13,10 @@
       "k": ["vim::Up", { "display_lines": true }],
       "g D": "editor::GoToDefinitionSplit",
       "g Y": "editor::GoToTypeDefinitionSplit",
-      "ctrl-shift-x": "project_panel::Delete"
+      "ctrl-shift-x": "project_panel::Delete",
+      "space h h": "editor::ToggleSelectedDiffHunks",
+      "space h r": "git::Restore",
+      "space h a": "git::StageAndNext"
     }
   },
   {
