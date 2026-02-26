@@ -38,7 +38,6 @@
       "shift-k": "editor::Hover",
       "space ,": "tab_switcher::Toggle",
       "ctrl-o": "file_finder::Toggle",
-      "shift-j": "editor::ToggleInlineDiagnostics",
       "z o": "editor::ToggleFold",
       "ctrl-n": "pane::ActivateNextItem",
       "ctrl-p": "pane::ActivatePreviousItem",
