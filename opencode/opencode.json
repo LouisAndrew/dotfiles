@@ -1,8 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "github-copilot/claude-opus-4.5",
+  "model": "github-copilot/claude-opus-4.6",
   "plugin": [
-    "@plannotator/opencode",
+    "@plannotator/opencode@latest",
     "cc-safety-net"
   ],
   "instructions": [

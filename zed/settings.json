@@ -21,7 +21,6 @@
     "opencode": {
       "default_mode": "OpenCoder",
       "type": "extension",
-      "favorite_models": ["github-copilot/claude-sonnet-4.6"],
       "default_config_options": {},
       "favorite_config_option_values": {}
     }
@@ -33,7 +32,7 @@
     },
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
+      "model": "claude-sonnet-4.6"
     },
     "default_model": {
       "provider": "copilot_chat",
