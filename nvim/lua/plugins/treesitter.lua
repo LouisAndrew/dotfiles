@@ -2,6 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	event = "VeryLazy",
+	breanch = "main",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"windwp/nvim-ts-autotag",
@@ -33,16 +34,6 @@ return {
 			"markdown",
 			"markdown_inline",
 		}
-
-		-- Auto-install parsers
-		vim.api.nvim_create_autocmd("FileType", {
-			callback = function()
-				local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
-				if lang and not pcall(vim.treesitter.language.inspect, lang) then
-					vim.cmd("TSInstall " .. lang)
-				end
-			end,
-		})
 
 		-- Install configured parsers on startup
 		for _, lang in ipairs(ensure_installed) do

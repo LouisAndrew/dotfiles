@@ -94,18 +94,18 @@ local M = {
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
 		-- ALT+H
-		{ "<M-h>", require("smart-splits").resize_left },
-		-- ALT+J
-		{ "<M-j>", require("smart-splits").resize_down },
-		-- ALT+K
-		{ "<M-k>", require("smart-splits").resize_up },
-		-- ALT+L
-		{ "<M-l>", require("smart-splits").resize_right },
-
-		{ "<C-h>", require("smart-splits").move_cursor_left },
-		{ "<C-j>", require("smart-splits").move_cursor_down },
-		{ "<C-k>", require("smart-splits").move_cursor_up },
-		{ "<C-l>", require("smart-splits").move_cursor_right },
+		-- { "<M-h>", require("smart-splits").resize_left },
+		-- -- ALT+J
+		-- { "<M-j>", require("smart-splits").resize_down },
+		-- -- ALT+K
+		-- { "<M-k>", require("smart-splits").resize_up },
+		-- -- ALT+L
+		-- { "<M-l>", require("smart-splits").resize_right },
+		--
+		-- { "<C-h>", require("smart-splits").move_cursor_left },
+		-- { "<C-j>", require("smart-splits").move_cursor_down },
+		-- { "<C-k>", require("smart-splits").move_cursor_up },
+		-- { "<C-l>", require("smart-splits").move_cursor_right },
 
 		{ "å", "zh" },
 		{ "∂", "zl" },
@@ -129,10 +129,6 @@ local M = {
 
 		{ "<leader>t[", "<cmd>:tabprev<cr>" }, -- adjacent
 		{ "<leader>t]", "<cmd>:tabnext<cr>" }, -- spec file
-		{ "<c-h>", require("smart-splits").move_cursor_left },
-		{ "<c-j>", require("smart-splits").move_cursor_down },
-		{ "<c-k>", require("smart-splits").move_cursor_up },
-		{ "<c-l>", require("smart-splits").move_cursor_right },
 
 		{
 			"S",
