@@ -4,6 +4,7 @@
     "assign-type-mismatch"
   ],
   "diagnostics.globals": [
-    "MiniFiles"
+    "MiniFiles",
+        "vim"
   ]
 }
