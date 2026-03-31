@@ -93,20 +93,6 @@ local M = {
 		{ "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		{ "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
-		-- ALT+H
-		-- { "<M-h>", require("smart-splits").resize_left },
-		-- -- ALT+J
-		-- { "<M-j>", require("smart-splits").resize_down },
-		-- -- ALT+K
-		-- { "<M-k>", require("smart-splits").resize_up },
-		-- -- ALT+L
-		-- { "<M-l>", require("smart-splits").resize_right },
-		--
-		-- { "<C-h>", require("smart-splits").move_cursor_left },
-		-- { "<C-j>", require("smart-splits").move_cursor_down },
-		-- { "<C-k>", require("smart-splits").move_cursor_up },
-		-- { "<C-l>", require("smart-splits").move_cursor_right },
-
 		{ "å", "zh" },
 		{ "∂", "zl" },
 		{ "ß", "zh" },

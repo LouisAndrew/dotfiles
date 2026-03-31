@@ -1,5 +1,3 @@
-local icons = require("theme.icons")
-
 return {
 	{
 		"neovim/nvim-lspconfig",

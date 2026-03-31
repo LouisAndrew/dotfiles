@@ -12,12 +12,6 @@ return {
 	event = "BufEnter",
 	config = function()
 		require("mini.comment").setup({
-			mappings = {
-				comment = "gy",
-				comment_line = "gyy",
-				comment_visual = "gy",
-				textobject = "gy",
-			},
 			options = {
 				custom_commentstring = function()
 					return require("ts_context_commentstring.internal").calculate_commentstring()
