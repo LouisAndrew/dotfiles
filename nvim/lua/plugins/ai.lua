@@ -10,7 +10,7 @@ return {
 		config = function()
 			require("copilot").setup({
 				suggestion = {
-					auto_trigger = false,
+					auto_trigger = true,
 					hide_during_completion = false,
 					keymap = {
 						accept = "<C-l>",
