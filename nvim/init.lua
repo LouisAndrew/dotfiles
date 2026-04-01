@@ -38,4 +38,4 @@ for key, value in pairs(config) do
 	opt[key] = value
 end
 
-vim.cmd("colorscheme minimal_fedu")
+vim.cmd("colorscheme mfgh")

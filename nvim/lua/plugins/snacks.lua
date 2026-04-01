@@ -6,6 +6,9 @@ vim.api.nvim_create_user_command("PickFiles", function()
 	Snacks.picker.files({
 		-- dotfiles, but not hidden (in gitignore)
 		hidden = true,
+		layout = {
+			preset = "select",
+		},
 	})
 end, {})
 
