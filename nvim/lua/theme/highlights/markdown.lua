@@ -1,22 +1,24 @@
+local lush = require("lush")
+local H = require("theme.lush")
 local colors = require("minimal_fedu")
 
-local markdown = {
-	prefix = "RenderMarkdown",
-	{ "CodeInline", nil, colors.background },
-	{ "Code", nil, colors.bg_shade },
-	{ "Quote", colors.palette.indigo[2] },
-	{ "Update", colors.palette.magenta[2] },
-	{ "TableHead", colors.bg_accent },
-	{ "TableRow", colors.bg_accent },
-	{ "WikiLink", colors.palette.grey[6], nil },
-	{ "Link", colors.palette.grey[6], nil },
-}
+---@diagnostic disable: undefined-global
+return lush(function(injected)
+	local sym = injected.sym
 
-local ts = {
-	{ "@lsp.type.enumMember.markdown", colors.palette.indigo[2] },
-	{ "@markup.link.label.markdown_inline", colors.palette.grey[6] },
-	{ "@lsp.type.class.markdown", "@markup.link.label.markdown_inline", link = true },
-	{ "@markup.link.url.markdown_inline", colors.foreground },
-}
+	return {
+		RenderMarkdownCodeInline({ bg = H.hex(colors.background) }),
+		RenderMarkdownCode({ bg = H.hex(colors.bg_shade) }),
+		RenderMarkdownQuote({ fg = H.hex(colors.palette.indigo[2]) }),
+		RenderMarkdownUpdate({ fg = H.hex(colors.palette.magenta[2]) }),
+		RenderMarkdownTableHead({ fg = H.hex(colors.bg_accent) }),
+		RenderMarkdownTableRow({ fg = H.hex(colors.bg_accent) }),
+		RenderMarkdownWikiLink({ fg = H.hex(colors.palette.grey[6]) }),
+		RenderMarkdownLink({ fg = H.hex(colors.palette.grey[6]) }),
 
-return require("theme.config").mergeHlConfig({ markdown, ts })
+		sym("@lsp.type.enumMember.markdown")({ fg = H.hex(colors.palette.indigo[2]) }),
+		sym("@markup.link.label.markdown_inline")({ fg = H.hex(colors.palette.grey[6]) }),
+		sym("@lsp.type.class.markdown")({ sym("@markup.link.label.markdown_inline") }),
+		sym("@markup.link.url.markdown_inline")({ fg = H.hex(colors.foreground) }),
+	}
+end)

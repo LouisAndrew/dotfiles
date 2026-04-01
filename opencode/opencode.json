@@ -8,5 +8,5 @@
   "instructions": [
     "context/**/*.md"
   ],
-  "provider": {}
+  "provider": {},
 }

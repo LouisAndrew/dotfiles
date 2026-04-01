@@ -1,46 +1,45 @@
+local lush = require("lush")
+local H = require("theme.lush")
 local colors = require("minimal_fedu")
 
-local kind = {
-	prefix = "BlinkCmpKind",
-	{ "File", colors.palette.grey[3] },
-	{ "Module", colors.palette.grey[3] },
-	{ "Namespace", colors.palette.grey[3] },
-	{ "Package", colors.palette.grey[3] },
-	{ "Class", colors.palette.red[2] },
-	{ "Method", colors.misc.bool },
-	{ "Property", colors.palette.cyan[1] },
-	{ "Field", colors.palette.cyan[1] },
-	{ "Constructor", colors.palette.grey[3] },
-	{ "Enum", colors.palette.green[2] },
-	{ "Interface", colors.palette.navy[1] },
-	{ "Function", colors.misc.bool },
-	{ "Variable", colors.palette.navy[1] },
-	{ "Constant", colors.palette.grey[3] },
-	{ "String", colors.palette.green[2] },
-	{ "Number", colors.palette.grey[3] },
-	{ "Boolean", colors.palette.grey[3] },
-	{ "Array", colors.palette.grey[3] },
-	{ "Object", colors.palette.grey[3] },
-	{ "Key", colors.palette.green[2] },
-	{ "Null", colors.palette.grey[3] },
-	{ "EnumMember", colors.palette.grey[3] },
-	{ "Struct", colors.palette.grey[3] },
-	{ "Event", colors.palette.grey[3] },
-	{ "Operator", colors.palette.grey[3] },
-	{ "TypeParameter", colors.palette.grey[3] },
-	{ "Unit", colors.palette.cyan[2] },
-	{ "Text", colors.palette.grey[3] },
-	{ "Snippet", colors.palette.grey[3] },
-	{ "Keyword", colors.palette.grey[3] },
-}
+---@diagnostic disable: undefined-global
+return lush(function()
+	return {
+		BlinkCmpMenu({ bg = H.hex(colors.background) }),
+		BlinkCmpMenuBorder({ fg = H.hex(colors.bg_accent), bg = H.hex(colors.background) }),
+		BlinkCmpDoc({ bg = H.hex(colors.background) }),
+		BlinkCmpDocBorder({ fg = H.hex(colors.bg_accent), bg = H.hex(colors.background) }),
+		BlinkCmpDocSeparator({ fg = H.hex(colors.palette.grey[9]) }),
 
-local menu = {
-	prefix = "BlinkCmp",
-	{ "Menu", "NormalFloat", link = true },
-	{ "MenuBorder", "FloatBorder", link = true },
-	{ "Doc", "NormalFloat", link = true },
-	{ "DocBorder", "FloatBorder", link = true },
-	{ "DocSeparator", colors.palette.grey[9] },
-}
-
-return require("theme.config").mergeHlConfig({ menu, kind })
+		BlinkCmpKindFile({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindModule({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindNamespace({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindPackage({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindClass({ fg = H.hex(colors.palette.red[2]) }),
+		BlinkCmpKindMethod({ fg = H.hex(colors.misc.bool) }),
+		BlinkCmpKindProperty({ fg = H.hex(colors.palette.cyan[1]) }),
+		BlinkCmpKindField({ fg = H.hex(colors.palette.cyan[1]) }),
+		BlinkCmpKindConstructor({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindEnum({ fg = H.hex(colors.palette.green[2]) }),
+		BlinkCmpKindInterface({ fg = H.hex(colors.palette.navy[1]) }),
+		BlinkCmpKindFunction({ fg = H.hex(colors.misc.bool) }),
+		BlinkCmpKindVariable({ fg = H.hex(colors.palette.navy[1]) }),
+		BlinkCmpKindConstant({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindString({ fg = H.hex(colors.palette.green[2]) }),
+		BlinkCmpKindNumber({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindBoolean({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindArray({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindObject({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindKey({ fg = H.hex(colors.palette.green[2]) }),
+		BlinkCmpKindNull({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindEnumMember({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindStruct({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindEvent({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindOperator({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindTypeParameter({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindUnit({ fg = H.hex(colors.palette.cyan[1]) }),
+		BlinkCmpKindText({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindSnippet({ fg = H.hex(colors.palette.grey[3]) }),
+		BlinkCmpKindKeyword({ fg = H.hex(colors.palette.grey[3]) }),
+	}
+end)
