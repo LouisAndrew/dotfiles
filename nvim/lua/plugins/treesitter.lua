@@ -31,6 +31,7 @@ return {
 			"html",
 			"css",
 			"graphql",
+			"json",
 			"markdown",
 			"markdown_inline",
 		}

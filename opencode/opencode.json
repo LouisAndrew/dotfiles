@@ -9,4 +9,12 @@
     "context/**/*.md"
   ],
   "provider": {},
+  "agent": {
+    "opencoder": {
+      "disable": true
+    },
+    "openagent": {
+      "disable": true
+    }
+  }
 }

@@ -19,7 +19,7 @@ return lush(function()
 
 		BqfPreviewFloat({ bg = H.hex(colors.background) }),
 		QuickFixLine({ fg = H.hex(colors.palette.grey[1]) }),
-		Delimiter({ fg = H.hex(colors.bg_shade) }),
+		Delimiter({ fg = H.hex(colors.palette.grey[7]) }),
 
 		TelescopeBorder({ fg = H.hex(colors.bg_accent), bg = H.hex(colors.background) }),
 	}

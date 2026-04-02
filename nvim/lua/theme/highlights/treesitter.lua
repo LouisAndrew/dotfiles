@@ -90,6 +90,16 @@ return lush(function(injected)
 		sym("@punctuation.special")({ fg = H.hex(colors.palette.grey[8]) }),
 		sym("@punctuation.bracket")({ fg = H.hex(colors.palette.grey[7]) }),
 		sym("@type.qualifier")({ fg = H.hex(colors.palette.navy[1]) }),
+
+		-- JSON
+		sym("@property.json")({ fg = H.hex(colors.palette.grey[4]) }),
+		sym("@string.json")({ fg = H.hex(colors.primary) }),
+		sym("@string.special.key.json")({ fg = H.hex(colors.palette.grey[4]) }),
+		sym("@number.json")({ fg = H.hex(colors.misc.number) }),
+		sym("@boolean.json")({ fg = H.hex(colors.misc.bool) }),
+		sym("@punctuation.bracket.json")({ fg = H.hex(colors.palette.grey[5]) }),
+		sym("@punctuation.delimiter.json")({ fg = H.hex(colors.palette.grey[6]) }),
+
 		sym("@number")({ fg = H.hex(colors.misc.number) }),
 		sym("@float")({ fg = H.hex(colors.misc.number) }),
 		sym("@text.strong")({ gui = "bold" }),
