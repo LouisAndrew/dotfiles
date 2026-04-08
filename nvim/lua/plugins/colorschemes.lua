@@ -1,5 +1,9 @@
 return {
 	{
+		"rktjmp/lush.nvim",
+		lazy = true,
+	},
+	{
 		"kvrohit/rasmus.nvim",
 		priority = 1000,
 	},

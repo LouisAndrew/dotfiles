@@ -1,17 +1,19 @@
+local lush = require("lush")
+local H = require("theme.lush")
 local colors = require("minimal_fedu")
 
-local avante = {
-	prefix = "Avante",
-	{ "SidebarNormal", nil, colors.background },
-	{ "SidebarWinHorizontalSeparator", nil, colors.background },
-	{ "SidebarWinSeparator", colors.bg_accent, colors.background },
-	{ "InlineHint", colors.palette.grey[8] },
-	{ "Title", colors.palette.grey[5], colors.background },
-	{ "ReversedTitle", colors.background, colors.background },
-	{ "SubTitle", "AvanteTitle", link = true },
-	{ "ReversedSubtitle", "AvanteReversedTitle", link = true },
-	{ "ThirdTitle", "AvanteTitle", link = true },
-	{ "ReversedThirdTitle", "AvanteReversedTitle", link = true },
-}
-
-return require("theme.config").mergeHlConfig({ avante })
+---@diagnostic disable: undefined-global
+return lush(function()
+	return {
+		AvanteSidebarNormal({ bg = H.hex(colors.background) }),
+		AvanteSidebarWinHorizontalSeparator({ bg = H.hex(colors.background) }),
+		AvanteSidebarWinSeparator({ fg = H.hex(colors.bg_accent), bg = H.hex(colors.background) }),
+		AvanteInlineHint({ fg = H.hex(colors.palette.grey[8]) }),
+		AvanteTitle({ fg = H.hex(colors.palette.grey[5]), bg = H.hex(colors.background) }),
+		AvanteReversedTitle({ fg = H.hex(colors.background), bg = H.hex(colors.background) }),
+		AvanteSubTitle({ AvanteTitle }),
+		AvanteReversedSubtitle({ AvanteReversedTitle }),
+		AvanteThirdTitle({ AvanteTitle }),
+		AvanteReversedThirdTitle({ AvanteReversedTitle }),
+	}
+end)

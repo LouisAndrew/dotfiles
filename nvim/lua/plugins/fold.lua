@@ -2,7 +2,6 @@ local utils = require("utils")
 
 local ft_fold_provider = {
 	tsplayground = { "indent" },
-	vue = { "treesitter", "indent" },
 }
 
 return {

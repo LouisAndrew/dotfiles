@@ -2,10 +2,10 @@ local icons = require("theme.icons")
 local utils = require("utils")
 
 local blink_keymap = {
-	["<C-e>"] = { "show", "hide" },
-	["<C-r>"] = { "show_documentation", "hide_documentation" },
+	preset = "super-tab",
 	["<C-u>"] = { "scroll_documentation_up", "fallback" },
 	["<C-d>"] = { "scroll_documentation_down", "fallback" },
+	["<C-e>"] = { "show", "fallback" },
 }
 
 return {

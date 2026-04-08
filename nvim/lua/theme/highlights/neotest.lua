@@ -1,15 +1,19 @@
+local lush = require("lush")
+local H = require("theme.lush")
 local colors = require("minimal_fedu")
 
-return {
-	prefix = "Neotest",
-	{ "Failed", "Removed", link = true },
-	{ "Passed", "Added", link = true },
-	{ "Running", "Changed", link = true },
-	{ "Skipped", "Comment", link = true },
-	{ "AdapterName", colors.white },
-	{ "Dir", colors.palette.grey[7] },
-	{ "File", colors.palette.grey[5] },
-	{ "Namespace", colors.white },
-	{ "Focused", "AdapterName", link = true },
-	{ "ExpandMarker", "NeotestIndent", link = true },
-}
+---@diagnostic disable: undefined-global
+return lush(function()
+	return {
+		NeotestFailed({ fg = H.hex(colors.misc.remove_fg) }),
+		NeotestPassed({ fg = H.hex(colors.misc.add_fg) }),
+		NeotestRunning({ fg = H.hex(colors.misc.change_fg) }),
+		NeotestSkipped({ fg = H.hex(colors.palette.grey[8]) }),
+		NeotestAdapterName({ fg = H.hex(colors.white) }),
+		NeotestDir({ fg = H.hex(colors.palette.grey[7]) }),
+		NeotestFile({ fg = H.hex(colors.palette.grey[5]) }),
+		NeotestNamespace({ fg = H.hex(colors.white) }),
+		NeotestFocused({ NeotestAdapterName }),
+		NeotestExpandMarker({ fg = H.hex(colors.palette.grey[7]) }),
+	}
+end)

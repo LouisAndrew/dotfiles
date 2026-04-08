@@ -8,5 +8,13 @@
   "instructions": [
     "context/**/*.md"
   ],
-  "provider": {}
+  "provider": {},
+  "agent": {
+    "opencoder": {
+      "disable": true
+    },
+    "openagent": {
+      "disable": true
+    }
+  }
 }

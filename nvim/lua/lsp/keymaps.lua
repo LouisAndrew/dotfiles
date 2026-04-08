@@ -109,7 +109,15 @@ return {
 					end,
 					opts = { desc = "Go to definition" },
 				},
-				{ "grD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
+				{
+				"gD",
+				function()
+					vim.cmd("vsplit")
+					vim.lsp.buf.definition()
+				end,
+				opts = { desc = "Go to definition in vsplit" },
+			},
+			{ "grD", vim.lsp.buf.declaration, opts = { desc = "goto declaration" } },
 				{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
 				{
 					"<leader>cC",

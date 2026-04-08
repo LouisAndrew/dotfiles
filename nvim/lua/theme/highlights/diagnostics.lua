@@ -1,37 +1,28 @@
+local lush = require("lush")
+local H = require("theme.lush")
 local colors = require("minimal_fedu")
 
-local M = {
-	prefix = "Diagnostic",
-	{ "Source", colors.primary },
-	{ "Pos", colors.mfed_7 },
-	{ "Word", colors.secondary },
-	{ "VirtualTextError", colors.diagnostic.error, colors.misc.remove },
-}
+---@diagnostic disable: undefined-global
+return lush(function()
+	return {
+		DiagnosticSource({ fg = H.hex(colors.primary) }),
+		DiagnosticPos({ fg = H.hex(colors.mfed_7) }),
+		DiagnosticWord({ fg = H.hex(colors.white) }),
+		DiagnosticVirtualTextError({ fg = H.hex(colors.diagnostic.error), bg = H.hex(colors.misc.remove) }),
 
-local prefixes = {
-	"",
-	"Floating",
-	"Underline",
-}
+		DiagnosticError({ fg = H.hex(colors.diagnostic.error) }),
+		DiagnosticWarn({ fg = H.hex(colors.diagnostic.warn) }),
+		DiagnosticInfo({ fg = H.hex(colors.diagnostic.info) }),
+		DiagnosticHint({ fg = H.hex(colors.diagnostic.hint) }),
 
-local levels = {}
+		DiagnosticFloatingError({ DiagnosticError }),
+		DiagnosticFloatingWarn({ DiagnosticWarn }),
+		DiagnosticFloatingInfo({ DiagnosticInfo }),
+		DiagnosticFloatingHint({ DiagnosticHint }),
 
-local utils = require("utils")
-for name, hl in pairs(colors.diagnostic) do
-	levels[utils.capitalize(name)] = hl
-end
-
-for _, p in ipairs(prefixes) do
-	for name, hl in pairs(levels) do
-		local cfg = { p .. name, hl }
-		if p == "Underline" then
-			cfg.underline = true
-			cfg.sp = hl
-			cfg[2] = nil
-		end
-
-		table.insert(M, cfg)
-	end
-end
-
-return M
+		DiagnosticUnderlineError({ gui = "underline", sp = H.hex(colors.diagnostic.error) }),
+		DiagnosticUnderlineWarn({ gui = "underline", sp = H.hex(colors.diagnostic.warn) }),
+		DiagnosticUnderlineInfo({ gui = "underline", sp = H.hex(colors.diagnostic.info) }),
+		DiagnosticUnderlineHint({ gui = "underline", sp = H.hex(colors.diagnostic.hint) }),
+	}
+end)
