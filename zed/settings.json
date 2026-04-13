@@ -1,4 +1,5 @@
 {
+  "icon_theme": "Zed (Default)",
   "file_scan_exclusions": ["**/.yarn"],
   "lsp": {
     "vtsls": {
@@ -21,8 +22,9 @@
     "opencode": {
       "default_mode": "OpenCoder",
       "type": "extension",
-      "default_config_options": {},
-      "favorite_config_option_values": {}
+      "default_config_options": {
+        "mode": "OpenAgent"
+      }
     }
   },
   "tab_size": 2,
@@ -37,8 +39,7 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4.5"
-    },
-    "default_view": "text_thread"
+    }
   },
   "agent_buffer_font_size": 16,
   "buffer_font_size": 17,
@@ -61,17 +62,18 @@
   "pane_split_direction_vertical": "right",
   "pane_split_direction_horizontal": "down",
   "current_line_highlight": "none",
-  "theme": "Minimal Fedu Github",
+  "theme": "Min Dark (Solid)",
   "use_smartcase_search": true,
   "vim_mode": true,
   "cursor_blink": false,
   "relative_line_numbers": "enabled",
   "ui_font_family": "CommitMono",
-  "buffer_font_family": "CommitMono",
+  "buffer_font_family": "JetBrains Mono",
+  "ui_font_weight": 200,
   "buffer_line_height": {
     "custom": 1.75
   },
-  "buffer_font_weight": 400,
+  "buffer_font_weight": 200,
   "buffer_font_fallbacks": ["nonicons"],
   "diagnostics": {
     "inline": {
@@ -124,7 +126,7 @@
   },
   "snippet_sort_order": "top",
   "indent_guides": {
-    "enabled": true
+    "enabled": false
   },
   "search": {
     "regex": true

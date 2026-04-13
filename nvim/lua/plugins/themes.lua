@@ -7,7 +7,27 @@ return {
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("github-theme").setup({})
-			vim.cmd("colorscheme github_dark")
+		end,
+	},
+	{
+		"kyza0d/xeno.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			contrast = 0.1,
+		},
+		config = function(_, opts)
+			local xeno = require("xeno")
+
+			xeno.config(opts)
+
+			-- Create your custom theme
+			xeno.new_theme("my-theme", {
+				base = "#1E1E1E",
+				accent = "#8CBE8C",
+			})
+			vim.cmd("colorscheme my-theme")
 		end,
 	},
 }

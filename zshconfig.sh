@@ -39,6 +39,7 @@ PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="$brew_path/opt/curl/bin:$PATH"
 PATH="$GOBIN:$PATH"
+PATH="$HOME/.plannotator/bin:$PATH"
 export PATH
 
 
