@@ -62,7 +62,7 @@
   "pane_split_direction_vertical": "right",
   "pane_split_direction_horizontal": "down",
   "current_line_highlight": "none",
-  "theme": "Min Dark (Solid)",
+  "theme": "Minimal Fedu Github",
   "use_smartcase_search": true,
   "vim_mode": true,
   "cursor_blink": false,
@@ -150,5 +150,23 @@
   "unstable.ui_density": "compact",
   "gutter": {
     "min_line_number_digits": 0
+  },
+  "theme_overrides": {
+    "Min Dark (Solid)": {
+      "text.accent": "#818cf8",
+      "border": "#3a3a3a",
+      "border.variant": "#3a3a3a",
+      "border.focused": "#3a3a3a",
+      "border.selected": "#3a3a3a",
+      "border.transparent": "#3a3a3a",
+      "editor.document_highlight.read_background": "#343950",
+      "players": [
+        {
+          "cursor": "#818cf8",
+          "background": "#121212",
+          "selection": "#343950"
+        }
+      ]
+    }
   }
 }

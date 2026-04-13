@@ -30,7 +30,7 @@
         "text.muted": "#9a9a9a",
         "text.placeholder": "#737373",
         "text.disabled": "#737373",
-        "text.accent": "#ffffff",
+        "text.accent": "#818cf8",
         "icon": "#dce0e5ff",
         "icon.muted": "#a9afbcff",
         "icon.disabled": "#878a98ff",
@@ -336,7 +336,8 @@
             "font_weight": null
           },
           "string": {
-            "color": "#A6D6FF",
+            // "color": "#A6D6FF",
+            "color": "#ffcfa7",
             "font_style": null,
             "font_weight": null
           },
