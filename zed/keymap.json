@@ -27,7 +27,10 @@
       "ctrl-f": "pane::DeploySearch",
       "ctrl-shift-q": "workspace::CloseWindow",
       "ctrl-shift-r": ["task::Spawn", { "reveal_target": "center" }],
-      "cmd-e": "workspace::ToggleLeftDock"
+      "cmd-e": "workspace::ToggleLeftDock",
+      "cmd-shift-j": "multi_workspace::ToggleWorkspaceSidebar",
+      "cmd-down": "multi_workspace::NextProject",
+      "cmd-up": "multi_workspace::PreviousProject"
     }
   },
   {
@@ -56,6 +59,15 @@
       "g R": "editor::ConfirmCodeAction",
       "] h": "editor::GoToHunk",
       "[ h": "editor::GoToPreviousHunk"
+    }
+  },
+  {
+    "context": "AcpThread > Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-u": "agent::ScrollOutputPageUp",
+      "ctrl-d": "agent::ScrollOutputPageDown",
+      "ctrl-e": "agent::ScrollOutputLineDown",
+      "ctrl-y": "agent::ScrollOutputLineUp"
     }
   },
   {
