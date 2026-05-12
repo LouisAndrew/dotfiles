@@ -6,7 +6,8 @@ local f = ls.function_node
 local i = ls.insert_node
 
 return {
-	s("imd", fmt('import {{ {} }} from "{}"', { i(2), i(1) })),
+	s("imd", fmt("import {{ {} }} from '{}';", { i(2), i(1) })),
+	s("imw", fmt("import {} from '{}';", { i(2), i(1) })),
 
 	s(
 		"imp",
@@ -17,5 +18,38 @@ return {
 		})
 	),
 
-	s("clg", fmt("console.log({})", { i(1) })),
+	s("clg", fmt("console.log({});", { i(1, "message") })),
+	s('clw', fmt('console.log("wis {}");', { i(1) })),
+	s(
+		"fn",
+		fmt(
+			[[
+{}function {}({}) {{
+	{}
+}}
+]],
+			{
+				i(1),
+				i(2, "functionName"),
+				i(3, "params"),
+				i(0),
+			}
+		)
+	),
+	s(
+		"afn",
+		fmt(
+			[[
+{}const {} = ({}) => {{
+	{}
+}}
+]],
+			{
+				i(1),
+				i(2, "functionName"),
+				i(3, "params"),
+				i(0),
+			}
+		)
+	),
 }

@@ -42,8 +42,13 @@ local M = {
 	n = {
 		{ "j", "gj" },
 		{ "zo", "za" },
+		{ "gR", vim.lsp.buf.code_action, opts = { desc = "Code actions" } },
+		{ "<C-f>", "<cmd>Grep<cr>", opts = { desc = "Project search" } },
+		{ "<C-S-o>", function()
+			Snacks.picker.commands()
+		end, opts = { desc = "Command palette" } },
 		{
-			"<leader>pd",
+			"<leader>bh",
 			function()
 				local bufinfos = vim.fn.getbufinfo({ buflisted = 1 })
 				vim.tbl_map(function(bufinfo)
@@ -73,6 +78,7 @@ local M = {
 		{ "<C-p>", "<cmd>:bprev<cr>" },
 		{ "<C-n>", "<cmd>:bnext<cr>" },
 		{ "<leader>bw", "<cmd>:%bd|e#|bd#<cr>" },
+		{ "<leader>pd", "<cmd>:%bd|e#|bd#<cr>", opts = { desc = "Close other buffers" } },
 		-- Customs
 		{ "<S-h>", "^", "start of line" },
 		{ "<S-l>", "$", "end of line" },
@@ -133,6 +139,7 @@ local M = {
 		{ "n", "*", "next occurence" },
 		{ "N", "#", "last occurence" },
 		{ "s", "<Plug>(nvim-surround-visual)" },
+		{ "<C-f>", "<cmd>Grep<cr>", opts = { desc = "Project search" } },
 	},
 
 	x = {

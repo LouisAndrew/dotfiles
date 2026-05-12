@@ -13,12 +13,20 @@ local t = ls.text_node
 return {
     s(
         "fn",
-        fmt("func {fnName}({ar}){retType} {{ {body} }}", {
-            fnName = i(1),
-            ar = i(2),
-            retType = i(3),
-            body = i(4),
-        })
+        fmt(
+            [[
+func{} {}({}) {} {{
+	{}
+}}
+]],
+            {
+                i(1),
+                i(2, "functionName"),
+                i(3, "params"),
+                i(4),
+                i(0),
+            }
+        )
     ),
 
     s(

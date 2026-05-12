@@ -26,7 +26,7 @@ return {
 	-- split
 	splitright = true,
 	splitbelow = true,
-	cursorline = true,
+	cursorline = false,
 	cursorlineopt = "number",
 	guicursor = block,
 	undofile = true,

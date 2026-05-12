@@ -12,14 +12,13 @@ local sn = ls.snippet_node
 return {
 	s(
 		"imd",
-		fmt('import {actual} from "{from}"', {
+		fmt("import {{ {actual} }} from '{from}';", {
 			from = i(1),
-			actual = c(2, {
-				sn(nil, fmt("{{ {} }}", { i(1) })),
-				i(1),
-			}),
+			actual = i(2),
 		})
 	),
+
+	s("imw", fmt("import {module} from '{from}';", { from = i(1), module = i(2) })),
 
 	s(
 		"imp",
@@ -30,7 +29,8 @@ return {
 		})
 	),
 
-	s("clg", fmt("console.log({})", { i(1) })),
+	s("clg", fmt("console.log({});", { i(1, "message") })),
+	s('clw', fmt('console.log("wis {}");', { i(1, "message") })),
 
 	s(
 		"ds",
@@ -62,15 +62,36 @@ return {
 	),
 	s(
 		"fn",
-		fmt("{declaration}({ar}){retType} {{ {body} }}", {
-			declaration = c(1, {
-				sn(nil, fmt("function {}", { i(1) })),
-				sn(nil, fmt("async function {}", { i(1) })),
-			}),
-			ar = i(2),
-			retType = i(3),
-			body = i(4),
-		})
+		fmt(
+			[[
+{}function {}({}) {{
+	{}
+}}
+]],
+			{
+				i(1),
+				i(2, "functionName"),
+				i(3, "params"),
+				i(0),
+			}
+		)
+	),
+
+	s(
+		"afn",
+		fmt(
+			[[
+{}const {} = ({}) => {{
+	{}
+}}
+]],
+			{
+				i(1),
+				i(2, "functionName"),
+				i(3, "params"),
+				i(0),
+			}
+		)
 	),
 
 	s(

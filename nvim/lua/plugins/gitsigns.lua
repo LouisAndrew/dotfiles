@@ -47,6 +47,9 @@ return {
 
 					-- Actions
 					map("n", "<leader>hu", gs.undo_stage_hunk)
+					map("n", "<leader>ha", gs.stage_hunk)
+					map("n", "<leader>hh", gs.preview_hunk)
+					map("n", "<leader>hr", gs.reset_hunk)
 					map("n", "<leader>hs", gs.stage_hunk)
 					map("n", "<leader>hx", gs.reset_hunk)
 					map("v", "<leader>hs", function()

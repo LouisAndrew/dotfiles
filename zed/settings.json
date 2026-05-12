@@ -43,7 +43,8 @@
           "github-copilot/gpt-5.5",
           "openai/gpt-5.5",
           "github-copilot/claude-sonnet-4.6",
-          "github-copilot/claude-opus-4.6"
+          "github-copilot/claude-opus-4.6",
+          "openai/gpt-5.3-codex"
         ]
       },
       "type": "extension"
@@ -52,7 +53,7 @@
   "tab_size": 2,
   "agent": {
     "flexible": false,
-    "default_width": 8,
+    "default_width": 12,
     "dock": "left",
     "tool_permissions": {
       "default": "allow"

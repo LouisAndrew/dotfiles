@@ -1,7 +1,11 @@
 return {
 	{
 		"rktjmp/lush.nvim",
-		lazy = true,
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("mfgh")
+		end,
 	},
 	{
 		"kvrohit/rasmus.nvim",

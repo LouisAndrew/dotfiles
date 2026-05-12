@@ -15,6 +15,10 @@ return {
 		},
 	},
 	keys = {
+		{ "<leader>dJ", "<cmd>:DapContinue<cr>" },
+		{ "<leader>dh", "<cmd>:DapStepOut<cr>" },
+		{ "<leader>dl", "<cmd>:DapStepInto<cr>" },
+		{ "<leader>dj", "<cmd>:DapStepOver<cr>" },
 		{ "<leader>dt", "<cmd>:DapToggleBreakpoint<cr>" },
 		{ "<leader>dp", "<cmd>:DapToggleBreakpoint<cr>" },
 

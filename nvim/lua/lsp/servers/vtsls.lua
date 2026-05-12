@@ -4,6 +4,12 @@ local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/lan
 return {
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 	settings = {
+		javascript = {
+			updateImportsOnFileMove = { enabled = "always" },
+		},
+		typescript = {
+			updateImportsOnFileMove = { enabled = "always" },
+		},
 		vtsls = {
 			tsserver = {
 				globalPlugins = {
