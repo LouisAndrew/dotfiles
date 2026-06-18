@@ -7,5 +7,12 @@
     "./plugins/caveman/plugin.js"
   ],
   "instructions": [],
+  "mcp": {
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp",
+      "enabled": true
+    }
+  },
   "provider": {}
 }
