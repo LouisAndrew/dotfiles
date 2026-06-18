@@ -39,7 +39,7 @@
     "bindings": {
       "shift-s": "workspace::Save",
       "shift-k": "editor::Hover",
-      "space ,": "tab_switcher::Toggle",
+      "g b": "tab_switcher::Toggle",
       "ctrl-o": "file_finder::Toggle",
       "z o": "editor::ToggleFold",
       "ctrl-n": "pane::ActivateNextItem",
