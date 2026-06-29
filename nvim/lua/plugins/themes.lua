@@ -1,4 +1,13 @@
 return {
+	{
+		"ribru17/bamboo.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("bamboo").setup({})
+			require("bamboo").load()
+		end,
+	},
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
 		"projekt0n/github-nvim-theme",
@@ -27,7 +36,6 @@ return {
 				base = "#1E1E1E",
 				accent = "#8CBE8C",
 			})
-			vim.cmd("colorscheme my-theme")
 		end,
 	},
 }

@@ -1,17 +1,5 @@
 {
-  "cli_default_open_behavior": "existing_window",
-  "project_panel": {
-    "dock": "right"
-  },
-  "outline_panel": {
-    "dock": "right"
-  },
-  "collaboration_panel": {
-    "dock": "right"
-  },
-  "git_panel": {
-    "dock": "right"
-  },
+  "cli_default_open_behavior": "new_window",
   "icon_theme": "Zed (Default)",
   "file_scan_exclusions": ["**/.yarn", "**/LanguageData"],
   "lsp": {
@@ -61,8 +49,8 @@
       "default": "allow"
     },
     "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-4.6"
+      "provider": "openai",
+      "model": "gpt-5.4-mini"
     },
     "default_model": {
       "provider": "copilot_chat",
@@ -137,13 +125,23 @@
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       },
-      "language_servers": ["!deno", "!typescript-language-server", "..."]
+      "language_servers": [
+        "!deno",
+        "!typescript-language-server",
+        "!vtsls",
+        "..."
+      ]
     },
     "TSX": {
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       },
-      "language_servers": ["!deno", "!typescript-language-server", "..."]
+      "language_servers": [
+        "!deno",
+        "!typescript-language-server",
+        "!vtsls",
+        "..."
+      ]
     },
     "http": {
       "enable_language_server": false
@@ -179,22 +177,10 @@
   "gutter": {
     "min_line_number_digits": 0
   },
-  "theme_overrides": {
-    "Min Dark (Solid)": {
-      "text.accent": "#818cf8",
-      "border": "#3a3a3a",
-      "border.variant": "#3a3a3a",
-      "border.focused": "#3a3a3a",
-      "border.selected": "#3a3a3a",
-      "border.transparent": "#3a3a3a",
-      "editor.document_highlight.read_background": "#343950",
-      "players": [
-        {
-          "cursor": "#818cf8",
-          "background": "#121212",
-          "selection": "#343950"
-        }
-      ]
-    }
-  }
+  "file_finder": {
+    "file_icons": false,
+    "include_channels": true,
+    "modal_max_width": "medium"
+  },
+  "document_folding_ranges": "on"
 }
