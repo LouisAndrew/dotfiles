@@ -7,16 +7,90 @@ local palettes = {
     -- These colors have 2 shades: base, and bright
 
     -- Passing a string sets the base
-    bg1 = "#121212",
+    black = "#0a0a0a",
+    gray = {
+      base = "#9a9a9a",
+      bright = "#d5d5d5",
+    },
+    blue = {
+      base = "#172554",
+      bright = "#93c5fd",
+    },
+    green = {
+      base = "#173626",
+      bright = "#81ffbb",
+    },
+    magenta = {
+      base = "#291A2E",
+      bright = "#e879f9",
+    },
+    red = {
+      base = "#42191b",
+      bright = "#ff8185",
+    },
+    white = "#ffffff",
+    yellow = {
+      base = "#713f12",
+      bright = "#fed7aa",
+    },
+    cyan = "#97CCF1",
+
+    bg0 = "#131313",
+    bg1 = "#0a0a0a",
+    bg2 = "#1a1a1a",
+    bg3 = "#1f2425",
+    bg4 = "#323232",
+    fg0 = "#ffffff",
+    fg1 = "#ffffff",
+    fg2 = "#d5d5d5",
+    fg3 = "#9a9a9a",
+    sel0 = "#242536",
+    sel1 = "#221f36",
+    sel2 = "#1e1b4b",
+    comment = "#737373",
   },
 }
 
 local specs = {
   all = {
     syntax = {
+      bracket = "fg3",
+      builtin0 = "#ff8185",
+      builtin1 = "#93c5fd",
+      builtin2 = "#fed7aa",
+      comment = "comment",
+      conditional = "#ff8185",
+      const = "#ff8185",
       field = "fg1",
+      func = "#ffcfa7",
       ident = "fg1",
+      keyword = "#ff8185",
+      number = "#ffd6b3",
+      operator = "fg3",
+      param = "fg1",
+      preproc = "#e879f9",
+      regex = "#97CCF1",
+      string = "#81ffbb",
+      tag = "#93c5fd",
+      type = "#a5b4fc",
       variable = "fg1",
+    },
+    diag = {
+      error = "#ff8185",
+      warn = "#fed7aa",
+      info = "#93c5fd",
+      hint = "fg3",
+    },
+    diff = {
+      add = "#173626",
+      change = "#221f36",
+      delete = "#42191b",
+      text = "#242536",
+    },
+    git = {
+      add = "#81ffbb",
+      changed = "#a5b4fc",
+      removed = "#ff8185",
     },
   },
 }
@@ -28,7 +102,7 @@ local groups = {
     CursorLine = { bg = "NONE" },
     CursorLineNr = { bg = "NONE" },
     Exception = { link = "Constant" },
-    Visual = { bg = "#343950" },
+    Visual = { bg = "#242536" },
 
     ["@variable"] = { fg = "fg1" },
     ["@variable.javascript"] = { fg = "fg1" },
