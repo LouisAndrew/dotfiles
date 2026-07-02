@@ -4,9 +4,9 @@ local lush = require("lush")
 local hsl = lush.hsl
 
 local palette = {
-  bg = hsl("#121212"),
-  surface = hsl("#101010"),
-  surface_hi = hsl("#121212"),
+  bg = hsl("#0a0a0a"),
+  surface = hsl("#0a0a0a"),
+  surface_hi = hsl("#0a0a0a"),
   status = hsl("#151515"),
   border = hsl("#242424"),
   cursor = hsl("#818cf8"),
