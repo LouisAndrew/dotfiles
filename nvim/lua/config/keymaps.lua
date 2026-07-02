@@ -1,20 +1,4 @@
 vim.keymap.set("i", "jj", "<Esc>")
-vim.keymap.set("n", "zo", "za", { desc = "Toggle Fold" })
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local opts = { buffer = args.buf }
-
-    vim.keymap.set("n", "gs", function()
-      Snacks.picker.lsp_symbols()
-    end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
-    vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
-  end,
-})
-
--- recommended mappings
--- resizing splits
--- these keymaps will also accept a range,
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
 vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
 vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
