@@ -16,7 +16,7 @@ return {
     },
     opts = {
       mappings = {
-        close = "<leader>w",
+        close = "q",
         go_in_plus = "<CR>",
         synchronize = "<c-s>",
       },
