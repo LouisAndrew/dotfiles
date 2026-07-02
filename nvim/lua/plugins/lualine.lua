@@ -1,5 +1,5 @@
 local icons = require("utils.icons")
--- local colors = require("minimal_fedu")
+local colors = require("utils.palette")
 
 return {
   "nvim-lualine/lualine.nvim",
@@ -11,10 +11,10 @@ return {
         component_separators = "",
         theme = {
           normal = {
-            -- c = { bg = colors.background, fg = colors.palette.grey[5] },
-            -- x = { bg = colors.background },
+            c = { bg = colors.bg, fg = colors.subtle },
+            x = { bg = colors.bg },
           },
-          -- inactive = { c = { bg = colors.background }, x = { bg = colors.background } },
+          inactive = { c = { bg = colors.bg }, x = { bg = colors.bg } },
         },
       },
       sections = {
@@ -28,7 +28,7 @@ return {
             end,
             padding = { left = 1 },
             color = {
-              -- fg = colors.white,
+              fg = colors.fg_hi,
             },
           },
           {
@@ -59,7 +59,7 @@ return {
             end,
             ---@diagnostic disable-next-line: undefined-field
             cond = require("noice").api.status.mode.has,
-            -- color = { fg = colors.palette.grey[7] },
+            color = { fg = colors.muted },
           },
         },
         lualine_x = {
@@ -70,10 +70,10 @@ return {
             },
             buffers_color = {
               active = {
-                -- fg = colors.white,
+                fg = colors.fg,
               },
               inactive = {
-                -- fg = colors.palette.grey[5],
+                fg = colors.subtle,
               },
             },
 

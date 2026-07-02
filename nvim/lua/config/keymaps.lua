@@ -9,10 +9,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       Snacks.picker.lsp_symbols()
     end, vim.tbl_extend("force", opts, { desc = "Document Symbols" }))
     vim.keymap.set("n", "grn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
-    vim.keymap.set("n", "gD", function()
-      vim.cmd.split()
-      vim.lsp.buf.definition()
-    end, vim.tbl_extend("force", opts, { desc = "Definition (Split)" }))
   end,
 })
 

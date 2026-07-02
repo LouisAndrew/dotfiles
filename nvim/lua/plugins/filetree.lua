@@ -1,7 +1,25 @@
 return {
   {
     "nvim-mini/mini.files",
+    keys = {
+      { "_", "<cmd>:lua MiniFiles.open()<cr>" },
+      {
+        "-",
+        function()
+          if MiniFiles.get_explorer_state() then
+            MiniFiles.close()
+          else
+            MiniFiles.open(vim.api.nvim_buf_get_name(0))
+          end
+        end,
+      },
+    },
     opts = {
+      mappings = {
+        close = "<leader>w",
+        go_in_plus = "<CR>",
+        synchronize = "S",
+      },
       windows = {
         preview = true,
         width_focus = 30,
@@ -9,16 +27,6 @@ return {
       },
       options = {
         use_as_default_explorer = true,
-      },
-    },
-    keys = {
-      {
-        "-",
-        function()
-          local path = vim.api.nvim_buf_get_name(0)
-          require("mini.files").open(path ~= "" and path or vim.uv.cwd(), true)
-        end,
-        desc = "Open mini.files (Directory of Current File)",
       },
     },
   },

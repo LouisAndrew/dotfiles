@@ -3,33 +3,7 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
-local palette = {
-  bg = hsl("#0a0a0a"),
-  surface = hsl("#0a0a0a"),
-  surface_hi = hsl("#0a0a0a"),
-  status = hsl("#151515"),
-  border = hsl("#242424"),
-  cursor = hsl("#818cf8"),
-  selection = hsl("#343950"),
-  scrollbar = hsl("#303030"),
-
-  fg = hsl("#d8d8d8"),
-  fg_hi = hsl("#eeeeee"),
-  subtle = hsl("#989898"),
-  muted = hsl("#5c5c5c"),
-  gutter = hsl("#4f5a5f"),
-
-  red = hsl("#f88888"),
-  red_soft = hsl("#cd6d6f"),
-  peach = hsl("#ffd0a8"),
-  peach_muted = hsl("#e8c0a0"),
-  lavender = hsl("#e0c0ff"),
-  purple = hsl("#c8b0e0"),
-  blue = hsl("#525490"),
-  yellow = hsl("#d8be72"),
-  green = hsl("#a8d8a2"),
-  cyan = hsl("#9bcfd8"),
-}
+local palette = vim.tbl_map(hsl, require("utils.palette"))
 
 return lush(function()
   return {
