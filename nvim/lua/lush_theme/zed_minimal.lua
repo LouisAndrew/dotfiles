@@ -37,7 +37,7 @@ return lush(function()
     NormalNC({ fg = palette.subtle, bg = palette.bg }),
     NormalFloat({ fg = palette.fg, bg = palette.surface }),
     FloatBorder({ fg = palette.border.lighten(22), bg = palette.surface }),
-    FloatTitle({ fg = palette.peach, bg = palette.surface, gui = "bold" }),
+    FloatTitle({ fg = palette.fg, bg = palette.surface, gui = "bold" }),
 
     ColorColumn({ bg = palette.surface }),
     Conceal({ fg = palette.muted }),
@@ -46,7 +46,7 @@ return lush(function()
     CursorColumn({ bg = palette.surface }),
     CursorLine({ bg = palette.surface }),
     CursorLineNr({ fg = palette.fg, bg = palette.surface, gui = "bold" }),
-    Directory({ fg = palette.yellow, gui = "bold" }),
+    Directory({ fg = palette.subtle, gui = "bold" }),
     EndOfBuffer({ fg = palette.bg }),
     ErrorMsg({ fg = palette.red, gui = "bold" }),
     FoldColumn({ fg = palette.muted, bg = palette.bg }),
@@ -56,7 +56,7 @@ return lush(function()
     MatchParen({ fg = palette.fg_hi, bg = palette.selection, gui = "bold" }),
     ModeMsg({ fg = palette.peach }),
     MoreMsg({ fg = palette.green }),
-    NonText({ fg = palette.border.lighten(14) }),
+    NonText({ fg = palette.muted.lighten(16) }),
     Pmenu({ fg = palette.fg, bg = palette.surface }),
     PmenuSbar({ bg = palette.surface_hi }),
     PmenuSel({ fg = palette.fg_hi, bg = palette.selection }),
@@ -77,7 +77,7 @@ return lush(function()
     TabLineFill({ bg = palette.surface_hi }),
     TabLineSel({ fg = palette.fg, bg = palette.bg, gui = "bold" }),
     TermCursor({ Cursor }),
-    Title({ fg = palette.peach, gui = "bold" }),
+    Title({ fg = palette.fg, gui = "bold" }),
     VertSplit({ fg = palette.border, bg = palette.bg }),
     Visual({ bg = palette.selection }),
     VisualNOS({ Visual }),
@@ -90,6 +90,7 @@ return lush(function()
 
     Comment({ fg = palette.muted, gui = "italic" }),
     Constant({ fg = palette.peach }),
+    Nullish({ fg = palette.subtle }),
     String({ fg = palette.peach }),
     Character({ fg = palette.peach }),
     Number({ fg = palette.peach_muted }),
@@ -113,7 +114,7 @@ return lush(function()
     StorageClass({ fg = palette.red }),
     Structure({ fg = palette.purple }),
     Typedef({ fg = palette.purple }),
-    Special({ fg = palette.peach }),
+    Special({ fg = palette.subtle }),
     SpecialChar({ fg = palette.peach }),
     Tag({ fg = palette.lavender }),
     Delimiter({ fg = palette.subtle }),
@@ -177,5 +178,12 @@ return lush(function()
 
     LazyNormal({ fg = palette.fg, bg = palette.surface }),
     MasonNormal({ fg = palette.fg, bg = palette.surface }),
+
+    SnacksDashboardDesc({ fg = palette.subtle }),
+    SnacksDashboardFile({ fg = palette.subtle }),
+    SnacksDashboardIcon({ fg = palette.subtle }),
+    SnacksDashboardFooter({ fg = palette.subtle, gui = "bold" }),
+    SnacksDashboardHeader({ fg = palette.fg, gui = "bold" }),
+    SnacksDashboardKey({ fg = palette.subtle }),
   }
 end)
