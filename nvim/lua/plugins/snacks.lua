@@ -13,7 +13,9 @@ return {
 
     opts.picker.win.input.keys["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } }
     opts.picker.win.input.keys["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } }
+    opts.picker.win.input.keys["<C-l>"] = { "edit_vsplit", mode = { "i", "n" } }
     opts.picker.win.list.keys["<C-d>"] = "preview_scroll_down"
     opts.picker.win.list.keys["<C-u>"] = "preview_scroll_up"
+    opts.picker.win.list.keys["<C-l>"] = "edit_vsplit"
   end,
 }

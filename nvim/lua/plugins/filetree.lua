@@ -18,7 +18,7 @@ return {
       mappings = {
         close = "<leader>w",
         go_in_plus = "<CR>",
-        synchronize = "S",
+        synchronize = "<c-s>",
       },
       windows = {
         preview = true,
