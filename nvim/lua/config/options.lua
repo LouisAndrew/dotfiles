@@ -9,3 +9,4 @@ vim.opt.listchars = {
   trail = "-",
   nbsp = "+",
 }
+vim.g.lazyvim_eslint_auto_format = true
