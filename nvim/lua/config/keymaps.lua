@@ -7,6 +7,10 @@ vim.keymap.set("n", "<c-f>", function()
   Snacks.picker.grep({})
 end, { desc = "Open grep" })
 
+vim.keymap.set("n", "<leader>th", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>tl", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>tq", "<cmd>tabclose<cr>", { desc = "Close tab" })
+
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
 vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
 vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
