@@ -35,6 +35,14 @@ return {
       end
 
       local keys = opts.servers["*"].keys
+      table.insert(keys, {
+        "J",
+        function()
+          vim.diagnostic.open_float(nil, { scope = "cursor", focus = false })
+        end,
+        desc = "Line Diagnostics",
+      })
+
       for _, key in ipairs(keys) do
         if key[1] == "gD" then
           key[2] = function()

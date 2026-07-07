@@ -4,3 +4,8 @@
 
 vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
 vim.opt.statuscolumn = [[%!v:lua.require("statuscol").statusCol()]]
+vim.opt.listchars = {
+  tab = "  ",
+  trail = "-",
+  nbsp = "+",
+}

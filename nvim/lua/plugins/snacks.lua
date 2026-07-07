@@ -1,5 +1,8 @@
 return {
   "folke/snacks.nvim",
+  keys = {
+    { "<leader>gd", false },
+  },
   opts = function(_, opts)
     opts.scroll = { enabled = false }
     opts.indent = { enabled = false }

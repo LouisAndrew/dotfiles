@@ -12,12 +12,30 @@ return {
     "NeogitOrg/neogit",
     lazy = true,
     dependencies = {
-      "esmuellert/codediff.nvim", -- optional
+      {
+        "esmuellert/codediff.nvim",
+        opts = {
+          keymaps = {
+            view = {
+              next_hunk = "]h",
+              prev_hunk = "[h",
+              open_in_prev_tab = "g<leader>",
+              stage_hunk = "<leader>ghs",
+              unstage_hunk = "<leader>ghu",
+              discard_hunk = "<leader>ghr",
+            },
+            explorer = {
+              select = "<CR>",
+            },
+          },
+        },
+      }, -- optional
       "m00qek/baleia.nvim", -- optional
     },
     cmd = "Neogit",
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+      { "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Show CodeDiff UI" },
     },
   },
   {
