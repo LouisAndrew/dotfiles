@@ -1,11 +1,34 @@
 vim.keymap.set("i", "jj", "<Esc>")
+
+local function snacks_picker_project_opts()
+  local exclude = vim.g.snacks_picker_exclude
+  return type(exclude) == "table" and { exclude = exclude } or {}
+end
+
 vim.keymap.set("n", "<c-o>", function()
-  Snacks.picker.files()
+  Snacks.picker.files(snacks_picker_project_opts())
 end, { desc = "Open file picker" })
 
 vim.keymap.set("n", "<c-f>", function()
-  Snacks.picker.grep({})
+  Snacks.picker.grep(snacks_picker_project_opts())
 end, { desc = "Open grep" })
+
+for _, lhs in ipairs({ "<leader>bb", "<leader>bd", "<leader>bo", "<leader>bi", "<leader>bD" }) do
+  pcall(vim.keymap.del, "n", lhs)
+end
+
+vim.keymap.set("n", "<C-w>Q", "<cmd>wqa<cr>", { desc = "Close all windows and quit" })
+vim.keymap.set("n", "<C-b>b", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+vim.keymap.set("n", "<C-b>d", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+vim.keymap.set("n", "<C-b>o", function()
+  Snacks.bufdelete.other()
+end, { desc = "Delete Other Buffers" })
+vim.keymap.set("n", "<C-b>i", function()
+  Snacks.bufdelete.invisible()
+end, { desc = "Delete Invisible Buffers" })
+vim.keymap.set("n", "<C-b>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 vim.keymap.set("n", "<C-T>h", "<cmd>tabnext<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<C-T>l", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
