@@ -43,5 +43,7 @@ PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.plannotator/bin:$PATH"
 export PATH
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # tmux
 source $DOTFILES_PATH/shell/tmux.sh

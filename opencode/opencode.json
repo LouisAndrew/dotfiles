@@ -4,12 +4,12 @@
   "default_agent": "plan",
   "agent": {
     "plan": {
-      "model": "openai/gpt-5.6-luna",
+      "model": "openai/gpt-5.6-terra",
       "mode": "primary",
       "prompt": "Plan mode: investigate the request and build a clear outline before implementation. Do not edit files. Produce a concise plan with goals, relevant files, implementation steps, risks, and verification."
     },
     "build": {
-      "model": "openai/gpt-5.6-luna",
+      "model": "openai/gpt-5.6-terra",
       "mode": "primary",
       "prompt": "Build mode: implement the request by building on the clear plan from Plan mode. Preserve the plan's intent, make minimal correct edits, and verify the result."
     }
