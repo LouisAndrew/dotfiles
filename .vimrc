@@ -33,8 +33,8 @@ set clipboard=unnamed
 exmap foldopen obcommand editor:fold-less
 exmap foldclose obcommand editor:fold-more
 
-nmap zr :foldopen<CR>
-nmap zm :foldclose<CR>
+nmap zo :foldopen<CR>
+nmap zc :foldclose<CR>
 
 exmap symbols obcommand darlal-switcher-plus:switcher-plus:open-symbols
 nmap gs :symbols<CR>

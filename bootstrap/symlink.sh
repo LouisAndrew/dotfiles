@@ -6,6 +6,9 @@ ln -s $DOTFILES_PATH/espanso $DARWIN_CONFIG/espanso
 ln -s $DOTFILES_PATH/lazygit $DARWIN_CONFIG/lazygit
 ln -s $DOTFILES_PATH/zed $XDG_CONFIG/zed
 ln -s $DOTFILES_PATH/nvim $XDG_CONFIG/nvim
+ln -s $DOTFILES_PATH/pi $XDG_CONFIG/pi
+ln -s $DOTFILES_PATH/omp/config.yml $HOME/.omp/agent/config.yml
+ln -s $DOTFILES_PATH/omp/keybindings.yml $HOME/.omp/agent/keybindings.yml
 
 ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json

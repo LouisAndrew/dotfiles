@@ -11,3 +11,4 @@ vim.opt.listchars = {
 }
 vim.opt.exrc = true
 vim.g.lazyvim_eslint_auto_format = true
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
