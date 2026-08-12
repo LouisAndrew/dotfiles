@@ -5,10 +5,11 @@ plugins=(zsh-vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 export DENO_INSTALL="$HOME/.deno"
+export BUN_INSTALL="$HOME/.bun"
 
 # Check that the function `starship_zle-keymap-select()` is defined.
 # xref: https://github.com/starship/starship/issues/3418
-type starship_zle-keymap-select >/dev/null || \
+type starship_zle-keymap-select >/dev/null ||
   {
     eval "$(/opt/homebrew/bin/starship init zsh)"
   }
@@ -38,11 +39,11 @@ done
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="$brew_path/opt/curl/bin:$PATH"
-PATH="$GOBIN:$PATH"
+PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.plannotator/bin:$PATH"
 export PATH
 
-
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # tmux
 source $DOTFILES_PATH/shell/tmux.sh

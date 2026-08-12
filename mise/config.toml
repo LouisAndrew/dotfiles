@@ -1,5 +1,5 @@
 [tools]
-node = "24"
+node = "22"
 ruby = "2.6.10"
 yarn = "1"
 

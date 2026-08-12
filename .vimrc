@@ -11,10 +11,6 @@ map k gk
 
 imap jj <Esc>
 
-" I like using H and L for beginning/end of line
-map H ^
-map L $
-
 map K {
 map J }
 
