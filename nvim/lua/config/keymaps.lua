@@ -13,6 +13,13 @@ vim.keymap.set("n", "<c-f>", function()
   Snacks.picker.grep(snacks_picker_project_opts())
 end, { desc = "Open grep" })
 
+vim.keymap.set("n", "<leader>gs", function()
+  Snacks.picker.lsp_symbols()
+end, { desc = "Symbols" })
+vim.keymap.set("n", "<leader>gS", function()
+  Snacks.picker.lsp_workspace_symbols()
+end, { desc = "Workspace Symbols" })
+
 for _, lhs in ipairs({ "<leader>bb", "<leader>bd", "<leader>bo", "<leader>bi", "<leader>bD" }) do
   pcall(vim.keymap.del, "n", lhs)
 end
