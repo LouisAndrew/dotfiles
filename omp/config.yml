@@ -1,20 +1,30 @@
 symbolPreset: ascii
-theme: 
+theme:
   dark: dark-tundra
 setupVersion: 2
-modelRoles: 
+modelRoles:
   default: openai-codex/gpt-5.6-terra:medium
-statusLine: 
-  preset: default
+statusLine:
+  preset: compact
   separator: pipe
   transparent: true
-terminal: 
+  sessionAccent: false
+  contextLine: annotated
+terminal:
   showProgress: false
-tools: 
+tools:
   approvalMode: yolo
-error: 
+error:
   notify: "off"
-composer: 
+composer:
   shape: box
-dev: 
+dev:
   autoqaConsent: granted
+skills:
+  enabled: true
+  enableCodexUser: true
+colorBlindMode: false
+github:
+  enabled: true
+vault:
+  enabled: true
