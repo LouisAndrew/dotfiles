@@ -40,7 +40,6 @@ PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="$brew_path/opt/curl/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
-PATH="$HOME/.plannotator/bin:$PATH"
 export PATH
 
 export XDG_CONFIG_HOME="$HOME/.config"

@@ -15,7 +15,6 @@
     }
   },
   "plugin": [
-    "@plannotator/opencode@latest",
     "cc-safety-net",
     "./plugins/caveman/plugin.js"
   ],
