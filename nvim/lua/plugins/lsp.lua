@@ -46,10 +46,10 @@ return {
       for _, key in ipairs(keys) do
         if key[1] == "gD" then
           key[2] = function()
-            vim.cmd.vsplit()
+            vim.cmd.split()
             vim.lsp.buf.definition()
           end
-          key.desc = "Definition (Vsplit)"
+          key.desc = "Definition (Split)"
           key.has = "definition"
           return opts
         end
