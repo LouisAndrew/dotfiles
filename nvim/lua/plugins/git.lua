@@ -44,5 +44,8 @@ return {
       signs = signs,
       signs_staged = signs,
     },
+    keys = {
+      { "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Preview Hunk Inline" },
+    },
   },
 }
