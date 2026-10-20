@@ -1,13 +1,11 @@
-[tools]
-node = "22"
-ruby = "2.6.10"
-yarn = "1"
-
 [settings]
-idiomatic_version_file_enable_tools = ["node", "go", "python", "ruby"]
+idiomatic_version_file_enable_tools = ["node"]
 
-[tasks.open]
-description = "Open editor"
-run = [
-  "$EDITOR .",
-]
+[tools]
+bun = "latest"
+conftest = "0.35.0"
+"github:cline/cline" = "latest"
+ni = "latest"
+"npm:cline" = "latest"
+terraform = "latest"
+
