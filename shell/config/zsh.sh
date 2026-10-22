@@ -1,12 +1,12 @@
-export EDITOR="nvim"
+export EDITOR="zed"
 export KUBE_EDITOR="$EDITOR"
 export AI_HARNESS="omp"
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=white'
 
-open-nvim-cwd() {
+open-editor-cwd() {
   zle -I
-  nvim
+  $EDITOR .
   zle reset-prompt
 }
 
@@ -22,14 +22,14 @@ open-ai-harness() {
   zle reset-prompt
 }
 
-zle -N open-nvim-cwd
+zle -N open-editor-cwd
 zle -N open-lazygit
 zle -N open-ai-harness
 
-bindkey '^O' open-nvim-cwd
-bindkey -M viins '^O' open-nvim-cwd
-bindkey -M vicmd '^O' open-nvim-cwd
-bindkey -M emacs '^O' open-nvim-cwd
+bindkey '^O' open-editor-cwd
+bindkey -M viins '^O' open-editor-cwd
+bindkey -M vicmd '^O' open-editor-cwd
+bindkey -M emacs '^O' open-editor-cwd
 
 bindkey '^G' open-lazygit
 bindkey -M viins '^G' open-lazygit

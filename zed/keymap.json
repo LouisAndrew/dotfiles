@@ -7,6 +7,12 @@
     }
   },
   {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space": null
+    }
+  },
+  {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "j": ["vim::Down", { "display_lines": true }],
@@ -15,6 +21,7 @@
       "g Y": "editor::GoToTypeDefinitionSplit",
       "ctrl-shift-x": "project_panel::Delete",
       "space h h": "editor::ToggleSelectedDiffHunks",
+      "space h s": "git::ToggleStaged",
       "space h r": "git::Restore",
       "space h a": "git::StageAndNext"
     }
@@ -37,15 +44,13 @@
     // normal
     "context": "vim_mode == normal && !menu",
     "bindings": {
-      "shift-s": "workspace::Save",
+      "ctrl-s": "workspace::Save",
       "shift-k": "editor::Hover",
       "g b": "tab_switcher::Toggle",
       "ctrl-o": "file_finder::Toggle",
       "z o": "editor::ToggleFold",
       "ctrl-n": "pane::ActivateNextItem",
       "ctrl-p": "pane::ActivatePreviousItem",
-      "shift-l": "vim::EndOfLine",
-      "shift-h": "vim::FirstNonWhitespace",
       "space p d": "pane::CloseOtherItems",
       "space d t": "editor::ToggleBreakpoint",
       "space d j": "debugger::StepOver",
@@ -58,7 +63,9 @@
       "ctrl-g": "git::Diff",
       "g R": "editor::ConfirmCodeAction",
       "] h": "editor::GoToHunk",
-      "[ h": "editor::GoToPreviousHunk"
+      "[ h": "editor::GoToPreviousHunk",
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePreviousItem"
     }
   },
   {
@@ -85,8 +92,6 @@
     // visual
     "context": "vim_mode == visual",
     "bindings": {
-      "shift-l": "vim::EndOfLine",
-      "shift-h": "vim::FirstNonWhitespace",
       "s": "vim::PushAddSurrounds",
       "ctrl-a": "assistant::InlineAssist" // zed specific
     }
@@ -166,13 +171,12 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-shift-o": "command_palette::Toggle"
+      "ctrl-shift-o": "command_palette::Toggle",
+      "ctrl-g": "git::Diff"
     }
   },
   {
-    "bindings": {
-      "alt-a": "copilot::NextSuggestion"
-    }
+    "bindings": {}
   },
   {
     "context": "Editor",
@@ -184,6 +188,18 @@
     "context": "Pane || Editor",
     "bindings": {
       "ctrl-shift-f": "project_search::ToggleFilters"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "z o": "editor::ExpandExcerpts"
+    }
+  },
+  {
+    "context": "!AcpThread > Editor && mode == full",
+    "unbind": {
+      "shift-enter": "editor::ExpandExcerpts"
     }
   }
 ]
