@@ -1,4 +1,4 @@
-export EDITOR="zed"
+export EDITOR="nvim"
 export KUBE_EDITOR="$EDITOR"
 export AI_HARNESS="omp"
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
@@ -6,7 +6,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=white'
 
 open-editor-cwd() {
   zle -I
-  $EDITOR .
+  $EDITOR
   zle reset-prompt
 }
 

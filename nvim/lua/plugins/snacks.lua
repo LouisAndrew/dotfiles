@@ -7,6 +7,7 @@ return {
   opts = function(_, opts)
     opts.scroll = { enabled = false }
     opts.indent = { enabled = false }
+    opts.explorer = vim.tbl_deep_extend("force", opts.explorer or {}, { replace_netrw = false })
 
     opts.picker = opts.picker or {}
     opts.picker.win = opts.picker.win or {}

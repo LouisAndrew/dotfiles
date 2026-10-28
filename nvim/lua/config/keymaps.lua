@@ -9,6 +9,8 @@ vim.keymap.set("n", "<c-o>", function()
   Snacks.picker.files(snacks_picker_project_opts())
 end, { desc = "Open file picker" })
 
+vim.keymap.set("n", "<C-p>", "<C-o>", { desc = "Jump to previous location" })
+
 vim.keymap.set("n", "<c-f>", function()
   Snacks.picker.grep(snacks_picker_project_opts())
 end, { desc = "Open grep" })

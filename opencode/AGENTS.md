@@ -15,3 +15,8 @@ Auto-Clarity: drop caveman for security warnings, irreversible actions, user con
 
 Boundaries: code/commits/PRs written normal.
 <!-- caveman-end -->
+
+## Configuration
+
+`opencode.json` uses the OpenCode v2 schema. Plan is the default agent; Plan and Build inherit `opencode-go/qwen3.8-flash` from the root model setting.
+Connect credentials locally with `/connect` → **OpenCode Go**; never store API keys in this repository.
