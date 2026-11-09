@@ -4,6 +4,16 @@ return {
     opts = function(_, opts)
       local icons = require("utils.icons")
 
+      opts.servers.vtsls = vim.tbl_deep_extend("force", opts.servers.vtsls or {}, {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 8192,
+            },
+          },
+        },
+      })
+
       opts.diagnostics = {
         virtual_text = {
           prefix = "",
