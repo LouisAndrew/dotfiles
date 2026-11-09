@@ -7,12 +7,8 @@ link_resource() {
     local destination=$2
 
     if [ -e "$destination" ] && [ ! -L "$destination" ]; then
-        if [ -f "$destination" ] && cmp -s "$source" "$destination"; then
-            rm "$destination"
-        else
-            printf 'Refusing to replace existing resource: %s\n' "$destination" >&2
-            return 1
-        fi
+        printf 'Refusing to replace existing resource: %s\n' "$destination" >&2
+        return 1
     fi
 
     ln -sfn "$source" "$destination"
@@ -39,5 +35,7 @@ done
 ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
 ln -s $DOTFILES_PATH/starship.toml $XDG_CONFIG/starship.toml
-ln -s $DOTFILES_PATH/tmux.conf $HOME/tmux.conf
+# Link only configuration; Herdr keeps private session state beside it.
+mkdir -p "$XDG_CONFIG/herdr"
+link_resource "$DOTFILES_PATH/herdr/config.toml" "$XDG_CONFIG/herdr/config.toml"
 ln -s $DOTFILES_PATH/.prettierrc $HOME/.prettierrc

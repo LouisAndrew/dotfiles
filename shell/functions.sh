@@ -94,13 +94,7 @@ function fsf() {
 }
 
 function fs() {
-    session=$(tmux display-message -p '#S')
-    if [ -d "$DEV_HOME/$session" ] && [[ ! ${toplevel[$session/]} ]]; then
-        session="$session"
-    else
-        session=""
-    fi
-    fsf $session
+    fsf "$@"
 }
 
 # Display branches in a picker

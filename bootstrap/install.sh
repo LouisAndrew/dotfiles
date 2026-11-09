@@ -14,7 +14,7 @@ fi
 pkgs=(
     starship
     mise
-    tmux
+    herdr
     fzf
     jq
     ripgrep
@@ -50,4 +50,7 @@ for gui in "${gui_pkgs[@]}"; do
     fi
 done
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Keep the Herdr navigation bridge on the same revision as Neovim.
+herdr plugin install mrjones2014/smart-splits.nvim \
+    --ref "$(jq -er '."smart-splits.nvim".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
+    --yes
