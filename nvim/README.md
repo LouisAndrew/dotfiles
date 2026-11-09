@@ -16,19 +16,22 @@ Restart Neovim after changing this limit.
 
 ## Herdr terminal integration
 
-Ghostty hosts Herdr; `smart-splits.nvim` handles navigation inside Neovim and
-across Herdr pane edges. The existing eager plugin loading and keymaps are
-unchanged. `herdr/config.toml` in the dotfiles root replaces `.tmux.conf`.
-Shells no longer start a multiplexer automatically; run `herdr` (or `t` after
-loading the updated shell aliases).
+Ghostty hosts Herdr; [`vim-herdr-navigation`](https://github.com/paulbkim-dev/vim-herdr-navigation)
+handles `Ctrl+h/j/k/l` inside Neovim and across Herdr pane edges. Its upstream
+editor script loads after LazyVim's keymaps so those mappings win. Smart-splits
+remains installed for resizing, buffer swaps, and the previous-window mapping,
+but its multiplexer integration is disabled inside Herdr.
+`herdr/config.toml` in the dotfiles root replaces `.tmux.conf`. Shells no longer
+start a multiplexer automatically; run `herdr` (or `t` after loading the updated
+shell aliases). Requires Herdr >= 0.7.0 and `jq`.
 
 For an existing machine, install Herdr and the navigation bridge from the
 dotfiles root:
 
 ```sh
 brew install herdr jq
-herdr plugin install mrjones2014/smart-splits.nvim \
-  --ref "$(jq -er '."smart-splits.nvim".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
+herdr plugin install paulbkim-dev/vim-herdr-navigation \
+  --ref "$(jq -er '."vim-herdr-navigation".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
   --yes
 mkdir -p "$HOME/.config/herdr"
 ln -s "$DOTFILES_PATH/herdr/config.toml" "$HOME/.config/herdr/config.toml"
@@ -40,14 +43,14 @@ exists, inspect and migrate it before linking; do not overwrite it. Only the
 config file is linked: Herdr's sessions, logs, plugin installs, and state stay
 local. Fresh-machine bootstrap installs Herdr and the same pinned bridge, and
 links the config. Keep the bridge revision aligned with `nvim/lazy-lock.json`
-when updating smart-splits; rerun the plugin install command after a revision
-change. Agent integrations are opt-in (`herdr integration install omp`, for
+when updating vim-herdr-navigation; rerun the plugin install command after a
+revision change. Agent integrations are opt-in (`herdr integration install omp`, for
 example).
 
 If `Ctrl+h/j/k/l` reports `Action rejected: plugin not found`, check
 `herdr plugin list`. The Neovim plugin and Herdr bridge are separate installs:
 rerun the pinned `herdr plugin install` command above, then
-`herdr server reload-config`. `herdr plugin action list --plugin smart-splits.nvim`
+`herdr server reload-config`. `herdr plugin action list --plugin vim-herdr-navigation`
 should show the `left`, `down`, `up`, and `right` actions.
 
 Herdr reuses the former tmux Nova palette: `#0a0a0a` backgrounds, `#f5f5f5`
@@ -93,3 +96,43 @@ not carried over.
 session name; `fs <scope>` selects a scope explicitly. Detach/reattach keeps
 live processes running. Stopping the Herdr server does not: layout restore is
 not process persistence.
+
+### Revert to smart-splits navigation
+
+The old Herdr bridge is left installed on this machine; it has no keybindings
+while vim-herdr-navigation is selected. To roll back only this change without
+discarding unrelated config edits:
+
+1. Restore `lua/plugins/splits.lua` to:
+
+   ```lua
+   return { "mrjones2014/smart-splits.nvim", lazy = false }
+   ```
+
+   This also removes the Herdr-specific multiplexer opt-out.
+2. Add these normal-mode mappings back to `lua/config/keymaps.lua`:
+
+   ```lua
+   vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+   vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+   vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+   vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+   ```
+
+3. In `herdr/config.toml`, change only the four action prefixes from
+   `vim-herdr-navigation.` to `smart-splits.nvim.`. In `bootstrap/install.sh`,
+   restore the repository to `mrjones2014/smart-splits.nvim` and the lockfile
+   lookup to `."smart-splits.nvim".commit`. Remove the `vim-herdr-navigation`
+   entry from `lazy-lock.json`; leave the existing smart-splits pin unchanged.
+4. Ensure the old bridge is installed, validate, and reload:
+
+   ```sh
+   herdr plugin install mrjones2014/smart-splits.nvim \
+     --ref "$(jq -er '."smart-splits.nvim".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
+     --yes
+   herdr config check
+   herdr server reload-config
+   ```
+
+Restart Neovim and press `Ctrl+i`, `r` in the Herdr client. The unused
+vim-herdr-navigation install can remain; neither configuration references it.

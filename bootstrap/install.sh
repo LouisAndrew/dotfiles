@@ -51,6 +51,6 @@ for gui in "${gui_pkgs[@]}"; do
 done
 
 # Keep the Herdr navigation bridge on the same revision as Neovim.
-herdr plugin install mrjones2014/smart-splits.nvim \
-    --ref "$(jq -er '."smart-splits.nvim".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
+herdr plugin install paulbkim-dev/vim-herdr-navigation \
+    --ref "$(jq -er '."vim-herdr-navigation".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
     --yes
