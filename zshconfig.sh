@@ -45,4 +45,4 @@ export PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # tmux
-source $DOTFILES_PATH/shell/tmux.sh
+source "$DOTFILES_PATH/shell/tmux.sh"

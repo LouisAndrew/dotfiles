@@ -1,7 +1,7 @@
 symbolPreset: ascii
 theme:
   dark: dark-tundra
-setupVersion: 2
+setupVersion: 3
 modelRoles:
   default: openai-codex/gpt-6.1-sol
 statusLine:
@@ -29,3 +29,5 @@ github:
   enabled: true
 vault:
   enabled: true
+update:
+  auto: false
