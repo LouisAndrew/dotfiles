@@ -1,4 +1,4 @@
-alias t="herdr"
+alias t="tmux"
 alias ll="ls -la"
 
 alias fsc="fs-cli && cd \$(clipboard)"

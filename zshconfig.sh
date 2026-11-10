@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_TMUX_AUTOSTART="true"
 
 plugins=(zsh-vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
@@ -42,3 +43,6 @@ PATH="$GOPATH/bin:$PATH"
 export PATH
 
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# tmux
+source "$DOTFILES_PATH/shell/tmux.sh"

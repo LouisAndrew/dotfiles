@@ -14,7 +14,7 @@ fi
 pkgs=(
     starship
     mise
-    herdr
+    tmux
     fzf
     jq
     ripgrep
@@ -50,7 +50,4 @@ for gui in "${gui_pkgs[@]}"; do
     fi
 done
 
-# Keep the Herdr navigation bridge on the same revision as Neovim.
-herdr plugin install paulbkim-dev/vim-herdr-navigation \
-    --ref "$(jq -er '."vim-herdr-navigation".commit' "$DOTFILES_PATH/nvim/lazy-lock.json")" \
-    --yes
+git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"

@@ -35,7 +35,5 @@ done
 ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
 ln -s $DOTFILES_PATH/starship.toml $XDG_CONFIG/starship.toml
-# Link only configuration; Herdr keeps private session state beside it.
-mkdir -p "$XDG_CONFIG/herdr"
-link_resource "$DOTFILES_PATH/herdr/config.toml" "$XDG_CONFIG/herdr/config.toml"
+link_resource "$DOTFILES_PATH/.tmux.conf" "$HOME/.tmux.conf"
 ln -s $DOTFILES_PATH/.prettierrc $HOME/.prettierrc
