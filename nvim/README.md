@@ -56,8 +56,15 @@ should show the `left`, `down`, `up`, and `right` actions.
 Herdr reuses the former tmux Nova palette: `#0a0a0a` backgrounds, `#f5f5f5`
 active text, `#737373` muted text, and the `#818cf8` accent. Semantic status
 colors still follow Ghostty's ANSI palette. The tab bar sits at the bottom;
-pane splits have no outer frame or gaps. These overrides live in
+pane splits have no outer frame or gaps. Borders and separators use `#303030`,
+slightly lighter than the `#0a0a0a` background. These overrides live in
 `herdr/config.toml` under `[theme.custom]` and `[ui]`.
+
+The sidebar starts expanded so workspace names remain visible, with a 22-column
+default width and automatic sizing between 18 and 26 columns. Press `Ctrl+i`,
+then `b` to toggle it. On Herdr 0.9.5, collapsed rows are fixed compact indicators;
+custom sidebar row layouts only apply while expanded. Width changes apply on
+reload, but `sidebar_start_collapsed = false` takes effect on the next launch.
 
 After editing, run `herdr config check`, then press `Ctrl+i`, `r` in Herdr
 to reload both the client's theme and the server config. The CLI equivalent
