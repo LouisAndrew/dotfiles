@@ -1,3 +1,11 @@
+# Homebrew (macOS: /opt/homebrew, Linux/WSL: /home/linuxbrew)
+for brew_bin in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  if [[ -x "$brew_bin" ]]; then
+    eval "$("$brew_bin" shellenv)"
+    break
+  fi
+done
+
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_TMUX_AUTOSTART="true"
 
@@ -11,24 +19,23 @@ export BUN_INSTALL="$HOME/.bun"
 # xref: https://github.com/starship/starship/issues/3418
 type starship_zle-keymap-select >/dev/null ||
   {
-    eval "$(/opt/homebrew/bin/starship init zsh)"
+    command -v starship >/dev/null && eval "$(starship init zsh)"
   }
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/aws-okta aws-okta
+[[ -x /usr/local/bin/aws-okta ]] && complete -o nospace -C /usr/local/bin/aws-okta aws-okta
 
 export STARSHIP_CONFIG="$DOTFILES_PATH/starship.toml"
 
 source $DOTFILES_PATH/shell/alias.sh
 source $DOTFILES_PATH/shell/functions.sh
-brew_path=$(brew --prefix)
 
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
+command -v carapace >/dev/null && source <(carapace _carapace)
 
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
@@ -38,7 +45,7 @@ done
 
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
-PATH="$brew_path/opt/curl/bin:$PATH"
+command -v brew >/dev/null && PATH="$(brew --prefix)/opt/curl/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 export PATH
 

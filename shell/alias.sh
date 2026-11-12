@@ -13,7 +13,7 @@ alias c-="cd -"
 
 alias dcu="docker compose up"
 alias dcd="docker compose down"
-alias icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
+[[ "$OSTYPE" == darwin* ]] && alias icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias oc="opencode"
 alias cdx="codex"
 alias m="mise"
