@@ -44,3 +44,11 @@ bold-is-bright = true
 
 # OSC 9/777 desktop notifications from TUIs (e.g. Claude Code)
 desktop-notifications = true
+
+# Clipboard (WSLg)
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = false
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
