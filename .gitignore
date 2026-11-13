@@ -3,3 +3,4 @@ zed/converstations/*
 zed/prompts/*
 zed/.tmp*
 lazygit/state.yml
+ghostty/config.local

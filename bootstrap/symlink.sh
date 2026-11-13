@@ -25,6 +25,8 @@ link_resource "$DOTFILES_PATH/lazygit" "$APP_CONFIG/lazygit"
 link_resource "$DOTFILES_PATH/zed" "$XDG_CONFIG/zed"
 link_resource "$DOTFILES_PATH/nvim" "$XDG_CONFIG/nvim"
 link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
+# WSL-only ghostty overrides (font size etc.), included via `config-file = ?config.local`
+[ "$(uname)" != "Darwin" ] && link_resource "$DOTFILES_PATH/ghostty/config.wsl" "$DOTFILES_PATH/ghostty/config.local"
 # Machine-local global tools can go in ~/.config/mise/conf.d/*.toml
 link_resource "$DOTFILES_PATH/mise/config.toml" "$XDG_CONFIG/mise/config.toml"
 

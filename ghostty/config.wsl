@@ -1,0 +1,2 @@
+# WSL-only overrides, loaded via the git-ignored config.local symlink (see bootstrap/symlink.sh)
+font-size = 14
