@@ -44,3 +44,17 @@ bold-is-bright = true
 
 # OSC 9/777 desktop notifications from TUIs (e.g. Claude Code)
 desktop-notifications = true
+
+# No title bar or borders (WSLg). Discussion #3158, ghostty-org/ghostty
+window-decoration = server
+
+# Clipboard (WSLg)
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = false
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Per-machine overrides. On WSL, bootstrap links config.local -> config.wsl
+config-file = ?config.local

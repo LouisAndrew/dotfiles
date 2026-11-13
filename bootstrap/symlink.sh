@@ -1,6 +1,10 @@
 # Considering $DOTFILES_PATH is setup
-DARWIN_CONFIG=$HOME/Library/Application\ Support
 XDG_CONFIG="$HOME/.config"
+if [ "$(uname)" = "Darwin" ]; then
+    APP_CONFIG="$HOME/Library/Application Support"
+else
+    APP_CONFIG="$XDG_CONFIG"
+fi
 
 link_resource() {
     local source=$1
@@ -11,13 +15,21 @@ link_resource() {
         return 1
     fi
 
+    mkdir -p "$(dirname "$destination")"
     ln -sfn "$source" "$destination"
 }
 
-ln -s $DOTFILES_PATH/espanso $DARWIN_CONFIG/espanso
-ln -s $DOTFILES_PATH/lazygit $DARWIN_CONFIG/lazygit
-ln -s $DOTFILES_PATH/zed $XDG_CONFIG/zed
-ln -s $DOTFILES_PATH/nvim $XDG_CONFIG/nvim
+# espanso is a desktop app; on WSL it runs on the Windows side instead
+[ "$(uname)" = "Darwin" ] && link_resource "$DOTFILES_PATH/espanso" "$APP_CONFIG/espanso"
+link_resource "$DOTFILES_PATH/lazygit" "$APP_CONFIG/lazygit"
+link_resource "$DOTFILES_PATH/zed" "$XDG_CONFIG/zed"
+link_resource "$DOTFILES_PATH/nvim" "$XDG_CONFIG/nvim"
+link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
+# WSL-only ghostty overrides (font size etc.), included via `config-file = ?config.local`
+[ "$(uname)" != "Darwin" ] && link_resource "$DOTFILES_PATH/ghostty/config.wsl" "$DOTFILES_PATH/ghostty/config.local"
+# Machine-local global tools can go in ~/.config/mise/conf.d/*.toml
+link_resource "$DOTFILES_PATH/mise/config.toml" "$XDG_CONFIG/mise/config.toml"
+
 # Keep OMP credentials and session state local; link only versioned resources.
 mkdir -p "$HOME/.omp/agent"
 link_resource "$DOTFILES_PATH/omp/config.yml" "$HOME/.omp/agent/config.yml"
@@ -32,8 +44,10 @@ for skill in "$DOTFILES_PATH"/claude/skills/*/; do
     link_resource "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
 done
 
-ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
-ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
-ln -s $DOTFILES_PATH/starship.toml $XDG_CONFIG/starship.toml
+link_resource "$DOTFILES_PATH/httpie.json" "$XDG_CONFIG/httpie.json"
+link_resource "$DOTFILES_PATH/starship.toml" "$XDG_CONFIG/starship.toml"
 link_resource "$DOTFILES_PATH/.tmux.conf" "$HOME/.tmux.conf"
-ln -s $DOTFILES_PATH/.prettierrc $HOME/.prettierrc
+link_resource "$DOTFILES_PATH/.prettierrc" "$HOME/.prettierrc"
+link_resource "$DOTFILES_PATH/.vimrc" "$HOME/.vimrc"
+link_resource "$DOTFILES_PATH/opencode" "$XDG_CONFIG/opencode"
+link_resource "$DOTFILES_PATH/codex/config.toml" "$HOME/.codex/config.toml"
