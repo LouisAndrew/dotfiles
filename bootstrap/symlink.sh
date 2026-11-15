@@ -27,6 +27,29 @@ link_resource "$DOTFILES_PATH/nvim" "$XDG_CONFIG/nvim"
 link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
 # WSL-only ghostty overrides (font size etc.), included via `config-file = ?config.local`
 [ "$(uname)" != "Darwin" ] && link_resource "$DOTFILES_PATH/ghostty/config.wsl" "$DOTFILES_PATH/ghostty/config.local"
+
+# Noctty (native Windows terminal, Ghostty core) on WSL: point its Windows-side
+# config at dotfiles. Windows symlinks need admin (Developer Mode is off), so the
+# first run shows a UAC prompt; later runs skip once the link exists.
+link_noctty_windows() {
+    command -v powershell.exe >/dev/null 2>&1 || return 0
+    local appdata
+    appdata=$(cd /mnt/c && cmd.exe /c 'echo %LOCALAPPDATA%' 2>/dev/null | tr -d '\r') || return 0
+    local dir dest dest_win target_win
+    dir="$(wslpath -u "$appdata")/noctty"
+    dest="$dir/config.ghostty"
+    [ -L "$dest" ] && return 0
+    if [ -e "$dest" ]; then
+        printf 'Refusing to replace existing resource: %s\n' "$dest" >&2
+        return 1
+    fi
+    mkdir -p "$dir"
+    dest_win=$(wslpath -w "$dest")
+    target_win=$(wslpath -w "$DOTFILES_PATH/noctty/config.ghostty")
+    (cd /mnt/c && powershell.exe -NoProfile -Command \
+        "Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList '-NoProfile','-Command',\"New-Item -ItemType SymbolicLink -Path '$dest_win' -Target '$target_win'\"")
+}
+grep -qi microsoft /proc/version 2>/dev/null && link_noctty_windows
 # Machine-local global tools can go in ~/.config/mise/conf.d/*.toml
 link_resource "$DOTFILES_PATH/mise/config.toml" "$XDG_CONFIG/mise/config.toml"
 
