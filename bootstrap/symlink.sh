@@ -66,6 +66,13 @@ for skill in "$DOTFILES_PATH"/claude/skills/*/; do
     [ -d "$skill" ] || continue
     link_resource "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
 done
+# Share one global instruction file across agents. OpenCode loads it through opencode.json.
+mkdir -p "$HOME/.codex"
+link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.codex/AGENTS.md"
+# Codex gets the shared memory skill. OpenCode and Oh My Pi get it through their skills folders.
+mkdir -p "$HOME/.codex/skills"
+link_resource "$DOTFILES_PATH/claude/skills/remember" "$HOME/.codex/skills/remember"
 
 link_resource "$DOTFILES_PATH/httpie.json" "$XDG_CONFIG/httpie.json"
 link_resource "$DOTFILES_PATH/starship.toml" "$XDG_CONFIG/starship.toml"
