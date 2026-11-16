@@ -32,3 +32,26 @@ If the `OBSIDIAN_VAULT_PATH` environment variable is set, use its value instead 
 3. Read and search the notes with normal file tools.
 
 The vault syncs through the private GitHub repository `LouisAndrew/vault`. The Hermes agent on the VPS pulls every 10 minutes. A local change reaches the VPS only after a commit and a push.
+
+## Shared memory
+
+The `memory/` folder in the vault is the memory that all of my agents share. It tells you who I am, what I work on now, and what comes next.
+
+At the start of a session, read these three notes, unless they are already in your context:
+
+- `memory/User.md`: who I am
+- `memory/Memory.md`: lasting facts about my setup
+- `memory/Now.md`: my current focus and next steps
+
+Claude Code gets the three notes from a SessionStart hook, `agents/memory-context.sh`.
+
+If you need more detail, open the review or project note that these notes link to. Do not read whole folders.
+
+To write to memory, use the `remember` skill. If your tool has no skill support, follow the "Shared Memory" rules in the vault `AGENTS.md`. In short:
+
+1. At the end of real work, append one entry to `memory/log/<YYWww> <host>.md`. The host is `mac` on the MacBook, `pc` in WSL on the Windows PC, and `vps` on the VPS.
+2. If you learn a lasting fact about my setup, add one line to `memory/Memory.md`.
+3. If you learn a lasting fact about me, add one line under "Learned by agents" in `memory/User.md`.
+4. Do not edit `memory/Now.md` without my request.
+
+Keep work entries general. Do not write code, customer data, credentials or secrets to memory.

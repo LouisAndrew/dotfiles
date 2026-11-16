@@ -35,6 +35,9 @@ done
 mkdir -p "$HOME/.codex"
 link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.codex/AGENTS.md"
+# Codex gets the shared memory skill. OpenCode and Oh My Pi get it through their skills folders.
+mkdir -p "$HOME/.codex/skills"
+link_resource "$DOTFILES_PATH/claude/skills/remember" "$HOME/.codex/skills/remember"
 
 ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
