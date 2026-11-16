@@ -14,6 +14,7 @@ The shared memory lives in `memory/` in my Obsidian vault. The global `AGENTS.md
 | The result of a piece of real work | `memory/log/<YYWww> <host>.md` | Append one entry |
 | A lasting fact about my setup | `memory/Memory.md` | Add one line under the matching heading |
 | A lasting fact about me | `memory/User.md` | Add one line under "Learned by agents" |
+| A personal goal: finance, fitness or personal life | `memory/Personal.md` | Never on the MacBook |
 | My request to rebuild Now | `memory/Now.md` | Rebuild it from the current reviews |
 
 `<YYWww>` is the ISO week, for example `26W47`. Get it with `date +%gW%V`. `<host>` is `mac` on the MacBook, `pc` in WSL on the Windows PC, and `vps` on the VPS.
@@ -34,7 +35,9 @@ A log entry is one line: `- <YYYY-MM-DD>, <agent>: <what changed>. Left: <what i
 
 ## Rebuild Now
 
-Rebuild `memory/Now.md` only on my request. Read the current quarterly, monthly and weekly reviews in `proj30/`, and this week's logs. Keep the frontmatter and the first two paragraphs. Replace the rest with the open goals, grouped by area, and link each goal to its review. Update the "Last rebuilt" line.
+Rebuild `memory/Now.md` only on my request. Read the current quarterly, monthly and weekly reviews in `proj30/`, and this week's logs. Keep the frontmatter and the paragraphs above "Last rebuilt". Replace the rest with the open Career goals and side projects, and link each goal to its review. Update the "Last rebuilt" line.
+
+The Finance, Fitness and Personal goals go to `memory/Personal.md`, never to `Now.md`. Rebuild `Personal.md` only on the Windows PC or the VPS.
 
 ## Do not write
 

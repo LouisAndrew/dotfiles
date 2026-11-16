@@ -15,9 +15,19 @@ fi
 
 [ -n "$vault" ] && [ -d "$vault/memory" ] || exit 0
 
-printf 'Shared memory from the Obsidian vault at %s (see the vault AGENTS.md, "Shared Memory").\n' "$vault"
+# The MacBook is a work machine: personal goals never load there.
+# Set MEMORY_PROFILE to "work" or "personal" to override the default.
+profile="${MEMORY_PROFILE:-}"
+if [ -z "$profile" ]; then
+    if [ "$(uname)" = "Darwin" ]; then profile=work; else profile=personal; fi
+fi
 
-for note in User Memory Now; do
+notes="User Memory Now"
+[ "$profile" = "personal" ] && notes="$notes Personal"
+
+printf 'Shared memory from the Obsidian vault at %s, profile %s (see the vault AGENTS.md, "Shared Memory").\n' "$vault" "$profile"
+
+for note in $notes; do
     file="$vault/memory/$note.md"
     [ -f "$file" ] || continue
     printf '\n<memory note="memory/%s.md">\n' "$note"

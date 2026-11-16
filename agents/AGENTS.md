@@ -43,7 +43,9 @@ At the start of a session, read these three notes, unless they are already in yo
 - `memory/Memory.md`: lasting facts about my setup
 - `memory/Now.md`: my current focus and next steps
 
-Claude Code gets the three notes from a SessionStart hook, `agents/memory-context.sh`.
+On the Windows PC and the VPS, also read `memory/Personal.md`: my finance, fitness and personal goals. On the work MacBook, never read `memory/Personal.md`.
+
+Claude Code gets these notes from a SessionStart hook, `agents/memory-context.sh`. The hook skips `Personal.md` on macOS.
 
 If you need more detail, open the review or project note that these notes link to. Do not read whole folders.
 
