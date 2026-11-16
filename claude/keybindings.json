@@ -7,6 +7,12 @@
       "bindings": {
         "meta+d": "app:toggleReplTab"
       }
+    },
+    {
+      "context": "Chat",
+      "bindings": {
+        "ctrl+alt+g": "command:orca-agent-view"
+      }
     }
   ]
 }
