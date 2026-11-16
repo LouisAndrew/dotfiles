@@ -31,6 +31,10 @@ for skill in "$DOTFILES_PATH"/claude/skills/*/; do
     [ -d "$skill" ] || continue
     link_resource "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
 done
+# Share one global instruction file across agents. OpenCode loads it through opencode.json.
+mkdir -p "$HOME/.codex"
+link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.codex/AGENTS.md"
 
 ln -s $DOTFILES_PATH/ghostty.config $XDG_CONFIG/ghostty.config
 ln -s $DOTFILES_PATH/httpie.json $XDG_CONFIG/httpie.json
