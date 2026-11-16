@@ -80,4 +80,5 @@ link_resource "$DOTFILES_PATH/.tmux.conf" "$HOME/.tmux.conf"
 link_resource "$DOTFILES_PATH/.prettierrc" "$HOME/.prettierrc"
 link_resource "$DOTFILES_PATH/.vimrc" "$HOME/.vimrc"
 link_resource "$DOTFILES_PATH/opencode" "$XDG_CONFIG/opencode"
-link_resource "$DOTFILES_PATH/codex/config.toml" "$HOME/.codex/config.toml"
+# Claude Code and Codex rewrite their own config files, so merge the shared keys instead of linking.
+bash "$DOTFILES_PATH/scripts/agent-config.sh"

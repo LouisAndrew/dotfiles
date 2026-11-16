@@ -1,0 +1,28 @@
+{
+  "theme": "custom:x",
+  "preferredNotifChannel": "ghostty",
+  "enabledPlugins": {
+    "simple-english@simple-english": true
+  },
+  "extraKnownMarketplaces": {
+    "simple-english": {
+      "source": {
+        "source": "github",
+        "repo": "AminBlg/SimpleEnglish"
+      }
+    }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/dev/dotfiles/agents/memory-context.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
