@@ -93,14 +93,14 @@
                     },
                     "height": 28
                   },
-                  "background": "#0a0a0a",
+                  "background": "#181818",
                   "border": {
                     "width": 1,
-                    "color": "#212121"
+                    "color": "#2e2e2e"
                   },
                   "focus": {
                     "width": 1,
-                    "color": "#333333"
+                    "color": "#3a3a3a"
                   },
                   "radius": 12,
                   "gap": 8,
@@ -174,7 +174,7 @@
       ]
     }
   ],
-  "background": "#0a0a0a",
+  "background": "#181818",
   "padding": [
     6,
     6
@@ -182,15 +182,16 @@
   "theme": "ghostty",
   "colors": {
     "accent": "#93c5fd",
-    "background": "#0a0a0a",
-    "border": "#212121",
+    "background": "#181818",
+    "border": "#2c2c2c",
+    "chrome": "#131313",
     "dim": "#777777",
     "foreground": "#d5d5d5",
     "hover": "#ffffff0d",
     "muted": "#989898",
-    "raised": "#1a1a1a",
+    "raised": "#242424",
     "selection": "#343950",
-    "surface": "#0a0a0a",
+    "surface": "#131313",
     "terminal_foreground": "#b4b4b4"
   },
   "gap": 8,

@@ -1,12 +1,12 @@
 return {
-  bg = "#0a0a0a",
-  surface = "#0a0a0a",
-  surface_hi = "#0a0a0a",
-  status = "#151515",
-  border = "#242424",
+  bg = "#181818",
+  surface = "#181818",
+  surface_hi = "#181818",
+  status = "#202020",
+  border = "#2c2c2c",
   cursor = "#818cf8",
   selection = "#343950",
-  scrollbar = "#303030",
+  scrollbar = "#383838",
 
   fg = "#d8d8d8",
   fg_hi = "#eeeeee",

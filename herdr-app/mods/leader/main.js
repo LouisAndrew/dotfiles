@@ -61,8 +61,8 @@ function togglePanel(child) {
 const KEYS = [
   ["g", "changes", () => togglePanel("changes")],
   ["o", "files", () => togglePanel("files")],
-  ["l", "split right", () => run("pane.split", { direction: "right" })],
-  ["j", "split down", () => run("pane.split", { direction: "down" })],
+  ["l", "split right", () => run("nav.split_right")],
+  ["j", "split down", () => run("nav.split_down")],
   ["q", "close pane", () => run("pane.close", {})],
   ["f", "zoom pane", () => run("pane.zoom", {})],
   ["z", "zoom pane", () => run("pane.zoom", {})],
