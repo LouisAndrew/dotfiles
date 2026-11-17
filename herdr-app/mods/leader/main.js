@@ -31,9 +31,9 @@ const KEYS = [
 ];
 
 // Herdr has no copy mode, so the pane's history opens read-only in Vim instead.
-// `hc read` adds "[hc] ..." notes to its output; drop them from the text.
+// Plain `hc read` with history can take seconds; its --json form returns at once.
 const PAGER = [
-  "\"$HOME/.local/bin/hc\" read --lines 100000 \"$1\" | sed '/^\\[hc\\] /d' | /usr/bin/vim -u NONE -N -R",
+  "\"$HOME/.local/bin/hc\" read --json --lines 100000 \"$1\" | /opt/homebrew/bin/jq -r .text | /usr/bin/vim -u NONE -N -R",
   "-c 'set clipboard=unnamed hlsearch incsearch ignorecase smartcase' -c 'nnoremap q :qa!<cr>' -c 'normal! G' -",
 ].join(" ");
 
