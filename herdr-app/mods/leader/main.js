@@ -24,7 +24,7 @@ const KEYS = [
   ["$", "rename space", () => run("space.rename", {})],
   ["b", "sidebar", () => run("layout.toggle", { id: "sidebar" })],
   ["space", "palette", () => run("app.palette", {})],
-  ["c", "copy mode", () => copyMode()],
+  ["c", "copy mode", copyMode],
   ["H", "prev agent", () => run("agent.prev", {})],
   ["L", "next agent", () => run("agent.next", {})],
   ["m", "move tab…", null],
@@ -78,6 +78,12 @@ export default class Leader extends View {
       return;
     }
     const hit = KEYS.find(([key]) => key === k);
+    // Closing stops this mod's pending tasks, so copy mode must finish first.
+    if (hit?.[2] === copyMode) {
+      this.timer?.cancel?.();
+      copyMode().catch(() => {}).finally(() => this.close());
+      return;
+    }
     this.close();
     hit?.[2]?.();
   }
