@@ -1,0 +1,1 @@
+{ "place": "none", "title": "Leader", "overlay": { "kind": "popup", "frame": "none", "at": { "x": 100000, "y": 100000 }, "width": 536, "height": 300 } }

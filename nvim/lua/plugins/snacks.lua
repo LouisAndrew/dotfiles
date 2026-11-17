@@ -10,6 +10,8 @@ return {
     opts.explorer = vim.tbl_deep_extend("force", opts.explorer or {}, { replace_netrw = false })
 
     opts.picker = opts.picker or {}
+    -- The default layout dims the editor with a black backdrop at 60% blend, much darker than the palette.
+    opts.picker.layout = vim.tbl_deep_extend("force", opts.picker.layout or {}, { layout = { backdrop = false } })
     opts.picker.win = opts.picker.win or {}
     opts.picker.win.input = opts.picker.win.input or {}
     opts.picker.win.list = opts.picker.win.list or {}
