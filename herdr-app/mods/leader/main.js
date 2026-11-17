@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, panes, terminals } from "herdr";
+import { run, props, closeOverlay, theme, focused, panes, terminals, layout } from "herdr";
 
 const TIMEOUT_MS = 2500;
 
@@ -35,7 +35,32 @@ function showPrimary() {
   if (pane) run("pane.focus", { pane: pane.pane });
 }
 
+function findNode(node, id) {
+  if (!node) return null;
+  if (node.id === id) return node;
+  for (const child of node.children ?? []) {
+    const hit = findNode(child, id);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+// The built-in changes and files mods sit in the "panel-body" stack of layouts/ghostty.json.
+function togglePanel(child) {
+  const root = layout();
+  const panel = findNode(root, "panel");
+  const body = findNode(root, "panel-body");
+  if (panel && !panel.hidden && body?.active === child) {
+    run("layout.hide", { id: "panel" });
+    return;
+  }
+  run("layout.select", { stack: "panel-body", child });
+  run("layout.show", { id: "panel" });
+}
+
 const KEYS = [
+  ["g", "changes", () => togglePanel("changes")],
+  ["o", "files", () => togglePanel("files")],
   ["l", "split right", () => run("pane.split", { direction: "right" })],
   ["j", "split down", () => run("pane.split", { direction: "down" })],
   ["q", "close pane", () => run("pane.close", {})],

@@ -139,6 +139,39 @@
           }
         }
       ]
+    },
+    {
+      "id": "panel",
+      "type": "column",
+      "hidden": true,
+      "size": {
+        "px": 368
+      },
+      "min": 280,
+      "max": 900,
+      "children": [
+        {
+          "id": "panel-body",
+          "type": "stack",
+          "active": "changes",
+          "children": [
+            {
+              "id": "changes",
+              "type": "block",
+              "content": {
+                "mod": "changes"
+              }
+            },
+            {
+              "id": "files",
+              "type": "block",
+              "content": {
+                "mod": "files"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "background": "#0a0a0a",
