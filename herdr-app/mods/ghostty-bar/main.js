@@ -29,6 +29,7 @@ function lead(all, id) {
 }
 
 // The program's tile from the app's table: its color, its glyph (or logo) on it.
+// Its 7px corners set the rest: a tab is 2px around it (radius 9), the tray 3px more (12).
 function tile(t, p) {
   const g = p?.program;
   const dot = p?.status && p.status !== "idle" ? t[p.status] : null;
@@ -40,7 +41,7 @@ function tile(t, p) {
     .rounded(7)
     .border_1()
     .border_color("#ffffff14")
-    .bg(g?.tile ?? C.chip)
+    .bg((g?.key !== "nvim" && g?.tile) || C.chip)
     .flex()
     .items_center()
     .justify_center()
@@ -108,11 +109,11 @@ export default class TerminalsBar extends View {
         .w(260)
         .min_w(0)
         .h_full()
-        .pl(5)
+        .pl(2)
         .pr(12)
         .gap(9)
         .items_center()
-        .rounded(13)
+        .rounded(9)
         .border_1()
         .cursor_pointer()
         .text_size(13)
@@ -145,7 +146,7 @@ export default class TerminalsBar extends View {
           .py(3)
           .pr(3)
           .gap(3)
-          .rounded(16)
+          .rounded(12)
           .bg(C.tray)
           .children(space.tabs.map(tab)),
       )
