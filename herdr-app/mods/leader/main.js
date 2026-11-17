@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, hc, terminals } from "herdr";
+import { run, props, closeOverlay, theme, focused, hc, terminals, notify } from "herdr";
 
 const TIMEOUT_MS = 1000;
 
@@ -40,11 +40,11 @@ const PAGER = [
 async function copyMode(cx) {
   const f = focused();
   const terminal = f?.shown ?? f?.terminal;
-  if (!terminal) return;
+  if (!terminal) throw new Error("No focused terminal");
   // A child of the pane, so terminal.peek can show it over the tab.
   const r = await hc(["run", "--bg", "--json", "--rm", "--no-notify", "--parent", terminal, "--", "sh", "-c", PAGER, "sh", terminal]);
   const address = r.code === 0 ? JSON.parse(r.stdout).address : null;
-  if (!address) return;
+  if (!address) throw new Error(r.stderr || r.stdout || "hc run failed");
   // The app learns about new terminals a moment after the core starts them.
   const tick = () => new Promise((resolve) => cx.timer.after(50, () => resolve()));
   for (let i = 0; i < 60 && !terminals().some((t) => t.address === address); i++) await tick();
@@ -86,7 +86,14 @@ export default class Leader extends View {
     // Closing stops this mod's pending tasks, so copy mode must finish first.
     if (hit?.[2] === copyMode) {
       this.timer?.cancel?.();
-      copyMode(cx).catch(() => {}).finally(() => this.close());
+      cx.spawn(async (cx) => {
+        try {
+          await copyMode(cx);
+        } catch (err) {
+          notify({ title: "Copy mode failed", body: String(err), level: "error" });
+        }
+        this.close();
+      });
       return;
     }
     this.close();
