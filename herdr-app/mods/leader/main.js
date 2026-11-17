@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, hc, exec, terminals } from "herdr";
+import { run, props, closeOverlay, theme, focused, hc, terminals } from "herdr";
 
 const TIMEOUT_MS = 1000;
 
@@ -30,14 +30,14 @@ const KEYS = [
   ["m", "move tab…", null],
 ];
 
-// Herdr has no copy mode, so the pane's history opens read-only in Neovim instead.
+// Herdr has no copy mode, so the pane's history opens read-only in Vim instead.
 // `hc read` adds "[hc] ..." notes to its output; drop them from the text.
 const PAGER = [
-  "\"$HOME/.local/bin/hc\" read --lines 100000 \"$1\" | sed '/^\\[hc\\] /d' | /opt/homebrew/bin/nvim -R",
-  "-c 'set buftype=nofile clipboard=unnamedplus' -c 'nnoremap <buffer> q <cmd>qa!<cr>' -c 'normal! G' -",
+  "\"$HOME/.local/bin/hc\" read --lines 100000 \"$1\" | sed '/^\\[hc\\] /d' | /usr/bin/vim -u NONE -N -R",
+  "-c 'set clipboard=unnamed hlsearch incsearch ignorecase smartcase' -c 'nnoremap q :qa!<cr>' -c 'normal! G' -",
 ].join(" ");
 
-async function copyMode() {
+async function copyMode(cx) {
   const f = focused();
   const terminal = f?.shown ?? f?.terminal;
   if (!terminal) return;
@@ -46,7 +46,8 @@ async function copyMode() {
   const address = r.code === 0 ? JSON.parse(r.stdout).address : null;
   if (!address) return;
   // The app learns about new terminals a moment after the core starts them.
-  for (let i = 0; i < 40 && !terminals().some((t) => t.address === address); i++) await exec("sleep", ["0.05"]);
+  const tick = () => new Promise((resolve) => cx.timer.after(50, () => resolve()));
+  for (let i = 0; i < 60 && !terminals().some((t) => t.address === address); i++) await tick();
   run("terminal.peek", { terminal: address });
 }
 
@@ -62,7 +63,7 @@ export default class Leader extends View {
     closeOverlay(props().overlay);
   }
 
-  onKey(e) {
+  onKey(e, cx) {
     // Shift+] reports key "]"; key_char carries the "}" it types.
     const k = e.modifiers.shift && e.key_char ? e.key_char : e.key;
     if (this.mode === "move") {
@@ -85,7 +86,7 @@ export default class Leader extends View {
     // Closing stops this mod's pending tasks, so copy mode must finish first.
     if (hit?.[2] === copyMode) {
       this.timer?.cancel?.();
-      copyMode().catch(() => {}).finally(() => this.close());
+      copyMode(cx).catch(() => {}).finally(() => this.close());
       return;
     }
     this.close();
@@ -103,7 +104,7 @@ export default class Leader extends View {
       .track_focus(this.handle)
       .on_key_down((e, cx) => {
         if (["shift", "control", "alt", "platform", "function"].includes(e.key)) return;
-        this.onKey(e);
+        this.onKey(e, cx);
         cx.stop_propagation();
         cx.notify();
       })
