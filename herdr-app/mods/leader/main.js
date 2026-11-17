@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, hc, terminals, notify } from "herdr";
+import { run, props, closeOverlay, theme } from "herdr";
 
 const TIMEOUT_MS = 1000;
 
@@ -24,32 +24,11 @@ const KEYS = [
   ["$", "rename space", () => run("space.rename", {})],
   ["b", "sidebar", () => run("layout.toggle", { id: "sidebar" })],
   ["space", "palette", () => run("app.palette", {})],
-  ["c", "copy mode", copyMode],
+  ["c", "copy mode", () => run("nav.copy")],
   ["H", "prev agent", () => run("agent.prev", {})],
   ["L", "next agent", () => run("agent.next", {})],
   ["m", "move tab…", null],
 ];
-
-// Herdr has no copy mode, so the pane's history opens read-only in Vim instead.
-// Plain `hc read` with history can take seconds; its --json form returns at once.
-const PAGER = [
-  "\"$HOME/.local/bin/hc\" read --json --lines 100000 \"$1\" | /opt/homebrew/bin/jq -r .text | /usr/bin/vim -u NONE -N -R",
-  "-c 'set clipboard=unnamed hlsearch incsearch ignorecase smartcase' -c 'nnoremap q :qa!<cr>' -c 'normal! G' -",
-].join(" ");
-
-async function copyMode(cx) {
-  const f = focused();
-  const terminal = f?.shown ?? f?.terminal;
-  if (!terminal) throw new Error("No focused terminal");
-  // A child of the pane, so terminal.peek can show it over the tab.
-  const r = await hc(["run", "--bg", "--json", "--rm", "--no-notify", "--parent", terminal, "--", "sh", "-c", PAGER, "sh", terminal]);
-  const address = r.code === 0 ? JSON.parse(r.stdout).address : null;
-  if (!address) throw new Error(r.stderr || r.stdout || "hc run failed");
-  // The app learns about new terminals a moment after the core starts them.
-  const tick = () => new Promise((resolve) => cx.timer.after(50, () => resolve()));
-  for (let i = 0; i < 60 && !terminals().some((t) => t.address === address); i++) await tick();
-  run("terminal.peek", { terminal: address });
-}
 
 export default class Leader extends View {
   init(_props, cx) {
@@ -63,7 +42,7 @@ export default class Leader extends View {
     closeOverlay(props().overlay);
   }
 
-  onKey(e, cx) {
+  onKey(e) {
     // Shift+] reports key "]"; key_char carries the "}" it types.
     const k = e.modifiers.shift && e.key_char ? e.key_char : e.key;
     if (this.mode === "move") {
@@ -83,19 +62,6 @@ export default class Leader extends View {
       return;
     }
     const hit = KEYS.find(([key]) => key === k);
-    // Closing stops this mod's pending tasks, so copy mode must finish first.
-    if (hit?.[2] === copyMode) {
-      this.timer?.cancel?.();
-      cx.spawn(async (cx) => {
-        try {
-          await copyMode(cx);
-        } catch (err) {
-          notify({ title: "Copy mode failed", body: String(err), level: "error" });
-        }
-        this.close();
-      });
-      return;
-    }
     this.close();
     hit?.[2]?.();
   }
@@ -111,7 +77,7 @@ export default class Leader extends View {
       .track_focus(this.handle)
       .on_key_down((e, cx) => {
         if (["shift", "control", "alt", "platform", "function"].includes(e.key)) return;
-        this.onKey(e, cx);
+        this.onKey(e);
         cx.stop_propagation();
         cx.notify();
       })
