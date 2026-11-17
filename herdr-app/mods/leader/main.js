@@ -6,7 +6,7 @@ import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
 import { run, props, closeOverlay, theme } from "herdr";
 
-const TIMEOUT_MS = 1000;
+const TIMEOUT_MS = 2500;
 
 const KEYS = [
   ["l", "split right", () => run("pane.split", { direction: "right" })],
@@ -72,18 +72,15 @@ export default class Leader extends View {
     const rows = move
       ? [["h", "move tab left"], ["l", "move tab right"], ["esc", "done"]]
       : [...KEYS.map(([k, label]) => [k, label]), ["1-9", "go to tab"]];
-    return v_flex()
-      .id("leader")
-      .track_focus(this.handle)
-      .on_key_down((e, cx) => {
-        if (["shift", "control", "alt", "platform", "function"].includes(e.key)) return;
-        this.onKey(e);
-        cx.stop_propagation();
-        cx.notify();
-      })
-      .size_full()
+    // Herdr can't anchor a popup to a corner: mod.json opens it past the bottom right so it
+    // lands there, and the frameless popup leaves room for the tab bar below the panel.
+    const panel = v_flex()
+      .w(520)
       .p(14)
       .gap(10)
+      .rounded(10)
+      .border_1()
+      .border_color(t.border)
       .bg(t.popover)
       .text_size(12)
       .child(div().text_color(t.muted).child(move ? "MOVE TAB" : "LEADER"))
@@ -102,5 +99,20 @@ export default class Leader extends View {
             ),
           ),
       );
+    return v_flex()
+      .id("leader")
+      .track_focus(this.handle)
+      .on_key_down((e, cx) => {
+        if (["shift", "control", "alt", "platform", "function"].includes(e.key)) return;
+        this.onKey(e);
+        cx.stop_propagation();
+        cx.notify();
+      })
+      .size_full()
+      .justify_end()
+      .items_end()
+      .pr(16)
+      .pb(52)
+      .child(panel);
   }
 }
