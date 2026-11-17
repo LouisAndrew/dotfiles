@@ -86,7 +86,7 @@
                 "content": {
                   "mod": "terminals-pane"
                 },
-                "height": 38
+                "height": 28
               },
               "background": "#0a0a0a",
               "border": {
