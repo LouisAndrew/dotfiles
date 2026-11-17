@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, hc, openOverlay } from "herdr";
+import { run, props, closeOverlay, theme, focused, hc, exec, terminals } from "herdr";
 
 const TIMEOUT_MS = 1000;
 
@@ -31,8 +31,9 @@ const KEYS = [
 ];
 
 // Herdr has no copy mode, so the pane's history opens read-only in Neovim instead.
+// `hc read` adds "[hc] ..." notes to its output; drop them from the text.
 const PAGER = [
-  "\"$HOME/.local/bin/hc\" read --lines 100000 \"$1\" | /opt/homebrew/bin/nvim -R",
+  "\"$HOME/.local/bin/hc\" read --lines 100000 \"$1\" | sed '/^\\[hc\\] /d' | /opt/homebrew/bin/nvim -R",
   "-c 'set buftype=nofile clipboard=unnamedplus' -c 'nnoremap <buffer> q <cmd>qa!<cr>' -c 'normal! G' -",
 ].join(" ");
 
@@ -40,10 +41,13 @@ async function copyMode() {
   const f = focused();
   const terminal = f?.shown ?? f?.terminal;
   if (!terminal) return;
-  const r = await hc(["run", "--bg", "--json", "--rm", "--no-parent", "--", "sh", "-c", PAGER, "sh", terminal]);
+  // A child of the pane, so terminal.peek can show it over the tab.
+  const r = await hc(["run", "--bg", "--json", "--rm", "--no-notify", "--parent", terminal, "--", "sh", "-c", PAGER, "sh", terminal]);
   const address = r.code === 0 ? JSON.parse(r.stdout).address : null;
   if (!address) return;
-  openOverlay({ layout: { id: "copy", type: "block", content: { terminal: address } }, kind: "dialog", width: 0.9, height: 0.9 });
+  // The app learns about new terminals a moment after the core starts them.
+  for (let i = 0; i < 40 && !terminals().some((t) => t.address === address); i++) await exec("sleep", ["0.05"]);
+  run("terminal.peek", { terminal: address });
 }
 
 export default class Leader extends View {
