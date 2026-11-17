@@ -27,7 +27,7 @@ link_resource "$DOTFILES_PATH/nvim" "$XDG_CONFIG/nvim"
 link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
 link_resource "$DOTFILES_PATH/herdr/config.toml" "$XDG_CONFIG/herdr/config.toml"
 # The Herdr app writes its own state into ~/.config/herdr-app, so link only my files.
-for resource in keys.json settings.json layouts/ghostty.json mods/ghostty-bar mods/leader mods/nav mods/copy mods/agents-plus; do
+for resource in keys.json settings.json layouts/ghostty.json mods/ghostty-bar mods/leader mods/nav mods/copy programs.json my-icons; do
     link_resource "$DOTFILES_PATH/herdr-app/$resource" "$XDG_CONFIG/herdr-app/$resource"
 done
 # WSL-only ghostty overrides (font size etc.), included via `config-file = ?config.local`

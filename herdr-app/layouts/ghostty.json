@@ -142,7 +142,7 @@
     "hover": "#ffffff0d",
     "muted": "#989898",
     "raised": "#1a1a1a",
-    "selection": "#2a2f3a",
+    "selection": "#343950",
     "surface": "#0a0a0a",
     "terminal_foreground": "#b4b4b4"
   },
