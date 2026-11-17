@@ -87,6 +87,7 @@ if [ "$OS" = "Linux" ]; then
   [ -f "$font_dir/nonicons.ttf" ] || curl -fsSL -o "$font_dir/nonicons.ttf" \
     "https://raw.githubusercontent.com/ya2s/nonicons/master/dist/nonicons.ttf"
   fc-cache -f "$font_dir"
+  grep -qi microsoft /proc/version 2>/dev/null && bash "$DOTFILES_PATH/scripts/windows-fonts.sh"
 fi
 
 clone_if_missing https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
