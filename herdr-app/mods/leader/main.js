@@ -4,9 +4,36 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme } from "herdr";
+import { run, props, closeOverlay, theme, focused, panes, terminals } from "herdr";
 
 const TIMEOUT_MS = 2500;
+
+function focusedPane() {
+  const f = focused();
+  return panes().find((p) => (f?.pane ? p.pane === f.pane : p.focused && p.tab === f?.tab));
+}
+
+// The sub-agent shows in the "sub-agent" agent block of layouts/ghostty.json, which sits in a
+// stack over the tab. The agents sidebar marks a sub-agent row only for the agent such a block shows.
+// agent.focus does nothing while the block is hidden, so select the stack child first.
+// pane.focus cannot target an agent block ("no such pane").
+// Each press shows the next live sub-agent, so repeated presses cycle through them.
+function showSubAgent() {
+  const pane = focusedPane();
+  if (!pane?.terminal) return;
+  const kids = terminals().filter((t) => t.parent === pane.terminal && t.state === "live");
+  if (!kids.length) return;
+  const at = kids.findIndex((t) => t.address === focused()?.agent);
+  const kid = kids[(at + 1) % kids.length].address;
+  run("layout.select", { stack: "main-stack", child: "sub-agent" });
+  run("agent.focus", { terminal: kid });
+}
+
+function showPrimary() {
+  const pane = focusedPane();
+  run("layout.select", { stack: "main-stack", child: "main" });
+  if (pane) run("pane.focus", { pane: pane.pane });
+}
 
 const KEYS = [
   ["l", "split right", () => run("pane.split", { direction: "right" })],
@@ -28,6 +55,8 @@ const KEYS = [
   ["c", "copy mode", () => run("mod.open", { name: "copy" })],
   ["H", "prev agent", () => run("agent.prev", {})],
   ["L", "next agent", () => run("agent.next", {})],
+  ["J", "sub-agent", showSubAgent],
+  ["K", "primary", showPrimary],
   ["m", "move tab…", null],
 ];
 

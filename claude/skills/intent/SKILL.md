@@ -139,6 +139,7 @@ The job is to find out what is true and what is still open before any code chang
        - a scope that disagrees with the ticket
        - a todo item with no clear end
     3. What is still open before development can start.
+    4. If `$HC_TERMINAL_ID` is set, offer the crosscheck skill, so that Codex reviews the plan.
 
 ## Check mode
 

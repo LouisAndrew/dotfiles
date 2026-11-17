@@ -77,31 +77,45 @@
       "resizable": false,
       "children": [
         {
-          "id": "main",
-          "type": "block",
-          "content": {
-            "tab": "active",
-            "pane": {
-              "header": {
-                "content": {
-                  "mod": "terminals-pane"
-                },
-                "height": 28
-              },
-              "background": "#0a0a0a",
-              "border": {
-                "width": 1,
-                "color": "#212121"
-              },
-              "focus": {
-                "width": 1,
-                "color": "#333333"
-              },
-              "radius": 12,
-              "gap": 8,
-              "lone": true
+          "id": "main-stack",
+          "type": "stack",
+          "active": "main",
+          "children": [
+            {
+              "id": "main",
+              "type": "block",
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "header": {
+                    "content": {
+                      "mod": "terminals-pane"
+                    },
+                    "height": 28
+                  },
+                  "background": "#0a0a0a",
+                  "border": {
+                    "width": 1,
+                    "color": "#212121"
+                  },
+                  "focus": {
+                    "width": 1,
+                    "color": "#333333"
+                  },
+                  "radius": 12,
+                  "gap": 8,
+                  "lone": true
+                }
+              }
+            },
+            {
+              "id": "sub-agent",
+              "type": "block",
+              "content": {
+                "agent": "focused"
+              }
             }
-          }
+          ]
         },
         {
           "id": "tabs",
