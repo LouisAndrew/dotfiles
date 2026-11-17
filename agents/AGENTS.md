@@ -57,3 +57,11 @@ To write to memory, use the `remember` skill. If your tool has no skill support,
 4. Do not edit `memory/Now.md` without my request.
 
 Keep work entries general. Do not write code, customer data, credentials or secrets to memory.
+
+## Code comments
+
+Write a comment only if it tells the reader something that the code cannot show. For example, a non-obvious reason, a constraint from an outside system, or a trap that a later change can fall into.
+
+- Do not write a comment that repeats what the code, a name or a test title already says.
+- Do not write comments that narrate the steps of a test.
+- Before you finish a task, read the comments in your diff and remove the ones that do not meet this rule.

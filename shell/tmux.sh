@@ -1,6 +1,12 @@
 #!/bin/sh
 
-if [[ ! -n $TMUX  ]]; then
+# Orca and Herdr manage their own panes and sessions, so skip the picker there.
+in_orchestrator() {
+  [[ -n $ORCA_PANE_KEY || -n $ORCA_TERMINAL_HANDLE || -n $HC_TERMINAL_ID ]] && return 0
+  [[ $__CFBundleIdentifier = com.stablyai.orca || $__CFBundleIdentifier = dev.herdr.app ]]
+}
+
+if [[ ! -n $TMUX ]] && ! in_orchestrator; then
   # Get the session IDs
   session_ids="$(tmux list-sessions)"
 
