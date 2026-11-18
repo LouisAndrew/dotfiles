@@ -49,6 +49,8 @@ For the intent file:
 For the fact file:
 
 - You own the file. Plan mode creates it or rewrites it.
+- Use no H1 heading. Use H2 and H3 headings only.
+- Keep it short. One line for each fact, decision and open decision. A plan item is a one-line title, at most three short sub-points, and a one-line "Done when". Leave out the detail that only matters during coding. If the user asks for detail, add it.
 - Keep the source on each fact, so a reader can check the fact again.
 - When you rewrite the file, keep the checked items of the plan checked, unless the plan item itself changed.
 - Do not uncheck an item that the user checked. If your evidence disagrees, say so in the chat.
@@ -93,9 +95,7 @@ The job is to find out what is true and what is still open before any code chang
 9. Write the fact file with these sections:
 
    ```markdown
-   # Facts: <TICKET> <short title>
-
-   Updated: <YYYY-MM-DD>. Intent: <ticket>-intent.md. Tickets: <keys>
+   Facts for <TICKET>: <short title>. Updated: <YYYY-MM-DD>. Intent: <ticket>-intent.md. Tickets: <keys>
 
    ## Repos
    - <repo name> (main): <path>. Branch: <branch, or "not created yet">
@@ -130,7 +130,7 @@ The job is to find out what is true and what is still open before any code chang
    - Include the items in external systems, for example "create the flag in the experiments dashboard".
    - Keep each item small enough to finish in one pull request or less.
 
-10. Report in the chat:
+10. Report in the chat as a short summary. If the user asks for detail, give it:
 
     1. The path of the fact file and one line on what it holds.
     2. The faults in the intent file. For each fault, quote the line, say what is wrong, and suggest a fix. Leave the change to the user. These are faults:

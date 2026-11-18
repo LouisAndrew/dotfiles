@@ -63,11 +63,11 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    If you disagree with a high finding, send your reason to Codex with `hc send crosscheck-<ticket> "<reason>"`, and wait for its answer once. Then decide.
 
-9. Update the fact file with the true findings: correct the facts, move settled inferences to facts, and change or add plan items with their "Done when" lines. Follow the file rules of the intent skill. If a true finding needs a decision from the user, add it under "Open decisions" and do not decide it.
+9. Update the fact file with the true findings, in the short style that the intent skill sets: correct the facts, move settled inferences to facts, and change or add plan items with their "Done when" lines. Follow the file rules of the intent skill. If a true finding needs a decision from the user, add it under "Open decisions" and do not decide it.
 
-10. Report in the chat:
+10. Report in the chat as a short summary. If the user asks for detail, give it:
     1. One line: how many findings were true, false and unverified.
-    2. The changes in the fact file, one line each.
+    2. The new information, one short line each. Do not list each edit of the fact file.
     3. The false findings, each with your reason.
     4. The unverified findings, each with what can settle it.
     5. The faults in the intent file, quoted, with a suggested fix.

@@ -1,0 +1,9 @@
+{
+  "name": "x",
+  "base": "dark-ansi",
+  "overrides": {
+    "composerSidebarBackground": "#101010",
+    "userMessageBackground": "#131313",
+    "promptBorder": "#555"
+  }
+}

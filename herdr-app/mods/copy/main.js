@@ -21,6 +21,8 @@ const HELP = [
 
 const space = (ch) => ch === " " || ch === "\t";
 const kind = (ch, big) => (space(ch) ? 0 : big || /[\p{L}\p{N}_]/u.test(ch) ? 1 : 2);
+const WIDE =
+  /\p{Emoji_Presentation}|[ᄀ-ᅟ⺀-〾ぁ-㏿㐀-䶿一-鿿ꀀ-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦\u{20000}-\u{3FFFD}]/u;
 
 export default class Copy extends View {
   init(_props, cx) {
@@ -110,14 +112,41 @@ export default class Copy extends View {
     if (r.code !== 0) return (this.rows = null);
     const { text, how } = JSON.parse(r.stdout);
     const rows = [];
-    for (const line of text.split("\n")) {
-      const chars = Array.from(line);
-      if (!chars.length) rows.push([]);
-      for (let i = 0; i < chars.length; i += v.cols) rows.push(chars.slice(i, i + v.cols));
-    }
+    for (const line of text.split("\n")) rows.push(...this.cells(line, v.cols));
     const exact = how === "screen" && !v.scrolls && rows.length === v.total;
     this.rowsFirst = exact ? 0 : this.anchor - (rows.length - 1);
     this.rows = rows;
+  }
+
+  // `hc read` gives characters, but selections count cells: an emoji or CJK character takes two
+  // (here the character twice, so it stays one word), a combining mark or a joined emoji none.
+  // A wide character that does not fit at the end of a row wraps whole and leaves a blank cell.
+  cells(line, cols) {
+    const rows = [];
+    let row = [];
+    let joined = false;
+    for (const ch of line) {
+      if (joined) {
+        joined = false;
+        continue;
+      }
+      if (ch === "‍") {
+        joined = true;
+        continue;
+      }
+      if (ch === "️" && row.length && row.at(-1) !== row.at(-2)) row.push(row.at(-1));
+      if (/\p{M}/u.test(ch)) continue;
+      const w = WIDE.test(ch) ? 2 : 1;
+      if (row.length + w > cols) {
+        while (row.length < cols) row.push(" ");
+        rows.push(row);
+        row = [];
+      }
+      row.push(ch);
+      if (w === 2) row.push(ch);
+    }
+    rows.push(row);
+    return rows;
   }
 
   row(r) {

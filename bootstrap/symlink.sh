@@ -65,6 +65,8 @@ link_resource "$DOTFILES_PATH/omp/keybindings.yml" "$HOME/.omp/agent/keybindings
 link_resource "$DOTFILES_PATH/omp/mcp.json" "$HOME/.omp/agent/mcp.json"
 link_resource "$DOTFILES_PATH/omp/skills" "$HOME/.omp/agent/skills"
 link_resource "$DOTFILES_PATH/claude/keybindings.json" "$HOME/.claude/keybindings.json"
+mkdir -p "$HOME/.claude/themes"
+link_resource "$DOTFILES_PATH/claude/themes/x.json" "$HOME/.claude/themes/x.json"
 # Keep Claude-managed skills (synced, plugin installs) local; link only versioned skills.
 mkdir -p "$HOME/.claude/skills"
 for skill in "$DOTFILES_PATH"/claude/skills/*/; do
