@@ -1,0 +1,3 @@
+# New terminals in the Windows Herdr app open the default WSL distro in its home folder.
+# wsl.exe does not pass HC_TERMINAL_ID into WSL, so HERDR_WSL tells shell/tmux.sh to skip tmux.
+shell = ["wsl.exe", "--cd", "~", "--", "HERDR_WSL=1", "exec", "$SHELL", "-l"]

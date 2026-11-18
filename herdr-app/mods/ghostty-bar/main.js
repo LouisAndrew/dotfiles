@@ -5,13 +5,13 @@ import { h_flex } from "gpui-base";
 import { spaces, panes, run, theme, home, openOverlay, window as win } from "herdr";
 
 const C = {
-  tray: "#0a0a0a",
+  tray: "#181818",
   // The shown tab stands out; a hovered one only hints, so the two never look alike.
-  tab: "#161616",
-  tabEdge: "#262626",
+  tab: "#242424",
+  tabEdge: "#333333",
   hover: "#ffffff07",
   edge: "#383b40",
-  chip: "#161616",
+  chip: "#242424",
   text: "#e8e9eb",
   dim: "#8b8f95",
 };

@@ -23,10 +23,10 @@ font-feature = -dlig
 font-codepoint-map = U+F101-U+F27D=nonicons
 
 # background = #131313
-background = #0a0a0a
+background = #181818
 foreground = #b4b4b4
 
-palette = 0=#212121
+palette = 0=#2e2e2e
 palette = 1=#ff8185
 palette = 2=#81ffbb
 palette = 3=#ffd6b3

@@ -2,7 +2,7 @@
 
 # Orca and Herdr manage their own panes and sessions, so skip the picker there.
 in_orchestrator() {
-  [[ -n $ORCA_PANE_KEY || -n $ORCA_TERMINAL_HANDLE || -n $HC_TERMINAL_ID ]] && return 0
+  [[ -n $ORCA_PANE_KEY || -n $ORCA_TERMINAL_HANDLE || -n $HC_TERMINAL_ID || -n $HERDR_WSL ]] && return 0
   [[ $__CFBundleIdentifier = com.stablyai.orca || $__CFBundleIdentifier = dev.herdr.app ]]
 }
 
