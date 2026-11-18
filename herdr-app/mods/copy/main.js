@@ -41,7 +41,8 @@ export default class Copy extends View {
     cx.spawn(async (cx) => {
       this.cur = (await this.apply(cx, "terminal.select", { at: "cursor" }))?.end ?? { row: 0, col: 0 };
       this.anchor = this.cur.row;
-      this.rowsLoad = this.loadRows();
+      this.rowsLoad = this.fetchRows();
+      this.poll(cx);
       while (!this.done) {
         if (!this.queue.length) await new Promise((resolve) => (this.wake = resolve));
         const step = this.queue.shift();
@@ -87,34 +88,37 @@ export default class Copy extends View {
     return this.selection();
   }
 
-  // `hc read` takes over 100 ms, so motions use the last read and a stale one refreshes behind them.
   async readRows() {
     if (!this.rows) await this.rowsLoad;
-    else if (!this.loading && Date.now() - this.rowsAt > 1000) this.rowsLoad = this.loadRows();
+  }
+
+  // An agent rewrites its screen while it works, and a motion on old text lands on whatever
+  // moved there since. `hc read` takes over 100 ms from a mod, too slow to wait for on each key,
+  // so the text is read again behind the motions while copy mode is open.
+  poll(cx) {
+    cx.spawn(async (cx) => {
+      await this.rowsLoad;
+      while (!this.done) {
+        await new Promise((resolve) => cx.timer.after(150, () => resolve()));
+        if (!this.done) await this.fetchRows();
+      }
+    });
   }
 
   // `hc read` joins wrapped lines and trims trailing blank rows, so the text is wrapped again
   // at the pane width and its last row is lined up with the row the cursor had at the start,
-  // where the prompt is. An alternate screen comes back as exactly its rows, so it maps one to one.
-  async loadRows() {
-    this.loading = true;
-    try {
-      await this.fetchRows();
-    } finally {
-      this.loading = false;
-      this.rowsAt = Date.now();
-    }
-  }
-
+  // where the prompt is. An alternate screen comes back as its rows from the top, so it maps one
+  // to one even when blank rows at its bottom are trimmed.
+  // Only the history from a page above the cursor is read, because long history is slow to read.
   async fetchRows() {
     const v = this.view();
-    const r = await hc(["read", "--json", "--lines", String(v.total), this.terminal]);
+    const lines = Math.max(0, v.total - v.len - (Math.min(this.cur.row, this.anchor) - v.len));
+    const r = await hc(["read", "--json", "--lines", String(lines), this.terminal]);
     if (r.code !== 0) return (this.rows = null);
     const { text, how } = JSON.parse(r.stdout);
     const rows = [];
     for (const line of text.split("\n")) rows.push(...this.cells(line, v.cols));
-    const exact = how === "screen" && !v.scrolls && rows.length === v.total;
-    this.rowsFirst = exact ? 0 : this.anchor - (rows.length - 1);
+    this.rowsFirst = how === "screen" && !v.scrolls ? 0 : this.anchor - (rows.length - 1);
     this.rows = rows;
   }
 
@@ -239,22 +243,30 @@ export default class Copy extends View {
       this.reveal(to.row);
       return;
     }
-    // A selection can only grow from its anchor by adjust_selection, one cell at a time.
-    const { row, col } = this.cur;
-    const steps = [];
-    if (to.row === 0 && to.col === 0 && key === "g") steps.push("home");
-    else if (key === "G") steps.push("end");
-    else {
-      for (let i = row; i < to.row; i++) steps.push("down");
-      for (let i = row; i > to.row; i--) steps.push("up");
-      for (let i = col; i < to.col; i++) steps.push("right");
-      for (let i = col; i > to.col; i--) steps.push("left");
+    // The terminal drops a selection when the program redraws under it, and adjust_selection
+    // then fails, so the selection is made again from where visual mode started.
+    let steps = this.steps(this.cur, to, key);
+    if (!this.selection()) {
+      await this.apply(cx, "terminal.select", { at: this.vstart, mode: this.visual === "line" ? "line" : "cell" });
+      steps = this.steps(this.vstart, to, key);
     }
     if (!steps.length) return;
     const last = steps.pop();
     for (const direction of steps) run("terminal.adjust_selection", { terminal: this.terminal, direction });
     const sel = await this.apply(cx, "terminal.adjust_selection", { direction: last });
     this.cur = sel?.end ?? to;
+  }
+
+  // A selection can only grow from its anchor by adjust_selection, one cell at a time.
+  steps(from, to, key) {
+    if (to.row === 0 && to.col === 0 && key === "g") return ["home"];
+    if (key === "G") return ["end"];
+    const steps = [];
+    for (let i = from.row; i < to.row; i++) steps.push("down");
+    for (let i = from.row; i > to.row; i--) steps.push("up");
+    for (let i = from.col; i < to.col; i++) steps.push("right");
+    for (let i = from.col; i > to.col; i--) steps.push("left");
+    return steps;
   }
 
   reveal(row) {
@@ -266,7 +278,10 @@ export default class Copy extends View {
 
   setVisual(mode) {
     this.visual = mode;
-    this.enqueue((cx) => this.apply(cx, "terminal.select", { at: this.cur, mode: mode === "line" ? "line" : "cell" }));
+    this.enqueue((cx) => {
+      this.vstart = this.cur;
+      return this.apply(cx, "terminal.select", { at: this.cur, mode: mode === "line" ? "line" : "cell" });
+    });
   }
 
   exit() {
