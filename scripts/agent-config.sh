@@ -8,6 +8,7 @@
 #   claude/settings.shared.json -> ~/.claude/settings.json (every host)
 #   claude/settings.mac.json    -> ~/.claude/settings.json (macOS only, the work MacBook)
 #   codex/config.shared.toml    -> ~/.codex/config.toml    (every host)
+#   hermes/config.shared.yaml   -> ~/.hermes/config.yaml   (hosts with Hermes)
 set -euo pipefail
 
 DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "$0")/.." && pwd)}"
@@ -113,5 +114,22 @@ else:
 PY
 }
 
+merge_hermes() {
+    local live="$HOME/.hermes/config.yaml"
+    [ -f "$live" ] || return 0
+    if grep -q "herdr-status.sh" "$live"; then
+        echo "agent-config: $live is up to date"
+    # A second top-level hooks key would replace the first one when YAML loads.
+    elif grep -q "^hooks:" "$live"; then
+        echo "agent-config: $live has its own hooks block, add hermes/config.shared.yaml by hand" >&2
+    else
+        cp "$live" "$live.dotfiles-backup"
+        printf '\n' >> "$live"
+        cat "$DOTFILES_PATH/hermes/config.shared.yaml" >> "$live"
+        echo "agent-config: updated $live (backup: $live.dotfiles-backup)"
+    fi
+}
+
 merge_claude
 merge_codex
+merge_hermes

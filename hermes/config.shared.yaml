@@ -1,0 +1,17 @@
+# herdr agent status, see hermes/herdr-status.sh. Merged into ~/.hermes/config.yaml by scripts/agent-config.sh.
+hooks:
+  pre_llm_call:
+    - command: "~/.hermes/agent-hooks/herdr-status.sh"
+      timeout: 5
+  on_human_input_request:
+    - command: "~/.hermes/agent-hooks/herdr-status.sh"
+      timeout: 5
+  post_approval_response:
+    - command: "~/.hermes/agent-hooks/herdr-status.sh"
+      timeout: 5
+  on_session_end:
+    - command: "~/.hermes/agent-hooks/herdr-status.sh"
+      timeout: 5
+  on_session_finalize:
+    - command: "~/.hermes/agent-hooks/herdr-status.sh"
+      timeout: 5

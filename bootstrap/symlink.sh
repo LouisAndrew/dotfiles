@@ -104,6 +104,9 @@ link_resource "$DOTFILES_PATH/agents/AGENTS.md" "$HOME/.codex/AGENTS.md"
 mkdir -p "$HOME/.codex/skills"
 link_resource "$DOTFILES_PATH/claude/skills/remember" "$HOME/.codex/skills/remember"
 
+# Hermes reports its status to herdr through this shell hook.
+[ -d "$HOME/.hermes" ] && link_resource "$DOTFILES_PATH/hermes/herdr-status.sh" "$HOME/.hermes/agent-hooks/herdr-status.sh"
+
 link_resource "$DOTFILES_PATH/httpie.json" "$XDG_CONFIG/httpie.json"
 link_resource "$DOTFILES_PATH/starship.toml" "$XDG_CONFIG/starship.toml"
 link_resource "$DOTFILES_PATH/.tmux.conf" "$HOME/.tmux.conf"

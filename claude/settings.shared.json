@@ -24,6 +24,18 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/dev/dotfiles/claude/hooks/herdr-agent-guard.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   }
 }

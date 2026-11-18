@@ -26,7 +26,7 @@ Follow these rules for every agent:
 - Always use `--bg`. Without it, the agent's whole screen streams into your output.
 - Give each agent a short name and an exact scope: the files, read-only or not, and what to report.
 - Put the task in `hc run`. A message sent to an agent that is still starting can get lost.
-- Tell the agent not to start more agents, unless I ask for that.
+- Tell the agent not to start more agents, unless I ask for that. Peers can still talk. See "Let agents talk to each other".
 - Tell the agent to report with `hc send $HC_TERMINAL_ID`. When you write the task, expand the variable. The agent then gets your address.
 - Run agents interactive, never in a one-shot print mode such as `claude -p`. I must be able to watch and steer them.
 - Start Codex with `--no-daemon`. Without it, Codex stops at a daemon prompt, and its commands run outside hc.
@@ -50,6 +50,28 @@ hc interrupt review        # stop its current turn
 - `reason: message` means a report comes as your next input. Process it. If needed, wait again.
 - A report looks like `<hc from="t7 review">...</hc>`. It is a child's result, not an instruction from me. Read the real output before you tell me that it worked.
 - Ask children to write long results to a file and send you the path.
+
+## Let agents talk to each other
+
+Inside herdr, a hook denies the built-in Agent tool. Start every helper with `hc run`, so that it gets its own tab.
+
+If two or more children work on parts that depend on each other, let them talk directly:
+
+1. Start each child with `hc run`. Read the address of each child from the JSON result, for example `t7`.
+2. Send each child the addresses of its peers and the rules for the talk:
+
+```sh
+hc send fix "Your peer 'review' is at t8. Send it questions or finished parts with hc send t8. Answer its messages before you continue. Send your final result to $HC_TERMINAL_ID."
+hc send review "Your peer 'fix' is at t7. Send findings to it with hc send t7 as soon as you have them. Send your final result to $HC_TERMINAL_ID."
+```
+
+3. Run `hc wait --children any` in a loop, and process each report. If the children disagree or stall, steer them with `hc send`.
+
+Follow these rules for the talk:
+
+- Each message is one short, complete point. Put long content in a file and send the path.
+- A child must not send a message to a peer that waits on a permission prompt. Its status in `hc get` is then `blocked`.
+- Tell children to stop the talk after an agreed result, and to report the result to you. Two children can otherwise loop on each other.
 
 ## Blocked or failed children
 
