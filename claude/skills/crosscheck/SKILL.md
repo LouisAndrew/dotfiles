@@ -28,7 +28,7 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    ```sh
    hc run --bg --name crosscheck-<ticket> --cwd <main repo> \
-     codex -m gpt-6.1-sol -s workspace-write --add-dir <report dir> "<task>"
+     codex --no-daemon -m gpt-6.1-sol -s workspace-write --add-dir <report dir> "<task>"
    ```
 
    Use this task:
@@ -47,12 +47,12 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    Write the report to <report path>. For each finding, give: the number of the point, a severity (high, medium or low), the item or line in the fact file, the evidence with file:line, and a suggested change. Put the facts that you confirmed in one short list at the end. Mark each claim without a source in the code as unverified.
 
-   When the report is written, run: hc send <your address> "crosscheck done: <report path>"
+   When the report is written, end your turn. Do not run hc send.
    ```
 
 5. Read `first_message.sent` in the JSON result. If it is `false`, follow the herdr-agents skill: read the screen, fix the cause, then send the task.
 
-6. Wait with `hc wait --children any`. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read crosscheck-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user.
+6. Wait with `hc wait --children any`. The Codex sandbox blocks `hc send`, so Codex does not message you. The status `done` shows that its turn ended. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read crosscheck-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user. Ask the user at once with your question tool, and quote what the prompt asks, so that the user gets a notification. If `hc get` shows status `null` for the child, the Codex status hooks do not work. Then read its screen at each `reason: timeout` to find a prompt.
 
 7. Read the report file. If the file does not exist, read the screen of the child and find out why.
 

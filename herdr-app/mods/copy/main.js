@@ -1,178 +1,146 @@
-// Leader c: keyboard copy mode on the live pane, built on Herdr's terminal selection.
-// The selection doubles as the cursor: outside visual mode it is one cell, placed directly
-// with terminal.select, because adjust_selection would flash a two-cell selection first.
-// Herdr gives mods no cell text, so word and line-edge motions read it with `hc read`.
+// Leader c: tmux-style copy mode. It reads the pane's text once with `hc read` and draws that
+// snapshot in the "copy" child of the layout's main stack, with its own cursor, so keys never
+// wait on the terminal and an agent that keeps redrawing cannot move the text under the cursor.
+// Plain text only: hc gives no colors.
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, focused, terminals, panes, hc, theme, checking } from "herdr";
+import { run, shared, terminals, hc, theme, settings, checking } from "herdr";
 
-const HELP = [
-  ["hjkl", "move"],
-  ["w b e", "word"],
-  ["0 ^ $", "line"],
-  ["^u ^d", "page"],
-  ["g G", "top/end"],
-  ["v V", "select"],
-  ["y ⏎", "copy"],
-  ["/", "search"],
-  ["q esc", "quit"],
-];
+const HISTORY = 10000;
+const STACK = "main-stack";
+const HINT = "hjkl wbe 0^$ gG ^u^d f/t  v V o  y ⏎ Y  / ? n N * #  q";
 
 const space = (ch) => ch === " " || ch === "\t";
 const kind = (ch, big) => (space(ch) ? 0 : big || /[\p{L}\p{N}_]/u.test(ch) ? 1 : 2);
 const WIDE =
-  /\p{Emoji_Presentation}|[ᄀ-ᅟ⺀-〾ぁ-㏿㐀-䶿一-鿿ꀀ-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦\u{20000}-\u{3FFFD}]/u;
+  /\p{Emoji_Presentation}|[ᄀ-ᅟ⺀-〾ぁ-㏿㐀-䶿一-鿿ꀀ-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦\u{20000}-\u{3FFFD}]/u;
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export default class Copy extends View {
   init(_props, cx) {
     this.handle = cx.focus_handle();
-    this.handle.focus();
-    const f = focused();
-    this.terminal = f?.shown ?? f?.terminal;
-    this.visual = null;
-    this.done = false;
-    this.queue = [];
-    this.wake = null;
+    this.height = 600;
+    this.reset();
     if (checking()) return;
-    if (!this.terminal) return this.exit();
-    // A selection command shows in terminals() only a moment after run() returns, so each
-    // step waits for it before the next one reads it. Steps run in key order.
+    // The stack starts this mod the first time it shows it and keeps it alive after, so each
+    // Leader c arrives as a new shared("copy") request from the nav mod, not as a new start.
     cx.spawn(async (cx) => {
-      this.cur = (await this.apply(cx, "terminal.select", { at: "cursor" }))?.end ?? { row: 0, col: 0 };
-      this.anchor = this.cur.row;
-      this.rowsLoad = this.fetchRows();
-      this.poll(cx);
-      while (!this.done) {
-        if (!this.queue.length) await new Promise((resolve) => (this.wake = resolve));
-        const step = this.queue.shift();
-        if (step) await step(cx);
+      for (;;) {
+        const req = shared("copy");
+        if (req && req.at !== this.seen && Date.now() - req.at < 3000) {
+          this.seen = req.at;
+          await this.open(cx, req.terminal);
+        }
+        await new Promise((resolve) => cx.timer.after(50, () => resolve()));
       }
     });
   }
 
-  enqueue(step) {
-    this.queue.push(step);
-    this.wake?.();
-    this.wake = null;
+  async open(cx, terminal) {
+    this.reset();
+    this.terminal = terminal;
+    this.done = false;
+    this.handle.focus();
+    cx.notify();
+    await this.load();
+    if (this.done) return;
+    this.handle.focus();
+    cx.notify();
   }
 
-  info() {
-    return terminals().find((t) => t.address === this.terminal);
+  reset() {
+    this.rows = null;
+    this.cur = { row: 0, col: 0 };
+    this.want = 0;
+    this.top = 0;
+    this.visual = null;
+    this.count = "";
+    this.pending = null;
+    this.prompt = null;
+    this.search = null;
+    this.lastFind = null;
+    this.lastKey = null;
+    this.message = "";
   }
 
-  selection() {
-    return this.info()?.selection ?? null;
-  }
 
-  // Shell panes have history; alternate-screen panes (Claude Code, Vim) are only their screen.
-  view() {
-    const t = this.info();
-    const scroll = panes().find((p) => p.terminal === this.terminal)?.scroll;
-    const rows = t?.rows ?? 1;
-    return {
-      cols: t?.cols ?? 1,
-      total: scroll?.total ?? rows,
-      top: scroll?.offset ?? 0,
-      len: scroll?.len ?? rows,
-      scrolls: !!scroll,
-    };
-  }
-
-  async apply(cx, name, args) {
-    const before = JSON.stringify(this.selection());
-    run(name, { terminal: this.terminal, ...args });
-    for (let i = 0; i < 10 && JSON.stringify(this.selection()) === before; i++) {
-      await new Promise((resolve) => cx.timer.after(10, () => resolve()));
+  async load() {
+    const t = terminals().find((x) => x.address === this.terminal);
+    const cols = t?.cols ?? 200;
+    const r = await hc(["read", "--json", "--lines", String(HISTORY), this.terminal]);
+    if (r.code !== 0) {
+      this.rows = [];
+      this.message = r.stderr.trim() || "hc read failed";
+      return;
     }
-    return this.selection();
+    const lines = JSON.parse(r.stdout).text.split("\n");
+    this.rows = [];
+    for (const line of lines) this.rows.push(...this.wrap(line, cols));
+    let last = this.rows.length - 1;
+    while (last > 0 && !this.rows[last].text.trim()) last--;
+    this.cur = { row: last, col: 0 };
+    this.top = Math.max(0, last - this.visibleRows() + 1);
+    this.anchor = true;
   }
 
-  async readRows() {
-    if (!this.rows) await this.rowsLoad;
-  }
-
-  // An agent rewrites its screen while it works, and a motion on old text lands on whatever
-  // moved there since. `hc read` takes over 100 ms from a mod, too slow to wait for on each key,
-  // so the text is read again behind the motions while copy mode is open.
-  poll(cx) {
-    cx.spawn(async (cx) => {
-      await this.rowsLoad;
-      while (!this.done) {
-        await new Promise((resolve) => cx.timer.after(150, () => resolve()));
-        if (!this.done) await this.fetchRows();
-      }
-    });
-  }
-
-  // `hc read` joins wrapped lines and trims trailing blank rows, so the text is wrapped again
-  // at the pane width and its last row is lined up with the row the cursor had at the start,
-  // where the prompt is. An alternate screen comes back as its rows from the top, so it maps one
-  // to one even when blank rows at its bottom are trimmed.
-  // Only the history from a page above the cursor is read, because long history is slow to read.
-  async fetchRows() {
-    const v = this.view();
-    const lines = Math.max(0, v.total - v.len - (Math.min(this.cur.row, this.anchor) - v.len));
-    const r = await hc(["read", "--json", "--lines", String(lines), this.terminal]);
-    if (r.code !== 0) return (this.rows = null);
-    const { text, how } = JSON.parse(r.stdout);
+  // `hc read` joins wrapped lines, so they are wrapped again at the pane width to look as they
+  // did. `joined` marks a row that continues the one above: a yank across it adds no newline.
+  // A wide character counts two cells and wraps whole, as the terminal draws it.
+  wrap(line, cols) {
     const rows = [];
-    for (const line of text.split("\n")) rows.push(...this.cells(line, v.cols));
-    this.rowsFirst = how === "screen" && !v.scrolls ? 0 : this.anchor - (rows.length - 1);
-    this.rows = rows;
-  }
-
-  // `hc read` gives characters, but selections count cells: an emoji or CJK character takes two
-  // (here the character twice, so it stays one word), a combining mark or a joined emoji none.
-  // A wide character that does not fit at the end of a row wraps whole and leaves a blank cell.
-  cells(line, cols) {
-    const rows = [];
-    let row = [];
-    let joined = false;
+    let chars = [];
+    let width = 0;
     for (const ch of line) {
-      if (joined) {
-        joined = false;
-        continue;
-      }
-      if (ch === "‍") {
-        joined = true;
-        continue;
-      }
-      if (ch === "️" && row.length && row.at(-1) !== row.at(-2)) row.push(row.at(-1));
-      if (/\p{M}/u.test(ch)) continue;
       const w = WIDE.test(ch) ? 2 : 1;
-      if (row.length + w > cols) {
-        while (row.length < cols) row.push(" ");
-        rows.push(row);
-        row = [];
+      if (width + w > cols && chars.length) {
+        rows.push(chars);
+        chars = [];
+        width = 0;
       }
-      row.push(ch);
-      if (w === 2) row.push(ch);
+      chars.push(ch);
+      width += w;
     }
-    rows.push(row);
-    return rows;
+    rows.push(chars);
+    return rows.map((c, i) => ({ chars: c, text: c.join(""), joined: i > 0 }));
   }
 
-  row(r) {
-    return this.rows?.[r - this.rowsFirst] ?? [];
+  // The terminal's font and line height, so the snapshot reads like the pane it came from.
+  // font_size already has the zoom in it, but the terminal spaces its rows from the unzoomed size.
+  metrics() {
+    const s = settings();
+    const size = Number(s.font_size) || 14;
+    const lh = Number(s.terminal_line_height) || 1.3;
+    return { size, row: Math.round((size * lh) / (Number(s.zoom) || 1)), font: s.font_family ?? s.font };
+  }
+
+  visibleRows() {
+    return Math.max(1, Math.floor((this.height - 48) / this.metrics().row));
+  }
+
+  len(r) {
+    return this.rows[r]?.chars.length ?? 0;
   }
 
   char({ row, col }) {
-    return this.row(row)[col] ?? " ";
+    return this.rows[row]?.chars[col] ?? " ";
+  }
+
+  clampCol(row, col) {
+    const max = Math.max(0, this.len(row) - 1 + (this.visual ? 1 : 0));
+    return Math.max(0, Math.min(max, col));
   }
 
   step(p, dir) {
-    const { cols, total } = this.view();
     const col = p.col + dir;
-    if (col >= 0 && col < cols) return { row: p.row, col };
+    if (col >= 0 && col < Math.max(1, this.len(p.row))) return { row: p.row, col };
     const row = p.row + dir;
-    if (row < 0 || row >= total) return null;
-    return { row, col: dir > 0 ? 0 : cols - 1 };
+    if (row < 0 || row >= this.rows.length) return null;
+    return { row, col: dir > 0 ? 0 : Math.max(0, this.len(row) - 1) };
   }
 
-  // Vim motions over the cells: w and e go forward, b goes back; big words split on spaces only.
+  // Vim word motions across rows; big words split on spaces only.
   word(motion, big) {
-    const dir = motion === "b" ? -1 : 1;
     const k = (p) => kind(this.char(p), big);
     let p = this.cur;
     let next;
@@ -185,187 +153,407 @@ export default class Copy extends View {
       }
       return p;
     }
+    const dir = motion === "b" ? -1 : 1;
     if (!(next = this.step(p, dir))) return p;
     p = next;
     while (!k(p) && (next = this.step(p, dir))) p = next;
     const cls = k(p);
-    while ((next = this.step(p, dir)) && k(next) === cls && cls) p = next;
+    while ((next = this.step(p, dir)) && k(next) === cls) p = next;
     return p;
   }
 
-  lineEdge(edge) {
-    const chars = this.row(this.cur.row);
-    if (edge === "end") return Math.max(0, chars.length - 1);
-    const first = chars.findIndex((ch) => !space(ch));
-    return first < 0 ? 0 : first;
+  find(op, ch, row, col) {
+    const chars = this.rows[row].chars;
+    const fwd = op === "f" || op === "t";
+    const till = op === "t" || op === "T";
+    const from = col + (fwd ? 1 : -1) + (till && this.lastFindRepeat ? (fwd ? 1 : -1) : 0);
+    const i = fwd ? chars.indexOf(ch, from) : chars.lastIndexOf(ch, from);
+    if (i < 0) return null;
+    return { row, col: till ? i - (fwd ? 1 : -1) : i };
   }
 
-  async target(key) {
-    const v = this.view();
+  paragraph(dir) {
+    let r = this.cur.row + dir;
+    while (r > 0 && r < this.rows.length - 1 && !this.rows[r].text.trim()) r += dir;
+    while (r > 0 && r < this.rows.length - 1 && this.rows[r].text.trim()) r += dir;
+    return { row: Math.max(0, Math.min(this.rows.length - 1, r)), col: 0 };
+  }
+
+  matchRe() {
+    if (!this.search) return null;
+    const flags = /[A-Z]/.test(this.search.text) ? "g" : "gi";
+    try {
+      return new RegExp(this.search.word ? `\\b${escapeRe(this.search.text)}\\b` : escapeRe(this.search.text), flags);
+    } catch {
+      return null;
+    }
+  }
+
+  // Finds the next match after the cursor (or before it, going back), wrapping like vim.
+  // Columns are character offsets in the row, the same unit the cursor uses.
+  searchNext(back) {
+    const re = this.matchRe();
+    if (!re) return null;
+    const n = this.rows.length;
+    const hits = (r) => {
+      const out = [];
+      const text = this.rows[r].text;
+      for (const m of text.matchAll(re)) out.push(Array.from(text.slice(0, m.index)).length);
+      return out;
+    };
+    for (let i = 0; i <= n; i++) {
+      const r = (this.cur.row + (back ? -i : i) + n * 2) % n;
+      let cols = hits(r);
+      if (i === 0) cols = cols.filter((c) => (back ? c < this.cur.col : c > this.cur.col));
+      else if (i === n) cols = cols.filter((c) => (back ? c >= this.cur.col : c <= this.cur.col));
+      if (cols.length) return { row: r, col: back ? cols.at(-1) : cols[0] };
+    }
+    this.message = `not found: ${this.search.text}`;
+    return null;
+  }
+
+  wordUnderCursor() {
+    const chars = this.rows[this.cur.row].chars;
+    const isWord = (ch) => kind(ch ?? " ", false) === 1;
+    let s = this.cur.col;
+    while (s < chars.length && !isWord(chars[s])) s++;
+    if (s >= chars.length) return null;
+    let e = s;
+    while (s > 0 && isWord(chars[s - 1])) s--;
+    while (e < chars.length && isWord(chars[e])) e++;
+    return chars.slice(s, e).join("");
+  }
+
+  // Where a motion takes the cursor, or null when it does not move it.
+  target(key, n) {
     const { row, col } = this.cur;
-    const clampRow = (r) => Math.max(0, Math.min(v.total - 1, r));
-    const half = Math.max(1, Math.floor(v.len / 2));
+    const last = this.rows.length - 1;
+    const clampRow = (r) => Math.max(0, Math.min(last, r));
+    const page = this.visibleRows();
+    const half = Math.max(1, Math.floor(page / 2));
     switch (key) {
       case "h":
-        return { row, col: Math.max(0, col - 1) };
+        return { row, col: Math.max(0, col - n) };
       case "l":
-        return { row, col: Math.min(v.cols - 1, col + 1) };
+        return { row, col: col + n };
       case "j":
-        return { row: clampRow(row + 1), col };
+        return { row: clampRow(row + n), col: this.want, keep: true };
       case "k":
-        return { row: clampRow(row - 1), col };
+        return { row: clampRow(row - n), col: this.want, keep: true };
       case "ctrl-d":
-        return { row: clampRow(row + half), col };
+        return { row: clampRow(row + half * n), col: this.want, keep: true, scroll: half * n };
       case "ctrl-u":
-        return { row: clampRow(row - half), col };
+        return { row: clampRow(row - half * n), col: this.want, keep: true, scroll: -half * n };
       case "ctrl-f":
-        return { row: clampRow(row + v.len), col };
+        return { row: clampRow(row + page * n), col: this.want, keep: true, scroll: page * n };
       case "ctrl-b":
-        return { row: clampRow(row - v.len), col };
+        return { row: clampRow(row - page * n), col: this.want, keep: true, scroll: -page * n };
       case "g":
-        return { row: 0, col: 0 };
+        return { row: this.count ? clampRow(n - 1) : 0, col: 0 };
       case "G":
-        return { row: v.total - 1, col: 0 };
+        return { row: this.count ? clampRow(n - 1) : last, col: 0 };
+      case "H":
+        return { row: this.top, col: 0 };
+      case "M":
+        return { row: clampRow(this.top + Math.floor(Math.min(page, this.rows.length - this.top) / 2)), col: 0 };
+      case "L":
+        return { row: clampRow(this.top + page - 1), col: 0 };
       case "0":
         return { row, col: 0 };
+      case "^": {
+        const i = this.rows[row].chars.findIndex((ch) => !space(ch));
+        return { row, col: Math.max(0, i) };
+      }
+      case "$":
+        return { row, col: Infinity };
+      case "{":
+        return this.paragraph(-1);
+      case "}":
+        return this.paragraph(1);
+      case "n":
+      case "N":
+        return this.searchNext(this.search && (key === "N") !== this.search.back);
     }
-    await this.readRows();
-    if (key === "$") return { row, col: this.lineEdge("end") };
-    if (key === "^") return { row, col: this.lineEdge("start") };
-    return this.word(key.toLowerCase(), key !== key.toLowerCase());
-  }
-
-  async move(cx, key) {
-    const to = await this.target(key);
-    if (!this.visual) {
-      run("terminal.select", { terminal: this.terminal, at: to });
-      this.cur = to;
-      this.reveal(to.row);
-      return;
+    if ("wbeWBE".includes(key)) {
+      const from = this.cur;
+      for (let i = 0; i < n; i++) this.cur = this.word(key.toLowerCase(), key !== key.toLowerCase());
+      const to = this.cur;
+      this.cur = from;
+      return to;
     }
-    // The terminal drops a selection when the program redraws under it, and adjust_selection
-    // then fails, so the selection is made again from where visual mode started.
-    let steps = this.steps(this.cur, to, key);
-    if (!this.selection()) {
-      await this.apply(cx, "terminal.select", { at: this.vstart, mode: this.visual === "line" ? "line" : "cell" });
-      steps = this.steps(this.vstart, to, key);
+    return null;
+  }
+
+  // j and k keep the column the cursor wanted, as vim does, so a short row does not pull it left.
+  moveTo(to) {
+    if (!to) return;
+    if (!to.keep) this.want = to.col;
+    this.cur = { row: to.row, col: this.clampCol(to.row, to.col) };
+    if (to.scroll) this.scroll(to.scroll);
+    this.reveal();
+  }
+
+  scroll(by) {
+    const max = Math.max(0, this.rows.length - this.visibleRows());
+    this.top = Math.max(0, Math.min(max, this.top + by));
+  }
+
+  reveal() {
+    const page = this.visibleRows();
+    if (this.cur.row < this.top) this.top = this.cur.row;
+    else if (this.cur.row >= this.top + page) this.top = this.cur.row - page + 1;
+  }
+
+  // Keeps the cursor on screen after the view moved under it (ctrl-e, ctrl-y, the wheel).
+  follow() {
+    const page = this.visibleRows();
+    const row = Math.max(this.top, Math.min(this.top + page - 1, this.cur.row));
+    if (row !== this.cur.row) this.cur = { row, col: this.clampCol(row, this.want) };
+  }
+
+  range() {
+    if (!this.visual) return null;
+    let [a, b] = [this.vstart, this.cur];
+    if (a.row > b.row || (a.row === b.row && a.col > b.col)) [a, b] = [b, a];
+    return { a, b };
+  }
+
+  selectedText() {
+    const r = this.range();
+    if (!r) return "";
+    let out = "";
+    for (let row = r.a.row; row <= r.b.row; row++) {
+      const chars = this.rows[row].chars;
+      const line = this.visual === "line";
+      const from = line || row !== r.a.row ? 0 : r.a.col;
+      const to = line || row !== r.b.row ? chars.length : r.b.col + 1;
+      if (row > r.a.row && !this.rows[row].joined) out += "\n";
+      out += chars.slice(from, to).join("");
     }
-    if (!steps.length) return;
-    const last = steps.pop();
-    for (const direction of steps) run("terminal.adjust_selection", { terminal: this.terminal, direction });
-    const sel = await this.apply(cx, "terminal.adjust_selection", { direction: last });
-    this.cur = sel?.end ?? to;
+    return this.visual === "line" ? out.replace(/[ \t]+$/gm, "") + "\n" : out;
   }
 
-  // A selection can only grow from its anchor by adjust_selection, one cell at a time.
-  steps(from, to, key) {
-    if (to.row === 0 && to.col === 0 && key === "g") return ["home"];
-    if (key === "G") return ["end"];
-    const steps = [];
-    for (let i = from.row; i < to.row; i++) steps.push("down");
-    for (let i = from.row; i > to.row; i--) steps.push("up");
-    for (let i = from.col; i < to.col; i++) steps.push("right");
-    for (let i = from.col; i > to.col; i--) steps.push("left");
-    return steps;
-  }
-
-  reveal(row) {
-    const v = this.view();
-    if (!v.scrolls) return;
-    if (row < v.top) run("terminal.scroll", { terminal: this.terminal, lines: row - v.top });
-    else if (row >= v.top + v.len) run("terminal.scroll", { terminal: this.terminal, lines: row - (v.top + v.len - 1) });
-  }
-
-  setVisual(mode) {
-    this.visual = mode;
-    this.enqueue((cx) => {
-      this.vstart = this.cur;
-      return this.apply(cx, "terminal.select", { at: this.cur, mode: mode === "line" ? "line" : "cell" });
-    });
+  yank(cx, text) {
+    if (text) cx.write_to_clipboard(text);
+    this.exit();
   }
 
   exit() {
     if (this.done) return;
     this.done = true;
-    this.wake?.();
-    if (this.terminal) {
-      run("terminal.clear_selection", { terminal: this.terminal });
-      run("terminal.scroll", { terminal: this.terminal, to: "bottom" });
+    run("layout.select", { stack: STACK, child: "main" });
+    if (this.terminal) run("pane.focus", { terminal: this.terminal });
+  }
+
+  promptKey(e) {
+    const p = this.prompt;
+    if (e.key === "escape") this.prompt = null;
+    else if (e.key === "backspace") {
+      if (!p.text) this.prompt = null;
+      else p.text = Array.from(p.text).slice(0, -1).join("");
+    } else if (e.key === "enter") {
+      this.prompt = null;
+      if (p.text) this.search = { text: p.text, back: p.back };
+      this.moveTo(this.searchNext(this.search?.back));
+    } else if (e.key_char && !e.modifiers.control && !e.modifiers.platform) p.text += e.key_char;
+  }
+
+  onKey(e, cx) {
+    this.message = "";
+    this.anchor = false;
+    if (this.prompt) return this.promptKey(e);
+    if (this.pending) {
+      const op = this.pending;
+      this.pending = null;
+      const ch = e.key === "space" ? " " : e.key_char;
+      if (!ch || e.key === "escape") return;
+      this.lastFind = { op, ch };
+      return this.moveTo(this.find(op, ch, this.cur.row, this.cur.col));
     }
-    closeOverlay(props().overlay);
-  }
-
-  // Esc and a click beside the popup close it without onKey, so clean up here too.
-  async close() {
-    this.exit();
-  }
-
-  onKey(e) {
     let k = e.modifiers.shift && e.key_char ? e.key_char : e.key;
-    k = { left: "h", down: "j", up: "k", right: "l", home: "0", end: "$" }[k] ?? k;
+    k = { left: "h", down: "j", up: "k", right: "l", home: "0", end: "$", pageup: "ctrl-b", pagedown: "ctrl-f" }[k] ?? k;
     if (e.modifiers.control) k = "ctrl-" + k;
-    const visual = this.visual;
-    if (/^([hjklgG0^$wbeWBE]|ctrl-[udfb])$/.test(k)) this.enqueue((cx) => this.move(cx, k));
-    else if (k === "v" || k === "space") this.setVisual(visual === "cell" ? null : "cell");
-    else if (k === "V") this.setVisual(visual === "line" ? null : "line");
-    else if (k === "y" || k === "enter") {
-      this.enqueue(async () => {
-        if (visual) run("terminal.copy");
-        this.exit();
-      });
-    } else if (k === "/") {
-      this.enqueue(async () => {
-        this.exit();
-        run("terminal.search");
-      });
-    } else if (k === "q" || k === "escape") {
-      if (visual) this.setVisual(null);
-      else this.enqueue(async () => this.exit());
+    if (e.modifiers.platform) k = "cmd-" + k;
+    if (/^[0-9]$/.test(k) && (k !== "0" || this.count)) {
+      this.count += k;
+      return;
     }
+    const n = Math.max(1, Number(this.count) || 1);
+    if (k === "g" && this.lastKey !== "g") {
+      this.lastKey = "g";
+      return;
+    }
+    this.lastKey = null;
+    if (!this.rows?.length) {
+      if (k === "q" || k === "escape") this.exit();
+      return;
+    }
+
+    if ("fFtT".includes(k) && k.length === 1) this.pending = k;
+    else if (k === ";" || k === ",") {
+      const f = this.lastFind;
+      if (f) {
+        const flip = { f: "F", F: "f", t: "T", T: "t" };
+        this.lastFindRepeat = true;
+        this.moveTo(this.find(k === "," ? flip[f.op] : f.op, f.ch, this.cur.row, this.cur.col));
+        this.lastFindRepeat = false;
+      }
+    } else if (k === "/" || k === "?") this.prompt = { back: k === "?", text: "" };
+    else if (k === "*" || k === "#") {
+      const w = this.wordUnderCursor();
+      if (w) {
+        this.search = { text: w, back: k === "#", word: true };
+        this.moveTo(this.searchNext(k === "#"));
+      }
+    } else if (k === "ctrl-e" || k === "ctrl-y") {
+      this.scroll(k === "ctrl-e" ? n : -n);
+      this.follow();
+    } else if (k === "v" || k === "V" || k === "space") {
+      const mode = k === "V" ? "line" : "char";
+      if (this.visual === mode) this.visual = null;
+      else {
+        if (!this.visual) this.vstart = this.cur;
+        this.visual = mode;
+      }
+    } else if (k === "o" && this.visual) [this.vstart, this.cur] = [this.cur, this.vstart];
+    else if (k === "y" || k === "enter" || k === "cmd-c") this.yank(cx, this.selectedText());
+    else if (k === "Y") {
+      this.vstart = this.cur;
+      this.cur = { row: Math.min(this.rows.length - 1, this.cur.row + n - 1), col: 0 };
+      this.visual = "line";
+      this.yank(cx, this.selectedText());
+    } else if (k === "escape" || k === "ctrl-c") {
+      if (this.visual) this.visual = null;
+      else this.exit();
+    } else if (k === "q") this.exit();
+    else this.moveTo(this.target(k, n));
+    this.count = "";
+  }
+
+  // Splits a row into runs that share one look: cursor, selection, search match or plain.
+  runs(r, re, sel) {
+    const chars = this.rows[r].chars;
+    const n = Math.max(chars.length, r === this.cur.row ? this.cur.col + 1 : 0);
+    const look = new Array(n).fill(0);
+    if (re) {
+      const text = this.rows[r].text;
+      for (const m of text.matchAll(re)) {
+        const s = Array.from(text.slice(0, m.index)).length;
+        for (let i = 0; i < Array.from(m[0]).length; i++) look[s + i] = 1;
+      }
+    }
+    if (sel && r >= sel.a.row && r <= sel.b.row) {
+      const line = this.visual === "line";
+      const from = line || r !== sel.a.row ? 0 : sel.a.col;
+      const to = line || r !== sel.b.row ? n - 1 : sel.b.col;
+      for (let i = from; i <= to && i < n; i++) look[i] = 2;
+    }
+    if (r === this.cur.row) look[this.cur.col] = 3;
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const ch = chars[i] ?? " ";
+      if (out.length && out.at(-1).look === look[i]) out.at(-1).text += ch;
+      else out.push({ look: look[i], text: ch });
+    }
+    return out;
   }
 
   render() {
     const t = theme();
-    const mode = this.visual === "line" ? "COPY · V-LINE" : this.visual ? "COPY · VISUAL" : "COPY";
-    const panel = v_flex()
-      .w(520)
-      .p(14)
-      .gap(10)
-      .rounded(10)
-      .border_1()
-      .border_color(t.border)
-      .bg(t.popover)
-      .text_size(12)
-      .child(div().text_color(this.visual ? t.accent : t.muted).child(mode))
-      .child(
-        h_flex()
-          .flex_wrap()
-          .gap_x(18)
-          .gap_y(6)
-          .children(
-            HELP.map(([k, label]) =>
-              h_flex()
-                .w(100)
-                .gap(8)
-                .child(div().w(40).text_color(t.accent).child(k))
-                .child(div().text_color(t.foreground).child(label)),
+    const m = this.metrics();
+    const page = this.visibleRows();
+    const sel = this.range();
+    const re = this.matchRe();
+    const looks = [
+      null,
+      [t.ansi3, t.background],
+      [t.selection, t.foreground],
+      [t.accent, t.accent_foreground ?? t.background],
+    ];
+    const lines = [];
+    if (this.rows) {
+      for (let r = this.top; r < Math.min(this.rows.length, this.top + page); r++) {
+        lines.push(
+          h_flex()
+            .h(m.row)
+            .flex_none()
+            .whitespace_nowrap()
+            .overflow_hidden()
+            .when(this.visual === "line" && sel && r >= sel.a.row && r <= sel.b.row, (el) => el.bg(t.selection))
+            .children(
+              this.runs(r, re, sel).map(({ look, text }) => {
+                const span = div().child(text);
+                return looks[look] ? span.bg(looks[look][0]).text_color(looks[look][1]) : span;
+              }),
             ),
-          ),
-      );
+        );
+      }
+    }
+    const mode = this.visual === "line" ? "V-LINE" : this.visual ? "VISUAL" : "COPY";
+    const left = this.prompt
+      ? (this.prompt.back ? "?" : "/") + this.prompt.text + "▏"
+      : this.message || (this.rows ? HINT : "Reading…");
+    const where = this.rows ? `${this.count}${this.count ? " " : ""}${this.cur.row + 1}/${this.rows.length}` : "";
+    const bar = h_flex()
+      .h(32)
+      .flex_none()
+      .px(12)
+      .gap(12)
+      .bg(t.chrome)
+      .border_t_1()
+      .border_color(t.border)
+      .text_size(12)
+      .child(div().px(6).rounded(4).bg(this.visual ? t.accent : t.raised).text_color(this.visual ? t.accent_foreground : t.foreground).child(mode))
+      .child(div().flex_1().min_w_0().truncate().text_color(this.prompt ? t.foreground : t.muted).child(left))
+      .child(div().text_color(t.muted).child(where));
     return v_flex()
       .id("copy")
       .track_focus(this.handle)
       .on_key_down((e, cx) => {
         if (["shift", "control", "alt", "platform", "function"].includes(e.key)) return;
-        this.onKey(e);
+        this.onKey(e, cx);
         cx.stop_propagation();
         cx.notify();
       })
+      .on_mouse_down("left", (_e, cx) => {
+        this.handle.focus();
+        cx.stop_propagation();
+      })
+      .on_scroll_wheel((e, cx) => {
+        const lines = e.delta_lines?.y ?? e.delta.y / m.row;
+        this.wheel = (this.wheel ?? 0) - lines;
+        const by = Math.trunc(this.wheel);
+        if (!by || !this.rows) return;
+        this.wheel -= by;
+        this.scroll(by);
+        this.follow();
+        cx.notify();
+      })
+      .on_size_change((size, cx) => {
+        // The reported size has the zoom applied, but the rows are drawn without it.
+        const height = size.height / (Number(settings().zoom) || 1);
+        // A hidden stack child can report no height; keep the last real one.
+        if (height === this.height || height < this.metrics().row) return;
+        this.height = height;
+        if (!this.rows) return cx.notify();
+        if (this.anchor) this.top = Math.max(0, this.cur.row - this.visibleRows() + 1);
+        else this.reveal();
+        this.anchor = false;
+        cx.notify();
+      })
       .size_full()
-      .justify_end()
-      .items_end()
-      .pr(16)
-      .pb(52)
-      .child(panel);
+      .bg(t.background)
+      .text_color(t.foreground)
+      .child(
+        v_flex()
+          .flex_1()
+          .min_h_0()
+          .overflow_hidden()
+          .p(8)
+          .font_family(m.font)
+          .text_size(m.size)
+          .children(lines),
+      )
+      .child(bar);
   }
 }

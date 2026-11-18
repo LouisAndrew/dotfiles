@@ -52,7 +52,8 @@ const KEYS = [
   ["$", "rename space", () => run("space.rename", {})],
   ["b", "sidebar", () => run("layout.toggle", { id: "sidebar" })],
   ["space", "palette", () => run("app.palette", {})],
-  ["c", "copy mode", () => run("mod.open", { name: "copy" })],
+  // The nav mod runs it: this popup closes first, and closing a mod cancels its hc calls.
+  ["c", "copy mode", () => run("nav.copy")],
   ["H", "prev agent", () => run("agent.prev", {})],
   ["L", "next agent", () => run("agent.next", {})],
   ["J", "sub-agent", showSubAgent],
