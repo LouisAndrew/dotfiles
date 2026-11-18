@@ -2,7 +2,8 @@
   "theme": "custom:x",
   "preferredNotifChannel": "ghostty",
   "enabledPlugins": {
-    "simple-english@simple-english": true
+    "simple-english@simple-english": true,
+    "cc-plugin-diff@builtin": false
   },
   "extraKnownMarketplaces": {
     "simple-english": {

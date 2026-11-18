@@ -18,7 +18,7 @@ For the full manual, run `hc --skill`. If a command in this skill fails or you n
 
 ```sh
 hc run --bg --name review --cwd ~/dev/app claude "Review src/auth only. Read-only. Do not start agents. Report with hc send $HC_TERMINAL_ID when done or stuck."
-hc run --bg --name fix --cwd ~/dev/app codex "Fix the failing login test. Edit only src/login. Do not start agents. Report with hc send $HC_TERMINAL_ID when done or stuck."
+hc run --bg --name fix --cwd ~/dev/app codex --no-daemon "Fix the failing login test. Edit only src/login. Do not start agents. Report with hc send $HC_TERMINAL_ID when done or stuck."
 ```
 
 Follow these rules for every agent:
@@ -29,6 +29,8 @@ Follow these rules for every agent:
 - Tell the agent not to start more agents, unless I ask for that.
 - Tell the agent to report with `hc send $HC_TERMINAL_ID`. When you write the task, expand the variable. The agent then gets your address.
 - Run agents interactive, never in a one-shot print mode such as `claude -p`. I must be able to watch and steer them.
+- Start Codex with `--no-daemon`. Without it, Codex stops at a daemon prompt, and its commands run outside hc.
+- Codex reports `working`, `blocked` and `done` to hc only through the hooks in `~/.codex/hooks.json` that call `~/dev/dotfiles/codex/hc-status.sh`. If a Codex child shows status `null` in `hc get`, the hooks are missing or not trusted. Then read its screen at each `reason: timeout`, and tell me about a prompt at once.
 - If two agents edit code, give each one its own git worktree. Agents in the same folder overwrite each other.
 
 After the start, read `first_message.sent` in the JSON result. If it is `false`, the task did not arrive. Run `hc read <name>` and fix the cause, for example a trust dialog: `hc keys <name> down enter`. Then send the task. Do not resend before you read the screen.

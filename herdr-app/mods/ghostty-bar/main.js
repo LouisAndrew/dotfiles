@@ -131,6 +131,20 @@ export default class TerminalsBar extends View {
             .truncate()
             .child(div().flex_none().text_color(c.active ? C.text : "#c4c6ca").child(c.name))
             .when(Boolean(where), (el) => el.child(div().truncate().text_color(C.dim).child(where))),
+        )
+        .when(c.zoomed && c.panes > 1, (el) =>
+          el.child(
+            div()
+              .flex_none()
+              .ml_auto()
+              .px(6)
+              .rounded(5)
+              .border_1()
+              .border_color(C.edge)
+              .text_size(11)
+              .text_color(C.dim)
+              .child(`+${c.panes - 1}`),
+          ),
         );
     };
 

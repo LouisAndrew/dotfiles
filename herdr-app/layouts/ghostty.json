@@ -114,6 +114,13 @@
               "content": {
                 "agent": "focused"
               }
+            },
+            {
+              "id": "copy",
+              "type": "block",
+              "content": {
+                "mod": "copy"
+              }
             }
           ]
         },

@@ -3,7 +3,7 @@
 // split_right/split_down open the new shell in the WSL folder of the focused pane (see split()).
 
 import { View, div } from "gpui-kit";
-import { panes, focused, hc, run, checking, nextCommand } from "herdr";
+import { panes, focused, hc, run, checking, nextCommand, setShared } from "herdr";
 
 const KEYS = { left: "ctrl+h", down: "ctrl+j", up: "ctrl+k", right: "ctrl+l" };
 const VIM = new Set(["nvim", "vim"]);
@@ -26,6 +26,7 @@ export default class Nav extends View {
       for (;;) {
         const command = await nextCommand();
         if (KEYS[command]) await this.go(command);
+        else if (command === "copy") await this.copy();
         else if (SPLITS[command]) this.split(SPLITS[command]);
       }
     });
@@ -42,6 +43,19 @@ export default class Nav extends View {
       return;
     }
     run("pane.go", { direction: dir });
+  }
+
+  // Leader c. Claude Code draws on the alternate screen, so the copy mod sees only its last
+  // screen; its own transcript view (ctrl+o) holds the whole conversation.
+  async copy() {
+    const f = focused();
+    const terminal = f?.shown ?? f?.terminal;
+    const pane = panes().find((p) => p.terminal === terminal);
+    if (!terminal) return;
+    if (pane?.program?.key === "claude") return void (await hc(["keys", terminal, "ctrl+o"]));
+    // The copy mod shows in the "copy" child of the main stack, so the sidebar and tab bar stay.
+    setShared("copy", { terminal, at: Date.now() });
+    run("layout.select", { stack: "main-stack", child: "copy" });
   }
 
   split(direction) {

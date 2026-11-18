@@ -28,7 +28,7 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    ```sh
    hc run --bg --name crosscheck-<ticket> --cwd <main repo> \
-     codex -m gpt-6.1-sol -s workspace-write --add-dir <report dir> "<task>"
+     codex --no-daemon -m gpt-6.1-sol -s workspace-write --add-dir <report dir> "<task>"
    ```
 
    Use this task:
@@ -47,12 +47,12 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    Write the report to <report path>. For each finding, give: the number of the point, a severity (high, medium or low), the item or line in the fact file, the evidence with file:line, and a suggested change. Put the facts that you confirmed in one short list at the end. Mark each claim without a source in the code as unverified.
 
-   When the report is written, run: hc send <your address> "crosscheck done: <report path>"
+   When the report is written, end your turn. Do not run hc send.
    ```
 
 5. Read `first_message.sent` in the JSON result. If it is `false`, follow the herdr-agents skill: read the screen, fix the cause, then send the task.
 
-6. Wait with `hc wait --children any`. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read crosscheck-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user.
+6. Wait with `hc wait --children any`. The Codex sandbox blocks `hc send`, so Codex does not message you. The status `done` shows that its turn ended. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read crosscheck-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user. Ask the user at once with your question tool, and quote what the prompt asks, so that the user gets a notification. If `hc get` shows status `null` for the child, the Codex status hooks do not work. Then read its screen at each `reason: timeout` to find a prompt.
 
 7. Read the report file. If the file does not exist, read the screen of the child and find out why.
 
@@ -63,11 +63,11 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
    If you disagree with a high finding, send your reason to Codex with `hc send crosscheck-<ticket> "<reason>"`, and wait for its answer once. Then decide.
 
-9. Update the fact file with the true findings: correct the facts, move settled inferences to facts, and change or add plan items with their "Done when" lines. Follow the file rules of the intent skill. If a true finding needs a decision from the user, add it under "Open decisions" and do not decide it.
+9. Update the fact file with the true findings, in the short style that the intent skill sets: correct the facts, move settled inferences to facts, and change or add plan items with their "Done when" lines. Follow the file rules of the intent skill. If a true finding needs a decision from the user, add it under "Open decisions" and do not decide it.
 
-10. Report in the chat:
+10. Report in the chat as a short summary. If the user asks for detail, give it:
     1. One line: how many findings were true, false and unverified.
-    2. The changes in the fact file, one line each.
+    2. The new information, one short line each. Do not list each edit of the fact file.
     3. The false findings, each with your reason.
     4. The unverified findings, each with what can settle it.
     5. The faults in the intent file, quoted, with a suggested fix.
