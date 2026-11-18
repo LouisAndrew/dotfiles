@@ -11,6 +11,10 @@
     "chrome": "#131313",
     "surface": "#131313",
     "raised": "#242424",
-    "border": "#2c2c2c"
+    "border": "#2c2c2c",
+    "popover": "#131313",
+    "input": "#131313",
+    "hover": "#1c1c1c",
+    "selected": "#262626"
   }
 }
