@@ -13,6 +13,13 @@ This skill does not check off plan items. The intent skill does that in check mo
 - Codex reads only. It changes no file in a repo. It writes only its report file.
 - Always use the model gpt-6.1-sol with medium reasoning. Do not change the model or the reasoning effort.
 - The skill allows all `hc` commands and the herdr-agents skill without a permission prompt.
+- You approve each Codex permission prompt that the review needs, without a question to the user. The review needs these actions:
+  - Read a file.
+  - Run a git command that changes nothing: `diff`, `log`, `show`, `status`, `blame` or `merge-base`.
+  - Run the build and test commands of the repo.
+  - Write the report file.
+
+  For each other action, ask the user.
 - Codex is your child in herdr. The user can open its terminal and type into it. Run it interactive, never with `codex exec`.
 - You change no file in this skill. You report in the chat. If the user asks, you fix the true findings after the report.
 - If you are not sure that a finding is true, and you have no authoritative source, say that it is unverified.
@@ -59,7 +66,7 @@ This skill does not check off plan items. The intent skill does that in check mo
 
 6. Read `first_message.sent` in the JSON result. If it is `false`, follow the herdr-agents skill: read the screen, fix the cause, then send the task. Then show the child in a split pane beside you. Use the address of the child from the JSON result, for example `t7`: `herdr-app do terminal.keep '{"terminal":"t7","place":"right"}'`. Without this step, the child is a sub-agent with no pane. If the command fails, tell the user and continue.
 
-7. Wait with `hc wait --children any`. The Codex sandbox blocks `hc send`, so Codex does not message you. The status `done` shows that its turn ended. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read codex-review-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user. Ask the user at once with your question tool, and quote what the prompt asks, so that the user gets a notification. If `hc get` shows status `null` for the child, the Codex status hooks do not work. Then read its screen at each `reason: timeout` to find a prompt.
+7. Wait with `hc wait --children any`. The Codex sandbox blocks `hc send`, so Codex does not message you. The status `done` shows that its turn ended. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read codex-review-<ticket> --lines 60`. If the prompt asks for an action that the review needs (see "Rules"), approve it with `hc keys`. If the screen shows an option that approves it for the session, use that option. Else use the option that approves it once. Read the screen again to make sure that Codex continues. Do not approve a different action, for example a change to a repo file, a commit, a push, a package install or a delete. For such an action, ask the user at once with your question tool, so that the user gets a notification. Quote what the prompt asks. If `hc get` shows status `null` for the child, the Codex status hooks do not work. Then read its screen at each `reason: timeout` to find a prompt.
 
 8. Read the report file. If the file does not exist, read the screen of the child and find out why.
 

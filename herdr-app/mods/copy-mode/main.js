@@ -41,16 +41,16 @@
  * that line and row numbers agree with the terminal's. The text is a snapshot:
  * output that arrives later isn't in it.
  *
- * Wrapping: as with Vim's 'wrap', j and k move by whole lines and gj and gk by
- * the terminal's rows; the scrolling keys (ctrl-e, ctrl-d, ctrl-f...) also
- * move by rows, unlike Vim's, so a line taller than the view can still be
+ * Wrapping: j and k move by the terminal's rows, the same as gj and gk (Vim's
+ * j and k move by whole lines); the scrolling keys (ctrl-e, ctrl-d, ctrl-f...)
+ * also move by rows, unlike Vim's, so a line taller than the view can still be
  * read through. A line copies as the one line it is.
  *
  * Keys. {count} is an optional number typed first (3j, 2w, 5G, y3e).
  *
  *   Motions: move the cursor, extend a selection, or follow y
  *     h j k l, arrows   left, down, up, right (also Backspace, Space)
- *     gj gk             down / up a row, within a wrapped line
+ *     gj gk             down / up a row, within a wrapped line (also j k)
  *     w b e ge          next word / previous word / end of word / end of previous word
  *     W B E gE          the same for WORDs (runs of non-blanks)
  *     0 ^ $ g_          line start / first non-blank / line end / last non-blank
@@ -641,8 +641,8 @@ const MOTIONS = {
       col: Math.min(lineLength(m.rows, m.cursor.row), m.cursor.col + n),
     }),
   },
-  j: { type: LINEWISE, vertical: true, to: (m, n) => m.rowBy(n) },
-  k: { type: LINEWISE, vertical: true, to: (m, n) => m.rowBy(-n) },
+  j: { type: EXCLUSIVE, to: (m, n, _, op) => m.displayLineMotion(n, op) },
+  k: { type: EXCLUSIVE, to: (m, n, _, op) => m.displayLineMotion(-n, op) },
   "+": { type: LINEWISE, to: (m, n) => m.rowBy(n, firstNonBlank) },
   "-": { type: LINEWISE, to: (m, n) => m.rowBy(-n, firstNonBlank) },
   0: { type: EXCLUSIVE, to: (m) => ({ row: m.cursor.row, col: 0 }) },

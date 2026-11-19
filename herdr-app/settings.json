@@ -1,16 +1,16 @@
 {
-  "zoom": 1.2000000476837158,
+  "zoom": 1,
   "sounds": {
     "enabled": false
   },
   "font": "CommitMono Nonicons",
-  "font_size": 15.0,
-  "font_weight": 300,
+  "font_size": 16,
+  "font_weight": 200,
   "font_ligatures": false,
   "terminal_line_height": 1.399999976158142,
-  "terminal_cell_width": 1.0,
-  "terminal_scroll_speed": 1.0,
+  "terminal_cell_width": 1,
+  "terminal_scroll_speed": 1,
   "ui_font": "CommitMono Nonicons",
   "telemetry": false,
-  "minimum_contrast": 1.0
+  "minimum_contrast": 1
 }

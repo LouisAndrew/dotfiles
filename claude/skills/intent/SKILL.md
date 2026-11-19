@@ -50,7 +50,12 @@ For the fact file:
 
 - You own the file. Plan mode creates it or rewrites it.
 - Use no H1 heading. Use H2 and H3 headings only.
-- Keep it short. One line for each fact, decision and open decision. A plan item is a one-line title, at most three short sub-points, and a one-line "Done when". Leave out the detail that only matters during coding. If the user asks for detail, add it.
+- Keep it short. Write a summary, not an explanation. Add detail only when the user asks for it.
+  - A fact, decision or open decision is one short clause of about 12 words or less, then its source. Do not explain how the code works.
+  - Give the source as a file name and line, without the repo prefix when the work has one repo. Do not give a full path.
+  - Leave out a fact that does not change the plan.
+  - A plan item is a one-line title, at most two short sub-points, and a one-line "Done when".
+  - Leave out the detail that only matters during coding.
 - Keep the source on each fact, so a reader can check the fact again.
 - When you rewrite the file, keep the checked items of the plan checked, unless the plan item itself changed.
 - Do not uncheck an item that the user checked. If your evidence disagrees, say so in the chat.
