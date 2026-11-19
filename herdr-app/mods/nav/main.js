@@ -3,11 +3,13 @@
 // split_right/split_down open the new shell in the WSL folder of the focused pane (see split()).
 
 import { View, div } from "gpui-kit";
-import { panes, focused, hc, run, checking, nextCommand } from "herdr";
+import { panes, focused, hc, run, checking, nextCommand, openOverlay } from "herdr";
 
 const KEYS = { left: "ctrl+h", down: "ctrl+j", up: "ctrl+k", right: "ctrl+l" };
 const VIM = new Set(["nvim", "vim"]);
 const SPLITS = { split_right: "right", split_down: "down" };
+// The "tabs" block of layouts/ghostty.json.
+const TAB_BAR = 38;
 
 // On Windows the core sees only wsl.exe, whose folder is always the Windows home, so a plain
 // split starts in ~. The shell's title ("user@host:~/dir") is the only place the WSL folder shows.
@@ -46,9 +48,19 @@ export default class Nav extends View {
   }
 
   // Leader c. The copy-mode mod moves the terminal's own selection, so it works the same in
-  // shells and in Claude Code.
+  // shells and in Claude Code. It opens as the strip in its mod.json, but in the bottom right
+  // corner above the tab bar: a window's `at` is its top left, and without a `key` Herdr does not
+  // move it to where it was last dragged.
   copy() {
-    run("mod.open", { name: "copy-mode" });
+    const { width, height } = window.viewport_size();
+    const strip = { width: 560, height: 30 };
+    openOverlay({
+      mod: "copy-mode",
+      kind: "window",
+      frame: "none",
+      ...strip,
+      at: { x: width - strip.width - 12, y: height - TAB_BAR - strip.height - 12 },
+    });
   }
 
   split(direction) {
