@@ -131,6 +131,9 @@ import {
   theme,
 } from "herdr";
 
+// The active tab of the ghostty-bar mod; keep in step with its C.tab, C.tabEdge and C.text.
+const TAB = { bg: "#242424", edge: "#333333", text: "#e8e9eb" };
+
 // History rows read at most: the view's own history is usually shorter.
 const MAX_HISTORY = 10000;
 const MAX_COUNT = 99999;
@@ -2043,15 +2046,10 @@ export default class CopyMode extends View {
     return "NORMAL";
   }
 
-  // The mode badge's [background, foreground].
-  modeColors(colors) {
-    if (this.visual) return [colors.ansi5, colors.background];
-    return [colors.accent, colors.accent_foreground];
-  }
-
   // The strip, like Vim's status line in the terminal's font: while searching,
-  // the / or ? prompt and the pattern across the window; otherwise only a badge
-  // colored for the mode, with any typed keys or error beside it, at the right.
+  // the / or ? prompt and the pattern across the window; otherwise only the mode,
+  // with any typed keys or error beside it, at the right. It is drawn like an
+  // active tab of the ghostty-bar mod, whatever the mode.
   // The rest of the window is left transparent. A press anywhere on it that
   // isn't stopped drags it.
   render(cx) {
@@ -2061,10 +2059,12 @@ export default class CopyMode extends View {
       .h_full()
       .items_center()
       .gap(8)
-      .rounded(6)
+      .px(10)
+      .rounded(9)
       .border_1()
-      .border_color(colors.border)
-      .bg(colors.raised)
+      .border_color(TAB.edge)
+      .bg(TAB.bg)
+      .text_color(TAB.text)
       .overflow_hidden();
     const strip = h_flex()
       .id("copy-mode")
@@ -2092,13 +2092,11 @@ export default class CopyMode extends View {
         box
           .flex_1()
           .min_w(0)
-          .px(8)
           .child(
             h_flex()
               .flex_1()
               .min_w(0)
               .overflow_hidden()
-              .text_color(colors.foreground)
               .child(div().whitespace_nowrap().child(`${this.searchForward ? "/" : "?"}${this.query}`))
               .child(div().w(size * 0.6).h(size * 1.25).flex_none().bg(colors.accent)),
           )
@@ -2109,27 +2107,16 @@ export default class CopyMode extends View {
           ),
       );
     }
-    const [badgeBackground, badgeForeground] = this.modeColors(colors);
     const pending = this.pendingKeys();
     const note = this.loading ? "loading…" : this.status || this.message;
     return strip.child(
       box
         .flex_none()
         .when(Boolean(note), (el) =>
-          el.child(div().pl(8).truncate().text_color(this.status ? colors.blocked : colors.muted).child(note)),
+          el.child(div().truncate().text_color(this.status ? colors.blocked : colors.muted).child(note)),
         )
-        .when(Boolean(pending), (el) => el.child(div().pl(8).text_color(colors.accent).child(pending)))
-        .child(
-          h_flex()
-            .h_full()
-            .flex_none()
-            .items_center()
-            .px(8)
-            .bg(badgeBackground)
-            .text_color(badgeForeground)
-            .font_semibold()
-            .child(this.modeName()),
-        ),
+        .when(Boolean(pending), (el) => el.child(div().text_color(colors.muted).child(pending)))
+        .child(div().flex_none().font_semibold().child(this.modeName())),
     );
   }
 }
