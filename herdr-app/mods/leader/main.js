@@ -35,6 +35,18 @@ function showPrimary() {
   if (pane) run("pane.focus", { pane: pane.pane });
 }
 
+// pane.close on the sub-agent block closes the parent's pane, because the block is not a pane.
+// Kill only the sub-agent that J shows, so a press on the primary view does nothing.
+function killSubAgent() {
+  const pane = focusedPane();
+  const shown = focused()?.agent;
+  if (!pane?.terminal || !shown) return;
+  const kid = terminals().find((t) => t.parent === pane.terminal && t.address === shown);
+  if (!kid) return;
+  run("terminal.kill", { terminal: kid.address });
+  showPrimary();
+}
+
 function findNode(node, id) {
   if (!node) return null;
   if (node.id === id) return node;
@@ -83,6 +95,7 @@ const KEYS = [
   ["L", "next agent", () => run("agent.next", {})],
   ["J", "sub-agent", showSubAgent],
   ["K", "primary", showPrimary],
+  ["X", "kill sub-agent", killSubAgent],
   ["m", "move tab…", null],
 ];
 

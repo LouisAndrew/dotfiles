@@ -1,6 +1,7 @@
 ---
 name: codex-review
-description: Let Codex review the code of the current branch after development. Codex says whether the code does what the ticket intended. Start Codex CLI (model gpt-6.1-sol) in a herdr terminal. It reads the branch changes and <ticket>-intent.md and <ticket>-fact.md, read-only, and writes a report. Then make sure that each finding is true, and report the result in the chat. Triggers: /codex-review, "have Codex review the code", "Codex review", "did we do what was intended", "second opinion on the branch". Run it after development and before /intent check or a pull request. Needs herdr ($HC_TERMINAL_ID).
+allowed-tools: Bash(hc:*), Skill(herdr-agents)
+description: Let Codex review the code of the current branch after development. Codex says whether the code does what the ticket intended. Start Codex CLI (model gpt-6.1-sol, medium reasoning) in a herdr terminal. It reads the branch changes and <ticket>-intent.md and <ticket>-fact.md, read-only, and writes a report. Then make sure that each finding is true, and report the result in the chat. Triggers: /codex-review, "have Codex review the code", "Codex review", "did we do what was intended", "second opinion on the branch". Run it after development and before /intent check or a pull request. Needs herdr ($HC_TERMINAL_ID).
 ---
 
 A second agent reviews the branch with no knowledge of this conversation. It finds bugs in the changes, and it compares the changes with the intent of the ticket. You then decide which findings are true. A finding from Codex is a claim, not a fact.
@@ -10,6 +11,8 @@ This skill does not check off plan items. The intent skill does that in check mo
 ## Rules
 
 - Codex reads only. It changes no file in a repo. It writes only its report file.
+- Always use the model gpt-6.1-sol with medium reasoning. Do not change the model or the reasoning effort.
+- The skill allows all `hc` commands and the herdr-agents skill without a permission prompt.
 - Codex is your child in herdr. The user can open its terminal and type into it. Run it interactive, never with `codex exec`.
 - You change no file in this skill. You report in the chat. If the user asks, you fix the true findings after the report.
 - If you are not sure that a finding is true, and you have no authoritative source, say that it is unverified.
@@ -31,7 +34,7 @@ This skill does not check off plan items. The intent skill does that in check mo
 
    ```sh
    hc run --bg --name codex-review-<ticket> --cwd <main repo> \
-     codex --no-daemon -m gpt-6.1-sol -s workspace-write --add-dir <report dir> "<task>"
+     codex --no-daemon -m gpt-6.1-sol -c model_reasoning_effort=medium -s workspace-write --add-dir <report dir> "<task>"
    ```
 
    Use this task. If there is no intent file, replace the intent files with the user's goal, or remove points 2 to 4 if there is no goal:
@@ -54,7 +57,7 @@ This skill does not check off plan items. The intent skill does that in check mo
    When the report is written, end your turn. Do not run hc send.
    ```
 
-6. Read `first_message.sent` in the JSON result. If it is `false`, follow the herdr-agents skill: read the screen, fix the cause, then send the task.
+6. Read `first_message.sent` in the JSON result. If it is `false`, follow the herdr-agents skill: read the screen, fix the cause, then send the task. Then show the child in a split pane beside you. Use the address of the child from the JSON result, for example `t7`: `herdr-app do terminal.keep '{"terminal":"t7","place":"right"}'`. Without this step, the child is a sub-agent with no pane. If the command fails, tell the user and continue.
 
 7. Wait with `hc wait --children any`. The Codex sandbox blocks `hc send`, so Codex does not message you. The status `done` shows that its turn ended. Repeat on `reason: timeout`. If the child is `blocked`, read its screen with `hc read codex-review-<ticket> --lines 60` and ask the user. Do not approve a permission prompt for the user. Ask the user at once with your question tool, and quote what the prompt asks, so that the user gets a notification. If `hc get` shows status `null` for the child, the Codex status hooks do not work. Then read its screen at each `reason: timeout` to find a prompt.
 

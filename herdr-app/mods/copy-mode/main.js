@@ -1,4 +1,7 @@
 /**
+ * This code is taken from https://github.com/jpgrayson/dot-files
+ * (commit 2370c98), MIT: see LICENSE.
+ *
  * Copy mode: vim keys for moving around a terminal's text, searching,
  * selecting and copying to the clipboard, right in the terminal's own pane.
  *
@@ -9,7 +12,6 @@
  * terminal.adjust_selection and the selection in terminals()) drawn by the
  * terminal itself instead of in a dialog.
  *
- * Taken from github.com/jpgrayson/dot-files (commit 2370c98), MIT: see LICENSE.
  * In these dotfiles, Leader c opens it through the nav mod, in the bottom right corner.
  *
  * Opening: keys.json binds `cmd-x` (section `terminal`) to

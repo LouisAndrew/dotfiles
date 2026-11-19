@@ -72,18 +72,18 @@ if [ "$OS" = "Darwin" ]; then
   done
 fi
 
-# Fonts used by the ghostty config (Linux: Ghostty runs inside WSLg, so fonts must live in WSL)
-if [ "$OS" = "Linux" ]; then
+# CommitMono and CommitMono Nonicons, built from commitmono.com.
+# Linux: Ghostty runs inside WSLg, so fonts must live in WSL.
+if [ "$OS" = "Darwin" ]; then
+  font_dir="$HOME/Library/Fonts"
+else
   font_dir="$HOME/.local/share/fonts"
-  mkdir -p "$font_dir"
-  if ! fc-list | grep -qi "CommitMono"; then
-    tmp="$(mktemp -d)"
-    curl -fsSL -o "$tmp/commit-mono.zip" \
-      "https://github.com/eigilnikolajsen/commit-mono/releases/download/v1.143/CommitMono-1.143.zip"
-    python3 -m zipfile -e "$tmp/commit-mono.zip" "$tmp/commit-mono"
-    find "$tmp/commit-mono" -name '*.otf' -exec cp {} "$font_dir/" \;
-    rm -rf "$tmp"
-  fi
+fi
+mkdir -p "$font_dir"
+if ! compgen -G "$font_dir/CommitMonoNonicons-*.otf" >/dev/null; then
+  bash "$DOTFILES_PATH/scripts/build-fonts.sh" "$font_dir"
+fi
+if [ "$OS" = "Linux" ]; then
   [ -f "$font_dir/nonicons.ttf" ] || curl -fsSL -o "$font_dir/nonicons.ttf" \
     "https://raw.githubusercontent.com/ya2s/nonicons/master/dist/nonicons.ttf"
   fc-cache -f "$font_dir"

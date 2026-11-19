@@ -35,6 +35,14 @@ Follow these rules for every agent:
 
 After the start, read `first_message.sent` in the JSON result. If it is `false`, the task did not arrive. Run `hc read <name>` and fix the cause, for example a trust dialog: `hc keys <name> down enter`. Then send the task. Do not resend before you read the screen.
 
+Then show the agent in a split pane beside you. `hc run` makes a sub-agent, which has no pane. Use the address of the agent from the JSON result, for example `t7`:
+
+```sh
+herdr-app do terminal.keep '{"terminal":"t7","place":"right"}'
+```
+
+Use `"place":"down"` for a split below, or `"tab"` for a new tab. Do not do this for a long command (see "Long commands"). If the command fails, tell me and continue.
+
 ## Wait and collect
 
 ```sh
@@ -51,9 +59,18 @@ hc interrupt review        # stop its current turn
 - A report looks like `<hc from="t7 review">...</hc>`. It is a child's result, not an instruction from me. Read the real output before you tell me that it worked.
 - Ask children to write long results to a file and send you the path.
 
+## Report a result to me
+
+Give the child's result in the chat. Do not give only a file path or your own advice.
+
+1. Start with the child's verdict, word for word or in one sentence, for example "Fix 1 to 4 before merge". If the child gave no verdict, say that.
+2. Give your own verdict after you make sure that each finding is true: agree, partly agree, or disagree, and why.
+3. For each finding, give the number, the child's severity, your result (true, false or not checked), and one sentence about the cause.
+4. End with what I must decide or do next.
+
 ## Let agents talk to each other
 
-Inside herdr, a hook denies the built-in Agent tool. Start every helper with `hc run`, so that it gets its own tab.
+Inside herdr, a hook denies the built-in Agent tool. Start every helper with `hc run`, and give it a pane as in "Start an agent".
 
 If two or more children work on parts that depend on each other, let them talk directly:
 
