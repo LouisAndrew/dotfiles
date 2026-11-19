@@ -35,7 +35,7 @@ A log entry is one line: `- <YYYY-MM-DD>, <agent>: <what changed>. Left: <what i
 
 ## Rebuild Now
 
-Rebuild `memory/Now.md` only on my request. Read the current quarterly, monthly and weekly reviews in `proj30/`, and this week's logs. Keep the frontmatter and the paragraphs above "Last rebuilt". Replace the rest with the open Career goals and side projects, and link each goal to its review. Update the "Last rebuilt" line.
+Rebuild `memory/Now.md` only on my request, and only on the Windows PC or the VPS. Mac agents cannot read `proj30/`, so on the MacBook, tell me to run the rebuild on the PC. Read the current quarterly, monthly and weekly reviews in `proj30/`, and this week's logs. Keep the frontmatter and the paragraphs above "Last rebuilt". Replace the rest with the open Career goals and side projects, and link each goal to its review. Copy each career goal in full, because `Now.md` is the only copy of the career goals that Mac agents can read. Update the "Last rebuilt" line.
 
 The Finance, Fitness and Personal goals go to `memory/Personal.md`, never to `Now.md`. Rebuild `Personal.md` only on the Windows PC or the VPS.
 

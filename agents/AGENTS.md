@@ -43,11 +43,13 @@ At the start of a session, read these three notes, unless they are already in yo
 - `memory/Memory.md`: lasting facts about my setup
 - `memory/Now.md`: my current focus and next steps
 
-On the Windows PC and the VPS, also read `memory/Personal.md`: my finance, fitness and personal goals. On the work MacBook, never read `memory/Personal.md`.
+On the Windows PC and the VPS, also read `memory/Personal.md`: my finance, fitness and personal goals.
+
+On the work MacBook, never read `memory/Personal.md`, the `proj30/` folder, or the `pc` and `vps` logs. These hold my personal goals. My career goals are in `memory/Now.md`, and my brag documents are in `work/` and `projects/`.
 
 Claude Code gets these notes from a SessionStart hook, `agents/memory-context.sh`. The hook skips `Personal.md` on macOS.
 
-If you need more detail, open the review or project note that these notes link to. Do not read whole folders.
+If you need more detail, open the review or project note that these notes link to. On the MacBook, do not open links into `proj30/`. Do not read whole folders.
 
 To write to memory, use the `remember` skill. If your tool has no skill support, follow the "Shared Memory" rules in the vault `AGENTS.md`. In short:
 
@@ -57,6 +59,8 @@ To write to memory, use the `remember` skill. If your tool has no skill support,
 4. Do not edit `memory/Now.md` without my request.
 
 Keep work entries general. Do not write code, customer data, credentials or secrets to memory.
+
+`memory/TODO.md` lists open tasks for my agents and for me. If your work leaves a step for another host or for me, add it there with the `todo` skill.
 
 ## Code comments
 

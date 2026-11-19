@@ -1,7 +1,10 @@
 {
   "permissions": {
     "deny": [
-      "Read(~/Obsidian/vault/memory/Personal.md)"
+      "Read(~/Obsidian/vault/memory/Personal.md)",
+      "Read(~/Obsidian/vault/proj30/**)",
+      "Read(~/Obsidian/vault/memory/log/* pc.md)",
+      "Read(~/Obsidian/vault/memory/log/* vps.md)"
     ]
   }
 }
