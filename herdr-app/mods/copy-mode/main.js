@@ -10,7 +10,7 @@
  * terminal itself instead of in a dialog.
  *
  * Taken from github.com/jpgrayson/dot-files (commit 2370c98), MIT: see LICENSE.
- * In these dotfiles, Leader c opens it through the nav mod.
+ * In these dotfiles, Leader c opens it through the nav mod, in the bottom right corner.
  *
  * Opening: keys.json binds `cmd-x` (section `terminal`) to
  * `mod.open:copy-mode`, and the prefix mod runs the same on `ctrl-o [`. Either
@@ -2049,23 +2049,27 @@ export default class CopyMode extends View {
     return [colors.accent, colors.accent_foreground];
   }
 
-  statusNote() {
-    if (this.status) return this.status;
-    if (this.message) return this.message;
-    return this.note ?? "";
-  }
-
   // The strip, like Vim's status line in the terminal's font: while searching,
-  // the / or ? prompt and the pattern; otherwise a badge colored for the mode
-  // and any message on the left, typed keys and the cursor position (line/
-  // lines:column) on the right. A press anywhere on it that isn't stopped
-  // drags it, and Herdr remembers where it was dropped.
+  // the / or ? prompt and the pattern across the window; otherwise only a badge
+  // colored for the mode, with any typed keys or error beside it, at the right.
+  // The rest of the window is left transparent. A press anywhere on it that
+  // isn't stopped drags it.
   render(cx) {
     const colors = theme();
     const size = fontSize();
+    const box = h_flex()
+      .h_full()
+      .items_center()
+      .gap(8)
+      .rounded(6)
+      .border_1()
+      .border_color(colors.border)
+      .bg(colors.raised)
+      .overflow_hidden();
     const strip = h_flex()
       .id("copy-mode")
       .size_full()
+      .justify_end()
       .track_focus(this.handle)
       .on_key_down((event, cx) => this.onKeyDown(event, cx))
       .on_mouse_down("left", () => {
@@ -2080,61 +2084,52 @@ export default class CopyMode extends View {
           if (!this.closed && !this.interacted && !this.handle.is_focused()) this.handle.focus();
         });
       })
-      .items_center()
-      .gap(12)
-      .pr(8)
-      .rounded(6)
-      .border_1()
-      .border_color(colors.border)
-      .bg(colors.raised)
-      .overflow_hidden()
       .font_family(fontFamily())
       .text_size(size);
     if (this.searching) {
       // The prompt, the pattern and a block cursor, run together as in Vim.
-      return strip
-        .pl(8)
-        .child(
-          h_flex()
-            .flex_1()
-            .min_w(0)
-            .overflow_hidden()
-            .text_color(colors.foreground)
-            .child(div().whitespace_nowrap().child(`${this.searchForward ? "/" : "?"}${this.query}`))
-            .child(div().w(size * 0.6).h(size * 1.25).flex_none().bg(colors.accent)),
-        )
-        .child(
-          this.searchError
-            ? div().text_color(colors.blocked).child(this.searchError)
-            : div().text_color(colors.muted).child(plural(this.matches.length, "match", "matches")),
-        );
+      return strip.child(
+        box
+          .flex_1()
+          .min_w(0)
+          .px(8)
+          .child(
+            h_flex()
+              .flex_1()
+              .min_w(0)
+              .overflow_hidden()
+              .text_color(colors.foreground)
+              .child(div().whitespace_nowrap().child(`${this.searchForward ? "/" : "?"}${this.query}`))
+              .child(div().w(size * 0.6).h(size * 1.25).flex_none().bg(colors.accent)),
+          )
+          .child(
+            this.searchError
+              ? div().text_color(colors.blocked).child(this.searchError)
+              : div().text_color(colors.muted).child(plural(this.matches.length, "match", "matches")),
+          ),
+      );
     }
     const [badgeBackground, badgeForeground] = this.modeColors(colors);
     const pending = this.pendingKeys();
-    const position = this.rows.length
-      ? `${this.cursor.row + 1}/${this.rows.length}:${this.cursor.col + 1}`
-      : "—";
-    return strip
-      .child(
-        h_flex()
-          .h_full()
-          .flex_none()
-          .items_center()
-          .px(8)
-          .bg(badgeBackground)
-          .text_color(badgeForeground)
-          .font_semibold()
-          .child(this.modeName()),
-      )
-      .child(
-        div()
-          .flex_1()
-          .min_w(0)
-          .truncate()
-          .text_color(this.status ? colors.blocked : colors.muted)
-          .child(this.loading ? "loading…" : this.statusNote()),
-      )
-      .when(Boolean(pending), (el) => el.child(div().text_color(colors.accent).child(pending)))
-      .child(div().flex_none().text_color(colors.muted).child(position));
+    const note = this.loading ? "loading…" : this.status || this.message;
+    return strip.child(
+      box
+        .flex_none()
+        .when(Boolean(note), (el) =>
+          el.child(div().pl(8).truncate().text_color(this.status ? colors.blocked : colors.muted).child(note)),
+        )
+        .when(Boolean(pending), (el) => el.child(div().pl(8).text_color(colors.accent).child(pending)))
+        .child(
+          h_flex()
+            .h_full()
+            .flex_none()
+            .items_center()
+            .px(8)
+            .bg(badgeBackground)
+            .text_color(badgeForeground)
+            .font_semibold()
+            .child(this.modeName()),
+        ),
+    );
   }
 }
