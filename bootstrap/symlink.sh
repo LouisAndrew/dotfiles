@@ -28,7 +28,7 @@ link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
 link_resource "$DOTFILES_PATH/herdr/config.toml" "$XDG_CONFIG/herdr/config.toml"
 # The Herdr app writes its own state into ~/.config/herdr-app, so link only my files.
 # On WSL the app runs on Windows, and link_windows_resources links its files.
-grep -qi microsoft /proc/version 2>/dev/null || for resource in keys.json settings.json layouts/ghostty.json themes/ghostty.json mods/ghostty-bar mods/leader mods/nav mods/copy mods/copy-mode programs.json my-icons; do
+grep -qi microsoft /proc/version 2>/dev/null || for resource in keys.json settings.json layouts/ghostty.json layouts/ghostty-compact.json themes/ghostty.json mods/agent-bar mods/pane-header mods/ghostty-bar mods/leader mods/nav mods/copy mods/copy-mode programs.json my-icons; do
     link_resource "$DOTFILES_PATH/herdr-app/$resource" "$XDG_CONFIG/herdr-app/$resource"
 done
 # WSL-only ghostty overrides (font size etc.), included via `config-file = ?config.local`
@@ -53,7 +53,7 @@ link_windows_resources() {
         "herdr-app/keys.windows.json" "$home/.config/herdr-app/keys.json"
     )
     local resource
-    for resource in settings.json programs.json my-icons layouts/ghostty.json themes/ghostty.json mods/ghostty-bar mods/leader mods/nav mods/copy mods/copy-mode; do
+    for resource in settings.json programs.json my-icons layouts/ghostty.json layouts/ghostty-compact.json themes/ghostty.json mods/agent-bar mods/pane-header mods/ghostty-bar mods/leader mods/nav mods/copy mods/copy-mode; do
         pairs+=("herdr-app/$resource" "$home/.config/herdr-app/$resource")
     done
 

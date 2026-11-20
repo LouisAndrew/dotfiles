@@ -4,7 +4,7 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme, focused, panes, terminals, layout } from "herdr";
+import { run, props, openOverlay, closeOverlay, theme, focused, panes, terminals, layout } from "herdr";
 
 const TIMEOUT_MS = 2500;
 
@@ -70,6 +70,21 @@ function togglePanel(child) {
   run("layout.show", { id: "panel" });
 }
 
+// The built-in prompt mod runs `command` with the typed text as `name`.
+// shell/functions/herdr-ticket.sh exports that name as $TN in the space's shells.
+function newTicketSpace() {
+  openOverlay({
+    mod: "prompt",
+    kind: "dialog",
+    width: 420,
+    props: {
+      title: "new ticket space",
+      hint: "Jira key, for example rad-885",
+      command: { name: "space.new", args: {} },
+    },
+  });
+}
+
 const KEYS = [
   ["g", "changes", () => togglePanel("changes")],
   ["o", "files", () => togglePanel("files")],
@@ -84,6 +99,8 @@ const KEYS = [
   ["{", "prev space", () => run("space.prev", {})],
   ["}", "next space", () => run("space.next", {})],
   ["n", "new space", () => run("space.new", {})],
+  ["I", "ticket space", newTicketSpace],
+  ["Q", "close space", () => run("space.close", { confirmed: true })],
   ["e", "rename tab", () => run("tab.rename", {})],
   ["s", "spaces", () => run("mod.open", { name: "picker" })],
   ["$", "rename space", () => run("space.rename", {})],

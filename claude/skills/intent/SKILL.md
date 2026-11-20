@@ -1,31 +1,33 @@
 ---
 name: intent
-description: Plan and check the work of one ticket against <ticket>-intent.md and <ticket>-fact.md, for example rad-884-intent.md and rad-884-fact.md. The files live at the root of the main repo, and other repos in the same work share them. The user writes the intent file by hand. The agent writes the fact file. Plan mode runs before development. It gathers the facts and interviews the user about each point that is not clear. It writes the facts, decisions and plan to the fact file, and reports faults in the intent file in the chat. Check mode runs after development. It compares the branches of all repos in the work with both files and checks off only the items that evidence shows are done. Use plan mode for "brainstorm the intent", "plan the intent", "what do we need before we start", "gather the facts", "interview me", or /intent plan. Use check mode for "check intent", "are we done", "did we meet the intent", or /intent check. When the code is merged, the wrapup skill summarizes it.
+description: Plan and check the work of one ticket against <ticket>-intent.md, <ticket>-fact.md and <ticket>-test.md, for example rad-884-intent.md, rad-884-fact.md and rad-884-test.md. The files live at the root of the main repo, and other repos in the same work share them. The user writes the intent file by hand. The agent writes the fact file and the test file. Plan mode runs before development. It gathers the facts and interviews the user about each point that is not clear. It writes the facts, decisions and plan to the fact file, writes the test plan to the test file, and reports faults in the intent file in the chat. Check mode runs after development. It compares the branches of all repos in the work with the three files and checks off only the items that evidence shows are done. Use plan mode for "brainstorm the intent", "plan the intent", "what do we need before we start", "gather the facts", "interview me", or /intent plan. Use plan mode also for "build the test plan" or "write the test plan". Use check mode for "check intent", "are we done", "did we meet the intent", or /intent check. When the code is merged, the wrapup skill summarizes it.
 ---
 
 # Intent
 
-Two files describe the work of one ticket:
+Three files describe the work of one ticket:
 
 - `<ticket>-intent.md` is the user's document. The user writes all of it by hand: the goal, the context, links to Jira tickets, and an optional todo checklist. You never write its prose.
 - `<ticket>-fact.md` is your document. It holds the repos, the facts with their sources, the decisions, the open decisions and the plan. Plan mode writes it. Check mode, later development and the wrapup skill read it, so it must make sense to an agent that did not see this conversation.
+- `<ticket>-test.md` is also your document. It holds the test plan: the setup, the automated checks, the manual test cases and what is not tested. Plan mode writes it. Check mode and the person who tests the work read it. Keep it in its own file, not in the fact file.
 
-`<ticket>` is the Jira key in lowercase, for example `rad-884`. Both files live at the root of the main repo. The main repo is the repo where the work starts.
+`<ticket>` is the Jira key in lowercase, for example `rad-884`. The three files live at the root of the main repo. The main repo is the repo where the work starts.
 
 The skill has two modes:
 
-- Plan mode, before development: you gather the facts, interview the user, write the fact file, and report faults in the intent file in the chat.
-- Check mode, after development: you compare the branches with both files and check off the items that are done.
+- Plan mode, before development: you gather the facts, interview the user, write the fact file and the test file, and report faults in the intent file in the chat.
+- Check mode, after development: you compare the branches with the three files and check off the items that are done.
 
 ## Find the ticket and the files
 
 1. Find the ticket key. Use the first of these that gives a key:
    1. The user's words or the skill arguments.
-   2. The current branch name. Look for a key such as `RAD-884`.
-   3. A single `*-intent.md` or `*-fact.md` file at the root of the current repo.
-   4. Ask the user.
-2. Find the files. Look at the root of the current repo first (`git rev-parse --show-toplevel`). If they are not there, look at the root of each sibling repo, for example `ls ~/dev/*/<ticket>-intent.md ~/dev/*/<ticket>-fact.md`. If you find the files in more than one repo, ask the user which repo is the main repo.
-3. If the files are not in any repo, the current repo is the main repo. Plan mode creates the fact file there. Do not create the intent file. Tell the user its path, so the user can write it.
+   2. The `TN` environment variable (`echo $TN`). A herdr space named after a ticket sets it, for example `TN=rad-885`. If it is set, use it as `<ticket>` for the intent, fact and test files, even if the branch name has another key. If the two keys differ, say so in the chat.
+   3. The current branch name. Look for a key such as `RAD-884`.
+   4. A single `*-intent.md` or `*-fact.md` file at the root of the current repo.
+   5. Ask the user.
+2. Find the files. Look at the root of the current repo first (`git rev-parse --show-toplevel`). If they are not there, look at the root of each sibling repo, for example `ls ~/dev/*/<ticket>-intent.md ~/dev/*/<ticket>-fact.md ~/dev/*/<ticket>-test.md`. If you find the files in more than one repo, ask the user which repo is the main repo.
+3. If the files are not in any repo, the current repo is the main repo. Plan mode creates the fact file and the test file there. Do not create the intent file. Tell the user its path, so the user can write it.
 
 Say the ticket, the main repo and the mode in one line before you start.
 
@@ -60,7 +62,15 @@ For the fact file:
 - When you rewrite the file, keep the checked items of the plan checked, unless the plan item itself changed.
 - Do not uncheck an item that the user checked. If your evidence disagrees, say so in the chat.
 
-For both files: do not stage or commit them. The user decides about Git.
+For the test file:
+
+- You own the file. Plan mode creates it or rewrites it. If the user asks only for the test plan, write only the test file.
+- Use the same style rules as the fact file: no H1 heading, short lines, a source on each setup fact.
+- Write each test case so that a person who did not see this conversation can run it: the state, the action, and the expected result.
+- Base the test cases on the plan, the decisions and the scope in the fact file, and on the code in the branch if it exists.
+- When you rewrite the file, keep the checked test cases checked, unless the test case itself changed.
+
+For the three files: do not stage or commit them. The user decides about Git.
 
 ## Plan mode
 
@@ -135,9 +145,38 @@ The job is to find out what is true and what is still open before any code chang
    - Include the items in external systems, for example "create the flag in the experiments dashboard".
    - Keep each item small enough to finish in one pull request or less.
 
-10. Report in the chat as a short summary. If the user asks for detail, give it:
+10. Write the test file with these sections:
 
-    1. The path of the fact file and one line on what it holds.
+    ```markdown
+    Test plan for <TICKET>: <short title>. Updated: <YYYY-MM-DD>. Fact: <ticket>-fact.md. Branch: <branch>
+
+    ## Setup
+    - <A build, flag, account, device or tool that the tests need.> Source: <file:line, page or person>
+
+    ## Automated
+    - [ ] <The command or test name.> Covers: <what it proves>
+
+    ## Manual
+    ### <Area, for example Placement, Flags or Navigation>
+    - [ ] T<n>. <The state and the action.> Expect: <the result that someone can see>
+
+    ## Before rollout
+    - [ ] T<n>. <A test that waits for an external system or a release build.> Owner: <person or team>
+
+    ## Not tested
+    - <What this plan does not test.> Owner: <person or team, if someone else tests it>
+    ```
+
+    Rules for the test plan:
+
+    - Give each plan item in the fact file at least one test case. Use its "Done when" line as a start.
+    - Where they apply, include the edge cases: the flags off, each flag alone, empty and error states, each layout, navigation away and back, and light and dark mode.
+    - If the code can do something that the fact file does not decide, add a test case that records what happens. Say in the case that the result goes in the pull request.
+    - Number the manual test cases T1, T2 and so on, so that a pull request can name them.
+
+11. Report in the chat as a short summary. If the user asks for detail, give it:
+
+    1. The paths of the fact file and the test file, with one line on what each holds.
     2. The faults in the intent file. For each fault, quote the line, say what is wrong, and suggest a fix. Leave the change to the user. These are faults:
        - a line that a fact or a decision contradicts
        - a goal with no result that someone can measure
@@ -150,11 +189,11 @@ The job is to find out what is true and what is still open before any code chang
 
 ### Steps
 
-1. Find the files with the steps in "Find the ticket and the files". If neither file exists, tell the user and offer plan mode. Do not create a file in check mode.
+1. Find the files with the steps in "Find the ticket and the files". If neither the intent file nor the fact file exists, tell the user and offer plan mode. Do not create a file in check mode.
 
 2. Save a copy of each file in your scratchpad directory before you edit it. You use the copies in step 7.
 
-3. Read the intent and the plan. Note the goal and the scope in the intent file. Note every todo item in the intent file and every plan item in the fact file, each with its children and its "Done when" line. Note the repos and the open decisions in the fact file.
+3. Read the intent and the plan. Note the goal and the scope in the intent file. Note every todo item in the intent file and every plan item in the fact file, each with its children and its "Done when" line. Note the repos and the open decisions in the fact file. Note every test case in the test file, if it exists.
 
 4. Read the linked tickets. If a file links Jira issues or names a ticket key and a Jira tool is available, read each issue and its acceptance criteria. If no Jira tool is available, say so in the report and continue with the files alone.
 
@@ -164,11 +203,12 @@ The job is to find out what is true and what is still open before any code chang
    - Read the changed code that relates to each item, not only the diff lines.
    - When an item depends on behavior, find the test that covers it. If you can run that test in under a few minutes, run it. Use the repo's own commands from its `AGENTS.md` or `CLAUDE.md`.
 
-6. Decide each item in both files. If you have direct evidence that an item is done, check it. These are the evidence rules:
+6. Decide each item in the three files. If you have direct evidence that an item is done, check it. These are the evidence rules:
    - If the item has a "Done when" line, that line sets the evidence that you need.
    - A code item needs the code in the branch of its repo and, for behavior, a test or a run that shows it works.
    - Some items are in an external system, for example GAM, an experiment dashboard, a feature flag service or a deploy. Such an item needs evidence from a tool that reads that system, or evidence from the user in this conversation, such as a screenshot. If you cannot see the system, leave the item unchecked and name the evidence that settles it.
    - If all children of a parent item are checked, check the parent. If a parent has no children, it needs its own evidence.
+   - An automated test case needs a run of its command that passes. A manual test case needs evidence from the user, such as a screenshot, a video or a statement in this conversation.
    - If you are not sure, leave the item unchecked and explain in the chat.
 
 7. Edit the files. Change each done item from `[ ]` to `[x]` with an exact edit of that line. Then compare each file with its copy from step 2. The only differences must be `[ ]` that became `[x]`. If anything else changed, restore the copy and edit again.
