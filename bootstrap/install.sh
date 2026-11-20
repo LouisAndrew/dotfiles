@@ -80,7 +80,7 @@ else
   font_dir="$HOME/.local/share/fonts"
 fi
 mkdir -p "$font_dir"
-if ! compgen -G "$font_dir/CommitMonoNonicons-*.otf" >/dev/null; then
+if ! [ -f "$font_dir/CommitMonoNonicons-200-Regular.otf" ]; then
   bash "$DOTFILES_PATH/scripts/build-fonts.sh" "$font_dir"
 fi
 if [ "$OS" = "Linux" ]; then

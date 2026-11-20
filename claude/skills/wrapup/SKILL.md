@@ -14,7 +14,7 @@ A ticket is usually one part of a Jira epic. The brag document shows the epic, b
 
 A ticket with no epic gets its own brag entry that links to the ticket note, and no epic note.
 
-The inputs are the files of the intent skill: `<ticket>-intent.md` (written by the user) and `<ticket>-fact.md` (written by an agent), at the root of the main repo. The outputs are one ticket note, one epic note, and one bullet or entry in the brag document.
+The inputs are the files of the intent skill: `<ticket>-intent.md` (written by the user), `<ticket>-fact.md` and `<ticket>-test.md` (written by an agent), at the root of the main repo. The outputs are one ticket note, one epic note, and one bullet or entry in the brag document.
 
 ## Rules
 
@@ -22,12 +22,19 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 - Draft in the chat first. Write to the vault only after the user approves the draft.
 - Keep the source on each claim, for example a pull request, a commit, a ticket or a dashboard. If you have no authoritative source for a claim, mark it as unverified. Never give an expected impact as a measured impact.
 - Do not write credentials, secrets, customer data or personal data about other people. Name colleagues only by their role or as the user names them.
-- Do not change code, the intent file or the fact file. Delete the intent and fact files only in the last step.
+- Do not change code, the intent file, the fact file or the test file. Delete these three files only in the last step.
 - Do not copy content between notes. The epic note links to the ticket notes and does not repeat their detail.
 
 ## Steps
 
-1. Find the ticket and the files. Use the steps in "Find the ticket and the files" of the intent skill. If there is no fact file, continue with the ticket and the pull requests, and say so in the draft.
+1. Find the ticket and the files. Find the ticket key in this order, and use the first source that gives a key:
+   1. The user's words or the skill arguments.
+   2. The `TN` environment variable (`echo $TN`). A herdr space named after a ticket sets it, for example `TN=rad-885`. If `TN` is set, use it and do not ask the user. If the branch name has another key, use `TN` and say so in the chat.
+   3. The current branch name.
+   4. A single `*-intent.md` or `*-fact.md` file at the root of the current repo.
+   5. Ask the user.
+
+   Then find the files with step 2 of "Find the ticket and the files" in the intent skill. Say the ticket key and its source in one line before you start. If there is no fact file, continue with the ticket and the pull requests, and say so in the draft.
 
 2. Find the epic. Read the Jira parent of the ticket. If no Jira tool is available, use the epic that the "Tickets" line or the decisions of the fact file name. Then read the epic: its summary, its description, and its child issues with their status (`parent = <EPIC>`). If the ticket has no epic, skip the epic steps below.
 
@@ -130,4 +137,4 @@ The inputs are the files of the intent skill: `<ticket>-intent.md` (written by t
 
 14. Report in the chat. Give the paths of the ticket note and the epic note, and the brag change. Give the open monitoring items with their dates, and each claim that is still unverified.
 
-15. Delete the intent and fact files. The ticket note now holds what they had. Do this step only after each vault write in step 12 read back correctly. If a file is tracked in Git, tell the user and do not delete it.
+15. Delete the intent, fact and test files (`<ticket>-intent.md`, `<ticket>-fact.md` and `<ticket>-test.md`). The ticket note now holds what they had. Do this step only after each vault write in step 12 read back correctly. If a file is tracked in Git, tell the user and do not delete it.

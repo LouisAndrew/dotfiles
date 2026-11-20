@@ -1,6 +1,6 @@
 ---
 name: intent
-description: Plan and check the work of one ticket against <ticket>-intent.md, <ticket>-fact.md and <ticket>-test.md, for example rad-884-intent.md, rad-884-fact.md and rad-884-test.md. The files live at the root of the main repo, and other repos in the same work share them. The user writes the intent file by hand. The agent writes the fact file and the test file. Plan mode runs before development. It gathers the facts and interviews the user about each point that is not clear. It writes the facts, decisions and plan to the fact file, writes the test plan to the test file, and reports faults in the intent file in the chat. Check mode runs after development. It compares the branches of all repos in the work with the three files and checks off only the items that evidence shows are done. Use plan mode for "brainstorm the intent", "plan the intent", "what do we need before we start", "gather the facts", "interview me", or /intent plan. Use plan mode also for "build the test plan" or "write the test plan". Use check mode for "check intent", "are we done", "did we meet the intent", or /intent check. When the code is merged, the wrapup skill summarizes it.
+description: Plan and check the work of one ticket against <ticket>-intent.md, <ticket>-fact.md and <ticket>-test.md, for example rad-884-intent.md, rad-884-fact.md and rad-884-test.md. The files live at the root of the main repo, and other repos in the same work share them. The user writes the intent file by hand. The agent writes the fact file and the test file. Plan mode runs before development. It gathers the facts and interviews the user about each point that is not clear. It writes the facts, decisions and plan to the fact file, writes the test plan to the test file, and reports faults in the intent file in the chat. Work mode runs during development. It does the open code items of the plan, in order, and runs their tests. Check mode runs after development. It compares the branches of all repos in the work with the three files and checks off only the items that evidence shows are done. Use plan mode for "brainstorm the intent", "plan the intent", "what do we need before we start", "gather the facts", "interview me", or /intent plan. Use plan mode also for "build the test plan" or "write the test plan". Use work mode for "work the plan", "do the plan", "start development", "implement the intent", or /intent work. Use check mode for "check intent", "are we done", "did we meet the intent", or /intent check. When the code is merged, the wrapup skill summarizes it.
 ---
 
 # Intent
@@ -11,11 +11,14 @@ Three files describe the work of one ticket:
 - `<ticket>-fact.md` is your document. It holds the repos, the facts with their sources, the decisions, the open decisions and the plan. Plan mode writes it. Check mode, later development and the wrapup skill read it, so it must make sense to an agent that did not see this conversation.
 - `<ticket>-test.md` is also your document. It holds the test plan: the setup, the automated checks, the manual test cases and what is not tested. Plan mode writes it. Check mode and the person who tests the work read it. Keep it in its own file, not in the fact file.
 
+The intent file is the source of truth. If the code, a draft, the fact file or the test file disagrees with the intent file, the intent file wins. Write the plan so that the work matches the intent, and record the disagreement as a fact. Do not ask the user to change the intent to match the code. Only the user can change the intent. If the ticket or the user's words in this conversation disagree with the intent file, ask the user, because the user can decide to change the intent.
+
 `<ticket>` is the Jira key in lowercase, for example `rad-884`. The three files live at the root of the main repo. The main repo is the repo where the work starts.
 
-The skill has two modes:
+The skill has three modes:
 
 - Plan mode, before development: you gather the facts, interview the user, write the fact file and the test file, and report faults in the intent file in the chat.
+- Work mode, during development: you do the open code items of the plan and run their automated checks.
 - Check mode, after development: you compare the branches with the three files and check off the items that are done.
 
 ## Find the ticket and the files
@@ -37,6 +40,7 @@ Say the ticket, the main repo and the mode in one line before you start.
 2. If the user does not name it:
    - If the fact file does not exist, use plan mode.
    - If the fact file exists and a repo in its "Repos" section has changes since its base, use check mode.
+   - If the fact file exists, its plan has open code items and no repo has changes since its base, use work mode.
    - If you cannot tell, ask the user which mode to use.
 
 ## The file rules
@@ -44,13 +48,14 @@ Say the ticket, the main repo and the mode in one line before you start.
 For the intent file:
 
 - In plan mode, do not change it. Give each fault you find in the chat.
+- In work mode, do not change it.
 - In check mode, change it in one way only: replace `[ ]` with `[x]` on a todo line that evidence shows is done.
 - Do not add notes, dates or comments to it. Do not fix its typos or style.
 - If a writing-style hook or linter flags its prose after your edit, do not fix it. Tell the user in one line that you left the prose as written.
 
 For the fact file:
 
-- You own the file. Plan mode creates it or rewrites it.
+- You own the file. Plan mode creates it or rewrites it. Work mode changes it only as the work mode steps say.
 - Use no H1 heading. Use H2 and H3 headings only.
 - Keep it short. Write a summary, not an explanation. Add detail only when the user asks for it.
   - A fact, decision or open decision is one short clause of about 12 words or less, then its source. Do not explain how the code works.
@@ -90,7 +95,7 @@ The job is to find out what is true and what is still open before any code chang
 
 6. Separate facts from inferences. A fact has a source that a reader can open: a `file:line`, a ticket, a page, a tool result, or a person in this conversation. If a statement comes from your own knowledge or reasoning, mark it as an inference, or check it with a tool first. Never give an inference as a fact.
 
-7. Compare the sources. Find the places where the ticket, the intent file, the user's words and the code do not agree. Find the decisions that the ticket says are open. Find the scope that one source names and another does not.
+7. Compare the sources. Find the places where the ticket, the intent file, the user's words and the code do not agree. If the code disagrees with the intent file, the code must change: add a plan item for it, and do not ask the user about it. Find the decisions that the ticket says are open. Find the scope that one source names and another does not.
 
 8. Interview the user. Make a list of each point that is still not clear after steps 1 to 7. Then ask the user about the points in rounds, until no point stays unclear.
 
@@ -178,12 +183,55 @@ The job is to find out what is true and what is still open before any code chang
 
     1. The paths of the fact file and the test file, with one line on what each holds.
     2. The faults in the intent file. For each fault, quote the line, say what is wrong, and suggest a fix. Leave the change to the user. These are faults:
-       - a line that a fact or a decision contradicts
+       - a line that a decision or the ticket contradicts. Do not report a line that only the code contradicts, because the code must change to match the intent.
        - a goal with no result that someone can measure
        - a scope that disagrees with the ticket
        - a todo item with no clear end
     3. What is still open before development can start.
     4. If `$HC_TERMINAL_ID` is set, offer the crosscheck skill, so that Codex reviews the plan.
+
+## Work mode
+
+The job is to change the code so that it matches the intent, with the plan in the fact file as the guide. Do not check boxes during the work. At the end, step 8 runs check mode, and check mode checks the boxes.
+
+### Steps
+
+1. Read the three files. If the fact file does not exist, tell the user and offer plan mode. Do not write code without a fact file.
+
+2. Read the rules of each repo in the "Repos" section, from its `CLAUDE.md` or `AGENTS.md`. Note its build, test, format and lint commands.
+
+3. Get each repo onto its branch:
+   - If the branch exists, switch to it. If the current repo has uncommitted changes that do not belong to this ticket, stop and ask the user.
+   - If the fact file says "not created yet", create the branch from the base that the fact file names. Uncommitted changes of this ticket move with the switch.
+   - Do not commit, push or open a pull request unless the user asks.
+
+4. Make the list of items to do. Take each unchecked plan item in order. Skip these items, and name them in the report:
+   - an item in an external system, for example a dashboard, a flag service or GAM
+   - an item that an open decision blocks
+   - an item that only the user can do, for example a video for the pull request
+
+5. Before you start, compare the plan with the intent. If a plan item disagrees with the intent, the intent wins. Change the plan item in the fact file to match, and say so in the chat. If an item needs a decision that is the user's to make and the fact file does not have it, ask the user before you write that code.
+
+6. Do each item:
+   - Read the files that the facts of the item name. If a fact is no longer true, correct it in the fact file with a new source.
+   - Write the code in the style of the code around it. Follow the repo rules and the comment rules in the global instructions.
+   - Write or change the tests that the "Done when" line names.
+   - Run the tests of the item with the repo's own command. If a test fails, fix the code and run it again. If you cannot make it pass, stop and report the failure with its output.
+   - If the work shows a new fact that changes the plan, add the fact with its source and change the plan items that it touches.
+
+7. Before you finish, run the format and lint commands of each changed repo, and the full unit tests if they run in a few minutes. Read your diff, and remove each comment that does not meet the comment rules.
+
+8. Run check mode on the result, so that the boxes show what evidence supports.
+
+### The report
+
+Give the report in the chat:
+
+1. The items you did, each with the files that changed and the tests that passed.
+2. The items you skipped, each with the reason and who can do it.
+3. The changes that you made to the fact file or the test file, and why.
+4. The checks that you ran and their result. Say clearly if a check failed or if you did not run it.
+5. The manual test cases in the test file that the user must run next.
 
 ## Check mode
 
@@ -221,7 +269,7 @@ Give the report in the chat:
 2. The items you checked, each with its evidence (a file path, a test name, a command result or the user's screenshot).
 3. The items you left unchecked, each with what is missing or the evidence that settles it.
 4. Items the user checked that the evidence does not support. Say what you found, and leave the box as it is.
-5. Gaps between the intent and the work. Name scope in the intent that no branch covers, and work in a branch that the intent does not ask for. Also name contradictions inside the intent, for example two different lists of modes.
+5. Gaps between the intent and the work. Name scope in the intent that no branch covers, and work in a branch that the intent does not ask for. The intent is the source of truth, so name each gap as work to do or to remove, not as a fault in the intent. Also name contradictions inside the intent, for example two different lists of modes.
 6. If a decision in the fact file is still open and it affects the verdict, name it.
 7. If a fact in the fact file is no longer true, name it and offer plan mode to update the file.
 8. Loose ends that affect the goal, for example uncommitted work, failing checks, or a missing translation step.
