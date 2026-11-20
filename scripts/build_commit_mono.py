@@ -18,11 +18,16 @@ VERSION = "V143"
 BASE_URL = "https://commitmono.com/src/fonts/fontlab/"
 FAMILY = "CommitMono"
 STYLES = {
+    "ExtraLight": (200, False),
+    "ExtraLight Italic": (200, True),
+    "Light": (250, False),
+    "Light Italic": (250, True),
     "Regular": (300, False),
     "Italic": (300, True),
     "Bold": (700, False),
     "Bold Italic": (700, True),
 }
+RIBBI = {"Regular", "Italic", "Bold", "Bold Italic"}
 # cv01-cv11: character alternates, swapped in as the default glyphs.
 ALTERNATES = []
 # ss01-ss05: features that the website turns on by default through calt.
@@ -68,14 +73,25 @@ def rename(font, style, weight, italic):
     bold = style.startswith("Bold")
     ps_name = f"{FAMILY}-{style.replace(' ', '')}"
     full_name = f"{FAMILY} {style}"
+    # Apps that only know the four RIBBI styles see each light weight as its own family.
+    # Name IDs 16 and 17 group all weights under FAMILY for apps such as browsers.
+    if style in RIBBI:
+        legacy_family, legacy_style = FAMILY, style
+    else:
+        weight_name = style.removesuffix(" Italic")
+        legacy_family = f"{FAMILY} {weight_name}"
+        legacy_style = "Italic" if italic else "Regular"
     version = font["name"].getDebugName(5)
     names = font["name"]
     names.removeNames(nameID=16)
     names.removeNames(nameID=17)
+    if style not in RIBBI:
+        names.addMultilingualName({"en": FAMILY}, font, nameID=16, mac=False)
+        names.addMultilingualName({"en": style}, font, nameID=17, mac=False)
     for rec in names.names:
         value = {
-            1: FAMILY,
-            2: style,
+            1: legacy_family,
+            2: legacy_style,
             3: f"{version};;{ps_name};2023;FL820",
             4: full_name,
             6: ps_name,
@@ -88,7 +104,7 @@ def rename(font, style, weight, italic):
     top = cff.topDictIndex[0]
     top.FamilyName = FAMILY
     top.FullName = full_name
-    top.Weight = "Bold" if bold else "Regular"
+    top.Weight = style.removesuffix(" Italic").removesuffix("Italic") or "Regular"
 
     font["head"].macStyle = int(bold) | int(italic) << 1
     os2 = font["OS/2"]
