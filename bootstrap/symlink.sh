@@ -26,6 +26,7 @@ link_resource "$DOTFILES_PATH/zed" "$XDG_CONFIG/zed"
 link_resource "$DOTFILES_PATH/nvim" "$XDG_CONFIG/nvim"
 link_resource "$DOTFILES_PATH/ghostty" "$XDG_CONFIG/ghostty"
 link_resource "$DOTFILES_PATH/herdr/config.toml" "$XDG_CONFIG/herdr/config.toml"
+link_resource "$DOTFILES_PATH/rex/init.lua" "$XDG_CONFIG/rex/init.lua"
 # The Herdr app writes its own state into ~/.config/herdr-app, so link only my files.
 # On WSL the app runs on Windows, and link_windows_resources links its files.
 grep -qi microsoft /proc/version 2>/dev/null || for resource in keys.json settings.json layouts/ghostty.json layouts/ghostty-compact.json themes/ghostty.json mods/agent-bar mods/pane-header mods/ghostty-bar mods/leader mods/nav mods/copy mods/copy-mode programs.json my-icons; do
